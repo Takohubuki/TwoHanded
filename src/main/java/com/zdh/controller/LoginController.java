@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,7 +19,7 @@ public class LoginController {
         InputStream resourceAsStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder().build(resourceAsStream);
         SqlSession sqlSession = sqlSessionFactoryBuilder.openSession();
-        sqlSession.getMapper();
+        //sqlSession.getMapper();
         return "success";
     }
 }

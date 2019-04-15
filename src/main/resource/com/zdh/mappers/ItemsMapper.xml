@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.ItemsMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Items">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, price, description, tags
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from items
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from items
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Items">
+    insert into items (id, name, price, 
+      description, tags)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{description,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Items">
+    insert into items
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Items">
+    update items
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Items">
+    update items
+    set name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      description = #{description,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
