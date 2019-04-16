@@ -11,6 +11,8 @@ public interface ItemsMapper {
 
     Items selectByPrimaryKey(String id);
 
+    Items selectByName(String itemname);
+
     int updateByPrimaryKeySelective(Items record);
 
     int updateByPrimaryKey(Items record);

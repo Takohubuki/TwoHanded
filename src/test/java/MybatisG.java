@@ -24,4 +24,9 @@ public class MybatisG {
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(configuration,callBack,warnings);
         myBatisGenerator.generate(null);
     }
+
+    @Test
+    public void Test02(){
+
+    }
 }
