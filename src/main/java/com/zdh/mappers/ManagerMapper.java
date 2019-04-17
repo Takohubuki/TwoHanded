@@ -1,9 +1,11 @@
 package com.zdh.mappers;
 
 import com.zdh.bean.Manager;
+import org.apache.ibatis.annotations.Select;
 
 public interface ManagerMapper {
-    int insert(Manager record);
 
-    int insertSelective(Manager record);
+    @Select(" select * from manager where name = #{name}")
+    Manager selectByName(String name);
+
 }
