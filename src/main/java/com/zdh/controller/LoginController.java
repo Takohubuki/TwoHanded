@@ -1,5 +1,6 @@
 package com.zdh.controller;
 
+import com.sun.deploy.net.HttpResponse;
 import com.zdh.bean.Manager;
 import com.zdh.bean.Members;
 import com.zdh.mappers.ManagerMapper;
@@ -11,8 +12,12 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,10 +40,10 @@ public class LoginController {
                 if (members == null){
                     model.addAttribute("message","用户名错误！");
                     return "login";
-                }else if (!members.getPassword().equals(password)){
+                }else if (!passwordConfirm(members.getPassword(),password)){
                     model.addAttribute("message","密码错误！");
                     return "login";
-                }else if (members.getPassword().equals(password)){
+                }else if (passwordConfirm(members.getPassword(),password)){
                     session.setAttribute("member",members);
                     return "success";
                 }else {
@@ -50,10 +55,10 @@ public class LoginController {
                 if (manager == null){
                     model.addAttribute("message","用户名错误！");
                     return "login";
-                }else if (!manager.getPassword().equals(password)){
+                }else if (!passwordConfirm(manager.getPassword(),password)){
                     model.addAttribute("message","密码错误！");
                     return "login";
-                }else if (manager.getPassword().equals(password)){
+                }else if (passwordConfirm(manager.getPassword(),password)){
                     session.setAttribute("manager",manager);
                     return "backstage";
                 }else {
@@ -85,4 +90,24 @@ public class LoginController {
         return "success";
 
     }
+
+
+
+
+
+
+    //密码验证
+    private static boolean passwordConfirm(String password1, String password2){
+        String md5_1= DigestUtils.md5DigestAsHex(password1.getBytes());
+
+        String md5_2 = DigestUtils.md5DigestAsHex(password2.getBytes());
+
+        if (md5_1.equals(md5_2)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
 }
