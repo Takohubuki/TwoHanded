@@ -1,6 +1,7 @@
 package com.zdh.bean;
 
-public class Buyer {
+public class Buyer extends Members{
+
     private String BID;
 
     private String username;
@@ -10,6 +11,14 @@ public class Buyer {
     private String phone;
 
     private String dormitory;
+
+    public Buyer(String BID, String username, String password, String phone, String dormitory) {
+        this.BID = "B" + BID;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.dormitory = dormitory;
+    }
 
     public String getBID() {
         return BID;

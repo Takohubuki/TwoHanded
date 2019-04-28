@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping("/backindex")
     public String backindex(){
-
+        
         return "redirect:/index.jsp";
 
 

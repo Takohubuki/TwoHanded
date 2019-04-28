@@ -9,6 +9,16 @@ public class Members {
 
     private String username;
 
+    private String dormitory;
+
+    public String getDormitory() {
+        return dormitory;
+    }
+
+    public void setDormitory(String dormitory) {
+        this.dormitory = dormitory;
+    }
+
     public String getUserId() {
         return userId;
     }

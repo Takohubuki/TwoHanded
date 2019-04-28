@@ -59,8 +59,14 @@
             <form action="${pageContext.servletContext.contextPath}/user/signup" method="post">
                 <div class="form-group">
                     <div class="input-group input-group-md margin_top_bottom">
+                        <span class="input-group-addon" id="userId-label">学 号</span>
+                        <input type="text" class="form-control" placeholder="请输入学号" aria-describedby="basic-addon1" name="userId">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-md margin_top_bottom">
                         <span class="input-group-addon" id="user-name-label">用户名</span>
-                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="username" value="${username}">
+                        <input type="text" class="form-control" placeholder="请输入用户名" aria-describedby="basic-addon1" name="username">
                     </div>
                 </div>
                 <div class="form-group">
@@ -72,7 +78,13 @@
                 <div class="form-group">
                     <div class="input-group input-group-md margin_top_bottom">
                         <span class="input-group-addon" id="phoneNum-label">手机号</span>
-                        <input type="password" class="form-control" placeholder="phone" aria-describedby="basic-addon1" name="phone">
+                        <input type="text" class="form-control" placeholder="phone" aria-describedby="basic-addon1" name="phoneNum">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group input-group-md margin_top_bottom">
+                        <span class="input-group-addon" id="dormitory-label">宿舍</span>
+                        <input type="text" class="form-control" placeholder="如1公寓101：1101" aria-describedby="basic-addon1" name="dormitory">
                     </div>
                 </div>
                 <div class="margin_top_bottom">

@@ -1,13 +1,14 @@
 package com.zdh.controller;
 
 import com.zdh.bean.Members;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class LoginInterceptor {
+public class LoginInterceptor implements HandlerInterceptor {
         //拦截器
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws ServletException, IOException {
         if (request.getRequestURI().contains("login")){
