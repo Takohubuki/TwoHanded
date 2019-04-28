@@ -1,8 +1,10 @@
 package com.zdh.controller;
 
 import com.sun.deploy.net.HttpResponse;
+import com.zdh.bean.Buyer;
 import com.zdh.bean.Manager;
 import com.zdh.bean.Members;
+import com.zdh.mappers.BuyerMapper;
 import com.zdh.mappers.ManagerMapper;
 import com.zdh.mappers.MembersMapper;
 import org.apache.ibatis.io.Resources;
@@ -26,7 +28,7 @@ import java.io.InputStream;
 public class LoginController {
 
     @Autowired
-    MembersMapper membersMapper;
+    BuyerMapper buyerMapper;
 
     @Autowired
     ManagerMapper managerMapper;
@@ -36,15 +38,15 @@ public class LoginController {
         System.out.println("--------------------开始登录-----------------");
         switch (type){
             case "用户":
-                Members members = membersMapper.selectByName(username);
-                if (members == null){
+                Buyer buyer = buyerMapper.selectByName(username);
+                if (buyer == null){
                     model.addAttribute("message","用户名错误！");
                     return "login";
-                }else if (!passwordConfirm(members.getPassword(),password)){
+                }else if (!passwordConfirm(buyer.getPassword(),password)){
                     model.addAttribute("message","密码错误！");
                     return "login";
-                }else if (passwordConfirm(members.getPassword(),password)){
-                    session.setAttribute("member",members);
+                }else if (passwordConfirm(buyer.getPassword(),password)){
+                    session.setAttribute("member",buyer);
                     return "success";
                 }else {
 
@@ -98,6 +100,7 @@ public class LoginController {
 
     //密码验证
     private static boolean passwordConfirm(String password1, String password2){
+        //将输入的密码转化成md5的形式与数据库中存储的md5进行对比
         String md5_1= DigestUtils.md5DigestAsHex(password1.getBytes());
 
         String md5_2 = DigestUtils.md5DigestAsHex(password2.getBytes());

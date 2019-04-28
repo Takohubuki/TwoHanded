@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.SellerMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Seller">
+    <id column="SID" jdbcType="VARCHAR" property="SID" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="dormitory" jdbcType="VARCHAR" property="dormitory" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SID, username, password, phone, dormitory
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from seller
+    where SID = #{SID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from seller
+    where SID = #{SID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Seller">
+    insert into seller (SID, username, password, 
+      phone, dormitory)
+    values (#{SID,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{dormitory,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Seller">
+    insert into seller
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="SID != null">
+        SID,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="dormitory != null">
+        dormitory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="SID != null">
+        #{SID,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitory != null">
+        #{dormitory,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Seller">
+    update seller
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitory != null">
+        dormitory = #{dormitory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SID = #{SID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Seller">
+    update seller
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      dormitory = #{dormitory,jdbcType=VARCHAR}
+    where SID = #{SID,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Seller">
+    <id column="SID" jdbcType="VARCHAR" property="SID" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="dormitory" jdbcType="VARCHAR" property="dormitory" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SID, username, password, phone, dormitory
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from seller
+    where SID = #{SID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from seller
+    where SID = #{SID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Seller">
+    insert into seller (SID, username, password, 
+      phone, dormitory)
+    values (#{SID,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{dormitory,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Seller">
+    insert into seller
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="SID != null">
+        SID,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="dormitory != null">
+        dormitory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="SID != null">
+        #{SID,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitory != null">
+        #{dormitory,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Seller">
+    update seller
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="dormitory != null">
+        dormitory = #{dormitory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SID = #{SID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Seller">
+    update seller
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      dormitory = #{dormitory,jdbcType=VARCHAR}
+    where SID = #{SID,jdbcType=VARCHAR}
+  </update>
+</mapper>
