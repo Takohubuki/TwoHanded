@@ -1,4 +1,7 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.zdh.bean.Members" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" isELIgnored="false"%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>--%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -182,9 +185,16 @@
     </div>
 </nav>
 <h2>HRBU二手交易</h2>
+<c:if test="${member != null}">
+    欢迎！
 ${member.username}
-<a href="${pageContext.servletContext.contextPath}/user/login"/>登录
+    <a href="${pageContext.servletContext.contextPath}/user/logout">注销</a>
+</c:if>
+<c:if test="${member == null}">
+    <a href="${pageContext.servletContext.contextPath}/user/login"/>登录
 
-<a href="${pageContext.servletContext.contextPath}/user/register"/>注册
+    <a href="${pageContext.servletContext.contextPath}/user/register"/>注册
+</c:if>
+
 </body>
 </html>

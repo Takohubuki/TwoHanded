@@ -38,6 +38,9 @@ public class UserController {
     @Autowired
     ManagerMapper managerMapper;
 
+    /*
+    用户登录模块
+     */
     @RequestMapping("/signin")
     public String signin(String username, String password, String type, Model model, HttpSession session) throws IOException {
         System.out.println("--------------------开始登录-----------------");
@@ -120,7 +123,14 @@ public class UserController {
 
     }
 
-
+    /*
+    用户登出模块
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.setAttribute("member",null);
+        return "success";
+    }
 
 
 
@@ -128,11 +138,10 @@ public class UserController {
     //密码验证
     private static boolean passwordConfirm(String password1, String password2){
         //将输入的密码转化成md5的形式与数据库中存储的md5进行对比
-        String md5_1= DigestUtils.md5DigestAsHex(password1.getBytes());
 
-        String md5_2 = DigestUtils.md5DigestAsHex(password2.getBytes());
+        String md5 = DigestUtils.md5DigestAsHex(password2.getBytes());
 
-        if (md5_1.equals(md5_2)){
+        if (password1.equals(md5)){
             return true;
         }else{
             return false;

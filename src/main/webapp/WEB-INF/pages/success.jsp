@@ -13,6 +13,7 @@
 </head>
 <body>
     <h1>SUCCESS!</h1>
+<%--    <jsp:forward page="${pageContext.servletContext.contextPath}/index/backindex"></jsp:forward>--%>
 <a href="${pageContext.servletContext.contextPath}/index/backindex"/>首页
 </body>
 </html>
