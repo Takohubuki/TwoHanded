@@ -61,7 +61,7 @@ public class UserController {
                     /*
                     用户登录成功返回首页
                      */
-                    return "success";
+                    return "redirect:/index.jsp";
                 }else {
 
                     return "login";
@@ -129,7 +129,7 @@ public class UserController {
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.setAttribute("member",null);
-        return "success";
+        return "redirect:/index.jsp";
     }
 
 
