@@ -9,6 +9,13 @@
   <sql id="Base_Column_List">
     id, name, password
   </sql>
+
+<!--  根据用户名查询-->
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from manager
+    where name = #{username}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

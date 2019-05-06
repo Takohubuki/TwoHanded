@@ -5,6 +5,7 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.InvalidConfigurationException;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.springframework.util.DigestUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class MybatisG {
 
     @Test
     public void Test02(){
+        String s = DigestUtils.md5DigestAsHex("admin".getBytes());
+        System.out.println(s);
 
     }
 }

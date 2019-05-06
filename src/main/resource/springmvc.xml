@@ -18,6 +18,9 @@
         </bean>
     </mvc:interceptor>
 </mvc:interceptors>
+    
+<!--    <mvc:resources mapping="/bower_components/**" location="bower_components"/>-->
+    <mvc:default-servlet-handler/>
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
