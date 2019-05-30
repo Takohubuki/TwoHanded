@@ -119,7 +119,7 @@ public class UserController {
         sellerMapper.insert(seller);
         System.out.println("-----------------------注册成功-----------------------------");
         session.setAttribute("member",members);
-        return "success";
+        return "redirect:/index.jsp";
 
     }
 

@@ -10,94 +10,75 @@
 <head>
     <title>注册</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/iCheck/square/blue.css">
 
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- jquery文件-->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-
-    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/i18n/defaults-*.min.js"></script>
-
-    <style>
-        .container{
-            display:table;
-            height:100%;
-        }
-
-        .row{
-            display: table-cell;
-            vertical-align: middle;
-        }
-        /* centered columns styles */
-        .row-centered {
-            text-align:center;
-        }
-        .col-centered {
-            display:inline-block;
-            float:none;
-            text-align:left;
-            margin-right:-4px;
-        }
-        .margin_top_bottom{
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-    </style>
 </head>
-<body>
-<div class="container">
-    <div class="row row-centered center-block">
-        <div class="well col-md-6 col-centered center-block">
-            <form action="${pageContext.servletContext.contextPath}/user/signup" method="post">
-                <div class="form-group">
-                    <div class="input-group input-group-md margin_top_bottom">
-                        <span class="input-group-addon" id="userId-label">学 号</span>
-                        <input type="text" class="form-control" placeholder="请输入学号" aria-describedby="basic-addon1" name="userId">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-md margin_top_bottom">
-                        <span class="input-group-addon" id="user-name-label">用户名</span>
-                        <input type="text" class="form-control" placeholder="请输入用户名" aria-describedby="basic-addon1" name="username">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-md margin_top_bottom">
-                        <span class="input-group-addon" id="password-label">密 码</span>
-                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1" name="password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-md margin_top_bottom">
-                        <span class="input-group-addon" id="phoneNum-label">手机号</span>
-                        <input type="text" class="form-control" placeholder="phone" aria-describedby="basic-addon1" name="phoneNum">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group input-group-md margin_top_bottom">
-                        <span class="input-group-addon" id="dormitory-label">宿舍</span>
-                        <input type="text" class="form-control" placeholder="如1公寓101：1101" aria-describedby="basic-addon1" name="dormitory">
-                    </div>
-                </div>
-                <div class="margin_top_bottom">
-                    <button type="submit" class="btn btn-success btn-block">注册</button>
-                </div>
-            </form>
-
-            <div id="message" style="color: red">${message}</div>
-        </div>
-
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="${pageContext.servletContext.contextPath}/index/backindex"><b>H</b>R<b>B</b>U</a>
     </div>
 
+    <div class="register-box-body">
+        <p class="login-box-msg">Register a new membership</p>
+
+        <form action="${pageContext.servletContext.contextPath}/user/signup" method="post">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="姓名" name="username">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="学号" name="userId">
+                <span class="glyphicon glyphicon-book form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Retype password">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="寝室 例如：2公寓202为2202" name="dormitory">
+                <span class="glyphicon glyphicon-home form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="手机号" name="phoneNum">
+                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <a href="login.html" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
 </div>
+<!-- /.register-box -->
+
+<!-- jQuery 3 -->
+<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

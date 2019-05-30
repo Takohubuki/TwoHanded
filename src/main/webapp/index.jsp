@@ -9,26 +9,26 @@
     <title>HRBU二手交易</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.css">
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/skins/_all-skins.css">
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <!-- jQuery 3 -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.min.js"></script>
+    <script src="${pageContext.request.contextPath}/dist/js/adminlte.min.js"></script>
 
 
 </head>
@@ -161,8 +161,8 @@
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
                         <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="#">Link in level 2</a></li>
@@ -191,6 +191,17 @@
 
         <!-- Main content -->
         <section class="content container-fluid">
+        	<div class="col-md-6">
+        		<div class="box box-solid">
+        			<div class="box-header width-border">
+        				<div class="box-body">
+        					<div name="craousel-example-generic" class="craousel slide" data-ride="craousel">
+        						
+        					</div>
+        				</div>
+        			</div>
+                </div>
+            </div>
 
             <!--------------------------
               | Your Page Content Here |
