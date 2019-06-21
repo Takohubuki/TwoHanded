@@ -33,19 +33,23 @@
 
         <form action="${pageContext.servletContext.contextPath}/user/signup" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="姓名" name="username">
+                <input type="text" class="form-control" placeholder="用户名" name="username">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="学号" name="userId">
+                <input type="text" class="form-control" placeholder="真实姓名" name="name">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="学号" name="sid">
                 <span class="glyphicon glyphicon-book form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="密码" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Retype password">
+                <input type="password" class="form-control" placeholder="再次输入密码">
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -53,7 +57,7 @@
                 <span class="glyphicon glyphicon-home form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="手机号" name="phoneNum">
+                <input type="text" class="form-control" placeholder="手机号" name="phone">
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
             </div>
             <div class="row">
@@ -68,7 +72,7 @@
             </div>
         </form>
 
-        <a href="login.html" class="text-center">I already have a membership</a>
+        <a href="${pageContext.request.contextPath}/user/login" class="text-center">我有账号</a>
     </div>
     <!-- /.form-box -->
 </div>

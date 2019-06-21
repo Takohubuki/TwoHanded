@@ -99,7 +99,9 @@ public class UserController {
         密码经过md5加密之后存入数据库中
          */
 //        Member members = new Member(member.getSid(), member.getUsername(),DigestUtils.md5DigestAsHex(member.getPassword().getBytes()), member.getPhone(), member.getDormitory());
-
+        String password = member.getPassword();
+        String s = DigestUtils.md5DigestAsHex(password.getBytes());
+        member.setPassword(s);
         memberMapper.insert(member);
         System.out.println("-----------------------注册成功-----------------------------");
         session.setAttribute("member",member);

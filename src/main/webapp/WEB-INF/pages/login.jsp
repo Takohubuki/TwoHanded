@@ -66,7 +66,7 @@
             </div>
             <c:if test="${message != null}">
 
-                <div class="alert alert-danger" role="alert">${message}</div>
+                <div class="alert alert-danger" role="alert" style="margin-top: 20px">${message}</div>
             </c:if>
         </form>
 

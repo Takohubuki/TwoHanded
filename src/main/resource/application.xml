@@ -25,7 +25,7 @@
                                         serverTimezone=GMT%2B8&amp;
                                         allowMultiQueries=true&amp;
                                         allowPublicKeyRetrieval=true"/>
-        <property name="password" value="password"/>
+        <property name="password" value="root"/>
         <property name="user" value="root"/>
     </bean>
 
