@@ -1,5 +1,9 @@
 package com.zdh.controller;
 
+import com.zdh.bean.Manager;
+import com.zdh.bean.Member;
+import com.zdh.mappers.ManagerMapper;
+import com.zdh.mappers.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,67 +17,64 @@ import java.io.IOException;
 @Controller
 public class UserController {
 
-//    @Autowired
-//    BuyerMapper buyerMapper;
-//
-//    @Autowired
-//    SellerMapper sellerMapper;
-//
-//    @Autowired
-//    ManagerMapper managerMapper;
+    @Autowired
+    MemberMapper memberMapper;
+
+    @Autowired
+    ManagerMapper managerMapper;
 
     /*
     用户登录模块
      */
-//    @RequestMapping("/signin")
-//    public String signin(String username, String password, String type, Model model, HttpSession session) throws IOException {
-//        System.out.println("--------------------开始登录-----------------");
-//        /*
-//        判断用户登录类型
-//         */
-//        switch (type){
-//            case "用户":
-//                Buyer buyer = buyerMapper.selectByName(username);
-//                if (buyer == null){
-//                    model.addAttribute("message","用户名错误！");
-//                    return "login";
-//                }else if (!passwordConfirm(buyer.getPassword(),password)){
-//                    model.addAttribute("message","密码错误！");
-//                    return "login";
-//                }else if (passwordConfirm(buyer.getPassword(),password)){
-//                    session.setAttribute("member",buyer);
-//                    /*
-//                    用户登录成功返回首页
-//                     */
-//                    return "redirect:/index.jsp";
-//                }else {
-//
-//                    return "login";
-//                }
-//            case "管理员":
-//                Manager manager = managerMapper.selectByName(username);
-//                if (manager == null){
-//                    model.addAttribute("message","用户名错误！");
-//                    return "login";
-//                }else if (!passwordConfirm(manager.getPassword(),password)){
-//                    model.addAttribute("message","密码错误！");
-//                    return "login";
-//                }else if (passwordConfirm(manager.getPassword(),password)){
-//                    session.setAttribute("manager",manager);
-//                    /*
-//                    管理员登录成功进入后台管理页面
-//                     */
-//
-//                    return "backstage";
-//                }else {
-//                    return "login";
-//                }
-//            default:
-//                model.addAttribute("message","请选择用户或管理员！");
-//                return "login";
-//        }
-//
-//    }
+    @RequestMapping("/signin")
+    public String signin(String username, String password, String type, Model model, HttpSession session) throws IOException {
+        System.out.println("--------------------开始登录-----------------");
+        /*
+        判断用户登录类型
+         */
+        switch (type){
+            case "用户":
+                Member member = memberMapper.selectByName(username);
+                if (member == null){
+                    model.addAttribute("message","用户名错误！");
+                    return "login";
+                }else if (!passwordConfirm(member.getPassword(),password)){
+                    model.addAttribute("message","密码错误！");
+                    return "login";
+                }else if (passwordConfirm(member.getPassword(),password)){
+                    session.setAttribute("member",member);
+                    /*
+                    用户登录成功返回首页
+                     */
+                    return "redirect:/index.jsp";
+                }else {
+
+                    return "login";
+                }
+            case "管理员":
+                Manager manager = managerMapper.selectByName(username);
+                if (manager == null){
+                    model.addAttribute("message","用户名错误！");
+                    return "login";
+                }else if (!passwordConfirm(manager.getPassword(),password)){
+                    model.addAttribute("message","密码错误！");
+                    return "login";
+                }else if (passwordConfirm(manager.getPassword(),password)){
+                    session.setAttribute("manager",manager);
+                    /*
+                    管理员登录成功进入后台管理页面
+                     */
+
+                    return "backstage";
+                }else {
+                    return "login";
+                }
+            default:
+                model.addAttribute("message","请选择用户或管理员！");
+                return "login";
+        }
+
+    }
 
     @RequestMapping("/login")
     public String login(){
@@ -87,25 +88,24 @@ public class UserController {
         return "register";
     }
 
-//    @RequestMapping("/signup")
+    @RequestMapping("/signup")
     /*
     用户注册模块
      */
-//    public String signup(Members members, HttpSession session, Model model){
-//        System.out.println("-----------------------开始注册------------------------");
-//        /*
-//        将新用户的信息分别存入buyer表和seller表中
-//        密码经过md5加密之后存入数据库中
-//         */
-//        Buyer buyer = new Buyer(members.getUserId(), members.getUsername(),DigestUtils.md5DigestAsHex(members.getPassword().getBytes()), members.getPhoneNum(), members.getDormitory());
-//        Seller seller = new Seller(members.getUserId(), members.getUsername(),DigestUtils.md5DigestAsHex(members.getPassword().getBytes()), members.getPhoneNum(), members.getDormitory());
-//        buyerMapper.insert(buyer);
-//        sellerMapper.insert(seller);
-//        System.out.println("-----------------------注册成功-----------------------------");
-//        session.setAttribute("member",members);
-//        return "redirect:/index.jsp";
-//
-//    }
+    public String signup(Member member, HttpSession session, Model model){
+        System.out.println("-----------------------开始注册------------------------");
+        /*
+        将新用户的信息分别存入member表和seller表中
+        密码经过md5加密之后存入数据库中
+         */
+//        Member members = new Member(member.getSid(), member.getUsername(),DigestUtils.md5DigestAsHex(member.getPassword().getBytes()), member.getPhone(), member.getDormitory());
+
+        memberMapper.insert(member);
+        System.out.println("-----------------------注册成功-----------------------------");
+        session.setAttribute("member",member);
+        return "redirect:/index.jsp";
+
+    }
 
     /*
     用户登出模块
