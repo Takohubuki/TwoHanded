@@ -16,7 +16,7 @@ import java.util.List;
 public class MybatisG {
     @Test
     public void Test01() throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
-        List<String> warnings = new ArrayList<String>();
+        List<String> warnings = new ArrayList<>();
         boolean overwrite = true;
         File config = new File("D:\\java\\TwoHanded\\src\\main\\resource\\MG.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);

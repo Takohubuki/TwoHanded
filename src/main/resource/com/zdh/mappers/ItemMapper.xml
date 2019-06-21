@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.ItemMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Item">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="quality" jdbcType="INTEGER" property="quality" />
+    <result column="condition" jdbcType="VARCHAR" property="condition" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, price, number, publisher, describe, image, quality, condition
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Item">
+    insert into item (id, name, price, 
+      number, publisher, describe, 
+      image, quality, condition
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{condition,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Item">
+    insert into item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="publisher != null">
+        publisher,
+      </if>
+      <if test="describe != null">
+        describe,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="quality != null">
+        quality,
+      </if>
+      <if test="condition != null">
+        condition,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        #{quality,jdbcType=INTEGER},
+      </if>
+      <if test="condition != null">
+        #{condition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Item">
+    update item
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        quality = #{quality,jdbcType=INTEGER},
+      </if>
+      <if test="condition != null">
+        condition = #{condition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Item">
+    update item
+    set name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      describe = #{describe,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=INTEGER},
+      condition = #{condition,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

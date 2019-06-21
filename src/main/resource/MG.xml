@@ -15,7 +15,7 @@
                                         serverTimezone=GMT%2B8&amp;
                                         allowMultiQueries=true&amp;
                                         allowPublicKeyRetrieval=true"
-                        userId="root" password="password">
+                        userId="root" password="root">
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
         <javaTypeResolver>

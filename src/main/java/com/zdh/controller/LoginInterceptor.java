@@ -1,6 +1,5 @@
 package com.zdh.controller;
 
-import com.zdh.bean.Members;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.ServletException;
@@ -10,16 +9,16 @@ import java.io.IOException;
 
 public class LoginInterceptor implements HandlerInterceptor {
         //拦截器
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws ServletException, IOException {
-        if (request.getRequestURI().contains("login")){
-            return true;
-        }
-        Members member = (Members) request.getSession().getAttribute("member");
-        if (member == null){
-            request.setAttribute("message","请先登录");
-            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request,response);
-            return false;
-        }
-        return true;
-    }
+//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws ServletException, IOException {
+//        if (request.getRequestURI().contains("login")){
+//            return true;
+//        }
+//        Members member = (Members) request.getSession().getAttribute("member");
+//        if (member == null){
+//            request.setAttribute("message","请先登录");
+//            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request,response);
+//            return false;
+//        }
+//        return true;
+//    }
 }
