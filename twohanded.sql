@@ -1,6 +1,6 @@
 /*
-SQLyog  v12.2.6 (64 bit)
-MySQL - 8.0.15 : Database - twohanded
+SQLyog Enterprise v12.2.6 (64 bit)
+MySQL - 8.0.16 : Database - twohanded
 *********************************************************************
 */
 
@@ -12,119 +12,92 @@ MySQL - 8.0.15 : Database - twohanded
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`twohanded` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`twohanded` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `twohanded`;
 
-/*Table structure for table `buyer` */
+/*Table structure for table `cart` */
 
-DROP TABLE IF EXISTS `buyer`;
+DROP TABLE IF EXISTS `cart`;
 
-CREATE TABLE `buyer` (
-  `BID` varchar(99) NOT NULL,
-  `username` varchar(99) DEFAULT NULL,
-  `password` varchar(99) DEFAULT NULL,
-  `phone` varchar(99) DEFAULT NULL,
-  `dormitory` varchar(99) DEFAULT NULL,
-  PRIMARY KEY (`BID`)
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_id` varchar(255) DEFAULT NULL,
+  `member_sid` varchar(255) DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Data for the table `buyer` */
+/*Data for the table `cart` */
 
-insert  into `buyer`(`BID`,`username`,`password`,`phone`,`dormitory`) values 
-('B16044521','123','e10adc3949ba59abbe56e057f20f883e','15242415623','5521'),
-('B16044619','xlj','e10adc3949ba59abbe56e057f20f883e','15242415623','2502');
+/*Table structure for table `item` */
 
-/*Table structure for table `items` */
+DROP TABLE IF EXISTS `item`;
 
-DROP TABLE IF EXISTS `items`;
-
-CREATE TABLE `items` (
-  `id` varchar(99) NOT NULL,
-  `name` varchar(99) DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  `description` varchar(99) DEFAULT NULL,
-  `tags` varchar(99) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `items_id_uindex` (`id`)
+CREATE TABLE `item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
+  `publisher` varchar(255) DEFAULT NULL,
+  `describe` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `quality` int(11) DEFAULT NULL,
+  `condition` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Data for the table `items` */
+/*Data for the table `item` */
 
 /*Table structure for table `manager` */
 
 DROP TABLE IF EXISTS `manager`;
 
 CREATE TABLE `manager` (
-  `id` varchar(99) NOT NULL,
-  `name` varchar(99) DEFAULT NULL,
-  `password` varchar(99) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `manager` */
 
-insert  into `manager`(`id`,`name`,`password`) values 
-('1','admin','21232f297a57a5a743894a0e4a801fc3');
+/*Table structure for table `member` */
 
-/*Table structure for table `members` */
+DROP TABLE IF EXISTS `member`;
 
-DROP TABLE IF EXISTS `members`;
-
-CREATE TABLE `members` (
-  `userId` varchar(99) NOT NULL,
-  `password` varchar(99) DEFAULT NULL,
-  `phoneNum` varchar(99) DEFAULT NULL,
-  `username` varchar(99) DEFAULT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `members_userId_uindex` (`userId`)
+CREATE TABLE `member` (
+  `sid` varchar(255) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `dormitory` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT 'default.jpg',
+  `phone` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Data for the table `members` */
+/*Data for the table `member` */
 
-insert  into `members`(`userId`,`password`,`phoneNum`,`username`) values 
-('20190422123','123','12521262215','123');
+insert  into `member`(`sid`,`username`,`password`,`dormitory`,`name`,`avatar`,`phone`) values 
+('15022364','123','4297f44b13955235245b2497399d7a93',5521,'但如果','default.jpg','15503125215'),
+('16046621','xlj','4297f44b13955235245b2497399d7a93',2202,'xlj','xlj.png','15504618935');
 
-/*Table structure for table `orders` */
+/*Table structure for table `order` */
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `order`;
 
-CREATE TABLE `orders` (
-  `orders_id` varchar(99) NOT NULL,
-  `items_id` varchar(99) NOT NULL,
-  `buyer_id` varchar(99) DEFAULT NULL,
-  `seller_id` varchar(99) DEFAULT NULL,
-  `items_num` int(11) DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  PRIMARY KEY (`orders_id`,`items_id`),
-  KEY `orders___buyer` (`buyer_id`),
-  KEY `orders___items` (`items_id`),
-  KEY `orders___seller` (`seller_id`),
-  CONSTRAINT `orders___buyer` FOREIGN KEY (`buyer_id`) REFERENCES `buyer` (`BID`),
-  CONSTRAINT `orders___items` FOREIGN KEY (`items_id`) REFERENCES `items` (`id`),
-  CONSTRAINT `orders___seller` FOREIGN KEY (`seller_id`) REFERENCES `seller` (`SID`)
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_paid` varchar(255) DEFAULT NULL,
+  `is_received` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-/*Data for the table `orders` */
-
-/*Table structure for table `seller` */
-
-DROP TABLE IF EXISTS `seller`;
-
-CREATE TABLE `seller` (
-  `SID` varchar(99) NOT NULL,
-  `username` varchar(99) DEFAULT NULL,
-  `password` varchar(99) DEFAULT NULL,
-  `phone` varchar(99) DEFAULT NULL,
-  `dormitory` varchar(99) DEFAULT NULL,
-  PRIMARY KEY (`SID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `seller` */
-
-insert  into `seller`(`SID`,`username`,`password`,`phone`,`dormitory`) values 
-('S16044521','123','e10adc3949ba59abbe56e057f20f883e','15242415623','5521'),
-('S16044619','xlj','e10adc3949ba59abbe56e057f20f883e','15242415623','2502');
+/*Data for the table `order` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
