@@ -247,7 +247,7 @@
 
 <body>
 <div class="header-most-top">
-    <p>哈学院唯一指定官方二手交易平台</p>
+    <p>哈学院官方唯一指定二手交易平台</p>
 </div>
 <div class="header-bot">
     <div class="header-bot_inner_wthreeinfo_header_mid">
@@ -342,14 +342,8 @@
                         <div class="styled-input">
                             <input type="password" placeholder="Password" name="password" required="">
                         </div>
-                        <div class="styled-input">
-                            <select class="selectpicker" title="请选择身份" name="type" data-style="btn-primary">
-                                <option value="用户">用户</option>
-                                <option value="管理员">管理员</option>
-                            </select>
-
-                        </div>
                         <input type="submit" value="登录">
+
                     </form>
                     <div class="clearfix"></div>
                 </div>

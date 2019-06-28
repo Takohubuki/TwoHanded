@@ -11,13 +11,13 @@
 <head>
     <title>登录</title>
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/font-awesome/css/font-awesome.min.css">
+    <link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/icons/ionicons.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
@@ -45,19 +45,19 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-                <div class="col-xs-8">
-                    <div class="selectpicker">
-                        <select class="selectpicker" title="请选择身份" data-style="btn-primary" name="type">
-                            <option value="用户">用户</option>
-                            <option value="管理员">管理员</option>
-                        </select>
-                    </div>
-                    <!-- <div class="checkbox icheck">
-                      <label>
-                        <input type="checkbox"> Remember Me
-                      </label>
-                    </div> -->
-                </div>
+<%--                <div class="col-xs-8">--%>
+<%--                    <div class="selectpicker">--%>
+<%--                        <select class="selectpicker" title="请选择身份" data-style="btn-primary" name="type">--%>
+<%--                            <option value="用户">用户</option>--%>
+<%--                            <option value="管理员">管理员</option>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+<%--                    <!-- <div class="checkbox icheck">--%>
+<%--                      <label>--%>
+<%--                        <input type="checkbox"> Remember Me--%>
+<%--                      </label>--%>
+<%--                    </div> -->--%>
+<%--                </div>--%>
                 <!-- /.col -->
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
@@ -79,9 +79,9 @@
 </div>
 <!-- /.login-box -->
 <!-- jQuery 3 -->
-<script src="${pageContext.request.contextPath}/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="${pageContext.request.contextPath}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>

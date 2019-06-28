@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -20,59 +21,42 @@ public class UserController {
     @Autowired
     MemberMapper memberMapper;
 
-    @Autowired
-    ManagerMapper managerMapper;
+
 
     /*
     用户登录模块
      */
     @RequestMapping("/signin")
-    public String signin(String username, String password, String type, Model model, HttpSession session) throws IOException {
+    public ModelAndView signin(String username, String password, String type, HttpSession session) throws IOException {
         System.out.println("--------------------开始登录-----------------");
         /*
         判断用户登录类型
          */
-        switch (type){
-            case "用户":
-                Member member = memberMapper.selectByName(username);
-                if (member == null){
-                    model.addAttribute("message","用户名错误！");
-                    return "login";
-                }else if (!passwordConfirm(member.getPassword(),password)){
-                    model.addAttribute("message","密码错误！");
-                    return "login";
-                }else if (passwordConfirm(member.getPassword(),password)){
-                    session.setAttribute("member",member);
-                    /*
-                    用户登录成功返回首页
-                     */
-                    return "redirect:/index.jsp";
-                }else {
-
-                    return "login";
-                }
-            case "管理员":
-                Manager manager = managerMapper.selectByName(username);
-                if (manager == null){
-                    model.addAttribute("message","用户名错误！");
-                    return "login";
-                }else if (!passwordConfirm(manager.getPassword(),password)){
-                    model.addAttribute("message","密码错误！");
-                    return "login";
-                }else if (passwordConfirm(manager.getPassword(),password)){
-                    session.setAttribute("manager",manager);
-                    /*
-                    管理员登录成功进入后台管理页面
-                     */
-
-                    return "backstage";
-                }else {
-                    return "login";
-                }
-            default:
-                model.addAttribute("message","请选择用户或管理员！");
-                return "login";
+        ModelAndView modelAndView = new ModelAndView();
+        Member member = memberMapper.selectByName(username);
+        if (member == null){
+            modelAndView.setViewName("login");
+            modelAndView.addObject("message","用户名错误！");
+            return modelAndView;
+        }else if (!passwordConfirm(member.getPassword(),password)){
+//            modelAndView.addAttribute("message","密码错误！");
+//            return "login";
+            modelAndView.setViewName("login");
+            modelAndView.addObject("message","密码错误！");
+            return modelAndView;
+        }else if (passwordConfirm(member.getPassword(),password)){
+            session.setAttribute("member",member);
+            /*
+            用户登录成功返回首页
+             */
+            modelAndView.setViewName("redirect:/index.jsp");
+            return modelAndView;
+        }else {
+            modelAndView.setViewName("login");
+            modelAndView.addObject("message","用户名或密码错误！");
+            return modelAndView;
         }
+
 
     }
 
@@ -122,7 +106,7 @@ public class UserController {
 
 
     //密码验证
-    private static boolean passwordConfirm(String password1, String password2){
+    static boolean passwordConfirm(String password1, String password2){
         //将输入的密码转化成md5的形式与数据库中存储的md5进行对比
 
         String md5 = DigestUtils.md5DigestAsHex(password2.getBytes());

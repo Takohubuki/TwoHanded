@@ -13,7 +13,7 @@
 </head>
 <body>
     <div style="float: right">
-        欢迎！${manager.name}<a href="${pageContext.servletContext.contextPath}/user/logout">注销</a>
+        欢迎！${manager.username}<a href="${pageContext.servletContext.contextPath}/manage/logout">注销</a>
     </div>
 </body>
 </html>
