@@ -2,6 +2,8 @@ package com.zdh.mappers;
 
 import com.zdh.bean.Item;
 
+import java.util.List;
+
 public interface ItemMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface ItemMapper {
     int updateByPrimaryKeySelective(Item record);
 
     int updateByPrimaryKey(Item record);
+
+    List<Item> selectAllByTime();
+
+    List<Item> select3ByTime();
 }

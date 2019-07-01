@@ -1,8 +1,6 @@
 package com.zdh.controller;
 
-import com.zdh.bean.Manager;
 import com.zdh.bean.Member;
-import com.zdh.mappers.ManagerMapper;
 import com.zdh.mappers.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -27,11 +26,10 @@ public class UserController {
     用户登录模块
      */
     @RequestMapping("/signin")
-    public ModelAndView signin(String username, String password, String type, HttpSession session) throws IOException {
+    public ModelAndView signin(String username, String password, HttpSession session, HttpServletRequest request) throws IOException {
         System.out.println("--------------------开始登录-----------------");
-        /*
-        判断用户登录类型
-         */
+        String uri = request.getRequestURI();
+        System.out.println(uri);
         ModelAndView modelAndView = new ModelAndView();
         Member member = memberMapper.selectByName(username);
         if (member == null){
