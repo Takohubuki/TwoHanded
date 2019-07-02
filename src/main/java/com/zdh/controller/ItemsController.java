@@ -15,12 +15,15 @@ public class ItemsController {
 
     @Autowired
     ItemMapper itemMapper;
-
+    //跳转商品详情页
     @RequestMapping("/singleitem")
-    public String singleitem(){
+    public String singleitem(Model model, String itemname){
+        Item item = itemMapper.selectItemOnSellByName();
+        model.addAttribute("item",item);
         return "singleitem";
     }
 
+    //跳转最新商品列表页
     @RequestMapping("/queryalltime")
     public String query(Model model){
         List<Item> items = itemMapper.selectAllByTime();

@@ -790,11 +790,11 @@
                 <!-- first section (nuts) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">出售</h3>
-                    <c:forEach var="newlist" items="${newestitems}">
+                    <c:forEach var="newestitems" items="${newestitems}">
                         <div class="col-md-4 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="${newlist.image}" alt="">
+                                    <img src="${newestitems.image}" alt="">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="${pageContext.request.contextPath}/items/singleitem" class="link-product-add-cart">Quick View</a>
@@ -804,14 +804,14 @@
                                 </div>
                                 <div class="item-info-product ">
                                     <h4>
-                                        <a href="${pageContext.request.contextPath}/items/singleitem">${newlist.name}</a>
+                                        <a href="${pageContext.request.contextPath}/items/singleitem">${newestitems.name}</a>
                                     </h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">${newlist .price}</span>
+                                        <span class="item_price">${newestitems .price}</span>
 
                                     </div>
                                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                        <form action="#" method="post">
+                                        <form action="${pageContext.request.contextPath}/order/addcart" method="post">
                                             <fieldset>
                                                 <input type="hidden" name="cmd" value="_cart" />
                                                 <input type="hidden" name="add" value="1" />

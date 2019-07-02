@@ -11,13 +11,13 @@ public class Item {
 
     private String publisher;
 
-    private String describe;
+    private String describes;
 
     private String image;
 
     private Integer quality;
 
-    private String condition;
+    private String conditions;
 
     public Integer getId() {
         return id;
@@ -59,12 +59,12 @@ public class Item {
         this.publisher = publisher == null ? null : publisher.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDescribes(String describes) {
+        this.describes = describes == null ? null : describes.trim();
     }
 
     public String getImage() {
@@ -83,11 +83,11 @@ public class Item {
         this.quality = quality;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getConditions() {
+        return conditions;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition == null ? null : condition.trim();
+    public void setConditions(String conditions) {
+        this.conditions = conditions == null ? null : conditions.trim();
     }
 }

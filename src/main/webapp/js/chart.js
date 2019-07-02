@@ -1674,7 +1674,7 @@ var Chart = require(29)();
 
 Chart.helpers = require(45);
 
-// @todo dispatch these helpers into appropriated helpers/helpers.* file and write unit tests!
+
 require(27)(Chart);
 
 Chart.defaults = require(25);
@@ -1741,7 +1741,7 @@ if (typeof window !== 'undefined') {
  * Provided for backward compatibility, use Chart.helpers.canvas instead.
  * @namespace Chart.canvasHelpers
  * @deprecated since version 2.6.0
- * @todo remove at version 3
+
  * @private
  */
 Chart.canvasHelpers = Chart.helpers.canvas;
@@ -3661,7 +3661,7 @@ module.exports = function(Chart) {
 	 * Provided for backward compatibility, use Chart.Animation instead
 	 * @prop Chart.Animation#animationObject
 	 * @deprecated since version 2.6.0
-	 * @todo remove at version 3
+
 	 */
 	Object.defineProperty(Chart.Animation.prototype, 'animationObject', {
 		get: function() {
@@ -3673,7 +3673,7 @@ module.exports = function(Chart) {
 	 * Provided for backward compatibility, use Chart.Animation#chart instead
 	 * @prop Chart.Animation#chartInstance
 	 * @deprecated since version 2.6.0
-	 * @todo remove at version 3
+
 	 */
 	Object.defineProperty(Chart.Animation.prototype, 'chartInstance', {
 		get: function() {
@@ -3780,7 +3780,7 @@ module.exports = function(Chart) {
 			 * the "instance" still need to be defined since it might be called from plugins.
 			 * @prop Chart#chart
 			 * @deprecated since version 2.6.0
-			 * @todo remove at version 3
+
 			 * @private
 			 */
 			me.chart = me;
@@ -3960,7 +3960,7 @@ module.exports = function(Chart) {
 				scales[scale.id] = scale;
 				scale.mergeTicksOptions();
 
-				// TODO(SB): I think we should be able to remove this custom case (options.scale)
+
 				// and consider it as a regular scale part of the "scales"" map only! This would
 				// make the logic easier and remove some useless? custom code.
 				if (item.isDefault) {
@@ -4100,7 +4100,7 @@ module.exports = function(Chart) {
 			 * Provided for backward compatibility, use `afterLayout` instead.
 			 * @method IPlugin#afterScaleUpdate
 			 * @deprecated since version 2.5.0
-			 * @todo remove at version 3
+
 			 * @private
 			 */
 			plugins.notify(me, 'afterScaleUpdate');
@@ -4586,7 +4586,7 @@ module.exports = function(Chart) {
 	 * Provided for backward compatibility, use Chart instead.
 	 * @class Chart.Controller
 	 * @deprecated since version 2.6.0
-	 * @todo remove at version 3
+
 	 * @private
 	 */
 	Chart.Controller = Chart;
@@ -5832,7 +5832,7 @@ module.exports = {
 		/**
 		 * @function Chart.Interaction.modes.label
 		 * @deprecated since version 2.4.0
-		 * @todo remove at version 3
+
 		 * @private
 		 */
 		label: indexMode,
@@ -5874,7 +5874,7 @@ module.exports = {
 		/**
 		 * @function Chart.Interaction.modes.x-axis
 		 * @deprecated since version 2.4.0. Use index mode and intersect == true
-		 * @todo remove at version 3
+
 		 * @private
 		 */
 		'x-axis': function(chart, e) {
@@ -6848,7 +6848,7 @@ module.exports = function(Chart) {
 	 * Provided for backward compatibility, use Chart.plugins instead
 	 * @namespace Chart.pluginService
 	 * @deprecated since version 2.1.5
-	 * @todo remove at version 3
+
 	 * @private
 	 */
 	Chart.pluginService = Chart.plugins;
@@ -6858,7 +6858,7 @@ module.exports = function(Chart) {
 	 * effect, instead simply create/register plugins via plain JavaScript objects.
 	 * @interface Chart.PluginBase
 	 * @deprecated since version 2.5.0
-	 * @todo remove at version 3
+
 	 * @private
 	 */
 	Chart.PluginBase = Element.extend({});
@@ -7309,7 +7309,7 @@ module.exports = function(Chart) {
 					var cosRotation = Math.cos(angleRadians);
 					var sinRotation = Math.sin(angleRadians);
 
-					// TODO - improve this calculation
+
 					var labelHeight = (sinRotation * largestTextWidth)
 						+ (tickFont.size * tallestLabelHeightInLines)
 						+ (lineSpace * (tallestLabelHeightInLines - 1))
@@ -9564,7 +9564,7 @@ var exports = module.exports = {
 	 * @param {Number} width - The rectangle's width.
 	 * @param {Number} height - The rectangle's height.
 	 * @param {Number} radius - The rounded amount (in pixels) for the four corners.
-	 * @todo handle `radius` as top-left, top-right, bottom-right, bottom-left array/object?
+
 	 */
 	roundedRect: function(ctx, x, y, width, height, radius) {
 		if (radius) {

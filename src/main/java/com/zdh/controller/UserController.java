@@ -24,12 +24,16 @@ public class UserController {
 
     /*
     用户登录模块
+
      */
     @RequestMapping("/signin")
     public ModelAndView signin(String username, String password, HttpSession session, HttpServletRequest request) throws IOException {
         System.out.println("--------------------开始登录-----------------");
-        String uri = request.getRequestURI();
-        System.out.println(uri);
+//        String uri = request.getRequestURI();
+//        System.out.println(uri);
+        String uri = request.getHeader("Referer");
+//        session.setAttribute("redirectUri",uri);
+
         ModelAndView modelAndView = new ModelAndView();
         Member member = memberMapper.selectByName(username);
         if (member == null){
@@ -37,8 +41,7 @@ public class UserController {
             modelAndView.addObject("message","用户名错误！");
             return modelAndView;
         }else if (!passwordConfirm(member.getPassword(),password)){
-//            modelAndView.addAttribute("message","密码错误！");
-//            return "login";
+
             modelAndView.setViewName("login");
             modelAndView.addObject("message","密码错误！");
             return modelAndView;
@@ -47,15 +50,14 @@ public class UserController {
             /*
             用户登录成功返回首页
              */
-            modelAndView.setViewName("redirect:/index.jsp");
+            System.out.println("redirect:"+uri);
+            modelAndView.setViewName("redirect:"+uri);
             return modelAndView;
         }else {
             modelAndView.setViewName("login");
             modelAndView.addObject("message","用户名或密码错误！");
             return modelAndView;
         }
-
-
     }
 
     @RequestMapping("/login")
@@ -74,20 +76,22 @@ public class UserController {
     /*
     用户注册模块
      */
-    public String signup(Member member, HttpSession session, Model model){
+    public String signup(Member member, HttpSession session, Model model, HttpServletRequest request){
         System.out.println("-----------------------开始注册------------------------");
         /*
         将新用户的信息分别存入member表和seller表中
         密码经过md5加密之后存入数据库中
          */
 //        Member members = new Member(member.getSid(), member.getUsername(),DigestUtils.md5DigestAsHex(member.getPassword().getBytes()), member.getPhone(), member.getDormitory());
+        String uri = request.getHeader("Referer");
+
         String password = member.getPassword();
         String s = DigestUtils.md5DigestAsHex(password.getBytes());
         member.setPassword(s);
         memberMapper.insert(member);
         System.out.println("-----------------------注册成功-----------------------------");
         session.setAttribute("member",member);
-        return "redirect:/index.jsp";
+        return "redirect:"+uri;
 
     }
 
@@ -95,9 +99,10 @@ public class UserController {
     用户登出模块
      */
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session,HttpServletRequest request){
+        String uri = request.getHeader("Referer");
         session.setAttribute("member",null);
-        return "redirect:/index.jsp";
+        return "redirect:"+uri;
     }
 
 

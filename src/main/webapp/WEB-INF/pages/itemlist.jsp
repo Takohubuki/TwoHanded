@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
@@ -75,7 +76,7 @@
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 注 销</a>
                     </li>
                     <li class="navbar-right">
-                        你好！<a href="#" >
+                        你好！<a href="${pageContext.request.contextPath}/user/profile" >
                         <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle" style="width: 20px;height: 20px">
                             ${member.username}
                     </a>
@@ -113,8 +114,7 @@
     </div>
 </div>
 
-<!-- signin Model -->
-<!-- Modal1 -->
+<!-- 登录模块 -->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -127,20 +127,21 @@
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
                 </div>
                 <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign In </h3>
+                    <h3 class="agileinfo_sign">登 录 </h3>
                     <p>
-                        Sign In now, Let's start your Grocery Shopping. Don't have an account?
+                        没有账号？点击注册
                         <a href="#" data-toggle="modal" data-target="#myModal2">
-                            Sign Up Now</a>
+                            去注册</a>
                     </p>
-                    <form action="#" method="post">
+                    <form action="${pageContext.request.contextPath}/user/signin" method="post">
                         <div class="styled-input agile-styled-input-top">
-                            <input type="text" placeholder="User Name" name="Name" required="">
+                            <input type="text" placeholder="User Name" name="username" required="">
                         </div>
                         <div class="styled-input">
                             <input type="password" placeholder="Password" name="password" required="">
                         </div>
-                        <input type="submit" value="Sign In">
+                        <input type="submit" value="登录">
+
                     </form>
                     <div class="clearfix"></div>
                 </div>
@@ -150,10 +151,8 @@
         <!-- //Modal content-->
     </div>
 </div>
-<!-- //Modal1 -->
-<!-- //signin Model -->
-<!-- signup Model -->
-<!-- Modal2 -->
+<!-- //登录结束 -->
+<!-- 注册模块 -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -166,36 +165,40 @@
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
                 </div>
                 <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign Up</h3>
-                    <p>
-                        Come join the Grocery Shoppy! Let's set up your Account.
-                    </p>
-                    <form action="#" method="post">
+                    <h3 class="agileinfo_sign">注 册</h3>
+
+                    <form action="${pageContext.request.contextPath}/user/signup" method="post">
                         <div class="styled-input agile-styled-input-top">
-                            <input type="text" placeholder="Name" name="Name" required="">
+                            <input type="text" placeholder="学号" name="sid" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="email" placeholder="E-mail" name="Email" required="">
+                            <input type="text" placeholder="真实姓名" name="name" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="password" placeholder="Password" name="password" id="password1" required="">
+                            <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="password" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
+                            <input type="text" placeholder="寝室号 如2公寓202为2202" name="dormitory" required="">
                         </div>
-                        <input type="submit" value="Sign Up">
+                        <div class="styled-input">
+                            <input type="text" placeholder="联系电话" name="phone" required="">
+                        </div>
+                        <div class="styled-input">
+                            <input type="password" placeholder="密码" name="password" id="password1" required="">
+                        </div>
+                        <div class="styled-input">
+                            <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2" required="">
+                        </div>
+                        <input type="submit" value="注册">
                     </form>
-                    <p>
-                        <a href="#">By clicking register, I agree to your terms</a>
-                    </p>
+
                 </div>
             </div>
         </div>
         <!-- //Modal content-->
     </div>
 </div>
-<!-- //Modal2 -->
-<!-- //signup Model -->
+<!-- //注册结束 -->
 <!-- //header-bot -->
 <!-- 导航栏模块 -->
 <div class="ban-top">

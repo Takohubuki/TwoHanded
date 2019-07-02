@@ -20,4 +20,7 @@ public interface ItemMapper {
     List<Item> selectAllByTime();
 
     List<Item> select3ByTime();
+
+    Item selectItemOnSellByName();
+
 }

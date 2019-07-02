@@ -7,13 +7,13 @@
         <result column="price" jdbcType="INTEGER" property="price" />
         <result column="number" jdbcType="INTEGER" property="number" />
         <result column="publisher" jdbcType="VARCHAR" property="publisher" />
-        <result column="describe" jdbcType="VARCHAR" property="describe" />
+        <result column="describes" jdbcType="VARCHAR" property="describes" />
         <result column="image" jdbcType="VARCHAR" property="image" />
         <result column="quality" jdbcType="INTEGER" property="quality" />
-        <result column="condition" jdbcType="VARCHAR" property="condition" />
+        <result column="conditions" jdbcType="VARCHAR" property="conditions" />
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, price, number, publisher, describe, image, quality, condition
+    id, name, price, number, publisher, describes, image, quality, conditions
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -26,10 +26,16 @@
     </select>
     <select id="select3ByTime" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"></include>
+        <include refid="Base_Column_List"/>
         from item
         order by update_time desc
         limit 3
+    </select>
+    <select id="selectItemOnSellByName" resultType="com.zdh.bean.Item">
+        select
+        <include refid="Base_Column_List"/>
+        from item
+        where conditions='出售' and name=#{name}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from item
@@ -37,12 +43,12 @@
   </delete>
     <insert id="insert" parameterType="com.zdh.bean.Item">
     insert into item (id, name, price, 
-      number, publisher, describe, 
-      image, quality, condition
+      number, publisher, describess,
+      image, quality, conditions
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{condition,jdbcType=VARCHAR}
+      #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR},
+      #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Item">
@@ -63,8 +69,8 @@
             <if test="publisher != null">
                 publisher,
             </if>
-            <if test="describe != null">
-                describe,
+            <if test="describes != null">
+                describes,
             </if>
             <if test="image != null">
                 image,
@@ -72,8 +78,8 @@
             <if test="quality != null">
                 quality,
             </if>
-            <if test="condition != null">
-                condition,
+            <if test="conditions != null">
+                conditions,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -92,8 +98,8 @@
             <if test="publisher != null">
                 #{publisher,jdbcType=VARCHAR},
             </if>
-            <if test="describe != null">
-                #{describe,jdbcType=VARCHAR},
+            <if test="describes != null">
+                #{describes,jdbcType=VARCHAR},
             </if>
             <if test="image != null">
                 #{image,jdbcType=VARCHAR},
@@ -101,8 +107,8 @@
             <if test="quality != null">
                 #{quality,jdbcType=INTEGER},
             </if>
-            <if test="condition != null">
-                #{condition,jdbcType=VARCHAR},
+            <if test="conditions != null">
+                #{conditions,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -121,8 +127,8 @@
             <if test="publisher != null">
                 publisher = #{publisher,jdbcType=VARCHAR},
             </if>
-            <if test="describe != null">
-                describe = #{describe,jdbcType=VARCHAR},
+            <if test="describes != null">
+                describes = #{describes,jdbcType=VARCHAR},
             </if>
             <if test="image != null">
                 image = #{image,jdbcType=VARCHAR},
@@ -130,8 +136,8 @@
             <if test="quality != null">
                 quality = #{quality,jdbcType=INTEGER},
             </if>
-            <if test="condition != null">
-                condition = #{condition,jdbcType=VARCHAR},
+            <if test="conditions != null">
+                conditions = #{conditions,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -142,10 +148,10 @@
       price = #{price,jdbcType=INTEGER},
       number = #{number,jdbcType=INTEGER},
       publisher = #{publisher,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       quality = #{quality,jdbcType=INTEGER},
-      condition = #{condition,jdbcType=VARCHAR}
+      conditions = #{conditions,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
