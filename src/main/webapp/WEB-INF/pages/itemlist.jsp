@@ -52,7 +52,7 @@
                     <span>H</span>RBU
                     <span>S</span>econdHand
                     <span>P</span>latform
-                    <img src="../../images/logo2.png" alt=" ">
+                    <img src="${pageContext.request.contextPath}/images/logo2.png" alt=" ">
                 </a>
             </h1>
         </div>
@@ -60,6 +60,10 @@
         <div class="col-md-8 header">
             <!-- header lists -->
             <ul>
+                <li class="navbar-right">
+                    <a href="${pageContext.request.contextPath}/items/publish" data-toggle="modal">
+                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 发 布</a>
+                </li>
                 <c:if test="${member == null}">
                     <li class="navbar-right">
                         <a href="#" data-toggle="modal" data-target="#myModal2">
@@ -285,7 +289,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-sm-4 multi-gd-img">
-                                            <img src="images/nav.png" alt="">
+                                            <img src="${pageContext.request.contextPath}/images/nav.png" alt="">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -498,11 +502,7 @@
     </div>
 </div>
 <!-- //导航栏结束 -->
-<!-- banner-2 -->
-<div class="page-head_agile_info_w3l">
 
-</div>
-<!-- //banner-2 -->
 <!-- page -->
 <div class="services-breadcrumb">
     <div class="agile_inner_breadcrumb">

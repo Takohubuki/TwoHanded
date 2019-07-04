@@ -1,5 +1,7 @@
 package com.zdh.bean;
 
+import java.util.Date;
+
 public class Item {
     private Integer id;
 
@@ -18,6 +20,26 @@ public class Item {
     private Integer quality;
 
     private String conditions;
+
+    private Date publish_time;
+
+    private Date update_time;
+
+    public Date getPublish_time() {
+        return publish_time;
+    }
+
+    public void setPublish_time(Date publish_time) {
+        this.publish_time = publish_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
+    }
 
     public Integer getId() {
         return id;

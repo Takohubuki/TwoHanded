@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.ServletContextAware;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import java.util.List;
@@ -20,19 +19,16 @@ public class IndexController implements InitializingBean, ServletContextAware {
     ItemMapper itemMapper;
 
     @RequestMapping("/index/backindex")
-    public String backindex(){
-        
+    public String backindex(Model model){
+        List<Item> wts_item3 = itemMapper.select3WtsItemByTime();
+        model.addAttribute("wts_item",wts_item3);
+
+
+        List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
+        model.addAttribute("wtb_item",wtb_item3);
         return "redirect:/index.jsp";
 
 
-    }
-
-    @RequestMapping("/index")
-    public String index(Model model){
-        System.out.println("首页控制器执行");
-        List<Item> itemList = itemMapper.select3ByTime();
-        model.addAttribute("newestitems",itemList);
-        return "redirect:/index.jsp";
     }
 
     @Override
@@ -43,8 +39,12 @@ public class IndexController implements InitializingBean, ServletContextAware {
     @Override
     public void setServletContext(ServletContext servletContext) {
         System.out.println("setServletContext");
-        List<Item> itemList = itemMapper.select3ByTime();
-        servletContext.setAttribute("newestitems",itemList);
+        List<Item> wts_item3 = itemMapper.select3WtsItemByTime();
+        servletContext.setAttribute("wts_item",wts_item3);
+
+
+        List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
+        servletContext.setAttribute("wtb_item",wtb_item3);
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.addObject("newestitems",itemList);
 

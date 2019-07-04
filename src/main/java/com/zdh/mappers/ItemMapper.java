@@ -17,10 +17,24 @@ public interface ItemMapper {
 
     int updateByPrimaryKey(Item record);
 
-    List<Item> selectAllByTime();
+    //根据时间查询所有出售商品
+    List<Item> selectWtsAllByTime();
 
-    List<Item> select3ByTime();
+    //根据时间查询所有求购信息
+    List<Item> selectWtbAllByTime();
 
-    Item selectItemOnSellByName();
+    //查询最新的3个出售信息
+    List<Item> select3WtsItemByTime();
 
+    //查询最新的3个求购信息
+    List<Item> select3WtbItemByTime();
+
+    //根据商品名查询单个出售商品信息
+    Item select1WtsItemByName(String itemname);
+
+    //添加出售或求购信息
+    void addpublish(Item item);
+
+    //根据商品名查询单个求购商品
+    Item select1WtbItemByName(String itemname);
 }

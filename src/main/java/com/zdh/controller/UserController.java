@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @RequestMapping("/user")
 @Controller
@@ -24,10 +23,9 @@ public class UserController {
 
     /*
     用户登录模块
-
      */
     @RequestMapping("/signin")
-    public ModelAndView signin(String username, String password, HttpSession session, HttpServletRequest request) throws IOException {
+    public ModelAndView signin(String username, String password, HttpSession session, HttpServletRequest request) {
         System.out.println("--------------------开始登录-----------------");
 //        String uri = request.getRequestURI();
 //        System.out.println(uri);
@@ -60,17 +58,17 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/login")
-    public String login(){
-        System.out.println("----------------------转到登录页面------------------------");
-        return "login";
-    }
-
-    @RequestMapping("/register")
-    public String register(){
-        System.out.println("---------------------转到注册页面------------------------");
-        return "register";
-    }
+//    @RequestMapping("/login")
+//    public String login(){
+//        System.out.println("----------------------转到登录页面------------------------");
+//        return "login";
+//    }
+//
+//    @RequestMapping("/register")
+//    public String register(){
+//        System.out.println("---------------------转到注册页面------------------------");
+//        return "register";
+//    }
 
     @RequestMapping("/signup")
     /*
@@ -99,10 +97,9 @@ public class UserController {
     用户登出模块
      */
     @RequestMapping("/logout")
-    public String logout(HttpSession session,HttpServletRequest request){
-        String uri = request.getHeader("Referer");
+    public String logout(HttpSession session){
         session.setAttribute("member",null);
-        return "redirect:"+uri;
+        return "redirect:/index.jsp";
     }
 
 

@@ -13,7 +13,7 @@
     <mvc:annotation-driven/>
 <mvc:interceptors>
     <mvc:interceptor>
-        <mvc:mapping path="/*"/>
+        <mvc:mapping path="/**"/>
         <bean class="com.zdh.controller.LoginInterceptor">
         </bean>
     </mvc:interceptor>

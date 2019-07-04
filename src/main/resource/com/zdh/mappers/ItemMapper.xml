@@ -21,21 +21,36 @@
         from item
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectAllByTime" resultMap="BaseResultMap">
+    <select id="selectWtsAllByTime" resultMap="BaseResultMap">
         select * from item order BY update_time desc
     </select>
-    <select id="select3ByTime" resultMap="BaseResultMap">
+    <select id="select3WtsItemByTime" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from item
+        where conditions='出售'
         order by update_time desc
         limit 3
     </select>
-    <select id="selectItemOnSellByName" resultType="com.zdh.bean.Item">
+    <select id="select3WtbItemByTime" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from item
-        where conditions='出售' and name=#{name}
+        where conditions='求购'
+        order by update_time desc
+        limit 3
+    </select>
+    <select id="select1WtsItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select
+        <include refid="Base_Column_List"/>
+        from item
+        where conditions='出售' and name=#{itemname}
+    </select>
+    <select id="select1WtbItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select
+        <include refid="Base_Column_List"/>
+        from item
+        where conditions='求购' and name=#{itemname}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from item
@@ -51,6 +66,16 @@
       #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR}
       )
   </insert>
+    <insert id="addpublish" parameterType="com.zdh.bean.Item">
+        insert into item (id, name, price,
+          number, publisher, describess,
+          image, quality, conditions
+          )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+          #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR},
+          #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR}
+          )
+    </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Item">
         insert into item
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -223,7 +223,7 @@
                     <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav menu__list">
                             <li>
-                                <a class="nav-stylehead" href="index.html">主页
+                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/index/backindex">主页
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
@@ -287,7 +287,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-sm-4 multi-gd-img">
-                                            <img src="images/nav.png" alt="">
+                                            <img src="${pageContext.request.contextPath}/images/nav.png" alt="">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -473,25 +473,7 @@
                                     </div>
                                 </ul>
                             </li>
-                            <li>
-                                <a class="nav-stylehead" href="faqs.html">Faqs</a>
-                            </li>
-                            <li class="dropdown">
-                                <a class="nav-stylehead dropdown-toggle" href="#" data-toggle="dropdown">Pages
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu agile_short_dropdown">
-                                    <li>
-                                        <a href="icons.html">Web Icons</a>
-                                    </li>
-                                    <li>
-                                        <a href="typography.html">Typography</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="" href="contact.html">Contact</a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -500,21 +482,17 @@
     </div>
 </div>
 <!-- //导航栏结束 -->
-<!-- banner-2 -->
-<div class="page-head_agile_info_w3l">
 
-</div>
-<!-- //banner-2 -->
 <!-- page -->
 <div class="services-breadcrumb">
     <div class="agile_inner_breadcrumb">
         <div class="container">
             <ul class="w3_short">
                 <li>
-                    <a href="${pageContext.request.contextPath}/index/backindex">Home</a>
+                    <a href="${pageContext.request.contextPath}/index/backindex">主页</a>
                     <i>|</i>
                 </li>
-                <li>Single Page</li>
+                <li>商品详情</li>
             </ul>
         </div>
     </div>
@@ -524,7 +502,7 @@
 <div class="banner-bootom-w3-agileits">
     <div class="container">
         <!-- tittle heading -->
-        <h3 class="tittle-w3l">Single Page
+        <h3 class="tittle-w3l">商品详情
             <span class="heading-style">
 					<i></i>
 					<i></i>
@@ -536,17 +514,17 @@
             <div class="grid images_3_of_2">
                 <div class="flexslider">
                     <ul class="slides">
-                        <li data-thumb="../../images/si.jpg">
+                        <li data-thumb="${pageContext.request.contextPath}/${item.image}">
                             <div class="thumb-image">
-                                <img src="../../images/si.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                <img src="${pageContext.request.contextPath}/${item.image}" data-imagezoom="true" class="img-responsive" alt=""> </div>
                         </li>
-                        <li data-thumb="../../images/si2.jpg">
+                        <li data-thumb="${pageContext.request.contextPath}/images/si2.jpg">
                             <div class="thumb-image">
-                                <img src="../../images/si2.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                <img src="${pageContext.request.contextPath}/images/si2.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
                         </li>
-                        <li data-thumb="../../images/si3.jpg">
+                        <li data-thumb="${pageContext.request.contextPath}/images/si3.jpg">
                             <div class="thumb-image">
-                                <img src="../../images/si3.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                <img src="${pageContext.request.contextPath}/images/si3.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
                         </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -554,7 +532,7 @@
             </div>
         </div>
         <div class="col-md-7 single-right-left simpleCart_shelfItem">
-            <h3>Zeeba Premium Basmati Rice - 5 KG</h3>
+            <h3>${item.name}</h3>
             <div class="rating1">
 					<span class="starRating">
 						<input id="rating5" type="radio" name="rating" value="5">
@@ -570,25 +548,21 @@
 					</span>
             </div>
             <p>
-                <span class="item_price">$950.00</span>
-                <del>$1300.00</del>
-                <label>Free delivery</label>
+                <span class="item_price">￥${item.price}</span>
+<%--                <label>Free delivery</label>--%>
             </p>
             <div class="single-infoagile">
                 <ul>
                     <li>
-                        Cash on Delivery Eligible.
+                        当面交易
                     </li>
                     <li>
                         Shipping Speed to Delivery.
                     </li>
                     <li>
-                        Sold and fulfilled by Supple Tek (3.6 out of 5 | 8 ratings).
+                        库存：${item.number}
                     </li>
-                    <li>
-                        1 offer from
-                        <span class="item_price">$950.00</span>
-                    </li>
+
                 </ul>
             </div>
             <div class="product-single-w3l">
@@ -616,13 +590,13 @@
             </div>
             <div class="occasion-cart">
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                    <form action="#" method="post">
+                    <form action="${pageContext.request.contextPath}/order/addcart" method="post">
                         <fieldset>
                             <input type="hidden" name="cmd" value="_cart" />
                             <input type="hidden" name="add" value="1" />
                             <input type="hidden" name="business" value=" " />
-                            <input type="hidden" name="item_name" value="Zeeba Premium Basmati Rice - 5 KG" />
-                            <input type="hidden" name="amount" value="950.00" />
+                            <input type="hidden" name="name" value="${item.name}" />
+                            <input type="hidden" name="price" value="${item.price}" />
                             <input type="hidden" name="discount_amount" value="1.00" />
                             <input type="hidden" name="currency_code" value="USD" />
                             <input type="hidden" name="return" value=" " />
@@ -635,7 +609,7 @@
             </div>
 
         </div>
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
     </div>
 </div>
 <!-- //Single Page -->
