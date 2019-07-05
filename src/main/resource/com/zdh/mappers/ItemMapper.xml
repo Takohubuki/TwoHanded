@@ -58,7 +58,7 @@
   </delete>
     <insert id="insert" parameterType="com.zdh.bean.Item">
     insert into item (id, name, price, 
-      number, publisher, describess,
+      number, publisher, describes,
       image, quality, conditions
       )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
@@ -68,12 +68,12 @@
   </insert>
     <insert id="addpublish" parameterType="com.zdh.bean.Item">
         insert into item (id, name, price,
-          number, publisher, describess,
-          image, quality, conditions
+          number, publisher, describes,
+          image, quality, conditions, publish_time, update_time
           )
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
           #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR},
-          #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR}
+          #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR},#{publish_time,jdbcType=TIMESTAMP},#{update_time,jdbcType=TIMESTAMP}
           )
     </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Item">

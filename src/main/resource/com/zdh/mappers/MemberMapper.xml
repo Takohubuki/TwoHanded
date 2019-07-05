@@ -28,10 +28,10 @@
   </delete>
     <insert id="insert" parameterType="com.zdh.bean.Member">
     insert into member (sid, username, password, 
-      dormitory, name, avatar, 
+      dormitory, name,
       phone)
     values (#{sid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{dormitory,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{dormitory,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Member">

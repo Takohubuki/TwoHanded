@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +23,15 @@ public class ItemsController {
 
     @Autowired
     ItemMapper itemMapper;
+
+    //转跳出售商品列表
+    //根据时间降序排列商品
+    @RequestMapping("/listwtsbytime")
+    public String listwtsbytime(Model model){
+        List<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
+        model.addAttribute("wtsAllByTime",wtsAllByTime);
+        return "itemlist";
+    }
 
     //跳转求购商品详情页
     @RequestMapping("/wtbitem")
@@ -53,14 +67,34 @@ public class ItemsController {
     //发布信息存入数据库
     //返回主页时更新最新商品
     @RequestMapping("/addpublish")
-    public String addpublish(Item item, Model model, HttpSession session){
+    public String addpublish(Item item, Model model, HttpSession session, @RequestParam("imagefile") MultipartFile file, HttpServletRequest request) throws IOException {
+        if(!file.isEmpty()) {
+            //上传文件路径
+            String path = request.getSession().getServletContext().getRealPath("/images/");
+
+            System.out.println(path);
+            //上传文件名
+            String filename = file.getOriginalFilename();
+            File filepath = new File(path,filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            file.transferTo(new File(path + File.separator + filename));
+            //输出文件上传最终的路径 测试查看
+            System.out.println(path + File.separator + filename);
+
+            item.setImage("images/"+filename);
+        }
         Member member = (Member) session.getAttribute("member");
-        item.setPublisher(member.getUsername());
+        item.setPublisher(member.getSid());
         Date date = new Date();
         item.setPublish_time(date);
         item.setUpdate_time(date);
-
         itemMapper.addpublish(item);
+
+
         List<Item> wtb_item = itemMapper.select3WtbItemByTime();
         List<Item> wts_item = itemMapper.select3WtsItemByTime();
         model.addAttribute("wtb_item",wtb_item);

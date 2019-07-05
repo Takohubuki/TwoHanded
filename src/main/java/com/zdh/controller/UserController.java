@@ -31,7 +31,9 @@ public class UserController {
 //        System.out.println(uri);
         String uri = request.getHeader("Referer");
 //        session.setAttribute("redirectUri",uri);
-
+        if (uri.contains("signin")){
+            uri = "/index.jsp";
+        }
         ModelAndView modelAndView = new ModelAndView();
         Member member = memberMapper.selectByName(username);
         if (member == null){
@@ -97,9 +99,15 @@ public class UserController {
     用户登出模块
      */
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session, HttpServletRequest request){
         session.setAttribute("member",null);
-        return "redirect:/index.jsp";
+        String uri = request.getHeader("Referer");
+        if (uri.contains("singleitem") || uri.contains("queryalltime") || uri.contains("wtbitem"))
+        {
+            return "redirect:"+uri;
+        }else {
+            return "redirect:/index.jsp";
+        }
     }
 
 

@@ -53,12 +53,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <div class="row">
-                            <div class="col-6">
-                                ${message}
-                                <a class="btn btn-primary px-5" role="button" href="${pageContext.request.contextPath}/manager/login">登录</a>
-                            </div>
-
+                        <div class="alert alert-danger">
+                            ${message}
                         </div>
                     </div>
                 </div>

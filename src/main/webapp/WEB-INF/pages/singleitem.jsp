@@ -63,6 +63,10 @@
         <div class="col-md-8 header">
             <!-- header lists -->
             <ul>
+                <li class="navbar-right">
+                    <a href="${pageContext.request.contextPath}/items/publish" data-toggle="modal">
+                        <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 发 布</a>
+                </li>
                 <c:if test="${member == null}">
                     <li class="navbar-right">
                         <a href="#" data-toggle="modal" data-target="#myModal2">
