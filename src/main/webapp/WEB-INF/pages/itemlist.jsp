@@ -6,7 +6,7 @@
   Time: 20:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>商品列表</title>
@@ -509,7 +509,7 @@
         <div class="container">
             <ul class="w3_short">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="${pageContext.request.contextPath}/index/backindex">Home</a>
                     <i>|</i>
                 </li>
                 <li>Single Page</li>
@@ -518,7 +518,50 @@
     </div>
 </div>
 <!-- //page -->
+<!-- Single Page -->
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">商品列表
+            <span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+        </h3>
+        <!-- //tittle heading -->
+        <div id="paging">
+            <div class="center-block">
+                <c:forEach var="itemlist" items="${itemPageInfo.list}">
+                    ${itemlist.name}<br>
+                </c:forEach>
+            </div>
+            <div style="text-align:center;">
+                <ul class="pagination">
+                    <c:if test="${!itemPageInfo.isFirstPage}">
+                        <li><a href="javascript:queryDeviceRecords(${itemPageInfo.navigateFirstPage});">首页</a></li>
+                        <li><a href="javascript:queryDeviceRecords(${itemPageInfo.prePage});">上一页</a></li>
+                    </c:if>
+                    <c:forEach items="${itemPageInfo.navigatepageNums}" var="navigatepageNum">
 
+                        <c:if test="${navigatepageNum==itemPageInfo.pageNum}">
+                            <li class="active"><a href="javascript:queryAllDevices(${navigatepageNum});">${navigatepageNum}</a></li>
+                        </c:if>
+                        <c:if test="${navigatepageNum!=itemPageInfo.pageNum}">
+                            <li><a href="javascript:queryDeviceRecords(${navigatepageNum});">${navigatepageNum}</a></li>
+                        </c:if>
+                    </c:forEach>
+                    <c:if test="${!itemPageInfo.isLastPage}">
+                        <li><a href="javascript:queryDeviceRecords(${itemPageInfo.nextPage});">下一页</a></li>
+                        <li><a href="javascript:queryDeviceRecords(${itemPageInfo.navigateLastPage});">最后一页</a></li>
+                    </c:if>
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //Single Page -->
 
 <!-- js-files -->
 <!-- jquery -->
@@ -682,6 +725,12 @@
 <!-- for bootstrap working -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
+<script type="text/javascript">
+    function queryDeviceRecords(pageNum) {
+        var id=$("#deviceId").val();
+        $("#paging").load("${pageContext.request.contextPath}/items/itempage?pageNum=" + pageNum);
+    }
+</script>
 <!-- //js-files -->
 
 </body>

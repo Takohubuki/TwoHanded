@@ -579,7 +579,9 @@
                 <!-- first section (nuts) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">出售</h3>
-                    <a class="text-right" href="${pageContext.request.contextPath}/items/listwtsbytime">更多</a>
+                    <div class="row" style="float: right">
+                        <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime">更多</a>
+                    </div>
                     <c:forEach var="wts_item" items="${wts_item}">
                         <div class="col-md-4 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
@@ -587,7 +589,7 @@
                                     <img src="${wts_item.image}" alt="">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${wts_item.name}" class="link-product-add-cart">Quick View</a>
+                                            <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${wts_item.name}" class="link-product-add-cart">详情</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
@@ -629,6 +631,9 @@
                 <!-- third section (oils) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
+                    <div class="row" style="float: right">
+                        <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime">更多</a>
+                    </div>
                     <c:forEach items="${wtb_item}" var="wtb_item">
                         <div class="col-md-4 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
@@ -636,7 +641,7 @@
                                     <img src="${wtb_item.image}" alt="">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemname=${wtb_item.name}" class="link-product-add-cart">Quick View</a>
+                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemname=${wtb_item.name}" class="link-product-add-cart">详情</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>

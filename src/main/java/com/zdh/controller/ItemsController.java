@@ -1,8 +1,13 @@
 package com.zdh.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zdh.bean.Item;
+import com.zdh.bean.ItemPage;
 import com.zdh.bean.Member;
 import com.zdh.mappers.ItemMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,15 +29,39 @@ public class ItemsController {
     @Autowired
     ItemMapper itemMapper;
 
+    @Autowired
+    ItemPage itemPage;
+
+    //转跳求购商品列表
+    //根据时间降序排列商品
+    @RequestMapping("/listwtbbytime")
+    public String listwtbbytime(Model model){
+        PageHelper.startPage(1,6);
+        Page<Item> wtsAllByTime = itemMapper.selectWtbAllByTime();
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
+        model.addAttribute("itemPageInfo",itemPageInfo);
+        return "itemlist";
+    }
+
     //转跳出售商品列表
     //根据时间降序排列商品
     @RequestMapping("/listwtsbytime")
     public String listwtsbytime(Model model){
-        List<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
-        model.addAttribute("wtsAllByTime",wtsAllByTime);
+        PageHelper.startPage(1,6);
+        Page<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
+        model.addAttribute("itemPageInfo",itemPageInfo);
         return "itemlist";
     }
 
+    @RequestMapping("/itempage")
+    public String itempage(Model model, @Param("pageNum")int pageNum){
+        PageHelper.startPage(pageNum,6);
+        Page<Item> itemPage = itemMapper.selectWtsAllByTime();
+        PageInfo<Item> itemPageInfo = new PageInfo<>(itemPage);
+        model.addAttribute("itemPageInfo",itemPageInfo);
+        return "itemlist_page";
+    }
     //跳转求购商品详情页
     @RequestMapping("/wtbitem")
     public String wtbitem(String itemname, Model model){

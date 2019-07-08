@@ -1,6 +1,8 @@
 package com.zdh.mappers;
 
+import com.github.pagehelper.Page;
 import com.zdh.bean.Item;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,10 +20,13 @@ public interface ItemMapper {
     int updateByPrimaryKey(Item record);
 
     //根据时间查询所有出售商品
-    List<Item> selectWtsAllByTime();
+    Page<Item> selectWtsAllByTime();
+
+    //根据时间分页查询所有出售商品
+    List<Item> selectWtsAllByTimePage(@Param("start")int start, @Param("pageSize")int pageSize);
 
     //根据时间查询所有求购信息
-    List<Item> selectWtbAllByTime();
+    Page<Item> selectWtbAllByTime();
 
     //查询最新的3个出售信息
     List<Item> select3WtsItemByTime();

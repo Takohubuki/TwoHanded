@@ -22,7 +22,10 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <select id="selectWtsAllByTime" resultMap="BaseResultMap">
-        select * from item order BY update_time desc
+        select * from item where conditions='出售' order BY update_time desc
+    </select>
+    <select id="selectWtbAllByTime" resultMap="BaseResultMap">
+        select * from item where conditions='求购' order BY update_time desc
     </select>
     <select id="select3WtsItemByTime" resultMap="BaseResultMap">
         select
