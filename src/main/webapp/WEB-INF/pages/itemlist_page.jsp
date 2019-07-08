@@ -25,12 +25,51 @@
 </head>
 <body>
 <div id="paging">
-    <div class="center-block">
+    <div class="center-block row">
         <c:forEach var="itemlist" items="${itemPageInfo.list}">
-            ${itemlist.name}<br>
+            <div class="col-md-4 product-men">
+                <div class="men-pro-item simpleCart_shelfItem">
+                    <div class="men-thumb-item">
+                        <img src="../${itemlist.image}" alt="">
+                        <div class="men-cart-pro">
+                            <div class="inner-men-cart-pro">
+                                <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${itemlist.name}" class="link-product-add-cart">详情</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-info-product ">
+                        <h4>
+                            <a href="${pageContext.request.contextPath}/items/singleitem">${itemlist.name}</a>
+                        </h4>
+                        <div class="info-product-price">
+                            <span class="item_price">￥${itemlist .price}</span>
+
+                        </div>
+                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                                <fieldset>
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="add" value="1" />
+                                    <input type="hidden" name="business" value=" " />
+                                    <input type="hidden" name="item_name" value="Almonds, 100g" />
+                                    <input type="hidden" name="amount" value="149.00" />
+                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                    <input type="hidden" name="currency_code" value="USD" />
+                                    <input type="hidden" name="return" value=" " />
+                                    <input type="hidden" name="cancel_return" value=" " />
+<%--                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
+                                </fieldset>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+<%--            ${itemlist.name}<br>--%>
         </c:forEach>
+
     </div>
-    <div style="text-align:center;">
+    <div class="row center-block">
         <ul class="pagination">
             <c:if test="${!itemPageInfo.isFirstPage}">
                 <li><a href="javascript:queryDeviceRecords(${itemPageInfo.navigateFirstPage});">首页</a></li>
