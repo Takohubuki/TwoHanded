@@ -543,57 +543,74 @@
         </h3>
         <!-- //tittle heading -->
 
-        <div class="box box-primary">
-            <div class="box-header with-border">
+        <div class="col-md-6 center-block">
+            <div class="box box-primary">
+                <div class="box-header with-border">
 
+                </div>
+                <form class="" action="${pageContext.request.contextPath}/items/addpublish" enctype="multipart/form-data" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="商品名" name="name">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control selectpicker" title="商品成色" name="quality">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">全新</option>
+                                <option value="0">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="商品数量" name="number">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control selectpicker" title="选择商品类型" name="kind">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">全新</option>
+                                <option value="0">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">￥</span>
+                            <input class="form-control" type="text" placeholder="商品单价" name="price">
+                        </div>
+                        <div class="form-group">
+                            <label>上传商品图片</label>
+                            <input class="form-control" type="file" name="imagefile">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="商品描述" name="describes">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control selectpicker" title="选择出售或求购" name="conditions">
+                                <option value="出售">出售</option>
+                                <option value="求购">求购</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="center-block">
+                            <input type="submit" role="button" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <form class="" action="${pageContext.request.contextPath}/items/addpublish" enctype="multipart/form-data" method="post">
-                <div class="box-body">
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="商品名" name="name">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control selectpicker" title="商品成色" name="quality">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">全新</option>
-                            <option value="0">其他</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="商品数量" name="number">
-                    </div>
-                    <div class="form-group">
-                        <span class="input-group-addon">￥</span>
-                        <input class="form-control input-group" type="text" placeholder="商品单价" name="price">
-                    </div>
-                    <div class="form-group">
-                        <label>上传商品图片</label>
-                        <input class="form-control" type="file" name="imagefile">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="商品描述" name="describes">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control selectpicker" title="选择出售或求购" name="conditions">
-                            <option value="出售">出售</option>
-                            <option value="求购">求购</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="box-footer">
-                    <div class="center-block">
-                        <input type="submit" role="button" class="btn btn-primary">
-                    </div>
-                </div>
-            </form>
         </div>
         <div class="clearfix"></div>
     </div>

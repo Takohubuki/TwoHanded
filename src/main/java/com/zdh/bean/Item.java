@@ -11,6 +11,8 @@ public class Item {
 
     private Integer number;
 
+    private String kind;
+
     private String publisher;
 
     private String describes;
@@ -24,6 +26,24 @@ public class Item {
     private Date publish_time;
 
     private Date update_time;
+
+    private String serial_num;
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public String getSerial_num() {
+        return serial_num;
+    }
+
+    public void setSerial_num(String serial_num) {
+        this.serial_num = serial_num;
+    }
 
     public Date getPublish_time() {
         return publish_time;

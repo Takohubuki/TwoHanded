@@ -66,7 +66,7 @@ public class ItemsController {
     @RequestMapping("/wtbitem")
     public String wtbitem(String itemname, Model model){
         Item wtb_item = itemMapper.select1WtbItemByName(itemname);
-        model.addAttribute("wtb_item",wtb_item);
+        model.addAttribute("item",wtb_item);
         return "wtbitem";
     }
 
@@ -74,7 +74,11 @@ public class ItemsController {
     @RequestMapping("/singleitem")
     public String singleitem(Model model, String itemname){
         Item item = itemMapper.select1WtsItemByName(itemname);
+        if (item == null){
+            item = itemMapper.select1WtbItemByName(itemname);
+        }
         model.addAttribute("item",item);
+
         return "singleitem";
     }
 
@@ -117,10 +121,12 @@ public class ItemsController {
             item.setImage("images/"+filename);
         }
         Member member = (Member) session.getAttribute("member");
-        item.setPublisher(member.getSid());
+        String sid = member.getSid();
+        item.setPublisher(sid);
         Date date = new Date();
         item.setPublish_time(date);
         item.setUpdate_time(date);
+        item.setSerial_num(item.getUpdate_time()+sid);
         itemMapper.addpublish(item);
 
 

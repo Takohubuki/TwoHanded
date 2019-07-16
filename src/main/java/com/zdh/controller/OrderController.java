@@ -35,4 +35,10 @@ public class OrderController {
     public String querycart(){
         return "";
     }
+
+    @RequestMapping("/checkout")
+    public String checkout(){
+
+        return "checkout";
+    }
 }

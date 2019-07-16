@@ -13,7 +13,7 @@
                                         allowMultiQueries=true&amp;
                                         allowPublicKeyRetrieval=true"/>
                 <property name="username" value="root"/>
-                <property name="password" value="password"/>
+                <property name="password" value="root"/>
             </dataSource>
         </environment>
     </environments>

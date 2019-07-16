@@ -1,16 +1,23 @@
 package com.zdh.controller;
 
+import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 @RequestMapping("/user")
 @Controller
@@ -19,7 +26,8 @@ public class UserController {
     @Autowired
     MemberMapper memberMapper;
 
-
+    @Autowired
+    ItemMapper itemMapper;
 
     /*
     用户登录模块
@@ -60,17 +68,6 @@ public class UserController {
         }
     }
 
-//    @RequestMapping("/login")
-//    public String login(){
-//        System.out.println("----------------------转到登录页面------------------------");
-//        return "login";
-//    }
-//
-//    @RequestMapping("/register")
-//    public String register(){
-//        System.out.println("---------------------转到注册页面------------------------");
-//        return "register";
-//    }
 
     @RequestMapping("/signup")
     /*
@@ -111,8 +108,71 @@ public class UserController {
     }
 
 
+    //跳转用户个人中心页面
+    @RequestMapping("/profile")
+    public String profile(){
+        return "profile";
+    }
 
+    @RequestMapping("/publish/wts")
+    public String publishwts(HttpSession session, Model model){
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+        List<Item> myWts = memberMapper.selectMyWts(sid);
+        model.addAttribute("mywts",myWts);
+        return "publishwts";
+    }
 
+    @RequestMapping("/publish/wtb")
+    public String publishwtb(HttpSession session, Model model){
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+        List<Item> myWtb = memberMapper.selectMyWtb(sid);
+        model.addAttribute("mywtb",myWtb);
+        return "publishwtb";
+    }
+
+    @RequestMapping("/updateprofile")
+    public String updateprofile(Model model){
+
+        return "updateprofile";
+    }
+
+    @RequestMapping("/update/profile")
+    public String upprofile(Member member, HttpSession session, @RequestParam("imagefile") MultipartFile file,HttpServletRequest request) throws IOException {
+
+        Member member_old = (Member) session.getAttribute("member");
+        if(!file.isEmpty()) {
+            //上传文件路径
+            String path = request.getSession().getServletContext().getRealPath("/images/avatar/");
+
+            System.out.println(path);
+            //上传文件名
+            String filename = file.getOriginalFilename();
+            File filepath = new File(path,filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            file.transferTo(new File(path + File.separator + filename));
+            //输出文件上传最终的路径 测试查看
+            System.out.println(path + File.separator + filename);
+
+            member.setAvatar(filename);
+        }else{
+            member.setAvatar(member_old.getAvatar());
+        }
+        String password = member_old.getPassword();
+        member.setPassword(password);
+
+        session.setAttribute("member",member);
+        if (member_old.getSid() != member.getSid()){
+            itemMapper.updatePublisherByName(member_old.getSid(),member.getSid());
+        }
+        memberMapper.updateProfile(member);
+        return "profile";
+    }
     //密码验证
     static boolean passwordConfirm(String password1, String password2){
         //将输入的密码转化成md5的形式与数据库中存储的md5进行对比

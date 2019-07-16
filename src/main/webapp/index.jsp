@@ -34,6 +34,7 @@
 <div class="header-most-top">
     <p>哈学院官方唯一指定二手交易平台</p>
 </div>
+
 <div class="header-bot">
     <div class="header-bot_inner_wthreeinfo_header_mid">
         <div class="col-md-4 logo_agile">
@@ -68,7 +69,7 @@
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 注 销</a>
                     </li>
                     <li class="navbar-right">
-                        你好！<a href="#" >
+                        你好！<a href="${pageContext.request.contextPath}/user/profile" >
                                 <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle" style="width: 20px;height: 20px">
                                 ${member.username}
                     </a>
@@ -579,50 +580,52 @@
                 <!-- first section (nuts) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">出售</h3>
-                    <div class="row" style="float: right">
-                        <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime">更多</a>
+                    <div class="row center-block">
+                        <a class="btn btn-primary text-right" role="button" href="${pageContext.request.contextPath}/items/listwtsbytime">更多</a>
                     </div>
-                    <c:forEach var="wts_item" items="${wts_item}">
-                        <div class="col-md-4 product-men">
-                            <div class="men-pro-item simpleCart_shelfItem">
-                                <div class="men-thumb-item">
-                                    <img src="${wts_item.image}" alt="">
-                                    <div class="men-cart-pro">
-                                        <div class="inner-men-cart-pro">
-                                            <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${wts_item.name}" class="link-product-add-cart">详情</a>
+                    <div class="row">
+                        <c:forEach var="wts_item" items="${wts_item}">
+                            <div class="col-md-4 product-men">
+                                <div class="men-pro-item simpleCart_shelfItem">
+                                    <div class="men-thumb-item">
+                                        <img src="${wts_item.image}" alt="" style="width: 159px;height: 150px">
+                                        <div class="men-cart-pro">
+                                            <div class="inner-men-cart-pro">
+                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${wts_item.name}" class="link-product-add-cart">详情</a>
+                                            </div>
                                         </div>
+                                        <span class="product-new-top">New</span>
                                     </div>
-                                    <span class="product-new-top">New</span>
-                                </div>
-                                <div class="item-info-product ">
-                                    <h4>
-                                        <a href="${pageContext.request.contextPath}/items/singleitem">${wts_item.name}</a>
-                                    </h4>
-                                    <div class="info-product-price">
-                                        <span class="item_price">${wts_item .price}</span>
+                                    <div class="item-info-product ">
+                                        <h4>
+                                            <a href="${pageContext.request.contextPath}/items/singleitem">${wts_item.name}</a>
+                                        </h4>
+                                        <div class="info-product-price">
+                                            <span class="item_price">￥${wts_item .price}</span>
+
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                            <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value="${wts_item.serial_num}" />
+                                                    <input type="hidden" name="item_name" value="${wts_item.name}" />
+                                                    <input type="hidden" name="amount" value="${wts_item.price}" />
+                                                    <input type="hidden" name="item_id" value="${wts_item.serial_num}"/>
+                                                    <input type="hidden" name="currency_code" value="CNY" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                </fieldset>
+                                            </form>
+                                        </div>
 
                                     </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                        <form action="${pageContext.request.contextPath}/order/addcart" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Almonds, 100g" />
-                                                <input type="hidden" name="amount" value="149.00" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
                                 </div>
                             </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </div>
 
                     <div class="clearfix"></div>
                 </div>
@@ -631,14 +634,14 @@
                 <!-- third section (oils) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
-                    <div class="row" style="float: right">
+                    <div class="row center-block">
                         <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime">更多</a>
                     </div>
                     <c:forEach items="${wtb_item}" var="wtb_item">
                         <div class="col-md-4 product-men">
                             <div class="men-pro-item simpleCart_shelfItem">
                                 <div class="men-thumb-item">
-                                    <img src="${wtb_item.image}" alt="">
+                                    <img src="${wtb_item.image}" alt="" style="width: 159px;height: 150px">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
                                             <a href="${pageContext.request.contextPath}/items/wtbitem?itemname=${wtb_item.name}" class="link-product-add-cart">详情</a>
@@ -651,7 +654,7 @@
                                         <a href="${pageContext.request.contextPath}/items/wtbitem?itemname=${wtb_item.name}">${wtb_item.name}</a>
                                     </h4>
                                     <div class="info-product-price">
-                                        <span class="item_price">${wtb_item.price}</span>
+                                        <span class="item_price">￥${wtb_item.price}</span>
                                     </div>
                                     <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                         <form action="#" method="post">
@@ -662,10 +665,10 @@
                                                 <input type="hidden" name="item_name" value="Freedom Sunflower Oil, 1L" />
                                                 <input type="hidden" name="amount" value="78.00" />
                                                 <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="USD" />
+                                                <input type="hidden" name="currency_code" value="CNY" />
                                                 <input type="hidden" name="return" value=" " />
                                                 <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
+<%--                                                <input type="submit" name="submit" value="Add to cart" class="button" />--%>
                                             </fieldset>
                                         </form>
                                     </div>
@@ -727,7 +730,52 @@
 <!-- 购物车 -->
 <script src="js/minicart.js"></script>
 <script>
-    paypalm.minicartk.render(); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
+<%--    let items = paypalm.minicartk.cart.items();--%>
+<%--    let settings = paypalm.minicartk.cart.settings();--%>
+<%--    let hasItems = !!items.length;--%>
+<%--    let priceFormat = { format: true, currency: paypalm.minicartk.cart.settings("currency_code") };--%>
+<%--    let totalFormat = { format: true, showCode: true };--%>
+<%--    let myTemple = '<from method="post" class="' ;--%>
+<%--    if (!hasItems) {--%>
+<%--        myTemple += 'minicartk-empty"'--%>
+<%--    }else {--%>
+<%--        myTemple += '"'--%>
+<%--    }--%>
+<%--    let action = paypalm.minicartk.config.action;--%>
+<%--    myTemple =myTemple + ' action="' + action + '"';--%>
+<%--    let target = paypalm.minicartk.config.target();--%>
+<%--    myTemple = myTemple + ' target="' + target + '"';--%>
+<%--    myTemple += '    <button type="button" class="minicartk-closer">&times;</button>    <ul>        ';--%>
+<%--    for (let i = 0, idx = i + 1; i < items.length; i++, idx++) {--%>
+<%--        let href = items[i].get("href");--%>
+<%--        let item_name = items[i].get("item_name");--%>
+<%--        let item_id = items[i].get("item_id");--%>
+<%--        let item_number = items[i].get("item_number");--%>
+<%--        myTemple = myTemple + '<li class="minicartk-item">\n' +--%>
+<%--            ' <div class="minicartk-details-name">\n' +--%>
+<%--            ' <a class="minicartk-name" href="' + href + '">' + item_name + '</a>\n' +--%>
+<%--            '<ul class="minicartk-attributes">'--%>
+<%--        if (items.get("item_id")) {--%>
+<%--            myTemple = myTemple + '<li>\n' +--%>
+<%--                item_id +--%>
+<%--                '<input type="hidden" name="item_serial_num_'+ idx + '" value="' + item_id + '" /></li>'--%>
+<%--        }--%>
+<%--        if (items.get("item_number")) {--%>
+<%--            myTemple = myTemple + '<li>\n' +--%>
+<%--                item_number +--%>
+<%--                '<input type="hidden" name="item_number_'+ idx + '" value="' + item_number + '" /></li>'--%>
+<%--        }--%>
+<%--        --%>
+<%--    }--%>
+
+    // var myTemplate = "<div></div>";
+    var cart_action = "${pageContext.request.contextPath}/order/checkout"
+    paypalm.minicartk.render({
+        action:cart_action,
+        <%--template: '<% for (var i= 0, idx = i + 1, len = items.length; i < len; i++, idx++) { %>        <li class="minicartk-item">            <div class="minicartk-details-name">                <a class="minicartk-name" href="<%= items[i].get("href") %>"><%= items[i].get("item_name") %></a>                <ul class="minicartk-attributes">                    <% if (items[i].get("item_number")) { %>                    <li>                        <%= items[i].get("item_number") %>                        <input type="hidden" name="item_number_<%= idx %>" value="<%= items[i].get("item_number") %>" />                    </li>                    <% } %>                    <% if (items[i].discount()) { %>                    <li>                        <%= config.strings.discount %> <%= items[i].discount(priceFormat) %>                        <input type="hidden" name="discount_amount_<%= idx %>" value="<%= items[i].discount() %>" />                    </li>                    <% } %>                    <% for (var options = items[i].options(), j = 0, len2 = options.length; j < len2; j++) { %>                        <li>                            <%= options[j].key %>: <%= options[j].value %>                            <input type="hidden" name="on<%= j %>_<%= idx %>" value="<%= options[j].key %>" />                            <input type="hidden" name="os<%= j %>_<%= idx %>" value="<%= options[j].value %>" />                        </li>                    <% } %>                </ul>            </div>            <div class="minicartk-details-quantity">                <input class="minicartk-quantity" data-minicartk-idx="<%= i %>" name="quantity_<%= idx %>" type="text" pattern="[0-9]*" value="<%= items[i].get("quantity") %>" autocomplete="off" />            </div>            <div class="minicartk-details-remove">                <button type="button" class="minicartk-remove" data-minicartk-idx="<%= i %>">&times;</button>            </div>            <div class="minicartk-details-price">                <span class="minicartk-price"><%= items[i].total(priceFormat) %></span>            </div>            <input type="hidden" name="item_name_<%= idx %>" value="<%= items[i].get("item_name") %>" />            <input type="hidden" name="amount_<%= idx %>" value="<%= items[i].amount() %>" />            <input type="hidden" name="shipping_<%= idx %>" value="<%= items[i].get("shipping") %>" />            <input type="hidden" name="shipping2_<%= idx %>" value="<%= items[i].get("shipping2") %>" />        </li>        <% } %>    </ul>    <div class="minicartk-footer">        <% if (hasItems) { %>            <div class="minicartk-subtotal">                <%= config.strings.subtotal %> <%= cart.total(totalFormat) %>            </div>            <button class="minicartk-submit" type="submit" data-minicartk-alt="<%= config.strings.buttonAlt %>"><%- config.strings.button %></button>        <% } else { %>            <p class="minicartk-empty-text"><%= config.strings.empty %></p>        <% } %>    </div>    <input type="hidden" name="cmd" value="_cart" />    <input type="hidden" name="upload" value="1" />    <% for (var key in settings) { %>        <input type="hidden" name="<%= key %>" value="<%= settings[key] %>" />    <% } %></form>'--%>
+<%--        template:myTemple--%>
+    }); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
+
 
     paypalm.minicartk.cart.on('checkout', function (evt) {
         var items = this.items(),
@@ -740,10 +788,11 @@
             total += items[i].get('quantity');
         }
 
-        if (total < 3) {
-            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-            evt.preventDefault();
-        }
+        // if (total < 3) {
+        //     alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+        //     evt.preventDefault();
+        // }
+
     });
 </script>
 <!-- //购物车结束-->

@@ -11,15 +11,22 @@
         <result column="image" jdbcType="VARCHAR" property="image" />
         <result column="quality" jdbcType="INTEGER" property="quality" />
         <result column="conditions" jdbcType="VARCHAR" property="conditions" />
+        <result column="serial_num" jdbcType="VARCHAR" property="serial_num" />
+        <result column="kind" jdbcType="VARCHAR" property="kind" />
+        <result column="publish_time" jdbcType="TIMESTAMP" property="publish_time" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
     </resultMap>
     <sql id="Base_Column_List">
     id, name, price, number, publisher, describes, image, quality, conditions
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        *
         from item
         where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from item;
     </select>
     <select id="selectWtsAllByTime" resultMap="BaseResultMap">
         select * from item where conditions='出售' order BY update_time desc
@@ -29,7 +36,7 @@
     </select>
     <select id="select3WtsItemByTime" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        *
         from item
         where conditions='出售'
         order by update_time desc
@@ -37,7 +44,7 @@
     </select>
     <select id="select3WtbItemByTime" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        *
         from item
         where conditions='求购'
         order by update_time desc
@@ -45,13 +52,13 @@
     </select>
     <select id="select1WtsItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
         select
-        <include refid="Base_Column_List"/>
+        *
         from item
         where conditions='出售' and name=#{itemname}
     </select>
     <select id="select1WtbItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
         select
-        <include refid="Base_Column_List"/>
+        *
         from item
         where conditions='求购' and name=#{itemname}
     </select>
@@ -72,11 +79,12 @@
     <insert id="addpublish" parameterType="com.zdh.bean.Item">
         insert into item (id, name, price,
           number, publisher, describes,
-          image, quality, conditions, publish_time, update_time
+          image, quality, conditions, publish_time, update_time, kind, serial_num
           )
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
           #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR},
-          #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR},#{publish_time,jdbcType=TIMESTAMP},#{update_time,jdbcType=TIMESTAMP}
+          #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR},#{publish_time,jdbcType=TIMESTAMP},#{update_time,jdbcType=TIMESTAMP},
+          #{kind,jdbcType=VARCHAR}, #{serial_num,jdbcType=VARCHAR}
           )
     </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Item">
@@ -172,14 +180,17 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Item">
     update item
-    set name = #{name,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
-      number = #{number,jdbcType=INTEGER},
-      publisher = #{publisher,jdbcType=VARCHAR},
-      describes = #{describes,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      quality = #{quality,jdbcType=INTEGER},
-      conditions = #{conditions,jdbcType=VARCHAR}
+    set
+      serial_num = #{serial_num,jdbcType=VARCHAR}
+
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="updateSerial_num" parameterType="java.lang.String">
+        update item set serial_num=#{serial_num} where name=#{name}
+    </update>
+    <update id="updatePublisherByName" parameterType="java.lang.String">
+        update item
+        set publisher=#{new_sid}
+        where publisher=#{old_sid}
+    </update>
 </mapper>

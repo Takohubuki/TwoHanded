@@ -1,6 +1,9 @@
 package com.zdh.mappers;
 
+import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+
+import java.util.List;
 
 public interface MemberMapper {
     int deleteByPrimaryKey(String sid);
@@ -16,4 +19,10 @@ public interface MemberMapper {
     int updateByPrimaryKey(Member record);
 
     Member selectByName(String username);
+
+    List<Item> selectMyWts(String sid);
+
+    List<Item> selectMyWtb(String sid);
+
+    void updateProfile(Member sid);
 }

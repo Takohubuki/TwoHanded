@@ -22,6 +22,12 @@
     <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from member where username=#{username}
     </select>
+    <select id="selectMyWts" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where publisher=#{sid} and conditions='出售' order by update_time desc
+    </select>
+    <select id="selectMyWtb" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where publisher=#{sid} and conditions='求购' order by update_time desc
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from member
     where sid = #{sid,jdbcType=VARCHAR}
@@ -107,7 +113,7 @@
         </set>
         where sid = #{sid,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Member">
+    <update id="updateProfile" parameterType="com.zdh.bean.Member">
     update member
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -117,4 +123,5 @@
       phone = #{phone,jdbcType=VARCHAR}
     where sid = #{sid,jdbcType=VARCHAR}
   </update>
+
 </mapper>

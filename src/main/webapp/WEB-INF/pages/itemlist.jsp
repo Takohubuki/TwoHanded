@@ -509,10 +509,10 @@
         <div class="container">
             <ul class="w3_short">
                 <li>
-                    <a href="${pageContext.request.contextPath}/index/backindex">Home</a>
+                    <a href="${pageContext.request.contextPath}/index/backindex">主页</a>
                     <i>|</i>
                 </li>
-                <li>Single Page</li>
+                <li>商品列表</li>
             </ul>
         </div>
     </div>
@@ -536,7 +536,7 @@
                     <div class="col-md-4 product-men">
                         <div class="men-pro-item simpleCart_shelfItem">
                             <div class="men-thumb-item">
-                                <img src="../${itemlist.image}" alt="">
+                                <img src="../${itemlist.image}" alt="" style="width: 159px;height: 150px">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
                                         <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${itemlist.name}" class="link-product-add-cart">详情</a>
@@ -548,7 +548,7 @@
                                     <a href="${pageContext.request.contextPath}/items/singleitem">${itemlist.name}</a>
                                 </h4>
                                 <div class="info-product-price">
-                                    <span class="item_price">${itemlist .price}</span>
+                                    <span class="item_price">￥${itemlist .price}</span>
 
                                 </div>
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">

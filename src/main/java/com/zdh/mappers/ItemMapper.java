@@ -42,4 +42,12 @@ public interface ItemMapper {
 
     //根据商品名查询单个求购商品
     Item select1WtbItemByName(String itemname);
+
+    List<Item> selectPublisherAndPublishTime();
+
+    List<Item> selectAll();
+
+    void updateSerial_num(@Param("serial_num") String serial_num,@Param("name") String name);
+
+    void updatePublisherByName(@Param("old_sid")String old_sid, @Param("new_sid")String new_sid);
 }

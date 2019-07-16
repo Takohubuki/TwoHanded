@@ -34,29 +34,27 @@
                     <div class="card-body py-5">
                         <form action="${pageContext.request.contextPath}/manage/login" method="post">
                             <div class="form-group">
-                                <label class="form-control-label">Username</label>
+                                <label class="form-control-label">用户名</label>
                                 <input type="text" class="form-control" name="username">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-control-label">Password</label>
+                                <label class="form-control-label">密码</label>
                                 <input type="password" class="form-control" name="password">
                             </div>
 
-                            <div class="custom-control custom-checkbox mt-4">
-                                <input type="checkbox" class="custom-control-input" id="login">
-                                <label class="custom-control-label" for="login">Check this custom checkbox</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary px-5">Login</button>
+
+                            <button type="submit" class="btn btn-primary px-5">登录</button>
                         </form>
 
                     </div>
-
-                    <div class="card-footer">
-                        <div class="alert alert-danger">
-                            ${message}
+                    <c:if test="${message != null}">
+                        <div class="card-footer">
+                            <div class="alert alert-danger">
+                                    ${message}
+                            </div>
                         </div>
-                    </div>
+                    </c:if>
                 </div>
             </div>
         </div>
