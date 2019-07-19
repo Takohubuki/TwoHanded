@@ -25,4 +25,6 @@ public interface MemberMapper {
     List<Item> selectMyWtb(String sid);
 
     void updateProfile(Member sid);
+
+    void updateRecentLogin(Member member);
 }

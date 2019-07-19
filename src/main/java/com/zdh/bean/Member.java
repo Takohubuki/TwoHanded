@@ -1,5 +1,7 @@
 package com.zdh.bean;
 
+import java.util.Date;
+
 public class Member {
     private String sid;
 
@@ -14,6 +16,36 @@ public class Member {
     private String avatar;
 
     private String phone;
+
+    private Integer is_active;
+
+    private Date signin_time;
+
+    private Date recent_login;
+
+    public Integer getIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(Integer is_active) {
+        this.is_active = is_active;
+    }
+
+    public Date getSignin_time() {
+        return signin_time;
+    }
+
+    public void setSignin_time(Date signin_time) {
+        this.signin_time = signin_time;
+    }
+
+    public Date getRecent_login() {
+        return recent_login;
+    }
+
+    public void setRecent_login(Date recent_login) {
+        this.recent_login = recent_login;
+    }
 
     public String getSid() {
         return sid;

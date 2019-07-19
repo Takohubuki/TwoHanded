@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,13 +66,17 @@ public class UserController {
             modelAndView.addObject("message","密码错误！");
             return modelAndView;
         }else if (passwordConfirm(member.getPassword(),password)){
-            session.setAttribute("member",member);
+
             /*
             用户登录成功返回上一个请求
+            并记录最近登录时间
              */
             System.out.println("redirect:"+uri);
             modelAndView.setViewName("redirect:"+uri);
-
+            Date date = new Date();
+            member.setRecent_login(date);
+            memberMapper.updateRecentLogin(member);
+            session.setAttribute("member",member);
             return modelAndView;
         }else {
             modelAndView.setViewName("login");
@@ -128,11 +133,29 @@ public class UserController {
             Order order_pre = orderList.get(i);
             for (int j = i+1; j < orderList.size(); j++) {
                 Order order_nex = orderList.get(j);
+                //判断是否属于同一个订单
                 if (order_pre.getOrder_id().equals(order_nex.getOrder_id())){
+                    //合并属于同一个订单的商品
                     Item item_1 = itemMapper.selectBySerialNum(order_pre.getItem_id());
                     Item item_2 = itemMapper.selectBySerialNum(order_nex.getItem_id());
-                    order_pre.getItem_list().add(item_1);
-                    order_pre.getItem_list().add(item_2);
+                    List<Item> item_list = order_pre.getItem_list();
+                    item_list.add(item_1);
+                    item_list.add(item_2);
+                    order_pre.setItem_list(item_list);
+
+                    Map num2item = order_pre.getNum2item();
+                    num2item.put(order_pre.getItem_id(),order_pre.getItem_num());
+                    num2item.put(order_nex.getItem_id(),order_nex.getItem_num());
+                    order_pre.setNum2item(num2item);
+
+                }
+            }
+            orderList.set(i,order_pre);
+        }
+        for (int i = 0; i < orderList.size() - 1; i++) {
+            for (int j = i + 1; j < orderList.size(); j++) {
+                if (orderList.get(i) == orderList.get(j)){
+                    orderList.remove(j);
                 }
             }
         }

@@ -15,6 +15,7 @@
         <result column="kind" jdbcType="VARCHAR" property="kind" />
         <result column="publish_time" jdbcType="TIMESTAMP" property="publish_time" />
         <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+        <result column="is_undercarriage" jdbcType="INTEGER" property="is_undercarriage" />
     </resultMap>
     <sql id="Base_Column_List">
     id, name, price, number, publisher, describes, image, quality, conditions
@@ -23,10 +24,10 @@
         select
         *
         from item
-        where serial_num = #{id,jdbcType=VARCHAR}
+        where serial_num = #{id,jdbcType=VARCHAR} and is_undercarriage='0'
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
-        select * from item;
+        select * from item where is_undercarriage='0';
     </select>
     <select id="selectWtsAllByTime" resultMap="BaseResultMap">
         select * from item where conditions='出售' order BY update_time desc
@@ -38,7 +39,7 @@
         select
         *
         from item
-        where conditions='出售'
+        where conditions='出售' and is_undercarriage='0'
         order by update_time desc
         limit 3
     </select>
@@ -46,7 +47,7 @@
         select
         *
         from item
-        where conditions='求购'
+        where conditions='求购' and is_undercarriage='0'
         order by update_time desc
         limit 3
     </select>
@@ -54,13 +55,19 @@
         select
         *
         from item
-        where conditions='出售' and name=#{itemname}
+        where conditions='出售' and name=#{itemname} and is_undercarriage='0'
     </select>
     <select id="select1WtbItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
         select
         *
         from item
-        where conditions='求购' and name=#{itemname}
+        where conditions='求购' and name=#{itemname} and is_undercarriage='0'
+    </select>
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where name like"%"#{name}"%"
+    </select>
+    <select id="RecommandSameKind" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where kind=#{kind} and conditions='出售' limit 6;
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from item

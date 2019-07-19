@@ -9,6 +9,9 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="avatar" jdbcType="VARCHAR" property="avatar" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="is_active" jdbcType="INTEGER" property="is_active" />
+        <result column="signin_time" jdbcType="TIMESTAMP" property="signin_time" />
+        <result column="recent_login" jdbcType="TIMESTAMP" property="recent_login" />
     </resultMap>
     <sql id="Base_Column_List">
     sid, username, password, dormitory, name, avatar, phone
@@ -123,5 +126,7 @@
       phone = #{phone,jdbcType=VARCHAR}
     where sid = #{sid,jdbcType=VARCHAR}
   </update>
-
+    <update id="updateRecentLogin" parameterType="com.zdh.bean.Member">
+        update member set recent_login = #{recent_login} where sid=#{sid};
+    </update>
 </mapper>

@@ -74,10 +74,12 @@
                                                 ${order_list.order_id}
                                             </td>
                                             <td>
-                                                ${order_list.item_id}
+                                                ${order_list.item_list}
                                             </td>
                                             <td>
-                                                ${order_list.item_list.get(1)}
+                                                <c:if test="${order_list.num2item != null}">
+                                                    ${order_list.num2item}
+                                                </c:if>
                                             </td>
                                             <td>
                                                 ${order_list.item_num}

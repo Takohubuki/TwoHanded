@@ -50,4 +50,10 @@ public interface ItemMapper {
     void updateSerial_num(@Param("serial_num") String serial_num,@Param("name") String name);
 
     void updatePublisherByName(@Param("old_sid")String old_sid, @Param("new_sid")String new_sid);
+
+    List<Item> selectByName(String name);
+
+    List<Item> selectSameKind(String kind);
+
+    List<Item> RecommandSameKind(String kind);
 }

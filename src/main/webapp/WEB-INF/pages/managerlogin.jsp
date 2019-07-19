@@ -20,8 +20,6 @@
 </head>
 <body>
 
-
-<!-- FIXME 管理员登录模块完善 -->
 <div class="page-wrapper flex-row align-items-center">
     <div class="container">
         <div class="row justify-content-center">
@@ -48,10 +46,10 @@
                         </form>
 
                     </div>
-                    <c:if test="${message != null}">
+                    <c:if test="${manager_message != null}">
                         <div class="card-footer">
                             <div class="alert alert-danger">
-                                    ${message}
+                                    ${manager_message}
                             </div>
                         </div>
                     </c:if>

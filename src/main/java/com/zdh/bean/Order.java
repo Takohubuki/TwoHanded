@@ -1,8 +1,6 @@
 package com.zdh.bean;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Order {
     private Integer id;
@@ -24,6 +22,20 @@ public class Order {
     private Integer item_num;
 
     private List<Item> item_list;
+
+    private Map<String,String> num2item;
+
+    public Map getNum2item() {
+        if (num2item == null){
+            return new HashMap();
+        }else {
+            return num2item;
+        }
+    }
+
+    public void setNum2item(Map num2item) {
+        this.num2item = num2item;
+    }
 
     public List<Item> getItem_list() {
         if (item_list == null){

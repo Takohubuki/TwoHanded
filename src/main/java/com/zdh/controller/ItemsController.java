@@ -57,10 +57,17 @@ public class ItemsController {
 
     //商品列表分页
     @RequestMapping("/itempage")
-    public String itempage(Model model, @Param("pageNum")int pageNum){
+    public String itempage(Model model, @Param("pageNum")int pageNum, HttpServletRequest request){
         PageHelper.startPage(pageNum,6);
-        Page<Item> itemPage = itemMapper.selectWtsAllByTime();
-        PageInfo<Item> itemPageInfo = new PageInfo<>(itemPage);
+        PageInfo<Item> itemPageInfo = null;
+        if (request.getRequestURI().contains("listwtsbytime")){
+            Page<Item> itemPage = itemMapper.selectWtsAllByTime();
+            itemPageInfo = new PageInfo<>(itemPage);
+        }else if (request.getRequestURI().contains("searchbyname")){
+            String search = request.getParameter("search");
+            List<Item> items = itemMapper.selectByName(search);
+            itemPageInfo = new PageInfo<>(items);
+        }
         model.addAttribute("itemPageInfo",itemPageInfo);
         return "itemlist_page";
     }
@@ -81,6 +88,11 @@ public class ItemsController {
         }
         model.addAttribute("item",item);
 
+        //搜索同类型商品
+        String kind = item.getKind();
+        List<Item> recommand_items = itemMapper.RecommandSameKind(kind);
+        recommand_items.remove(item);
+        model.addAttribute("recommand_items",recommand_items);
         return "singleitem";
     }
 
@@ -139,5 +151,15 @@ public class ItemsController {
         model.addAttribute("wtb_item",wtb_item);
         model.addAttribute("wts_item",wts_item);
         return "redirect:/index.jsp";
+    }
+
+    //根据商品名查询
+    @RequestMapping("/searchbyname")
+    public String sreachbyname(Model model,String search){
+        PageHelper.startPage(1,6);
+        List<Item> items = itemMapper.selectByName(search);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(items);
+        model.addAttribute("itemPageInfo",itemPageInfo);
+        return "itemlist";
     }
 }

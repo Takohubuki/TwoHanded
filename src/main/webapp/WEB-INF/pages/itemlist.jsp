@@ -91,8 +91,8 @@
             <!-- //header lists -->
             <!-- search -->
             <div class="agileits_search">
-                <form action="#" method="post">
-                    <input name="Search" type="search" placeholder="How can we help you today?" required="">
+                <form action="${pageContext.request.contextPath}/items/searchbyname" method="post">
+                    <input name="search" type="search" placeholder="想搜点什么?" required="">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
@@ -380,22 +380,24 @@
                                     <a href="${pageContext.request.contextPath}/items/singleitem">${itemlist.name}</a>
                                 </h4>
                                 <div class="info-product-price">
-                                    <span class="item_price">￥${itemlist .price}</span>
+                                    <span class="item_price">￥${itemlist.price}</span>
 
                                 </div>
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                    <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                                    <form action="#" method="post">
                                         <fieldset>
                                             <input type="hidden" name="cmd" value="_cart" />
                                             <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value=" " />
+                                            <input type="hidden" name="business" value="${itemlist.serial_num}" />
                                             <input type="hidden" name="item_name" value="${itemlist.name}" />
                                             <input type="hidden" name="amount" value="${itemlist.price}" />
-                                            <input type="hidden" name="item_serial_num" value="${itemlist.serial_num}" />
+                                            <input type="hidden" name="item_id" value="${itemlist.serial_num}"/>
                                             <input type="hidden" name="currency_code" value="CNY" />
                                             <input type="hidden" name="return" value=" " />
                                             <input type="hidden" name="cancel_return" value=" " />
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                                            <c:if test="${itemlist.conditions == '出售'}">
+                                                <input type="submit" name="submit" value="Add to cart" class="button" />
+                                            </c:if>
                                         </fieldset>
                                     </form>
                                 </div>
@@ -434,7 +436,7 @@
 
 <!-- js-files -->
 <!-- jquery -->
-<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
 <!-- //jquery -->
 
 <!-- popup modal (for signin & signup)-->

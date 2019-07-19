@@ -29,6 +29,16 @@ public class Item {
 
     private String serial_num;
 
+    private Integer is_undercarriage;
+
+    public Integer getIs_undercarriage() {
+        return is_undercarriage;
+    }
+
+    public void setIs_undercarriage(Integer is_undercarriage) {
+        this.is_undercarriage = is_undercarriage;
+    }
+
     public String getKind() {
         return kind;
     }

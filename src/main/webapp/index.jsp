@@ -79,8 +79,8 @@
             </ul>
             <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="${pageContext.request.contextPath}/items/search" method="post">
-                    <input name="Search" type="search" placeholder="想搜点什么？" required="">
+                <form action="${pageContext.request.contextPath}/items/searchbyname" method="post">
+                    <input name="search" type="search" placeholder="想搜点什么？" required="">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>

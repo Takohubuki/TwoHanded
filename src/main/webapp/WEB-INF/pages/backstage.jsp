@@ -15,69 +15,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Carbon - Admin Template</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/simple-line-icons.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fontawesome-all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body class="sidebar-fixed header-fixed">
 <div class="page-wrapper">
     <nav class="navbar page-header">
-        <a href="#" class="btn btn-link sidebar-mobile-toggle d-md-none mr-auto">
-            <i class="fa fa-bars"></i>
-        </a>
-
-        <a class="navbar-brand" href="#">
-            <img src="./imgs/logo.png" alt="logo">
-        </a>
-
-        <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">
-            <i class="fa fa-bars"></i>
-        </a>
-
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item d-md-down-none">
-                <a href="#">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
-
-            <li class="nav-item d-md-down-none">
-                <a href="#">
-                    <i class="fa fa-envelope-open"></i>
-                    <span class="badge badge-pill badge-danger">5</span>
-                </a>
-            </li>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="small ml-1 d-md-down-none">${manager.name}</span>
+                    <span class="small ml-1 d-md-down-none">${manager.username}</span>
                 </a>
-
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header">Account</div>
-
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-user"></i> Profile
-                    </a>
-
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-envelope"></i> Messages
-                    </a>
-
-                    <div class="dropdown-header">Settings</div>
-
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-bell"></i> Notifications
-                    </a>
-
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-wrench"></i> Settings
-                    </a>
-
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-lock"></i> Logout
-                    </a>
-                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/manage/logout" role="button">注销</a>
             </li>
         </ul>
     </nav>
@@ -89,183 +41,42 @@
                     <li class="nav-title">Navigation</li>
 
                     <li class="nav-item">
-                        <a href="index.html" class="nav-link active">
-                            <i class="icon icon-speedometer"></i> Dashboard
+                        <a href="${pageContext.request.contextPath}/manage/gen_sit" class="nav-link active">
+                            <i class="icon icon-speedometer"></i> 概况总览
                         </a>
                     </li>
 
                     <li class="nav-item nav-dropdown">
-                        <a href="#" class="nav-link nav-dropdown-toggle">
-                            <i class="icon icon-target"></i> Layouts <i class="fa fa-caret-left"></i>
+                        <a href="javascript:member_manage()" class="nav-link">
+                            <i class="icon icon-target"></i> 用户管理
                         </a>
-
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item">
-                                <a href="layouts-normal.html" class="nav-link">
-                                    <i class="icon icon-target"></i> Normal
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="layouts-fixed-sidebar.html" class="nav-link">
-                                    <i class="icon icon-target"></i> Fixed Sidebar
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="layouts-fixed-header.html" class="nav-link">
-                                    <i class="icon icon-target"></i> Fixed Header
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="layouts-hidden-sidebar.html" class="nav-link">
-                                    <i class="icon icon-target"></i> Hidden Sidebar
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li class="nav-item nav-dropdown">
-                        <a href="#" class="nav-link nav-dropdown-toggle">
-                            <i class="icon icon-energy"></i> UI Kits <i class="fa fa-caret-left"></i>
+                        <a href="javascript:item_manage()" class="nav-link">
+                            <i class="icon icon-energy"></i> 商品管理
                         </a>
-
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item">
-                                <a href="alerts.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Alerts
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="buttons.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Buttons
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="cards.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Cards
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="modals.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Modals
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="tabs.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Tabs
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="progress-bars.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Progress Bars
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="widgets.html" class="nav-link">
-                                    <i class="icon icon-energy"></i> Widgets
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li class="nav-item nav-dropdown">
-                        <a href="#" class="nav-link nav-dropdown-toggle">
-                            <i class="icon icon-graph"></i> Charts <i class="fa fa-caret-left"></i>
-                        </a>
-
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item">
-                                <a href="chartjs.html" class="nav-link">
-                                    <i class="icon icon-graph"></i> Chart.js
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="forms.html" class="nav-link">
-                            <i class="icon icon-puzzle"></i> Forms
+                        <a href="javascript:order_manage()" class="nav-link">
+                            <i class="icon icon-graph"></i> 订单管理
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="tables.html" class="nav-link">
-                            <i class="icon icon-grid"></i> Tables
-                        </a>
-                    </li>
-
-                    <li class="nav-title">More</li>
-
-                    <li class="nav-item nav-dropdown">
-                        <a href="#" class="nav-link nav-dropdown-toggle">
-                            <i class="icon icon-umbrella"></i> Pages <i class="fa fa-caret-left"></i>
-                        </a>
-
-                        <ul class="nav-dropdown-items">
-                            <li class="nav-item">
-                                <a href="blank.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> Blank Page
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="login.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> Login
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="register.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> Register
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="invoice.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> Invoice
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="404.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> 404
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="500.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> 500
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="settings.html" class="nav-link">
-                                    <i class="icon icon-umbrella"></i> Settings
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
             </nav>
         </div>
 
-        <div class="content">
+        <div class="content" id="page">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">54</span>
-                                    <span class="font-weight-light">Total Users</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">${member_sum}</span>
+                                    <span class="font-weight-light">注册用户数</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -279,8 +90,8 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">$32,400</span>
-                                    <span class="font-weight-light">Income</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">${item_wts_sum}</span>
+                                    <span class="font-weight-light">在售商品数</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -294,8 +105,8 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">900</span>
-                                    <span class="font-weight-light">Downloads</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">${item_wtb_sum}</span>
+                                    <span class="font-weight-light">求购信息数</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -309,8 +120,8 @@
                         <div class="card p-4">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <span class="h4 d-block font-weight-normal mb-2">32s</span>
-                                    <span class="font-weight-light">Time</span>
+                                    <span class="h4 d-block font-weight-normal mb-2">${order_today}</span>
+                                    <span class="font-weight-light">今日完成订单</span>
                                 </div>
 
                                 <div class="h2 text-muted">
@@ -321,44 +132,43 @@
                     </div>
                 </div>
 
-                <div class="row ">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                Total Users
-                            </div>
+<%--                <div class="row ">--%>
+<%--                    <div class="col-md-12">--%>
+<%--                        <div class="card">--%>
+<%--                            <div class="card-header">--%>
+<%--                                完成订单情况--%>
+<%--                            </div>--%>
 
-                            <div class="card-body p-0">
-                                <div class="p-4">
-                                    <canvas id="line-chart" width="100%" height="20"></canvas>
-                                </div>
+<%--                            <div class="card-body p-0">--%>
+<%--                                <div class="p-4">--%>
+<%--                                    <canvas id="line-chart" width="100%" height="20"></canvas>--%>
+<%--                                </div>--%>
 
-                                <div class="justify-content-around mt-4 p-4 bg-light d-flex border-top d-md-down-none">
-                                    <div class="text-center">
-                                        <div class="text-muted small">Total Traffic</div>
-                                        <div>12,457 Users (40%)</div>
-                                    </div>
+<%--                                <div class="justify-content-around mt-4 p-4 bg-light d-flex border-top d-md-down-none">--%>
+<%--                                    <div class="text-center">--%>
+<%--                                        <div class="text-muted small">Total Traffic</div>--%>
+<%--                                        <div>12,457 Users (40%)</div>--%>
+<%--                                    </div>--%>
 
-                                    <div class="text-center">
-                                        <div class="text-muted small">Banned Users</div>
-                                        <div>95,333 Users (5%)</div>
-                                    </div>
+<%--                                    <div class="text-center">--%>
+<%--                                        <div class="text-muted small">Banned Users</div>--%>
+<%--                                        <div>95,333 Users (5%)</div>--%>
+<%--                                    </div>--%>
 
-                                    <div class="text-center">
-                                        <div class="text-muted small">Page Views</div>
-                                        <div>957,565 Pages (50%)</div>
-                                    </div>
+<%--                                    <div class="text-center">--%>
+<%--                                        <div class="text-muted small">Page Views</div>--%>
+<%--                                        <div>957,565 Pages (50%)</div>--%>
+<%--                                    </div>--%>
 
-                                    <div class="text-center">
-                                        <div class="text-muted small">Total Downloads</div>
-                                        <div>957,565 Files (100 TB)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-                </div>
+<%--                                    <div class="text-center">--%>
+<%--                                        <div class="text-muted small">Total Downloads</div>--%>
+<%--                                        <div>957,565 Files (100 TB)</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
         </div>
     </div>
@@ -366,8 +176,20 @@
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<script src="${pageContext.request.contextPath}js/chart.js"></script>
+<script src="${pageContext.request.contextPath}/js/chart.js"></script>
 <script src="${pageContext.request.contextPath}/js/carbon.js"></script>
 <script src="${pageContext.request.contextPath}/js/demo.js"></script>
+
+<script>
+    function member_manage() {
+        $("#page").load("${pageContext.request.contextPath}/manage/member");
+    }
+    function item_manage() {
+        $("#page").load("${pageContext.request.contextPath}/manage/item");
+    }
+    function order_manage() {
+        $("#page").load("${pageContext.request.contextPath}/manage/order");
+    }
+</script>
 </body>
 </html>
