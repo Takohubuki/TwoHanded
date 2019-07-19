@@ -21,9 +21,19 @@ public class Order {
 
     private Integer item_num;
 
+    private Integer total;
+
     private List<Item> item_list;
 
     private Map<String,String> num2item;
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
     public Map getNum2item() {
         if (num2item == null){

@@ -45,6 +45,7 @@ public class OrderController {
     @RequestMapping("/checkout")
     public String checkout(@RequestParam("item_serial_num") String[] item_serial_num,
                            @RequestParam("quantity")String[] quantity,
+                           @RequestParam("total")Integer total,
                            HttpSession session){
 
         Member member = (Member) session.getAttribute("member");
@@ -65,10 +66,10 @@ public class OrderController {
             new_order.setBuyer_id(sid);
             new_order.setItem_num(item_num);
             new_order.setOrder_id(order_id);
+            new_order.setTotal(total);
             orderMapper.generateNewOrder(new_order);
         }
 
-//        orderMapper.generateNewOrder();
         return "checkout";
     }
 }

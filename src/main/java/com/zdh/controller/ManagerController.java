@@ -62,7 +62,8 @@ public class ManagerController {
     @RequestMapping("/manage/order")
     public String order(Model model){
         List<Order> orders = managerMapper.selectAllOrder();
-        model.addAttribute("");
+        model.addAttribute("orderlist",orders);
+        return "ordermanage";
     }
 
     //用户管理

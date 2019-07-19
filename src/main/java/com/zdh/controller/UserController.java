@@ -72,7 +72,11 @@ public class UserController {
             并记录最近登录时间
              */
             System.out.println("redirect:"+uri);
-            modelAndView.setViewName("redirect:"+uri);
+            if (uri.contains("checkout")){
+                modelAndView.setViewName("redirect:/index.jsp");
+            }else {
+                modelAndView.setViewName("redirect:"+uri);
+            }
             Date date = new Date();
             member.setRecent_login(date);
             memberMapper.updateRecentLogin(member);
@@ -169,6 +173,8 @@ public class UserController {
         return "profile";
     }
 
+
+    //用户发布出售商品信息
     @RequestMapping("/publish/wts")
     public String publishwts(HttpSession session, Model model){
         Member member = (Member) session.getAttribute("member");
@@ -178,6 +184,8 @@ public class UserController {
         return "publishwts";
     }
 
+
+    //用户发布求购商品信息
     @RequestMapping("/publish/wtb")
     public String publishwtb(HttpSession session, Model model){
         Member member = (Member) session.getAttribute("member");
@@ -193,6 +201,7 @@ public class UserController {
         return "updateprofile";
     }
 
+    //更新用户资料
     @Transactional
     @RequestMapping("/update/profile")
     public String upprofile(Member member, HttpSession session, @RequestParam("imagefile") MultipartFile file,HttpServletRequest request) throws IOException {
