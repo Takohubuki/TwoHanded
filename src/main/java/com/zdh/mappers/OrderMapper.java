@@ -2,6 +2,8 @@ package com.zdh.mappers;
 
 import com.zdh.bean.Order;
 
+import java.util.List;
+
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    void generateNewOrder(Order order);
+
+    List<Order> selectMyOrder(String sid);
 }

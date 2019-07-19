@@ -9,13 +9,20 @@
 <html>
 <head>
     <title>修改资料</title>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/icons/ionicons.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_all-skins.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body>
     <div class="container col-md-6">
@@ -62,11 +69,11 @@
     </div>
     <!-- js-files -->
     <!-- jquery -->
-    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
     <!-- //jquery -->
 
     <!-- 弹出登录注册框-->
-    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
     <script>
         $(document).ready(function () {
             $('.popup-with-zoom-anim').magnificPopup({
@@ -90,7 +97,7 @@
     <!-- //弹出控制结束-->
 
     <!-- 购物车 -->
-    <script src="js/minicart.js"></script>
+    <script src="${pageContext.request.contextPath}/js/minicart.js"></script>
     <script>
         paypalm.minicartk.render(); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
 
@@ -114,7 +121,7 @@
     <!-- //购物车结束-->
 
     <!-- price range (top products) -->
-    <script src="js/jquery-ui.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
     <script>
         //<![CDATA[
         $(window).load(function () {
@@ -134,7 +141,7 @@
     <!-- //price range (top products) -->
 
     <!-- flexisel (for special offers) -->
-    <script src="js/jquery.flexisel.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.flexisel.js"></script>
     <script>
         $(window).load(function () {
             $("#flexiselDemo1").flexisel({
@@ -183,12 +190,12 @@
     <!-- //检测结束 -->
 
     <!-- smoothscroll -->
-    <script src="js/SmoothScroll.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/SmoothScroll.min.js"></script>
     <!-- //smoothscroll -->
 
     <!-- start-smooth-scrolling -->
-    <script src="js/move-top.js"></script>
-    <script src="js/easing.js"></script>
+    <script src="${pageContext.request.contextPath}/js/move-top.js"></script>
+    <script src="${pageContext.request.contextPath}/js/easing.js"></script>
     <script>
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
@@ -222,7 +229,7 @@
     <!-- //smooth-scrolling-of-move-up -->
 
     <!-- for bootstrap working -->
-    <script src="js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
     <!-- //for bootstrap working -->
     <!-- //js-files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>

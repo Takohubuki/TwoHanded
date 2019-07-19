@@ -2,10 +2,13 @@ package com.zdh.controller;
 
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.bean.Order;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
+import com.zdh.mappers.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +20,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/user")
 @Controller
 public class UserController {
+
+    @Autowired
+    OrderMapper orderMapper;
 
     @Autowired
     MemberMapper memberMapper;
@@ -38,6 +46,9 @@ public class UserController {
 //        String uri = request.getRequestURI();
 //        System.out.println(uri);
         String uri = request.getHeader("Referer");
+        String method = request.getMethod();
+        Map cart_list = (HashMap) session.getAttribute("cart_list");
+
 //        session.setAttribute("redirectUri",uri);
         if (uri.contains("signin")){
             uri = "/index.jsp";
@@ -56,10 +67,11 @@ public class UserController {
         }else if (passwordConfirm(member.getPassword(),password)){
             session.setAttribute("member",member);
             /*
-            用户登录成功返回首页
+            用户登录成功返回上一个请求
              */
             System.out.println("redirect:"+uri);
             modelAndView.setViewName("redirect:"+uri);
+
             return modelAndView;
         }else {
             modelAndView.setViewName("login");
@@ -107,6 +119,26 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/allorder")
+    public String allorder(HttpSession session, Model model){
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+        List<Order> orderList = orderMapper.selectMyOrder(sid);
+        for (int i = 0; i < orderList.size()-1; i++) {
+            Order order_pre = orderList.get(i);
+            for (int j = i+1; j < orderList.size(); j++) {
+                Order order_nex = orderList.get(j);
+                if (order_pre.getOrder_id().equals(order_nex.getOrder_id())){
+                    Item item_1 = itemMapper.selectBySerialNum(order_pre.getItem_id());
+                    Item item_2 = itemMapper.selectBySerialNum(order_nex.getItem_id());
+                    order_pre.getItem_list().add(item_1);
+                    order_pre.getItem_list().add(item_2);
+                }
+            }
+        }
+        model.addAttribute("my_order_list",orderList);
+        return "allorder";
+    }
 
     //跳转用户个人中心页面
     @RequestMapping("/profile")
@@ -138,6 +170,7 @@ public class UserController {
         return "updateprofile";
     }
 
+    @Transactional
     @RequestMapping("/update/profile")
     public String upprofile(Member member, HttpSession session, @RequestParam("imagefile") MultipartFile file,HttpServletRequest request) throws IOException {
 
@@ -167,10 +200,16 @@ public class UserController {
         member.setPassword(password);
 
         session.setAttribute("member",member);
-        if (member_old.getSid() != member.getSid()){
-            itemMapper.updatePublisherByName(member_old.getSid(),member.getSid());
+        try {
+            if (member_old.getSid() != member.getSid()){
+                itemMapper.updatePublisherByName(member_old.getSid(),member.getSid());
+            }
+            memberMapper.updateProfile(member);
+
+        }catch (Exception e){
+            System.out.println("error!rollback!");
         }
-        memberMapper.updateProfile(member);
+
         return "profile";
     }
     //密码验证

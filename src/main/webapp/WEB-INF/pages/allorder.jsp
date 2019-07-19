@@ -2,39 +2,33 @@
 <%--
   Created by IntelliJ IDEA.
   User: Tako
-  Date: 2019/7/11
-  Time: 14:42
+  Date: 2019/7/18
+  Time: 13:58
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/icons/ionicons.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dataTables.bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_all-skins.css">
+<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/icons/ionicons.css">
+<!-- DataTables -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dataTables.bootstrap.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+     folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/_all-skins.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<!-- Google Font -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Main content -->
@@ -43,7 +37,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">我的出售</h3>
+                    <h3 class="box-title">我的订单</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -57,7 +51,7 @@
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting" tabindex="0" aria-controls="example2">
-                                            图片
+                                            订单编号
                                         </th>
                                         <th class="sorting" tabindex="1" aria-controls="example2">
                                             名称
@@ -74,22 +68,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="mywts" items="${mywts}">
+                                    <c:forEach var="order_list" items="${my_order_list}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                <img src="${pageContext.request.contextPath}/${mywts.image}" style="width: 80px;height: 75px">
+                                                ${order_list.order_id}
                                             </td>
                                             <td>
-                                                    ${mywts.name}
+                                                ${order_list.item_id}
                                             </td>
                                             <td>
-                                                    ${mywts.price}
+                                                ${order_list.item_list.get(1)}
                                             </td>
                                             <td>
-                                                    ${mywts.quality}
+                                                ${order_list.item_num}
                                             </td>
                                             <td>
-                                                    ${mywts.conditions}
+                                                ${order_list}
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -140,5 +134,4 @@
         })
     })
 </script>
-</body>
 </html>

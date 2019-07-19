@@ -12,6 +12,8 @@
 <context:component-scan base-package="com.zdh"/>
     <mvc:annotation-driven/>
 <mvc:interceptors>
+    <bean class="com.zdh.controller.LoginInterceptor">
+    </bean>
     <mvc:interceptor>
         <mvc:mapping path="/**"/>
         <bean class="com.zdh.controller.LoginInterceptor">

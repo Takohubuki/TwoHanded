@@ -30,7 +30,7 @@
             <div class="col-md-4 product-men">
                 <div class="men-pro-item simpleCart_shelfItem">
                     <div class="men-thumb-item">
-                        <img src="../${itemlist.image}" alt="">
+                        <img src="${pageContext.request.contextPath}/${itemlist.image}" alt="" style="width: 159px;height: 150px">
                         <div class="men-cart-pro">
                             <div class="inner-men-cart-pro">
                                 <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${itemlist.name}" class="link-product-add-cart">详情</a>
@@ -42,7 +42,7 @@
                             <a href="${pageContext.request.contextPath}/items/singleitem">${itemlist.name}</a>
                         </h4>
                         <div class="info-product-price">
-                            <span class="item_price">￥${itemlist .price}</span>
+                            <span class="item_price">￥${itemlist.price}</span>
 
                         </div>
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
@@ -51,13 +51,13 @@
                                     <input type="hidden" name="cmd" value="_cart" />
                                     <input type="hidden" name="add" value="1" />
                                     <input type="hidden" name="business" value=" " />
-                                    <input type="hidden" name="item_name" value="Almonds, 100g" />
-                                    <input type="hidden" name="amount" value="149.00" />
-                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                    <input type="hidden" name="currency_code" value="USD" />
+                                    <input type="hidden" name="item_name" value="${itemlist.name}" />
+                                    <input type="hidden" name="amount" value="${itemlist.price}" />
+                                    <input type="hidden" name="item_serial_num" value="${itemlist.serial_num}" />
+                                    <input type="hidden" name="currency_code" value="CNY" />
                                     <input type="hidden" name="return" value=" " />
                                     <input type="hidden" name="cancel_return" value=" " />
-<%--                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
+                                    <input type="submit" name="submit" value="Add to cart" class="button" />
                                 </fieldset>
                             </form>
                         </div>
@@ -93,7 +93,7 @@
 </div>
 <!-- js-files -->
 <!-- jquery -->
-<script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <!-- //jquery -->
 
 <!-- popup modal (for signin & signup)-->

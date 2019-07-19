@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class ItemsController {
         return "itemlist";
     }
 
+    //商品列表分页
     @RequestMapping("/itempage")
     public String itempage(Model model, @Param("pageNum")int pageNum){
         PageHelper.startPage(pageNum,6);
@@ -120,13 +122,15 @@ public class ItemsController {
 
             item.setImage("images/"+filename);
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
         item.setPublisher(sid);
         Date date = new Date();
         item.setPublish_time(date);
         item.setUpdate_time(date);
-        item.setSerial_num(item.getUpdate_time()+sid);
+        String format = sdf.format(date);
+        item.setSerial_num(format+sid);
         itemMapper.addpublish(item);
 
 

@@ -227,12 +227,9 @@
                     <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav menu__list">
                             <li>
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/index/backindex">主页
+                                <a class="nav-stylehead" href="index.html">主页
                                     <span class="sr-only">(current)</span>
                                 </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="about.html">About Us</a>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">电子产品
@@ -245,54 +242,10 @@
                                                 <li>
                                                     <a href="product.html">Bakery</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product.html">Baking Supplies</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Coffee, Tea & Beverages</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Dried Fruits, Nuts</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Sweets, Chocolate</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Spices & Masalas</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Jams, Honey & Spreads</a>
-                                                </li>
+
                                             </ul>
                                         </div>
-                                        <div class="col-sm-4 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product.html">Pickles</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Pasta & Noodles</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Rice, Flour & Pulses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Sauces & Cooking Pastes</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Snack Foods</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Oils, Vinegars</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product.html">Meat, Poultry & Seafood</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-4 multi-gd-img">
-                                            <img src="${pageContext.request.contextPath}/images/nav.png" alt="">
-                                        </div>
+
                                         <div class="clearfix"></div>
                                     </div>
                                 </ul>
@@ -308,24 +261,7 @@
                                                 <li>
                                                     <a href="product2.html">Kitchen & Dining</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product2.html">Detergents</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Utensil Cleaners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Floor & Other Cleaners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Disposables, Garbage Bag</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Repellents & Fresheners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html"> Dishwash</a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="col-sm-6 multi-gd-img">
@@ -333,24 +269,7 @@
                                                 <li>
                                                     <a href="product2.html">Pet Care</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product2.html">Cleaning Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Pooja Needs</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Crackers</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Festive Decoratives</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Plasticware</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Home Care</a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="clearfix"></div>
@@ -368,24 +287,7 @@
                                                 <li>
                                                     <a href="product2.html">Kitchen & Dining</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product2.html">Detergents</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Utensil Cleaners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Floor & Other Cleaners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Disposables, Garbage Bag</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Repellents & Fresheners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html"> Dishwash</a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="col-sm-6 multi-gd-img">
@@ -393,24 +295,7 @@
                                                 <li>
                                                     <a href="product2.html">Pet Care</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product2.html">Cleaning Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Pooja Needs</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Crackers</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Festive Decoratives</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Plasticware</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Home Care</a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="clearfix"></div>
@@ -428,24 +313,7 @@
                                                 <li>
                                                     <a href="product2.html">Kitchen & Dining</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product2.html">Detergents</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Utensil Cleaners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Floor & Other Cleaners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Disposables, Garbage Bag</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Repellents & Fresheners</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html"> Dishwash</a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="col-sm-6 multi-gd-img">
@@ -453,31 +321,13 @@
                                                 <li>
                                                     <a href="product2.html">Pet Care</a>
                                                 </li>
-                                                <li>
-                                                    <a href="product2.html">Cleaning Accessories</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Pooja Needs</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Crackers</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Festive Decoratives</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Plasticware</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product2.html">Home Care</a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -486,6 +336,7 @@
     </div>
 </div>
 <!-- //导航栏结束 -->
+
 
 <!-- page -->
 <div class="services-breadcrumb">
@@ -522,14 +373,7 @@
                             <div class="thumb-image">
                                 <img src="${pageContext.request.contextPath}/${item.image}" data-imagezoom="true" class="img-responsive" alt=""> </div>
                         </li>
-<%--                        <li data-thumb="${pageContext.request.contextPath}/images/si2.jpg">--%>
-<%--                            <div class="thumb-image">--%>
-<%--                                <img src="${pageContext.request.contextPath}/images/si2.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>--%>
-<%--                        </li>--%>
-<%--                        <li data-thumb="${pageContext.request.contextPath}/images/si3.jpg">--%>
-<%--                            <div class="thumb-image">--%>
-<%--                                <img src="${pageContext.request.contextPath}/images/si3.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>--%>
-<%--                        </li>--%>
+
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -578,20 +422,18 @@
             </div>
             <div class="occasion-cart">
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                    <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                    <form action="#" method="post">
                         <fieldset>
                             <input type="hidden" name="cmd" value="_cart" />
                             <input type="hidden" name="add" value="1" />
                             <input type="hidden" name="business" value=" " />
-                            <input type="hidden" name="name" value="${item.name}" />
+                            <input type="hidden" name="item_name" value="${item.name}" />
                             <input type="hidden" name="amount" value="${item.price}" />
-                            <input type="hidden" name="discount_amount" value="${item.serial_num}" />
-                            <input type="hidden" name="currency_code" value="USD" />
+                            <input type="hidden" name="item_serial_num" value="${item.serial_num}" />
+                            <input type="hidden" name="currency_code" value="CNY" />
                             <input type="hidden" name="return" value=" " />
-                            <input type="hidden" name="cancel_return" value=" "/>
-                            <c:if test="${item.conditions == '出售'}">
-                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                            </c:if>
+                            <input type="hidden" name="cancel_return" value=" " />
+                            <input type="submit" name="submit" value="Add to cart" class="button" />
                         </fieldset>
                     </form>
                 </div>

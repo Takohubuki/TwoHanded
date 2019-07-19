@@ -19,11 +19,11 @@
     <sql id="Base_Column_List">
     id, name, price, number, publisher, describes, image, quality, conditions
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectBySerialNum" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         *
         from item
-        where id = #{id,jdbcType=INTEGER}
+        where serial_num = #{id,jdbcType=VARCHAR}
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select * from item;

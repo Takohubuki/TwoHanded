@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | User Profile</title>
+    <title>User Profile</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -49,7 +49,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img id="avatar" src="../../images/avatar/${member.avatar}" class="img-circle" alt="User Image" style="height: 45px;width: 45px">
+                    <img id="avatar" src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle" alt="User Image" style="height: 45px;width: 45px">
                 </div>
                 <div class="pull-left info">
                     <p>${member.username}</p>
@@ -77,21 +77,10 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li>
                     <a href="javascript:allorder()">
                         <i class="fa fa-dashboard"></i> <span>所有订单</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-circle-o"></i>我的出售</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-circle-o"></i>我的求购</a>
-                        </li>
-                    </ul>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/user/logout"><i class="fa fa-circle-o text-red"></i> <span>注销</span></a></li>
 <%--                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>--%>
@@ -106,7 +95,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                User Profile
+                个人中心
             </h1>
 
         </section>
@@ -128,7 +117,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- FastClick -->
