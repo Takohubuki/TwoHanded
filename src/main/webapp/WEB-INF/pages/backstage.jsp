@@ -53,9 +53,21 @@
                     </li>
 
                     <li class="nav-item nav-dropdown">
-                        <a href="javascript:item_manage()" class="nav-link">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
                             <i class="icon icon-energy"></i> 商品管理
                         </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="javascript:wtsItem()" class="nav-link">
+                                    <i class="icon icon-target"></i> 出售商品
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:wtbItem()" class="nav-link">
+                                    <i class="icon icon-target"></i> 求购信息
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="nav-item nav-dropdown">
@@ -131,7 +143,67 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2">${loginToday}</span>
+                                    <span class="font-weight-light">今日登录用户数</span>
+                                </div>
 
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-people"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2">${item_wts_sum_today}</span>
+                                    <span class="font-weight-light">今日发布出售数</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-wallet"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2">${item_wtb_sum_today}</span>
+                                    <span class="font-weight-light">今日发布求购数</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-cloud-download"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-4">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h4 d-block font-weight-normal mb-2">${order_total}</span>
+                                    <span class="font-weight-light">完成订单总数</span>
+                                </div>
+
+                                <div class="h2 text-muted">
+                                    <i class="icon icon-clock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 <%--                <div class="row ">--%>
 <%--                    <div class="col-md-12">--%>
 <%--                        <div class="card">--%>
@@ -189,6 +261,12 @@
     }
     function order_manage() {
         $("#page").load("${pageContext.request.contextPath}/manage/order");
+    }
+    function wtsItem() {
+        $("#page").load("${pageContext.request.contextPath}/manage/wtsitem");
+    }
+    function wtbItem() {
+        $("#page").load("${pageContext.request.contextPath}/manage/wtbitem");
     }
 </script>
 </body>

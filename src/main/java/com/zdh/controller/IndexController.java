@@ -20,6 +20,7 @@ public class IndexController implements InitializingBean, ServletContextAware {
 
     @RequestMapping("/index/backindex")
     public String backindex(Model model){
+
         List<Item> wts_item3 = itemMapper.select3WtsItemByTime();
         model.addAttribute("wts_item",wts_item3);
 
@@ -28,11 +29,6 @@ public class IndexController implements InitializingBean, ServletContextAware {
         model.addAttribute("wtb_item",wtb_item3);
         return "redirect:/index.jsp";
 
-
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
 
     }
 
@@ -48,6 +44,11 @@ public class IndexController implements InitializingBean, ServletContextAware {
 //        ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.addObject("newestitems",itemList);
 
+
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
 
     }
 }

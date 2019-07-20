@@ -21,18 +21,18 @@ public class Order {
 
     private Integer item_num;
 
-    private Integer total;
+    private String sum_price;
 
     private List<Item> item_list;
 
     private Map<String,String> num2item;
 
-    public Integer getTotal() {
-        return total;
+    public String getSum_price() {
+        return sum_price;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setSum_price(String sum_price) {
+        this.sum_price = sum_price;
     }
 
     public Map getNum2item() {

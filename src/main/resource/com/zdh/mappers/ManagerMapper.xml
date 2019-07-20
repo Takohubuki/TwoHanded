@@ -27,8 +27,20 @@
     <select id="countItemWtbOnCarriiage" resultType="java.lang.Integer">
         select count(*) from item where conditions='求购' and is_undercarriage='0';
     </select>
+    <select id="selectLoginToday" resultType="java.lang.Integer">
+        select count(*) from member where TO_DAYS(recent_login)=TO_DAYS(NOW());
+    </select>
     <select id="orderedToday" resultType="java.lang.Integer">
         select count(*) from `order`  where TO_DAYS(create_time)=TO_DAYS(NOW());
+    </select>
+    <select id="countItemWtsToday" resultType="java.lang.Integer">
+        select count(*) from item  where TO_DAYS(publish_time)=TO_DAYS(NOW()) and conditions='出售';
+    </select>
+    <select id="countItemWtbToday" resultType="java.lang.Integer">
+        select count(*) from item  where TO_DAYS(publish_time)=TO_DAYS(NOW()) and conditions='求购';
+    </select>
+    <select id="countOrderTotal" resultType="java.lang.Integer">
+        select count(*) from `order`;
     </select>
     <select id="selectAllMember" resultType="com.zdh.bean.Member">
         select * from member;
@@ -38,6 +50,9 @@
     </select>
     <select id="selectAllBuyItems" resultType="com.zdh.bean.Item">
         select * from item where conditions='求购';
+    </select>
+    <select id="selectAllOrder" resultType="com.zdh.bean.Order">
+        select * from `order` ;
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from manager

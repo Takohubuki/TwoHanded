@@ -128,6 +128,15 @@ public class ManagerController {
         Integer countItemWtbOnCarriiage = managerMapper.countItemWtbOnCarriiage();
         Integer countItemWtsOnCarriiage = managerMapper.countItemWtsOnCarriiage();
         Integer orderedToday = managerMapper.orderedToday();
+        Integer loginToday = managerMapper.selectLoginToday();
+        Integer item_wts_sum_today = managerMapper.countItemWtsToday();
+        Integer item_wtb_sum_today = managerMapper.countItemWtbToday();
+        Integer order_total = managerMapper.countOrderTotal();
+
+        model.addAttribute("loginToday",loginToday);
+        model.addAttribute("item_wts_sum_today",item_wts_sum_today);
+        model.addAttribute("item_wtb_sum_today",item_wtb_sum_today);
+        model.addAttribute("order_total",order_total);
         model.addAttribute("member_sum",member_sum);
         model.addAttribute("item_wts_sum",countItemWtsOnCarriiage);
         model.addAttribute("item_wtb_sum",countItemWtbOnCarriiage);

@@ -74,7 +74,7 @@
                                                 ${order_list.order_id}
                                             </td>
                                             <td>
-                                                ${order_list.item_list}
+                                                ${order_list.item_id}
                                             </td>
                                             <td>
                                                 <c:if test="${order_list.num2item != null}">

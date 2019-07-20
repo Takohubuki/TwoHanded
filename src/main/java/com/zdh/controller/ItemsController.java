@@ -60,12 +60,19 @@ public class ItemsController {
     public String itempage(Model model, @Param("pageNum")int pageNum, HttpServletRequest request){
         PageHelper.startPage(pageNum,6);
         PageInfo<Item> itemPageInfo = null;
-        if (request.getRequestURI().contains("listwtsbytime")){
+        if (request.getHeader("Referer").contains("listwtsbytime")){
             Page<Item> itemPage = itemMapper.selectWtsAllByTime();
             itemPageInfo = new PageInfo<>(itemPage);
-        }else if (request.getRequestURI().contains("searchbyname")){
+        }else if (request.getHeader("Referer").contains("searchbyname")){
             String search = request.getParameter("search");
             List<Item> items = itemMapper.selectByName(search);
+            itemPageInfo = new PageInfo<>(items);
+        }else if (request.getHeader("Referer").contains("searchbykind")){
+            String kind = request.getParameter("kind");
+            List<Item> items = itemMapper.selectByKind(kind);
+            itemPageInfo = new PageInfo<>(items);
+        }else if (request.getHeader("Referer").contains("listwtbbytime")){
+            Page<Item> items = itemMapper.selectWtbAllByTime();
             itemPageInfo = new PageInfo<>(items);
         }
         model.addAttribute("itemPageInfo",itemPageInfo);
@@ -161,5 +168,49 @@ public class ItemsController {
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         model.addAttribute("itemPageInfo",itemPageInfo);
         return "itemlist";
+    }
+
+    //根据商品类型查询
+    @RequestMapping("/searchbykind")
+    public String searchbykind(Model model,String kind){
+        PageHelper.startPage(1,6);
+        List<Item> items = itemMapper.selectByKind(kind);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(items);
+        model.addAttribute("itemPageInfo",itemPageInfo);
+        return "itemlist";
+    }
+
+    //更新商品信息
+    @RequestMapping("/update")
+    public String updateiteminfo(Model model,String item_id){
+        Item item = itemMapper.selectBySerialNum(item_id);
+        model.addAttribute("item",item);
+        return "update";
+    }
+    @RequestMapping("/updateitem")
+    public String updateitem(Model model,Item item, @RequestParam("imagefile") MultipartFile file, HttpServletRequest request) throws IOException {
+        if(!file.isEmpty()) {
+            //上传文件路径
+            String path = request.getSession().getServletContext().getRealPath("/images/");
+
+            System.out.println(path);
+            //上传文件名
+            String filename = file.getOriginalFilename();
+            File filepath = new File(path,filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            file.transferTo(new File(path + File.separator + filename));
+            //输出文件上传最终的路径 测试查看
+            System.out.println(path + File.separator + filename);
+
+            item.setImage(filename);
+        }
+        Date date = new Date();
+        item.setUpdate_time(date);
+        itemMapper.updateItemInfo(item);
+        return "profile";
     }
 }

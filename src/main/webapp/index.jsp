@@ -216,102 +216,30 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">电子产品
-                                    <span class="caret"></span>
+                            <li class="">
+                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=电子产品">
+                                    电子产品
                                 </a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        <div class="col-sm-4 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product.html">Bakery</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">衣物
-                                    <span class="caret"></span>
+                            <li class="">
+                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=体育用品">
+                                    体育用品
                                 </a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Kitchen & Dining</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Pet Care</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">生活用品
-                                    <span class="caret"></span>
+                            <li class="">
+                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=生活用品">
+                                    生活用品
                                 </a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Kitchen & Dining</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Pet Care</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">杂物
-                                    <span class="caret"></span>
+                            <li class="">
+                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=衣物">
+                                    衣物
                                 </a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Kitchen & Dining</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                <li>
-                                                    <a href="product2.html">Pet Care</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
+                            </li>
+                            <li class="">
+                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=杂物">
+                                    杂物
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -321,6 +249,7 @@
     </div>
 </div>
 <!-- //导航栏结束 -->
+
 
 <!-- 轮播图模块 -->
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -340,7 +269,7 @@
                     </h3>
                     <p>
                         <span>10%</span> Cashback</p>
-                    <a class="button2" href="product.html">查看详情 </a>
+                    <a class="button2" href="#">查看详情 </a>
                 </div>
             </div>
         </div>
@@ -352,7 +281,7 @@
                     </h3>
                     <p>Get Upto
                         <span>30%</span> Off</p>
-                    <a class="button2" href="product.html">查看详情 </a>
+                    <a class="button2" href="#">查看详情 </a>
                 </div>
             </div>
         </div>
@@ -365,7 +294,7 @@
                     <p>Get Best Offer Upto
                         <span>20%</span>
                     </p>
-                    <a class="button2" href="product.html">查看详情 </a>
+                    <a class="button2" href="#">查看详情 </a>
                 </div>
             </div>
         </div>
@@ -377,7 +306,7 @@
                     </h3>
                     <p>Get Now
                         <span>40%</span> Discount</p>
-                    <a class="button2" href="product.html">查看详情</a>
+                    <a class="button2" href="#">查看详情</a>
                 </div>
             </div>
         </div>
@@ -521,14 +450,6 @@
 </div>
 <!-- //展示商品结束 -->
 
-
-<!-- copyright -->
-<div class="copy-right">
-    <div class="container">
-        <p>Copyright &copy; 2018.Company name All rights reserved.</p>
-    </div>
-</div>
-<!-- //copyright -->
 
 <!-- js-files -->
 <!-- jquery -->

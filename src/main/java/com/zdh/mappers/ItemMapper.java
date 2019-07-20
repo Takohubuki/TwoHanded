@@ -56,4 +56,8 @@ public interface ItemMapper {
     List<Item> selectSameKind(String kind);
 
     List<Item> RecommandSameKind(String kind);
+
+    List<Item> selectByKind(String kind);
+
+    void updateItemInfo(Item item);
 }

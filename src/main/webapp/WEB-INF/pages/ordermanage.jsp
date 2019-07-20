@@ -74,7 +74,7 @@
                                         <fmt:formatDate value="${orderlist.create_time}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
                                     </td>
                                     <td>
-                                        ￥
+                                        ${orderlist.sum_price}
                                     </td>
                                 </tr>
                             </c:forEach>

@@ -395,7 +395,7 @@
                         当面交易
                     </li>
                     <li>
-                        Shipping Speed to Delivery.
+                        联系方式：
                     </li>
                     <li>
                         库存：${item.number}

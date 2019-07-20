@@ -91,6 +91,10 @@
                                             <td>
                                                     ${mywts.conditions}
                                             </td>
+                                            <td>
+                                                <a href="javascript:updateitem('${mywts.serial_num}')">修改</a>
+                                                <a href="javascript:offmyitem('${mywts.serial_num}')">下架</a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -139,6 +143,19 @@
             'autoWidth'   : false
         })
     })
+    function offmyitem(item_id) {
+        $("#page").load("${pageContext.request.contextPath}/user/offmyitem?item_id="+item_id);
+    }
+    function updateitem(item_id) {
+        $("#page").load("${pageContext.request.contextPath}/items/update?item_id="+item_id);
+        <%--$.post("${pageContext.request.contextPath}/items/update",--%>
+        <%--    {--%>
+        <%--        item_id:string--%>
+        <%--    },--%>
+        <%--    function () {--%>
+        <%--    alert("error!")--%>
+        <%--})--%>
+    }
 </script>
 </body>
 </html>

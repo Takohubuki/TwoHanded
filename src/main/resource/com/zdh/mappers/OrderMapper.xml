@@ -36,7 +36,7 @@
       #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP})
   </insert>
     <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
-    insert into `order` (is_paid, is_received, create_time, update_time, order_id, item_id, buyer_id, item_num) values (#{is_paid},#{is_received},#{create_time},#{update_time},#{order_id},#{item_id},#{buyer_id},#{item_num});
+    insert into `order` (is_paid, is_received, create_time, update_time, order_id, item_id, buyer_id, item_num, sum_price) values (#{is_paid},#{is_received},#{create_time},#{update_time},#{order_id},#{item_id},#{buyer_id},#{item_num},#{total});
   </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Order">
         insert into `order`

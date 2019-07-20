@@ -43,4 +43,12 @@ public interface ManagerMapper {
     List<Item> selectAllBuyItems();
 
     List<Order> selectAllOrder();
+
+    Integer selectLoginToday();
+
+    Integer countItemWtsToday();
+
+    Integer countItemWtbToday();
+
+    Integer countOrderTotal();
 }
