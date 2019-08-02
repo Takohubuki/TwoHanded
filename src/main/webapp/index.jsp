@@ -90,9 +90,9 @@
             <!-- 购物车模块 -->
             <div class="top_nav_right">
                 <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                    <form action="#" method="post" class="last">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="display" value="1">
+                    <form action="${pageContext.request.contextPath}/order/mycart" method="post" class="last">
+<%--                        <input type="hidden" name="cmd" value="_cart">--%>
+<%--                        <input type="hidden" name="display" value="1">--%>
                         <button class="w3view-cart" type="submit" name="submit" value="">
                             <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                         </button>
@@ -377,7 +377,8 @@
                                                     <input type="hidden" name="currency_code" value="CNY" />
                                                     <input type="hidden" name="return" value=" " />
                                                     <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Add to cart" class="button" />
+<%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
+                                                    <input type="button" name="" class="button" onclick="javascript:addcart('${wts_item.serial_num}')" value="123"/>
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -626,6 +627,18 @@
 <!-- //js-files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
+<script>
+    function addcart(item_id) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/order/addcart",
+            type: "POST",
+            data: {
+                item_id: item_id
+            }
+        })
+        alert("success");
+    }
+</script>
 </body>
 
 </html>

@@ -60,4 +60,6 @@ public interface ItemMapper {
     List<Item> selectByKind(String kind);
 
     void updateItemInfo(Item item);
+
+    void updateItemNum(@Param("itemnumber") int itemnumber,@Param("item_id")String item_id);
 }

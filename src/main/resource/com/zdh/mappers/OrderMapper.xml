@@ -24,6 +24,9 @@
     <select id="selectMyOrder" resultMap="BaseResultMap">
         select * from `order` where buyer_id=#{sid};
     </select>
+    <select id="selectMyCart" resultType="com.zdh.bean.Cart">
+        select * from cart where is_checked = '0';
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from order

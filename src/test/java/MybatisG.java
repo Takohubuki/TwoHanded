@@ -17,9 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MybatisG {
 
@@ -52,5 +50,12 @@ public class MybatisG {
             itemMapper.updateByPrimaryKey(item);
         }
         sqlSession.commit();
+    }
+
+    @Test
+    public void Test03(){
+        Map map = new HashMap();
+        map.get("11111");
+        System.out.println(map);
     }
 }

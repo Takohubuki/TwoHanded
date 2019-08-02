@@ -25,7 +25,7 @@ public class Order {
 
     private List<Item> item_list;
 
-    private Map<String,String> num2item;
+    private Map<Item,String> num2item;
 
     public String getSum_price() {
         return sum_price;

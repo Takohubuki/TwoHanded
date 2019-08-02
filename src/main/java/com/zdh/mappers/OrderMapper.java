@@ -1,5 +1,6 @@
 package com.zdh.mappers;
 
+import com.zdh.bean.Cart;
 import com.zdh.bean.Order;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface OrderMapper {
     void generateNewOrder(Order order);
 
     List<Order> selectMyOrder(String sid);
+
+    List<Cart> selectMyCart(String sid);
 }

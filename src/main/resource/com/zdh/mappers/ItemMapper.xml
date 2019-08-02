@@ -214,4 +214,9 @@
          conditions = #{conditions}
          where serial_num = #{serial_num}
     </update>
+    <update id="updateItemNum" parameterType="java.lang.Integer">
+        update item set
+            number = #{itemnumber}
+        where serial_num = #{item_id}
+    </update>
 </mapper>
