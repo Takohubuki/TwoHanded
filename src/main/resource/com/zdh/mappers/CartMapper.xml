@@ -96,6 +96,6 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <update id="addCartNum" parameterType="com.zdh.bean.Cart">
-    update cart set number = #{number} where item_id = #{item_id} and member_sid = #{member_sid};
+        update cart set number = #{number} where item_id = #{item_id} and member_sid = #{member_sid};
   </update>
 </mapper>

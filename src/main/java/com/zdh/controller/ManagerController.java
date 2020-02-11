@@ -50,7 +50,6 @@ public class ManagerController {
     }
 
 
-
     //管理员注销
     @RequestMapping("/manage/logout")
     public String logout(HttpSession session){

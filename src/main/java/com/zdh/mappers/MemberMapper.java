@@ -2,9 +2,11 @@ package com.zdh.mappers;
 
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface MemberMapper {
     int deleteByPrimaryKey(String sid);
 

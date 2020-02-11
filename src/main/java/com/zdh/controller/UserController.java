@@ -6,6 +6,7 @@ import com.zdh.bean.Order;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
 import com.zdh.mappers.OrderMapper;
+import com.zdh.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -28,6 +30,9 @@ import java.util.Map;
 @RequestMapping("/user")
 @Controller
 public class UserController {
+
+    @Resource
+    LoginService loginService;
 
     @Autowired
     OrderMapper orderMapper;
@@ -42,10 +47,11 @@ public class UserController {
     用户登录模块
      */
     @RequestMapping("/signin")
-    public ModelAndView signin(String username, String password, HttpSession session, HttpServletRequest request) {
+    public ModelAndView signIn(String username, String password, HttpSession session, HttpServletRequest request) {
+
         System.out.println("--------------------开始登录-----------------");
-//        String uri = request.getRequestURI();
-//        System.out.println(uri);
+
+        loginService.signIn(username, password);
         String uri = request.getHeader("Referer");
         String method = request.getMethod();
         Map cart_list = (HashMap) session.getAttribute("cart_list");
