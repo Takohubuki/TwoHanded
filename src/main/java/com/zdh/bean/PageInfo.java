@@ -9,31 +9,35 @@ import java.util.List;
  * @author zhouhr3
  */
 public class PageInfo<T> {
-    /**
-     * 每页多少条数据
-     */
-    private Integer pageSize;
-    /**
-     * 当前页
-     */
-    private Integer pageNum;
-    /**
-     * 总数
-     */
-    private Long total;
-    /**
-     * 实际数据
-     */
-    private List<T> result;
-    /**
-     * 用作筛选条件
-     */
-    private T obj;
-
     public PageInfo() {
         this.pageNum = 1;
         this.pageSize = 10;
     }
+
+    /**
+     * 每页多少条数据
+     */
+    private Integer pageSize;
+
+    /**
+     * 当前页
+     */
+    private Integer pageNum;
+
+    /**
+     * 总数
+     */
+    private Long total;
+
+    /**
+     * 实际数据
+     */
+    private List<T> result;
+
+    /**
+     * 用作筛选条件
+     */
+    private T obj;
 
     public Integer getPageSize() {
         return pageSize;
