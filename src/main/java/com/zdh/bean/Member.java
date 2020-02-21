@@ -9,7 +9,7 @@ public class Member {
 
     private String password;
 
-    private Integer dormitory;
+    private String dormitory;
 
     private String name;
 
@@ -71,11 +71,11 @@ public class Member {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getDormitory() {
+    public String getDormitory() {
         return dormitory;
     }
 
-    public void setDormitory(Integer dormitory) {
+    public void setDormitory(String dormitory) {
         this.dormitory = dormitory;
     }
 

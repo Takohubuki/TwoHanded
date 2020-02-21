@@ -299,13 +299,13 @@
                                 <img src="${pageContext.request.contextPath}/${itemlist.image}" alt="" style="width: 159px;height: 150px">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
-                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${itemlist.name}" class="link-product-add-cart">详情</a>
+                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serial_num}" class="link-product-add-cart">详情</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="item-info-product ">
                                 <h4>
-                                    <a href="${pageContext.request.contextPath}/items/singleitem">${itemlist.name}</a>
+                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serial_num}">${itemlist.name}</a>
                                 </h4>
                                 <div class="info-product-price">
                                     <span class="item_price">￥${itemlist.price}</span>
@@ -316,7 +316,7 @@
                                         <fieldset>
                                             <input type="hidden" name="cmd" value="_cart" />
                                             <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value="${itemlist.serial_num}" />
+<%--                                            <input type="hidden" name="business" value="${itemlist.serial_num}" />--%>
                                             <input type="hidden" name="item_name" value="${itemlist.name}" />
                                             <input type="hidden" name="amount" value="${itemlist.price}" />
                                             <input type="hidden" name="item_id" value="${itemlist.serial_num}"/>

@@ -2,10 +2,12 @@ package com.zdh.mappers;
 
 import com.github.pagehelper.Page;
 import com.zdh.bean.Item;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface ItemMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -17,10 +17,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         Member member = (Member) request.getSession().getAttribute("member");
         String requestURI = request.getRequestURI();
-        System.out.println(requestURI);
         if (member == null && (request.getRequestURI().contains("checkout") || request.getRequestURI().contains("publish"))){
             request.setAttribute("message","请先登录");
-            request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request,response);
+            request.getRequestDispatcher("/user/signin").forward(request,response);
             return false;
         }
         return true;

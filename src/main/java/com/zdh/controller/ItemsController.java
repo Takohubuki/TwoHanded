@@ -7,6 +7,7 @@ import com.zdh.bean.Item;
 import com.zdh.bean.ItemPage;
 import com.zdh.bean.Member;
 import com.zdh.mappers.ItemMapper;
+import com.zdh.service.ItemService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -32,6 +35,9 @@ public class ItemsController {
 
     @Autowired
     ItemPage itemPage;
+
+    @Resource
+    ItemService itemService;
 
     //转跳求购商品列表
     //根据时间降序排列商品
@@ -80,27 +86,17 @@ public class ItemsController {
     }
     //跳转求购商品详情页
     @RequestMapping("/wtbitem")
-    public String wtbitem(String itemname, Model model){
-        Item wtb_item = itemMapper.select1WtbItemByName(itemname);
+    public String wtbItem(String itemId, Model model){
+        Item wtb_item = itemMapper.selectBySerialNum(itemId);
         model.addAttribute("item",wtb_item);
+
         return "wtbitem";
     }
 
     //跳转出售商品详情页
     @RequestMapping("/singleitem")
-    public String singleitem(Model model, String itemname){
-        Item item = itemMapper.select1WtsItemByName(itemname);
-        if (item == null){
-            item = itemMapper.select1WtbItemByName(itemname);
-        }
-        model.addAttribute("item",item);
-
-        //搜索同类型商品
-        String kind = item.getKind();
-        List<Item> recommand_items = itemMapper.RecommandSameKind(kind);
-        recommand_items.remove(item);
-        model.addAttribute("recommand_items",recommand_items);
-        return "singleitem";
+    public ModelAndView singleItem(ModelAndView modelAndView, String itemId){
+        return itemService.selectById(modelAndView, itemId);
     }
 
     //跳转最新出售商品列表页

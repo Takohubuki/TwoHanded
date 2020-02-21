@@ -36,7 +36,7 @@ public class OrderController {
     OrderMapper orderMapper;
     //TODO 添加购物车内商品
     @RequestMapping("/addcart")
-    public String addcart(@RequestParam("item_id") String item_id,
+    public String addCart(@RequestParam("item_id") String item_id,
                           @RequestParam(value = "item_num" ,required = false, defaultValue = "1") String item_num,
                           HttpServletResponse response,
                           HttpSession session){
@@ -63,18 +63,18 @@ public class OrderController {
 
     //TODO 删除购物车内商品
     @RequestMapping("/deletecart")
-    public String deletecart(){
+    public String deleteCart(){
         return "";
     }
 
     //TODO 查看购物车内商品
     @RequestMapping("/querycart")
-    public String querycart(){
+    public String queryCart(){
         return "";
     }
 
     @RequestMapping("/checkout")
-    public String checkout(@RequestParam("item_serial_num") String[] item_serial_num,
+    public String checkOut(@RequestParam("item_serial_num") String[] item_serial_num,
                            @RequestParam("quantity")String[] quantity,
                            @RequestParam("total")String total,
                            HttpSession session){
@@ -112,7 +112,7 @@ public class OrderController {
     }
 
     @RequestMapping("/mycart")
-    public String mycart(HttpSession session, Model model){
+    public String myCart(HttpSession session, Model model){
         Member member = (Member) session.getAttribute("member");
         List<String> item_ids = new ArrayList<>();
         List<Integer> item_num = new ArrayList<>();

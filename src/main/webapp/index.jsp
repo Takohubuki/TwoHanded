@@ -350,7 +350,7 @@
                                         <img src="${wts_item.image}" alt="" style="width: 159px;height: 150px">
                                         <div class="men-cart-pro">
                                             <div class="inner-men-cart-pro">
-                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${wts_item.name}" class="link-product-add-cart">详情</a>
+                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${wts_item.serial_num}" class="link-product-add-cart">详情</a>
                                             </div>
                                         </div>
                                         <span class="product-new-top">New</span>
@@ -404,14 +404,14 @@
                                     <img src="${wtb_item.image}" alt="" style="width: 159px;height: 150px">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemname=${wtb_item.name}" class="link-product-add-cart">详情</a>
+                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serial_num}" class="link-product-add-cart">详情</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
                                 </div>
                                 <div class="item-info-product ">
                                     <h4>
-                                        <a href="${pageContext.request.contextPath}/items/wtbitem?itemname=${wtb_item.name}">${wtb_item.name}</a>
+                                        <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serial_num}">${wtb_item.name}</a>
                                     </h4>
                                     <div class="info-product-price">
                                         <span class="item_price">￥${wtb_item.price}</span>

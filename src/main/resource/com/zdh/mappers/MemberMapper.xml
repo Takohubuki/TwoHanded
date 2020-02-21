@@ -5,7 +5,7 @@
         <id column="sid" jdbcType="VARCHAR" property="sid" />
         <result column="username" jdbcType="VARCHAR" property="username" />
         <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="dormitory" jdbcType="INTEGER" property="dormitory" />
+        <result column="dormitory" jdbcType="VARCHAR" property="dormitory" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="avatar" jdbcType="VARCHAR" property="avatar" />
         <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -40,7 +40,7 @@
       dormitory, name,
       phone)
     values (#{sid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{dormitory,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{dormitory,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.zdh.bean.Member">
@@ -79,7 +79,7 @@
                 #{password,jdbcType=VARCHAR},
             </if>
             <if test="dormitory != null">
-                #{dormitory,jdbcType=INTEGER},
+                #{dormitory,jdbcType=VARCHAR},
             </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
                 password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="dormitory != null">
-                dormitory = #{dormitory,jdbcType=INTEGER},
+                dormitory = #{dormitory,jdbcType=VARCHAR},
             </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
@@ -120,7 +120,7 @@
     update member
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      dormitory = #{dormitory,jdbcType=INTEGER},
+      dormitory = #{dormitory,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR}
