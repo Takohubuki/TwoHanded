@@ -2,6 +2,7 @@ package com.zdh.bean;
 
 import java.util.Date;
 
+// TODO: 2020/2/24 添加用户评价字段
 public class Member {
     private String sid;
 

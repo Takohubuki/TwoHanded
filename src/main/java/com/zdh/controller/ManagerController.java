@@ -1,19 +1,17 @@
 package com.zdh.controller;
 
 import com.zdh.bean.Item;
-import com.zdh.bean.Manager;
 import com.zdh.bean.Member;
-import com.zdh.bean.Order;
 import com.zdh.mappers.ManagerMapper;
+import com.zdh.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
-import static com.zdh.controller.UserController.passwordConfirm;
 
 @Controller
 
@@ -21,125 +19,144 @@ public class ManagerController {
     @Autowired
     ManagerMapper managerMapper;
 
+    @Resource
+    ManagerService managerService;
+
     @RequestMapping("/managerlogin")
     public String mamager(){
-        return "managerlogin";
+        return "managerLogin";
     }
 
 
-    //管理员登录
+    /**
+     * 管理员登录
+     * @param username
+     * @param password
+     * @param modelAndView
+     * @param session
+     * @return
+     */
     @RequestMapping("/manage/login")
-    public String login(String username, String password, Model model, HttpSession session){
-        Manager manager = managerMapper.selectByName(username);
-        if (manager == null){
-            model.addAttribute("manager_message","用户名错误！");
-            return "managerlogin";
-        }else if (!passwordConfirm(manager.getPassword(),password)){
-            model.addAttribute("manager_message","密码错误！");
-            return "managerlogin";
-        }else if (passwordConfirm(manager.getPassword(),password)){
-            session.setAttribute("manager",manager);
-            /*
-            管理员登录成功进入后台管理页面
-             */
-            return getGeneralSituation(model);
-        }else {
-            return "managerlogin";
-        }
-
+    public ModelAndView login(String username, String password, ModelAndView modelAndView, HttpSession session){
+        return managerService.login(username, password, modelAndView, session);
     }
 
 
-    //管理员注销
+    /**
+     * 管理员注销
+     * @param session
+     * @param modelAndView
+     * @return
+     */
     @RequestMapping("/manage/logout")
-    public String logout(HttpSession session){
-        session.setAttribute("manager",null);
-        return "managerlogin";
+    public ModelAndView logout(HttpSession session, ModelAndView modelAndView){
+        return managerService.logout(session, modelAndView);
     }
 
-    //订单管理
+    /**
+     * 订单管理
+     * @param modelAndView
+     * @return
+     */
     @RequestMapping("/manage/order")
-    public String order(Model model){
-        List<Order> orders = managerMapper.selectAllOrder();
-        model.addAttribute("orderlist",orders);
-        return "ordermanage";
+    public ModelAndView order(ModelAndView modelAndView){
+        return managerService.order(modelAndView);
     }
 
-    //用户管理
+    /**
+     * 用户管理
+     * @param modelAndView
+     * @return
+     */
     @RequestMapping("/manage/member")
-    public String managemember(Model model){
+    public ModelAndView manageMember(ModelAndView modelAndView){
         List<Member> members = managerMapper.selectAllMember();
-        model.addAttribute("memberlist",members);
-        return "membermanage";
+        modelAndView.addObject("memberlist",members);
+        modelAndView.setViewName("memberManage");
+        return modelAndView;
     }
 
-    //商品管理
+    /**
+     * 商品管理
+     * @param modelAndView
+     * @return
+     */
     @RequestMapping("/manage/wtsitem")
-    public String managewtsitem(Model model){
+    public ModelAndView manageWtsItem(ModelAndView modelAndView){
         List<Item> items = managerMapper.selectAllSellItems();
-        model.addAttribute("itemlist",items);
-        return "itemmanage";
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemManage");
+        return modelAndView;
     }
 
-    @RequestMapping("/manage/wtbitem")
-    public String managewtbitem(Model model){
-        List<Item> items = managerMapper.selectAllBuyItems();
-        model.addAttribute("itemlist",items);
-        return "itemmanage";
-    }
-
-    //下架商品
-    @RequestMapping("/manage/offitem")
-    public String offitem(Model model,String item_id){
-        managerMapper.offItem(item_id);
-        List<Item> items = managerMapper.selectAllSellItems();
-        model.addAttribute("itemlist",items);
-        return "itemmanage";
-    }
-
-    //查看平台概况
+    /**
+     * 查看平台概况
+     * @param modelAndView
+     * @return
+     */
     @RequestMapping("/manage/gen_sit")
-    public String general_situation(Model model){
-        return getGeneralSituation(model);
+    public ModelAndView generalSituation(ModelAndView modelAndView){
+        return managerService.generalSituation(modelAndView);
     }
 
-    //禁用用户
+    // TODO: 2020/2/24 以下基本需要重写方法
+    /**
+     * 管理求购信息
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping("/manage/wtbitem")
+    public ModelAndView manageWtbItem(ModelAndView modelAndView){
+        List<Item> items = managerMapper.selectAllBuyItems();
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemManage");
+        return modelAndView;
+    }
+
+    /**
+     * 下架商品
+     * @param modelAndView
+     * @param itemId
+     * @return
+     */
+    @RequestMapping("/manage/offitem")
+    public ModelAndView offItem(ModelAndView modelAndView, String itemId){
+        managerMapper.offItem(itemId);
+        List<Item> items = managerMapper.selectAllSellItems();
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemManage");
+        return modelAndView;
+    }
+
+
+    /**
+     * 封禁用户
+     * @param modelAndView
+     * @param sid
+     * @return
+     */
     @RequestMapping("/manage/shutmember")
-    public String shutmember(Model model, String sid){
+    public ModelAndView shutMember(ModelAndView modelAndView, String sid){
         managerMapper.shutMember(sid);
         List<Member> members = managerMapper.selectAllMember();
-        model.addAttribute("memberlist",members);
-        return "membermanage";
+        modelAndView.addObject("memberlist",members);
+        modelAndView.setViewName("memberManage");
+        return modelAndView;
     }
 
-    //启用用户
+    /**
+     * 解封用户
+     * @param modelAndView
+     * @param sid
+     * @return
+     */
     @RequestMapping("/manage/activemember")
-    public String activemember(Model model, String sid){
+    public ModelAndView activeMember(ModelAndView modelAndView, String sid){
         managerMapper.activeMember(sid);
         List<Member> members = managerMapper.selectAllMember();
-        model.addAttribute("memberlist",members);
-        return "membermanage";
+        modelAndView.addObject("memberlist",members);
+        modelAndView.setViewName("memberManage");
+        return modelAndView;
     }
 
-    //统计平台概况
-    private String getGeneralSituation(Model model) {
-        Integer member_sum = managerMapper.countMember();
-        Integer countItemWtbOnCarriiage = managerMapper.countItemWtbOnCarriiage();
-        Integer countItemWtsOnCarriiage = managerMapper.countItemWtsOnCarriiage();
-        Integer orderedToday = managerMapper.orderedToday();
-        Integer loginToday = managerMapper.selectLoginToday();
-        Integer item_wts_sum_today = managerMapper.countItemWtsToday();
-        Integer item_wtb_sum_today = managerMapper.countItemWtbToday();
-        Integer order_total = managerMapper.countOrderTotal();
-
-        model.addAttribute("loginToday",loginToday);
-        model.addAttribute("item_wts_sum_today",item_wts_sum_today);
-        model.addAttribute("item_wtb_sum_today",item_wtb_sum_today);
-        model.addAttribute("order_total",order_total);
-        model.addAttribute("member_sum",member_sum);
-        model.addAttribute("item_wts_sum",countItemWtsOnCarriiage);
-        model.addAttribute("item_wtb_sum",countItemWtbOnCarriiage);
-        model.addAttribute("order_today",orderedToday);
-        return "backstage";
-    }
 }

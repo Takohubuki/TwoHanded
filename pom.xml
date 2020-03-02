@@ -10,8 +10,7 @@
     <packaging>war</packaging>
 
     <name>TwoHanded Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <url>45.63.111.162:8080</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -131,7 +130,7 @@
         </dependency>
 
 
-            <!--文件上传-->
+        <!--文件上传-->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -139,7 +138,7 @@
         </dependency>
 
 
-            <!--分页插件-->
+        <!--分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>

@@ -127,7 +127,7 @@ public class MemberServiceImpl implements MemberService {
         String sid = member.getSid();
         List<Item> myWts = memberMapper.selectMyWts(sid);
         modelAndView.addObject("mywts",myWts);
-        modelAndView.setViewName("publishwts");
+        modelAndView.setViewName("publishWts");
         return modelAndView;
 
     }
@@ -138,7 +138,7 @@ public class MemberServiceImpl implements MemberService {
         String sid = member.getSid();
         List<Item> myWtb = memberMapper.selectMyWtb(sid);
         modelAndView.addObject("mywtb",myWtb);
-        modelAndView.setViewName("publishwtb");
+        modelAndView.setViewName("publishWtb");
         return modelAndView;
     }
 

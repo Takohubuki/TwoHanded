@@ -105,7 +105,7 @@ public class UserController {
 //            }
 //        }
         model.addAttribute("my_order_list",orderList);
-        return "allorder";
+        return "allOrder";
     }
 
     /**
@@ -143,10 +143,19 @@ public class UserController {
 
     @RequestMapping("/updateprofile")
     public String updateProfile(){
-        return "updateprofile";
+        return "updateProfile";
     }
 
-    //更新用户资料
+    /**
+     * 更新用户资料
+     * @param member
+     * @param session
+     * @param file
+     * @param request
+     * @param modelAndView
+     * @return
+     * @throws IOException
+     */
     @Transactional
     @RequestMapping("/update/profile")
     public ModelAndView upProfile(Member member, HttpSession session, @RequestParam("imagefile") MultipartFile file, HttpServletRequest request, ModelAndView modelAndView) throws IOException {

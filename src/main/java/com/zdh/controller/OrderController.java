@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-//TODO 用cookie实现购物车
 @RequestMapping("/order")
 public class OrderController {
 

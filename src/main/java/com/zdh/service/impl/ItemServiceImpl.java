@@ -1,13 +1,24 @@
 package com.zdh.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zdh.bean.Item;
+import com.zdh.bean.Member;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.service.ItemService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,7 +40,7 @@ public class ItemServiceImpl implements ItemService {
 
         modelAndView.addObject("item", item);
         modelAndView.addObject("recommand_items",items);
-        modelAndView.setViewName("singleitem");
+        modelAndView.setViewName("singleItem");
 
         return modelAndView;
     }
@@ -63,5 +74,164 @@ public class ItemServiceImpl implements ItemService {
         List<Item> items = itemMapper.RecommandSameKind(kind);
         items.remove(item);
         return items;
+    }
+
+    @Override
+    public ModelAndView listWtbByTime(ModelAndView modelAndView) {
+        PageHelper.startPage(1,6);
+        Page<Item> wtsAllByTime = itemMapper.selectWtbAllByTime();
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
+        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.setViewName("itemList");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView listWtsByTime(ModelAndView modelAndView) {
+        PageHelper.startPage(1,6);
+        Page<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
+        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.setViewName("itemList");
+        return modelAndView;
+
+    }
+
+    @Override
+    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request) {
+        PageHelper.startPage(pageNum,6);
+        PageInfo<Item> itemPageInfo = null;
+        if (request.getHeader("Referer").contains("listwtsbytime")){
+            Page<Item> itemPage = itemMapper.selectWtsAllByTime();
+            itemPageInfo = new PageInfo<>(itemPage);
+        }else if (request.getHeader("Referer").contains("searchbyname")){
+            String search = request.getParameter("search");
+            List<Item> items = itemMapper.selectByName(search);
+            itemPageInfo = new PageInfo<>(items);
+        }else if (request.getHeader("Referer").contains("searchbykind")){
+            String kind = request.getParameter("kind");
+            List<Item> items = itemMapper.selectByKind(kind);
+            itemPageInfo = new PageInfo<>(items);
+        }else if (request.getHeader("Referer").contains("listwtbbytime")){
+            Page<Item> items = itemMapper.selectWtbAllByTime();
+            itemPageInfo = new PageInfo<>(items);
+        }
+        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.setViewName("itemListPage");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView wtbItem(String itemId, ModelAndView modelAndView) {
+        Item wtb_item = itemMapper.selectBySerialNum(itemId);
+        modelAndView.addObject("item",wtb_item);
+        modelAndView.setViewName("wtbItem");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView queryWtsAllTime(ModelAndView modelAndView) {
+        List<Item> items = itemMapper.selectWtsAllByTime();
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemList");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView addPublish(Item item, ModelAndView modelAndView, HttpSession session, MultipartFile file, HttpServletRequest request) throws IOException {
+        if(!file.isEmpty()) {
+            //上传文件路径
+            String path = request.getSession().getServletContext().getRealPath("/images/");
+
+            System.out.println(path);
+            //上传文件名
+            String filename = file.getOriginalFilename();
+            File filepath = new File(path,filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            file.transferTo(new File(path + File.separator + filename));
+            //输出文件上传最终的路径 测试查看
+            System.out.println(path + File.separator + filename);
+
+            item.setImage("images/"+filename);
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+        item.setPublisher(sid);
+        Date date = new Date();
+        item.setPublish_time(date);
+        item.setUpdate_time(date);
+        String format = sdf.format(date);
+        item.setSerial_num(format+sid);
+        itemMapper.addpublish(item);
+
+        List<Item> wtb_item = itemMapper.select3WtbItemByTime();
+        List<Item> wts_item = itemMapper.select3WtsItemByTime();
+        modelAndView.addObject("wtb_item",wtb_item);
+        modelAndView.addObject("wts_item",wts_item);
+        modelAndView.setViewName("redirect:/index.jsp");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView searchByName(ModelAndView modelAndView, String search) {
+        PageHelper.startPage(1,6);
+        List<Item> items = itemMapper.selectByName(search);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(items);
+        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.setViewName("itemList");
+        return modelAndView;
+
+    }
+
+    @Override
+    public ModelAndView searchByKind(ModelAndView modelAndView, String kind) {
+        PageHelper.startPage(1,6);
+        List<Item> items = itemMapper.selectByKind(kind);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(items);
+        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.setViewName("itemList");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView updateItemInfo(ModelAndView modelAndView, String itemId) {
+        Item item = itemMapper.selectBySerialNum(itemId);
+        modelAndView.addObject("item",item);
+        modelAndView.setViewName("update");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView updateItem(ModelAndView modelAndView, Item item, MultipartFile file, HttpServletRequest request) throws IOException {
+        if(!file.isEmpty()) {
+            //上传文件路径
+            String path = request.getSession().getServletContext().getRealPath("/images/");
+
+            System.out.println(path);
+            //上传文件名
+            String filename = file.getOriginalFilename();
+            File filepath = new File(path,filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            file.transferTo(new File(path + File.separator + filename));
+            //输出文件上传最终的路径 测试查看
+            System.out.println(path + File.separator + filename);
+
+            item.setImage(filename);
+        }
+        Date date = new Date();
+        item.setUpdate_time(date);
+        itemMapper.updateItemInfo(item);
+        modelAndView.setViewName("profile");
+        return modelAndView;
+
     }
 }
