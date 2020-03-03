@@ -5,12 +5,14 @@ import com.zdh.bean.Order;
 import com.zdh.mappers.ManagerMapper;
 import com.zdh.service.ManagerService;
 import com.zdh.util.PasswordUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Service
 public class ManagerServiceImpl implements ManagerService {
 
     @Resource
