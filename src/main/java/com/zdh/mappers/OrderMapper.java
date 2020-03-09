@@ -1,6 +1,5 @@
 package com.zdh.mappers;
 
-import com.zdh.bean.Cart;
 import com.zdh.bean.Order;
 
 import java.util.List;
@@ -18,9 +17,7 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    void generateNewOrder(Order order);
+    void generateNewOrder(Order new_order);
 
     List<Order> selectMyOrder(String sid);
-
-    List<Cart> selectMyCart(String sid);
 }

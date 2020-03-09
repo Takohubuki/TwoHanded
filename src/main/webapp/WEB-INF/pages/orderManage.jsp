@@ -59,22 +59,22 @@
                             <c:forEach var="orderlist" items="${orderlist}">
                                 <tr role="row">
                                     <td class="sorting">
-                                            ${orderlist.order_id}
+                                            ${orderlist.orderId}
                                     </td>
                                     <td>
-                                            ${orderlist.buyer_id}
+                                            ${orderlist.buyerId}
                                     </td>
                                     <td>
-                                            ${orderlist.item_id}
+                                            ${orderlist.itemId}
                                     </td>
                                     <td>
-                                            ${orderlist.item_num}
+                                            ${orderlist.itemNum}
                                     </td>
                                     <td>
-                                        <fmt:formatDate value="${orderlist.create_time}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
+                                        <fmt:formatDate value="${orderlist.createTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
                                     </td>
                                     <td>
-                                        ${orderlist.sum_price}
+                                        ${orderlist.sumPrice}
                                     </td>
                                 </tr>
                             </c:forEach>

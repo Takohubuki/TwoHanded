@@ -1,15 +1,31 @@
 package com.zdh.bean;
 
-public class Cart {
+import java.io.Serializable;
+
+/**
+ * cart
+ * @author 
+ */
+public class Cart implements Serializable {
     private Integer id;
 
-    private String item_id;
-
-    private String member_sid;
-
-    private Integer number;
-
-    private Integer price;
+    private static final long serialVersionUID = 1L;
+    /**
+     * 商品id
+     */
+    private String itemId;
+    /**
+     * 用户id
+     */
+    private String memberSid;
+    /**
+     * 数量
+     */
+    private Integer itemNum;
+    /**
+     * 是否结账 0已付 1未付
+     */
+    private Boolean isChecked;
 
     public Integer getId() {
         return id;
@@ -19,35 +35,35 @@ public class Cart {
         this.id = id;
     }
 
-    public String getItem_id() {
-        return item_id;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(String item_id) {
-        this.item_id = item_id == null ? null : item_id.trim();
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 
-    public String getMember_sid() {
-        return member_sid;
+    public String getMemberSid() {
+        return memberSid;
     }
 
-    public void setMember_sid(String member_sid) {
-        this.member_sid = member_sid == null ? null : member_sid.trim();
+    public void setMemberSid(String memberSid) {
+        this.memberSid = memberSid;
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getItemNum() {
+        return itemNum;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setItemNum(Integer itemNum) {
+        this.itemNum = itemNum;
     }
 
-    public Integer getPrice() {
-        return price;
+    public Boolean getIsChecked() {
+        return isChecked;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setIsChecked(Boolean isChecked) {
+        this.isChecked = isChecked;
     }
 }

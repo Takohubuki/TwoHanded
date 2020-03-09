@@ -135,7 +135,7 @@
                         <a href="#" data-toggle="modal" data-target="#myModal2">
                             去注册</a>
                     </p>
-                    <form action="${pageContext.request.contextPath}/user/signin" method="post">
+                    <form action="${pageContext.request.contextPath}/user/login" method="post">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="User Name" name="username" required="">
                         </div>

@@ -16,9 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.zdh.util.PasswordUtils.passwordConfirm;
 
@@ -71,10 +69,10 @@ public class MemberServiceImpl implements MemberService {
         System.out.println("--------------------开始登录-----------------");
 
         String uri = request.getHeader("Referer");
-        Map cart_list = (HashMap) session.getAttribute("cart_list");
+//        Map cart_list = (HashMap) session.getAttribute("cart_list");
 
         if (uri.contains("signin")){
-            uri = "/index.jsp";
+            uri = "/";
         }
         Member member = memberMapper.selectByName(username);
 
@@ -100,13 +98,13 @@ public class MemberServiceImpl implements MemberService {
             System.out.println("redirect:"+uri);
 
             if (uri.contains("checkout")){
-                modelAndView.setViewName("redirect:/index.jsp");
+                modelAndView.setViewName("redirect:/");
             }else {
                 modelAndView.setViewName("redirect:"+uri);
             }
 
             Date date = new Date();
-            member.setRecent_login(date);
+            member.setRecentLogin(date);
             memberMapper.updateRecentLogin(member);
             session.setAttribute("member",member);
 
@@ -171,7 +169,7 @@ public class MemberServiceImpl implements MemberService {
 
         session.setAttribute("member",member);
         try {
-            if (member_old.getSid() != member.getSid()){
+            if (!member_old.getSid().equals(member.getSid())){
                 itemMapper.updatePublisherByName(member_old.getSid(),member.getSid());
             }
             memberMapper.updateProfile(member);

@@ -54,7 +54,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
         modelAndView.addObject("wtb_item",wtb_item3);
 
-        modelAndView.setViewName("/index.jsp");
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
@@ -71,7 +71,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> recommendSameKind(String kind, Item item) {
-        List<Item> items = itemMapper.RecommandSameKind(kind);
+        List<Item> items = itemMapper.recommandSameKind(kind);
         items.remove(item);
         return items;
     }
@@ -158,23 +158,32 @@ public class ItemServiceImpl implements ItemService {
 
             item.setImage("images/"+filename);
         }
+        //写入发布时间和更新时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        Member member = (Member) session.getAttribute("member");
-        String sid = member.getSid();
-        item.setPublisher(sid);
         Date date = new Date();
-        item.setPublish_time(date);
-        item.setUpdate_time(date);
-        String format = sdf.format(date);
-        item.setSerial_num(format+sid);
-        itemMapper.addpublish(item);
+        Member member = (Member) session.getAttribute("member");
 
-        List<Item> wtb_item = itemMapper.select3WtbItemByTime();
-        List<Item> wts_item = itemMapper.select3WtsItemByTime();
-        modelAndView.addObject("wtb_item",wtb_item);
-        modelAndView.addObject("wts_item",wts_item);
-        modelAndView.setViewName("redirect:/index.jsp");
-        return modelAndView;
+        String format = sdf.format(date);
+        String sid = member.getSid();
+
+        item.setPublisher(sid);
+        item.setPublishTime(date);
+        item.setUpdateTime(date);
+
+        //生成商品序列号
+        item.setSerialNum(format+sid);
+
+        //发布信息进入审核状态
+        item.setIsUndercarriage(true);
+        item.setUndercarriageReason("待审核");
+
+        itemMapper.addPublish(item);
+//        List<Item> wtb_item = itemMapper.select3WtbItemByTime();
+//        List<Item> wts_item = itemMapper.select3WtsItemByTime();
+//        modelAndView.addObject("wtb_item",wtb_item);
+//        modelAndView.addObject("wts_item",wts_item);
+//        modelAndView.setViewName("redirect:/");
+        return getIndexItem(modelAndView);
     }
 
     @Override
@@ -228,10 +237,12 @@ public class ItemServiceImpl implements ItemService {
             item.setImage(filename);
         }
         Date date = new Date();
-        item.setUpdate_time(date);
+
+        item.setUpdateTime(date);
+
         itemMapper.updateItemInfo(item);
+
         modelAndView.setViewName("profile");
         return modelAndView;
-
     }
 }

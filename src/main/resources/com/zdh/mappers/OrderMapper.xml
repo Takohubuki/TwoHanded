@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="sum_price" jdbcType="VARCHAR" property="sumPrice" />
+    <result column="item_num" jdbcType="INTEGER" property="itemNum" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="buyer_id" jdbcType="VARCHAR" property="buyerId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_paid" jdbcType="BIT" property="isPaid" />
+    <result column="is_received" jdbcType="BIT" property="isReceived" />
+    <result column="is_canceled" jdbcType="BIT" property="isCanceled" />
+    <result column="is_checked" jdbcType="BIT" property="isChecked" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, sum_price, item_num, item_id, buyer_id, create_time, update_time, is_paid, 
+    is_received, is_canceled, is_checked
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Order">
+    insert into order (id, order_id, sum_price, 
+      item_num, item_id, buyer_id, 
+      create_time, update_time, is_paid, 
+      is_received, is_canceled, is_checked
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{sumPrice,jdbcType=VARCHAR}, 
+      #{itemNum,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT}, 
+      #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="sumPrice != null">
+        sum_price,
+      </if>
+      <if test="itemNum != null">
+        item_num,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isPaid != null">
+        is_paid,
+      </if>
+      <if test="isReceived != null">
+        is_received,
+      </if>
+      <if test="isCanceled != null">
+        is_canceled,
+      </if>
+      <if test="isChecked != null">
+        is_checked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null">
+        #{sumPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNum != null">
+        #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPaid != null">
+        #{isPaid,jdbcType=BIT},
+      </if>
+      <if test="isReceived != null">
+        #{isReceived,jdbcType=BIT},
+      </if>
+      <if test="isCanceled != null">
+        #{isCanceled,jdbcType=BIT},
+      </if>
+      <if test="isChecked != null">
+        #{isChecked,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Order">
+    update order
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null">
+        sum_price = #{sumPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNum != null">
+        item_num = #{itemNum,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPaid != null">
+        is_paid = #{isPaid,jdbcType=BIT},
+      </if>
+      <if test="isReceived != null">
+        is_received = #{isReceived,jdbcType=BIT},
+      </if>
+      <if test="isCanceled != null">
+        is_canceled = #{isCanceled,jdbcType=BIT},
+      </if>
+      <if test="isChecked != null">
+        is_checked = #{isChecked,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Order">
+    update order
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      sum_price = #{sumPrice,jdbcType=VARCHAR},
+      item_num = #{itemNum,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_paid = #{isPaid,jdbcType=BIT},
+      is_received = #{isReceived,jdbcType=BIT},
+      is_canceled = #{isCanceled,jdbcType=BIT},
+      is_checked = #{isChecked,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectMyOrder" resultMap="BaseResultMap">
+        select * from `order` where buyer_id = #{sid};
+    </select>
+    <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
+insert into order (id, order_id, sum_price,
+      item_num, item_id, buyer_id,
+      create_time, update_time, is_paid,
+      is_received, is_canceled, is_checked
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{sumPrice,jdbcType=VARCHAR},
+      #{itemNum,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT},
+      #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}
+      )  </insert>
+</mapper>

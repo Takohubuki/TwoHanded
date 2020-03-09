@@ -1,18 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Tako
-  Date: 2019/7/4
-  Time: 11:02
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Tako
-  Date: 2019/6/29
-  Time: 19:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html lang="zxx">
 
@@ -149,7 +135,7 @@
                         <a href="#" data-toggle="modal" data-target="#myModal2">
                             去注册</a>
                     </p>
-                    <form action="${pageContext.request.contextPath}/user/signin" method="post">
+                    <form action="${pageContext.request.contextPath}/user/login" method="post">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="User Name" name="username" required="">
                         </div>

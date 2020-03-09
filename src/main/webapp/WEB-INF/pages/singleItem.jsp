@@ -139,7 +139,7 @@
                         <a href="#" data-toggle="modal" data-target="#myModal2">
                             去注册</a>
                     </p>
-                    <form action="${pageContext.request.contextPath}/user/signin" method="post">
+                    <form action="${pageContext.request.contextPath}/user/login" method="post">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="User Name" name="username" required="">
                         </div>
@@ -341,10 +341,10 @@
                         <fieldset>
                             <input type="hidden" name="cmd" value="_cart" />
                             <input type="hidden" name="add" value="1" />
-                            <input type="hidden" name="business" value="${item.serial_num}" />
+                            <input type="hidden" name="business" value="${item.serialNum}" />
                             <input type="hidden" name="item_name" value="${item.name}" />
                             <input type="hidden" name="amount" value="${item.price}" />
-                            <input type="hidden" name="item_id" value="${item.serial_num}"/>
+                            <input type="hidden" name="item_id" value="${item.serialNum}"/>
                             <input type="hidden" name="currency_code" value="CNY" />
                             <input type="hidden" name="return" value=" " />
                             <input type="hidden" name="cancel_return" value=" " />
@@ -378,13 +378,13 @@
                     <li>
                         <div class="w3l-specilamk">
                             <div class="speioffer-agile">
-                                <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${recommand_items.serial_num}">
+                                <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${recommand_items.serialNum}">
                                     <img src="${pageContext.request.contextPath}/${recommand_items.image}" alt="">
                                 </a>
                             </div>
                             <div class="product-name-w3l">
                                 <h4>
-                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${recommand_items.serial_num}">${recommand_items.name}</a>
+                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${recommand_items.serialNum}">${recommand_items.name}</a>
                                 </h4>
                                 <div class="w3l-pricehkj">
                                     <h6>￥${recommand_items.price}</h6>
@@ -397,7 +397,7 @@
                                             <input type="hidden" name="business" value=" " />
                                             <input type="hidden" name="item_name" value="${recommand_items.name}" />
                                             <input type="hidden" name="amount" value="${recommand_items.price}" />
-                                            <input type="hidden" name="item_id" value="${recommand_items.serial_num}" />
+                                            <input type="hidden" name="item_id" value="${recommand_items.serialNum}" />
                                             <input type="hidden" name="currency_code" value="CNY" />
                                             <input type="hidden" name="return" value=" " />
                                             <input type="hidden" name="cancel_return" value=" " />

@@ -123,7 +123,7 @@
                         <a href="#" data-toggle="modal" data-target="#myModal2">
                             去注册</a>
                     </p>
-                    <form action="${pageContext.request.contextPath}/user/signin" method="post">
+                    <form action="${pageContext.request.contextPath}/user/login" method="post">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="User Name" name="username" required="">
                         </div>
@@ -350,7 +350,7 @@
                                         <img src="${wts_item.image}" alt="" style="width: 159px;height: 150px">
                                         <div class="men-cart-pro">
                                             <div class="inner-men-cart-pro">
-                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${wts_item.serial_num}" class="link-product-add-cart">详情</a>
+                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${wts_item.serialNum}" class="link-product-add-cart">详情</a>
                                             </div>
                                         </div>
                                         <span class="product-new-top">New</span>
@@ -360,7 +360,7 @@
                                             <a href="${pageContext.request.contextPath}/items/singleitem">${wts_item.name}</a>
                                         </h4>
                                         <div class="info-product-price">
-                                            <span class="item_price">￥${wts_item .price}</span>
+                                            <span class="item_price">￥${wts_item.price}</span>
 
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
@@ -368,15 +368,15 @@
                                                 <fieldset>
                                                     <input type="hidden" name="cmd" value="_cart" />
                                                     <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value="${wts_item.serial_num}" />
+                                                    <input type="hidden" name="business" value="${wts_item.serialNum}" />
                                                     <input type="hidden" name="item_name" value="${wts_item.name}" />
                                                     <input type="hidden" name="amount" value="${wts_item.price}" />
-                                                    <input type="hidden" name="item_id" value="${wts_item.serial_num}"/>
+                                                    <input type="hidden" name="item_id" value="${wts_item.serialNum}"/>
                                                     <input type="hidden" name="currency_code" value="CNY" />
                                                     <input type="hidden" name="return" value=" " />
                                                     <input type="hidden" name="cancel_return" value=" " />
 <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
-                                                    <input type="button" name="" class="button" onclick="javascript:addcart('${wts_item.serial_num}')" value="123"/>
+                                                    <input type="button" name="" class="button" onclick="javascript:addcart('${wts_item.serialNum}')" value="123"/>
                                                 </fieldset>
                                             </form>
                                         </div>
@@ -404,14 +404,14 @@
                                     <img src="${wtb_item.image}" alt="" style="width: 159px;height: 150px">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serial_num}" class="link-product-add-cart">详情</a>
+                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serialNum}" class="link-product-add-cart">详情</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
                                 </div>
                                 <div class="item-info-product ">
                                     <h4>
-                                        <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serial_num}">${wtb_item.name}</a>
+                                        <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serialNum}">${wtb_item.name}</a>
                                     </h4>
                                     <div class="info-product-price">
                                         <span class="item_price">￥${wtb_item.price}</span>

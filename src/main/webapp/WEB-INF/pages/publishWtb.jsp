@@ -92,8 +92,8 @@
                                                         ${mywtb.describes}
                                                     </td>
                                                     <td>
-                                                        <a href="javascript:updateitem('${mywtb.serial_num}')">修改</a>
-                                                        <a href="javascript:offmyitem('${mywtb.serial_num}')">下架</a>
+                                                        <a href="javascript:updateitem('${mywtb.serialNum}')">修改</a>
+                                                        <a href="javascript:offmyitem('${mywtb.serialNum}')">下架</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

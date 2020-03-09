@@ -12,12 +12,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         //拦截器
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws ServletException, IOException {
-        if (request.getRequestURI().contains("login")){
+        String requestURI = request.getRequestURI();
+        if (requestURI.contains("login")){
             return true;
         }
         Member member = (Member) request.getSession().getAttribute("member");
-        String requestURI = request.getRequestURI();
-        if (member == null && (request.getRequestURI().contains("checkout") || request.getRequestURI().contains("publish"))){
+        if (member == null && (requestURI.contains("checkout") || requestURI.contains("publish") || requestURI.contains("cart"))){
             request.setAttribute("message","请先登录");
             request.getRequestDispatcher("/user/signin").forward(request,response);
             return false;

@@ -1,23 +1,16 @@
 package com.zdh.controller;
 
-import com.zdh.bean.Item;
-import com.zdh.bean.Member;
-import com.zdh.mappers.ManagerMapper;
 import com.zdh.service.ManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
-@Controller
+@RestController
 
 public class ManagerController {
-    @Autowired
-    ManagerMapper managerMapper;
 
     @Resource
     ManagerService managerService;
@@ -70,10 +63,7 @@ public class ManagerController {
      */
     @RequestMapping("/manage/member")
     public ModelAndView manageMember(ModelAndView modelAndView){
-        List<Member> members = managerMapper.selectAllMember();
-        modelAndView.addObject("memberlist",members);
-        modelAndView.setViewName("memberManage");
-        return modelAndView;
+        return managerService.manageMember(modelAndView);
     }
 
     /**
@@ -83,10 +73,7 @@ public class ManagerController {
      */
     @RequestMapping("/manage/wtsitem")
     public ModelAndView manageWtsItem(ModelAndView modelAndView){
-        List<Item> items = managerMapper.selectAllSellItems();
-        modelAndView.addObject("itemlist",items);
-        modelAndView.setViewName("itemManage");
-        return modelAndView;
+        return managerService.manageWtsItem(modelAndView);
     }
 
     /**
@@ -99,7 +86,6 @@ public class ManagerController {
         return managerService.generalSituation(modelAndView);
     }
 
-    // TODO: 2020/2/24 以下基本需要重写方法
     /**
      * 管理求购信息
      * @param modelAndView
@@ -107,10 +93,7 @@ public class ManagerController {
      */
     @RequestMapping("/manage/wtbitem")
     public ModelAndView manageWtbItem(ModelAndView modelAndView){
-        List<Item> items = managerMapper.selectAllBuyItems();
-        modelAndView.addObject("itemlist",items);
-        modelAndView.setViewName("itemManage");
-        return modelAndView;
+        return managerService.manageWtbItem(modelAndView);
     }
 
     /**
@@ -121,11 +104,7 @@ public class ManagerController {
      */
     @RequestMapping("/manage/offitem")
     public ModelAndView offItem(ModelAndView modelAndView, String itemId){
-        managerMapper.offItem(itemId);
-        List<Item> items = managerMapper.selectAllSellItems();
-        modelAndView.addObject("itemlist",items);
-        modelAndView.setViewName("itemManage");
-        return modelAndView;
+        return managerService.offItem(modelAndView, itemId);
     }
 
 
@@ -137,11 +116,7 @@ public class ManagerController {
      */
     @RequestMapping("/manage/shutmember")
     public ModelAndView shutMember(ModelAndView modelAndView, String sid){
-        managerMapper.shutMember(sid);
-        List<Member> members = managerMapper.selectAllMember();
-        modelAndView.addObject("memberlist",members);
-        modelAndView.setViewName("memberManage");
-        return modelAndView;
+        return managerService.shutMember(modelAndView, sid);
     }
 
     /**
@@ -152,11 +127,7 @@ public class ManagerController {
      */
     @RequestMapping("/manage/activemember")
     public ModelAndView activeMember(ModelAndView modelAndView, String sid){
-        managerMapper.activeMember(sid);
-        List<Member> members = managerMapper.selectAllMember();
-        modelAndView.addObject("memberlist",members);
-        modelAndView.setViewName("memberManage");
-        return modelAndView;
+        return managerService.activeMember(modelAndView, sid);
     }
 
 }

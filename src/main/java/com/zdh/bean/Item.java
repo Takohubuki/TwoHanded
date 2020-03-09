@@ -1,75 +1,72 @@
 package com.zdh.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Item {
+/**
+ * item
+ * @author 
+ */
+public class Item implements Serializable {
     private Integer id;
 
+    private static final long serialVersionUID = 1L;
+    /**
+     * 商品id
+     */
+    private String serialNum;
+    /**
+     * 商品名称
+     */
     private String name;
-
+    /**
+     * 单价
+     */
     private Integer price;
-
+    /**
+     * 库存
+     */
     private Integer number;
-
-    private String kind;
-
+    /**
+     * 发布用户id
+     */
     private String publisher;
-
+    /**
+     * 描述
+     */
     private String describes;
-
+    /**
+     * 图片
+     */
     private String image;
-
+    /**
+     * 分类
+     */
+    private String kind;
+    /**
+     * 商品成色 x表示x成新
+     */
     private Integer quality;
-
+    /**
+     * 出售或求购
+     */
     private String conditions;
-
-    private Date publish_time;
-
-    private Date update_time;
-
-    private String serial_num;
-
-    private Integer is_undercarriage;
-
-    public Integer getIs_undercarriage() {
-        return is_undercarriage;
-    }
-
-    public void setIs_undercarriage(Integer is_undercarriage) {
-        this.is_undercarriage = is_undercarriage;
-    }
-
-    public String getKind() {
-        return kind;
-    }
-
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
-
-    public String getSerial_num() {
-        return serial_num;
-    }
-
-    public void setSerial_num(String serial_num) {
-        this.serial_num = serial_num;
-    }
-
-    public Date getPublish_time() {
-        return publish_time;
-    }
-
-    public void setPublish_time(Date publish_time) {
-        this.publish_time = publish_time;
-    }
-
-    public Date getUpdate_time() {
-        return update_time;
-    }
-
-    public void setUpdate_time(Date update_time) {
-        this.update_time = update_time;
-    }
+    /**
+     * 发布时间
+     */
+    private Date publishTime;
+    /**
+     * 信息更新时间
+     */
+    private Date updateTime;
+    /**
+     * 是否下架
+     */
+    private Boolean isUndercarriage;
+    /**
+     * 下架原因
+     */
+    private String undercarriageReason;
 
     public Integer getId() {
         return id;
@@ -79,12 +76,20 @@ public class Item {
         this.id = id;
     }
 
+    public String getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSerialNum(String serialNum) {
+        this.serialNum = serialNum;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public Integer getPrice() {
@@ -108,7 +113,7 @@ public class Item {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher == null ? null : publisher.trim();
+        this.publisher = publisher;
     }
 
     public String getDescribes() {
@@ -116,7 +121,7 @@ public class Item {
     }
 
     public void setDescribes(String describes) {
-        this.describes = describes == null ? null : describes.trim();
+        this.describes = describes;
     }
 
     public String getImage() {
@@ -124,7 +129,15 @@ public class Item {
     }
 
     public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
+        this.image = image;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public Integer getQuality() {
@@ -140,6 +153,38 @@ public class Item {
     }
 
     public void setConditions(String conditions) {
-        this.conditions = conditions == null ? null : conditions.trim();
+        this.conditions = conditions;
+    }
+
+    public Date getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Boolean getIsUndercarriage() {
+        return isUndercarriage;
+    }
+
+    public void setIsUndercarriage(Boolean isUndercarriage) {
+        this.isUndercarriage = isUndercarriage;
+    }
+
+    public String getUndercarriageReason() {
+        return undercarriageReason;
+    }
+
+    public void setUndercarriageReason(String undercarriageReason) {
+        this.undercarriageReason = undercarriageReason;
     }
 }

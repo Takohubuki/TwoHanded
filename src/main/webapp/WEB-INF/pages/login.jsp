@@ -35,7 +35,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form action="${pageContext.servletContext.contextPath}/user/signin" method="post">
+        <form action="${pageContext.servletContext.contextPath}/user/login" method="post">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="用户名" name="username">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -45,20 +45,6 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
-<%--                <div class="col-xs-8">--%>
-<%--                    <div class="selectpicker">--%>
-<%--                        <select class="selectpicker" title="请选择身份" data-style="btn-primary" name="type">--%>
-<%--                            <option value="用户">用户</option>--%>
-<%--                            <option value="管理员">管理员</option>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
-<%--                    <!-- <div class="checkbox icheck">--%>
-<%--                      <label>--%>
-<%--                        <input type="checkbox"> Remember Me--%>
-<%--                      </label>--%>
-<%--                    </div> -->--%>
-<%--                </div>--%>
-                <!-- /.col -->
                 <div class="col-xs-4">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                 </div>

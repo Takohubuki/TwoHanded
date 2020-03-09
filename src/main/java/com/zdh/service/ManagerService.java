@@ -37,4 +37,16 @@ public interface ManagerService {
      * @return
      */
     public ModelAndView generalSituation(ModelAndView modelAndView);
+
+    public ModelAndView manageMember(ModelAndView modelAndView);
+
+    public ModelAndView manageWtsItem(ModelAndView modelAndView);
+
+    public ModelAndView manageWtbItem(ModelAndView modelAndView);
+
+    public ModelAndView offItem(ModelAndView modelAndView, String itemId);
+
+    public ModelAndView shutMember(ModelAndView modelAndView, String sid);
+
+    public ModelAndView activeMember(ModelAndView modelAndView, String sid);
 }

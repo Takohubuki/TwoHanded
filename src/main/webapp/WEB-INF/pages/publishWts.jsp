@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Tako
-  Date: 2019/7/11
-  Time: 14:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -92,8 +85,8 @@
                                                     ${mywts.conditions}
                                             </td>
                                             <td>
-                                                <a href="javascript:updateitem('${mywts.serial_num}')">修改</a>
-                                                <a href="javascript:offmyitem('${mywts.serial_num}')">下架</a>
+                                                <a href="javascript:updateitem('${mywts.serialNum}')">修改</a>
+                                                <a href="javascript:offmyitem('${mywts.serialNum}')">下架</a>
                                             </td>
                                         </tr>
                                     </c:forEach>

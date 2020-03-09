@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.ItemMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Item">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="serial_num" jdbcType="VARCHAR" property="serialNum" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+    <result column="describes" jdbcType="VARCHAR" property="describes" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="kind" jdbcType="VARCHAR" property="kind" />
+    <result column="quality" jdbcType="INTEGER" property="quality" />
+    <result column="conditions" jdbcType="VARCHAR" property="conditions" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage" />
+    <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, serial_num, `name`, price, `number`, publisher, describes, image, kind, quality, 
+    conditions, publish_time, update_time, is_undercarriage, undercarriage_reason
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Item">
+    insert into item (id, serial_num, `name`, 
+      price, `number`, publisher, 
+      describes, image, kind, 
+      quality, conditions, publish_time, 
+      update_time, is_undercarriage, undercarriage_reason
+      )
+    values (#{id,jdbcType=INTEGER}, #{serialNum,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{price,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, 
+      #{describes,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, 
+      #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{isUndercarriage,jdbcType=BIT}, #{undercarriageReason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Item">
+    insert into item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serialNum != null">
+        serial_num,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="publisher != null">
+        publisher,
+      </if>
+      <if test="describes != null">
+        describes,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="kind != null">
+        kind,
+      </if>
+      <if test="quality != null">
+        quality,
+      </if>
+      <if test="conditions != null">
+        conditions,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isUndercarriage != null">
+        is_undercarriage,
+      </if>
+      <if test="undercarriageReason != null">
+        undercarriage_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serialNum != null">
+        #{serialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null">
+        #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null">
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        #{quality,jdbcType=INTEGER},
+      </if>
+      <if test="conditions != null">
+        #{conditions,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUndercarriage != null">
+        #{isUndercarriage,jdbcType=BIT},
+      </if>
+      <if test="undercarriageReason != null">
+        #{undercarriageReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Item">
+    update item
+    <set>
+      <if test="serialNum != null">
+        serial_num = #{serialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null">
+        describes = #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null">
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        quality = #{quality,jdbcType=INTEGER},
+      </if>
+      <if test="conditions != null">
+        conditions = #{conditions,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUndercarriage != null">
+        is_undercarriage = #{isUndercarriage,jdbcType=BIT},
+      </if>
+      <if test="undercarriageReason != null">
+        undercarriage_reason = #{undercarriageReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Item">
+    update item
+    set serial_num = #{serialNum,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=INTEGER},
+      conditions = #{conditions,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_undercarriage = #{isUndercarriage,jdbcType=BIT},
+      undercarriage_reason = #{undercarriageReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectBySerialNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from item
+        where serial_num = #{id,jdbcType=VARCHAR} and is_undercarriage = '0'
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from item where is_undercarriage = '0';
+    </select>
+    <select id="selectWtsAllByTime" resultMap="BaseResultMap">
+        select * from item where conditions='出售' order BY update_time desc
+    </select>
+    <select id="selectWtbAllByTime" resultMap="BaseResultMap">
+        select * from item where conditions='求购' order BY update_time desc
+    </select>
+    <select id="select3WtsItemByTime" resultMap="BaseResultMap">
+        select
+        *
+        from item
+        where conditions='出售' and is_undercarriage='0'
+        order by update_time desc
+        limit 3
+    </select>
+    <select id="select3WtbItemByTime" resultMap="BaseResultMap">
+        select
+        *
+        from item
+        where conditions = '求购' and is_undercarriage = '0'
+        order by update_time desc
+        limit 3
+    </select>
+    <select id="select1WtsItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select
+        *
+        from item
+        where conditions='出售' and name = #{itemname} and is_undercarriage = '0'
+    </select>
+    <select id="select1WtbItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select
+        *
+        from item
+        where conditions='求购' and name = #{itemname} and is_undercarriage='0'
+    </select>
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where name like"%"#{name}"%"
+    </select>
+    <select id="recommandSameKind" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where kind = #{kind} and conditions='出售' limit 6
+    </select>
+    <select id="selectByKind" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+        select * from item where kind = #{kind} and is_undercarriage='0'
+    </select>
+    <insert id="addPublish" parameterType="com.zdh.bean.Item">
+        insert into item (id, name, price,
+          number, publisher, describes,
+          image, quality, conditions, publish_time, update_time, kind, serial_num, is_undercarriage, undercarriage_reason
+          )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER},
+          #{number,jdbcType=INTEGER}, #{publisher,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR},
+          #{image,jdbcType=VARCHAR}, #{quality,jdbcType=INTEGER}, #{conditions,jdbcType=VARCHAR},#{publishTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},
+          #{kind,jdbcType=VARCHAR}, #{serialNum,jdbcType=VARCHAR}, #{isUndercarriage,jdbcType=BIT}, #{undercarriageReason,jdbcType=VARCHAR}
+          )
+    </insert>
+    <update id="updateSerial_num" parameterType="java.lang.String">
+        update item set serial_num = #{serialNum} where name=#{name}
+    </update>
+    <update id="updatePublisherByName" parameterType="java.lang.String">
+        update item
+        set publisher = #{new_sid}
+        where publisher = #{old_sid}
+    </update>
+    <update id="updateItemInfo" parameterType="com.zdh.bean.Item">
+        update item set
+         name = #{name},
+         price = #{price},
+         image = #{image},
+         quality = #{quality},
+         number = #{number},
+         describes = #{describes},
+         conditions = #{conditions}
+         where serial_num = #{serialNum}
+    </update>
+    <update id="updateItemNum" parameterType="java.lang.Integer">
+        update item set
+            number = #{itemnumber}
+        where serial_num = #{itemId}
+    </update>
+</mapper>

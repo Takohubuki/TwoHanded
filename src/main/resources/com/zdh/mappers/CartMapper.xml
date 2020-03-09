@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.CartMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Cart">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="member_sid" jdbcType="VARCHAR" property="memberSid" />
+    <result column="item_num" jdbcType="INTEGER" property="itemNum" />
+    <result column="is_checked" jdbcType="BIT" property="isChecked" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, item_id, member_sid, item_num, is_checked
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zdh.bean.Cart">
+    insert into cart (id, item_id, member_sid, 
+      `number`, is_checked)
+    values (#{id,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{memberSid,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{isChecked,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Cart">
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="memberSid != null">
+        member_sid,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="isChecked != null">
+        is_checked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSid != null">
+        #{memberSid,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="isChecked != null">
+        #{isChecked,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Cart">
+    update cart
+    <set>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSid != null">
+        member_sid = #{memberSid,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="isChecked != null">
+        is_checked = #{isChecked,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Cart">
+    update cart
+    set item_id = #{itemId,jdbcType=VARCHAR},
+      member_sid = #{memberSid,jdbcType=VARCHAR},
+      `number` = #{number,jdbcType=INTEGER},
+      is_checked = #{isChecked,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="checkItemInMyCart" parameterType="java.lang.String" resultType="com.zdh.bean.Cart">
+        select * from cart where item_id = #{item_id} and member_sid = #{sid};
+    </select>
+    <insert id="addCart" parameterType="com.zdh.bean.Cart">
+        insert into cart (item_id, member_sid, item_num) values (#{itemId}, #{member_sid}, #{itemNum});
+    </insert>
+    <update id="addCartNum" parameterType="com.zdh.bean.Cart">
+        update cart set item_num = #{itemNum} where item_id = #{itemId} and member_sid = #{memberSid};
+    </update>
+  <select id="selectMyCart" resultMap="BaseResultMap">
+        select * from cart where is_checked = '0' and member_sid = #{memberSid};
+    </select>
+</mapper>

@@ -1,95 +1,60 @@
 package com.zdh.bean;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Order {
+/**
+ * order
+ * @author 
+ */
+public class Order implements Serializable {
     private Integer id;
 
-    private String is_paid;
-
-    private String is_received;
-
-    private Date create_time;
-
-    private Date update_time;
-
-    private String order_id;
-
-    private String item_id;
-
-    private String buyer_id;
-
-    private Integer item_num;
-
-    private String sum_price;
-
-    private List<Item> item_list;
-
-    private Map<Item,String> num2item;
-
-    public String getSum_price() {
-        return sum_price;
-    }
-
-    public void setSum_price(String sum_price) {
-        this.sum_price = sum_price;
-    }
-
-    public Map getNum2item() {
-        if (num2item == null){
-            return new HashMap();
-        }else {
-            return num2item;
-        }
-    }
-
-    public void setNum2item(Map num2item) {
-        this.num2item = num2item;
-    }
-
-    public List<Item> getItem_list() {
-        if (item_list == null){
-            return new ArrayList<>();
-        }else {
-            return item_list;
-        }
-    }
-
-    public void setItem_list(List<Item> item_list) {
-        this.item_list = item_list;
-    }
-
-    public Integer getItem_num() {
-        return item_num;
-    }
-
-    public void setItem_num(Integer item_num) {
-        this.item_num = item_num;
-    }
-
-    public String getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
-    }
-
-    public String getItem_id() {
-        return item_id;
-    }
-
-    public void setItem_id(String item_id) {
-        this.item_id = item_id;
-    }
-
-    public String getBuyer_id() {
-        return buyer_id;
-    }
-
-    public void setBuyer_id(String buyer_id) {
-        this.buyer_id = buyer_id;
-    }
+    private static final long serialVersionUID = 1L;
+    /**
+     * 订单id
+     */
+    private String orderId;
+    /**
+     * 单种商品总价
+     */
+    private String sumPrice;
+    /**
+     * 商品数量
+     */
+    private Integer itemNum;
+    /**
+     * 商品id
+     */
+    private String itemId;
+    /**
+     * 买家用户id
+     */
+    private String buyerId;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+    /**
+     * 是否付款 0付款 1未付
+     */
+    private Boolean isPaid;
+    /**
+     * 是否收货 0未受 1收货
+     */
+    private Boolean isReceived;
+    /**
+     * 是否取消 0正常 1取消
+     */
+    private Boolean isCanceled;
+    /**
+     * 结算状态 0未结算 1结算
+     */
+    private Boolean isChecked;
 
     public Integer getId() {
         return id;
@@ -99,35 +64,91 @@ public class Order {
         this.id = id;
     }
 
-    public String getIs_paid() {
-        return is_paid;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setIs_paid(String is_paid) {
-        this.is_paid = is_paid == null ? null : is_paid.trim();
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getIs_received() {
-        return is_received;
+    public String getSumPrice() {
+        return sumPrice;
     }
 
-    public void setIs_received(String is_received) {
-        this.is_received = is_received == null ? null : is_received.trim();
+    public void setSumPrice(String sumPrice) {
+        this.sumPrice = sumPrice;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Integer getItemNum() {
+        return itemNum;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setItemNum(Integer itemNum) {
+        this.itemNum = itemNum;
     }
 
-    public Date getUpdate_time() {
-        return update_time;
+    public String getItemId() {
+        return itemId;
     }
 
-    public void setUpdate_time(Date update_time) {
-        this.update_time = update_time;
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
+
+    public String getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(String buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Boolean getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(Boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    public Boolean getIsReceived() {
+        return isReceived;
+    }
+
+    public void setIsReceived(Boolean isReceived) {
+        this.isReceived = isReceived;
+    }
+
+    public Boolean getIsCanceled() {
+        return isCanceled;
+    }
+
+    public void setIsCanceled(Boolean isCanceled) {
+        this.isCanceled = isCanceled;
+    }
+
+    public Boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(Boolean isChecked) {
+        this.isChecked = isChecked;
     }
 }

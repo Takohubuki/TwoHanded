@@ -17,6 +17,10 @@
     <link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui1.css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <!-- jquery -->
+    <script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
+    <!-- //jquery -->
+
 </head>
 <body>
 <div class="header-most-top">
@@ -92,14 +96,47 @@
     </div>
 </div>
 
-<c:forEach var="item_list" items="${item_list}" varStatus="i">
-    商品名：${item_list.name}&nbsp;&nbsp;&nbsp;&nbsp;数量：${item_num_list.get(i.count-1)}<br>
-</c:forEach>
+<form action="#" method="post" id="form">
+    <c:forEach var="item_list" items="${item_list}" varStatus="i">
+        商品名：${item_list.name}&nbsp;&nbsp;&nbsp;&nbsp;数量：${item_num_list.get(i.count-1)}<br>
+        <input type="text" style="visibility: hidden" name="itemId" id="itemId${i.count-1}" value="${item_list.serialNum}" />
+        <input type="text" style="visibility: hidden" name="itemNum" id="itemNum${i.count-1}" value="${item_num_list.get(i.count-1)}" />
+    </c:forEach>
+    <input type="button" class="btn-default btn-primary" onclick="checkOut()" value="结算">
+</form>
+<script>
+    let cartList = [];
+    let cartItem = {
+        itemId: '',
+        itemNum: ''
+    };
+    cartItem.itemId = $("#itemId").val();
+    cartItem.itemNum = $("#itemNum").val();
+    let s = JSON.stringify(cartItem);
+    console.log(s);
+
+    cartList.push(cartItem);
+    console.log(cartList);
+
+    function checkOut(){
+        $.ajax({
+            url : "${pageContext.request.contextPath}/order/checkout",
+            type : "POST",
+            contentType: "application/json;charset=UTF-8",
+            data : JSON.stringify(cartList),
+            success : function(result) {
+                console.log(result);
+            },
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+
+</script>
 
 <!-- js-files -->
-<!-- jquery -->
-<script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
-<!-- //jquery -->
 
 <!-- 弹出登录注册框-->
 <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
@@ -132,8 +169,6 @@
     var cart_action = "${pageContext.request.contextPath}/order/checkout"
     paypalm.minicartk.render({
         action:cart_action,
-        <%--template: '<% for (var i= 0, idx = i + 1, len = items.length; i < len; i++, idx++) { %>        <li class="minicartk-item">            <div class="minicartk-details-name">                <a class="minicartk-name" href="<%= items[i].get("href") %>"><%= items[i].get("item_name") %></a>                <ul class="minicartk-attributes">                    <% if (items[i].get("item_number")) { %>                    <li>                        <%= items[i].get("item_number") %>                        <input type="hidden" name="item_number_<%= idx %>" value="<%= items[i].get("item_number") %>" />                    </li>                    <% } %>                    <% if (items[i].discount()) { %>                    <li>                        <%= config.strings.discount %> <%= items[i].discount(priceFormat) %>                        <input type="hidden" name="discount_amount_<%= idx %>" value="<%= items[i].discount() %>" />                    </li>                    <% } %>                    <% for (var options = items[i].options(), j = 0, len2 = options.length; j < len2; j++) { %>                        <li>                            <%= options[j].key %>: <%= options[j].value %>                            <input type="hidden" name="on<%= j %>_<%= idx %>" value="<%= options[j].key %>" />                            <input type="hidden" name="os<%= j %>_<%= idx %>" value="<%= options[j].value %>" />                        </li>                    <% } %>                </ul>            </div>            <div class="minicartk-details-quantity">                <input class="minicartk-quantity" data-minicartk-idx="<%= i %>" name="quantity_<%= idx %>" type="text" pattern="[0-9]*" value="<%= items[i].get("quantity") %>" autocomplete="off" />            </div>            <div class="minicartk-details-remove">                <button type="button" class="minicartk-remove" data-minicartk-idx="<%= i %>">&times;</button>            </div>            <div class="minicartk-details-price">                <span class="minicartk-price"><%= items[i].total(priceFormat) %></span>            </div>            <input type="hidden" name="item_name_<%= idx %>" value="<%= items[i].get("item_name") %>" />            <input type="hidden" name="amount_<%= idx %>" value="<%= items[i].amount() %>" />            <input type="hidden" name="shipping_<%= idx %>" value="<%= items[i].get("shipping") %>" />            <input type="hidden" name="shipping2_<%= idx %>" value="<%= items[i].get("shipping2") %>" />        </li>        <% } %>    </ul>    <div class="minicartk-footer">        <% if (hasItems) { %>            <div class="minicartk-subtotal">                <%= config.strings.subtotal %> <%= cart.total(totalFormat) %>            </div>            <button class="minicartk-submit" type="submit" data-minicartk-alt="<%= config.strings.buttonAlt %>"><%- config.strings.button %></button>        <% } else { %>            <p class="minicartk-empty-text"><%= config.strings.empty %></p>        <% } %>    </div>    <input type="hidden" name="cmd" value="_cart" />    <input type="hidden" name="upload" value="1" />    <% for (var key in settings) { %>        <input type="hidden" name="<%= key %>" value="<%= settings[key] %>" />    <% } %></form>'--%>
-        <%--        template:myTemple--%>
     }); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
 
 

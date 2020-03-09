@@ -1,6 +1,8 @@
 package com.zdh.service.impl;
 
+import com.zdh.bean.Item;
 import com.zdh.bean.Manager;
+import com.zdh.bean.Member;
 import com.zdh.bean.Order;
 import com.zdh.mappers.ManagerMapper;
 import com.zdh.service.ManagerService;
@@ -60,6 +62,60 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ModelAndView generalSituation(ModelAndView modelAndView) {
         return getGeneralSituation(modelAndView);
+    }
+
+    @Override
+    public ModelAndView manageMember(ModelAndView modelAndView) {
+        List<Member> members = managerMapper.selectAllMember();
+        modelAndView.addObject("memberlist",members);
+        modelAndView.setViewName("memberManage");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView manageWtsItem(ModelAndView modelAndView) {
+        List<Item> items = managerMapper.selectAllSellItems();
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemManage");
+        return modelAndView;
+
+    }
+
+    @Override
+    public ModelAndView manageWtbItem(ModelAndView modelAndView) {
+        List<Item> items = managerMapper.selectAllBuyItems();
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemManage");
+        return modelAndView;
+
+    }
+
+    @Override
+    public ModelAndView offItem(ModelAndView modelAndView, String itemId) {
+        managerMapper.offItem(itemId);
+        List<Item> items = managerMapper.selectAllSellItems();
+        modelAndView.addObject("itemlist",items);
+        modelAndView.setViewName("itemManage");
+        return modelAndView;
+
+    }
+
+    @Override
+    public ModelAndView shutMember(ModelAndView modelAndView, String sid) {
+        managerMapper.shutMember(sid);
+        List<Member> members = managerMapper.selectAllMember();
+        modelAndView.addObject("memberlist",members);
+        modelAndView.setViewName("memberManage");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView activeMember(ModelAndView modelAndView, String sid) {
+        managerMapper.activeMember(sid);
+        List<Member> members = managerMapper.selectAllMember();
+        modelAndView.addObject("memberlist",members);
+        modelAndView.setViewName("memberManage");
+        return modelAndView;
     }
 
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {

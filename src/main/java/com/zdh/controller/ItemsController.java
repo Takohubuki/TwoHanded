@@ -3,9 +3,9 @@ package com.zdh.controller;
 import com.zdh.bean.Item;
 import com.zdh.service.ItemService;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@Controller
+@RestController
 @RequestMapping("/items")
 public class ItemsController {
 
@@ -92,9 +92,9 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/publish")
-    public String publish(){
-        System.out.println("----------------------------跳转发布信息页--------------------------");
-        return "publish";
+    public ModelAndView publish(ModelAndView modelAndView){
+        modelAndView.setViewName("publish");
+        return modelAndView;
     }
 
     /**

@@ -83,24 +83,24 @@
                                             ${itemlist.quality}
                                     </td>
                                     <td>
-                                        <c:if test="${itemlist.is_undercarriage == 0}">
+                                        <c:if test="${itemlist.isUndercarriage == 0}">
                                             未下架
                                         </c:if>
-                                        <c:if test="${itemlist.is_undercarriage == 1}">
+                                        <c:if test="${itemlist.isUndercarriage == 1}">
                                             已下架
                                         </c:if>
                                     </td>
                                     <td>
-                                        ${itemlist.serial_num}
+                                        ${itemlist.serialNum}
                                     </td>
                                     <td>
-                                        <fmt:formatDate value="${itemlist.publish_time}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
+                                        <fmt:formatDate value="${itemlist.publishTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
                                     </td>
                                     <td>
                                             ${itemlist.publisher}
                                     </td>
                                     <td>
-                                        <a href="javascript:offitem(${itemlist.serial_num})" role="button" class="btn btn-primary">
+                                        <a href="javascript:offitem(${itemlist.serialNum})" role="button" class="btn btn-primary">
                                             下架
                                         </a>
                                     </td>

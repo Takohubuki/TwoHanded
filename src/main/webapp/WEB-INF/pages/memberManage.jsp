@@ -54,7 +54,7 @@
                                     注册时间
                                 </th>
                                 <th class="sorting" tabindex="6" aria-controls="example2">
-                                    是否活动
+                                    封禁状态
                                 </th>
                             </tr>
                             </thead>
@@ -77,14 +77,14 @@
                                             ${memberlist.phone}
                                     </td>
                                     <td>
-                                        <fmt:formatDate value="${memberlist.signin_time}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
+                                        <fmt:formatDate value="${memberlist.signinTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
 
                                     </td>
                                     <td>
-                                        <c:if test="${memberlist.is_active == 0}">
+                                        <c:if test="${memberlist.isActive == 0}">
                                             停用
                                         </c:if>
-                                        <c:if test="${memberlist.is_active == 1}">
+                                        <c:if test="${memberlist.isActive == 1}">
                                             正常
                                         </c:if>
                                     </td>

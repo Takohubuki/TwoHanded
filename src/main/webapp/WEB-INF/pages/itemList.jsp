@@ -137,7 +137,7 @@
                         <a href="#" data-toggle="modal" data-target="#myModal2">
                             去注册</a>
                     </p>
-                    <form action="${pageContext.request.contextPath}/user/signin" method="post">
+                    <form action="${pageContext.request.contextPath}/user/login" method="post">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="User Name" name="username" required="">
                         </div>
@@ -299,13 +299,13 @@
                                 <img src="${pageContext.request.contextPath}/${itemlist.image}" alt="" style="width: 159px;height: 150px">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
-                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serial_num}" class="link-product-add-cart">详情</a>
+                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}" class="link-product-add-cart">详情</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="item-info-product ">
                                 <h4>
-                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serial_num}">${itemlist.name}</a>
+                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}">${itemlist.name}</a>
                                 </h4>
                                 <div class="info-product-price">
                                     <span class="item_price">￥${itemlist.price}</span>
@@ -316,10 +316,10 @@
                                         <fieldset>
                                             <input type="hidden" name="cmd" value="_cart" />
                                             <input type="hidden" name="add" value="1" />
-<%--                                            <input type="hidden" name="business" value="${itemlist.serial_num}" />--%>
+<%--                                            <input type="hidden" name="business" value="${itemlist.serialNum}" />--%>
                                             <input type="hidden" name="item_name" value="${itemlist.name}" />
                                             <input type="hidden" name="amount" value="${itemlist.price}" />
-                                            <input type="hidden" name="item_id" value="${itemlist.serial_num}"/>
+                                            <input type="hidden" name="item_id" value="${itemlist.serialNum}"/>
                                             <input type="hidden" name="currency_code" value="CNY" />
                                             <input type="hidden" name="return" value=" " />
                                             <input type="hidden" name="cancel_return" value=" " />
