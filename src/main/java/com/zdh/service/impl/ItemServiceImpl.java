@@ -38,6 +38,7 @@ public class ItemServiceImpl implements ItemService {
 //        List<Item> recommand_items = itemMapper.RecommandSameKind(kind);
 //        recommand_items.remove(item);
 
+
         modelAndView.addObject("item", item);
         modelAndView.addObject("recommand_items",items);
         modelAndView.setViewName("singleItem");

@@ -34,9 +34,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ModelAndView myCart(HttpSession session, ModelAndView modelAndView) {
         Member member = (Member) session.getAttribute("member");
-        List<String> item_ids = new ArrayList<>();
-        List<Integer> item_num = new ArrayList<>();
-        List<Item> itemList = new ArrayList<>();
+        ArrayList<String> item_ids = new ArrayList<>();
+        ArrayList<Integer> item_num = new ArrayList<>();
+        ArrayList<Item> itemList = new ArrayList<>();
         List<Cart> carts = cartMapper.selectMyCart(member.getSid());
 
         for (Cart cart : carts) {
@@ -57,59 +57,83 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ModelAndView checkOut(List<Cart> cartList, HttpSession session, ModelAndView modelAndView) {
+    public ModelAndView checkOut(String cartList, HttpSession session, ModelAndView modelAndView) {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-        String format = simpleDateFormat.format(date);
-        String order_id = sid + format;
-        System.out.println(order_id);
-        for (int i = 0; i < cartList.size(); i++) {
-            Cart cart = cartList.get(i);
-            String itemId = cart.getItemId();
-            Integer item_num = cart.getItemNum();
+
+        //获取前台传来的购物车列表
+        String[] cartItems = cartList.split("&");
+        for (String cartItem : cartItems) {
+            String[] s = cartItem.split("_");
+            String itemId = s[0];
+            String item_num = s[1];
+            Integer integer = Integer.valueOf(item_num);
 
             Item item = itemMapper.selectBySerialNum(itemId);
-            int itemNum = item.getNumber() - item_num;
+            int itemNum = item.getNumber() - integer;
+
             item.setNumber(itemNum);
-            itemMapper.updateItemNum(itemNum, itemId);
+            if (itemNum == 0){
+                item.setIsUndercarriage(true);
+                item.setUndercarriageReason("库存不足");
+            }
+            itemMapper.updateItemInfo(item);
 
-            Order new_order = new Order();
+            Order order = generateOrder(sid, itemId, integer);
+            int i = integer * item.getPrice();
+            String sum = String.valueOf(i);
+            order.setSumPrice("¥" + sum);
 
-            new_order.setCreateTime(date);
-            new_order.setUpdateTime(date);
-            new_order.setItemId(itemId);
-            new_order.setBuyerId(sid);
-            new_order.setItemNum(item_num);
-            new_order.setOrderId(order_id);
-//            new_order.setSum_price(total);
-            orderMapper.generateNewOrder(new_order);
+            orderMapper.generateNewOrder(order);
+
+            cartMapper.removeCart(sid, itemId);
         }
         modelAndView.setViewName("checkout");
         return modelAndView;
     }
 
     @Override
-    public ModelAndView addCart(String itemId, String itemNum, HttpSession session, ModelAndView modelAndView) {
-        System.out.println(itemId);
+    public String addCart(Item item, HttpSession session, ModelAndView modelAndView) {
 
         Member member = (Member) session.getAttribute("member");
 
         String sid = member.getSid();
+        String itemId = item.getSerialNum();
+
         Cart cart = cartMapper.checkItemInMyCart(itemId, sid);
         if (cart == null){
             Cart new_item = new Cart();
             new_item.setMemberSid(member.getSid());
             new_item.setItemId(itemId);
-            new_item.setItemNum(Integer.valueOf(itemNum));
+            new_item.setItemNum(1);
             cartMapper.addCart(new_item);
         }else{
             cart.setItemNum(cart.getItemNum() + 1);
             cartMapper.addCartNum(cart);
         }
-        modelAndView.setViewName("cart");
-        return modelAndView;
+        return "success";
+    }
 
+    private Order generateOrder(String sid, String itemId, int itemNum){
+        //生成新订单
+        Order new_order = new Order();
+
+        //生成订单号
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date();
+        String format = simpleDateFormat.format(date);
+        String order_id = sid + format;
+
+        new_order.setCreateTime(date);
+        new_order.setUpdateTime(date);
+        new_order.setItemId(itemId);
+        new_order.setBuyerId(sid);
+        new_order.setItemNum(itemNum);
+        new_order.setOrderId(order_id);
+        new_order.setIsCanceled(false);
+        new_order.setIsChecked(true);
+        new_order.setIsPaid(true);
+        new_order.setIsReceived(false);
+        return new_order;
     }
 }

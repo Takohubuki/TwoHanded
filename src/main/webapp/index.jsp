@@ -364,23 +364,15 @@
 
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                            <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                                            <form action="#" method="post">
                                                 <fieldset>
-                                                    <input type="hidden" name="cmd" value="_cart" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value="${wts_item.serialNum}" />
-                                                    <input type="hidden" name="item_name" value="${wts_item.name}" />
-                                                    <input type="hidden" name="amount" value="${wts_item.price}" />
-                                                    <input type="hidden" name="item_id" value="${wts_item.serialNum}"/>
-                                                    <input type="hidden" name="currency_code" value="CNY" />
-                                                    <input type="hidden" name="return" value=" " />
-                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="hidden" name="itemId" value="${wts_item.serialNum}"/>
+                                                    <input type="hidden" name="itemName" value="${wts_item.name}" />
 <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
-                                                    <input type="button" name="" class="button" onclick="javascript:addcart('${wts_item.serialNum}')" value="123"/>
+                                                    <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                                                 </fieldset>
                                             </form>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -479,38 +471,6 @@
 </script> -->
 <!-- //弹出控制结束-->
 
-<!-- 购物车 -->
-<script src="js/minicart.js"></script>
-<script>
-
-    var cart_action = "${pageContext.request.contextPath}/order/checkout"
-    paypalm.minicartk.render({
-        action:cart_action,
-        <%--template: '<% for (var i= 0, idx = i + 1, len = items.length; i < len; i++, idx++) { %>        <li class="minicartk-item">            <div class="minicartk-details-name">                <a class="minicartk-name" href="<%= items[i].get("href") %>"><%= items[i].get("item_name") %></a>                <ul class="minicartk-attributes">                    <% if (items[i].get("item_number")) { %>                    <li>                        <%= items[i].get("item_number") %>                        <input type="hidden" name="item_number_<%= idx %>" value="<%= items[i].get("item_number") %>" />                    </li>                    <% } %>                    <% if (items[i].discount()) { %>                    <li>                        <%= config.strings.discount %> <%= items[i].discount(priceFormat) %>                        <input type="hidden" name="discount_amount_<%= idx %>" value="<%= items[i].discount() %>" />                    </li>                    <% } %>                    <% for (var options = items[i].options(), j = 0, len2 = options.length; j < len2; j++) { %>                        <li>                            <%= options[j].key %>: <%= options[j].value %>                            <input type="hidden" name="on<%= j %>_<%= idx %>" value="<%= options[j].key %>" />                            <input type="hidden" name="os<%= j %>_<%= idx %>" value="<%= options[j].value %>" />                        </li>                    <% } %>                </ul>            </div>            <div class="minicartk-details-quantity">                <input class="minicartk-quantity" data-minicartk-idx="<%= i %>" name="quantity_<%= idx %>" type="text" pattern="[0-9]*" value="<%= items[i].get("quantity") %>" autocomplete="off" />            </div>            <div class="minicartk-details-remove">                <button type="button" class="minicartk-remove" data-minicartk-idx="<%= i %>">&times;</button>            </div>            <div class="minicartk-details-price">                <span class="minicartk-price"><%= items[i].total(priceFormat) %></span>            </div>            <input type="hidden" name="item_name_<%= idx %>" value="<%= items[i].get("item_name") %>" />            <input type="hidden" name="amount_<%= idx %>" value="<%= items[i].amount() %>" />            <input type="hidden" name="shipping_<%= idx %>" value="<%= items[i].get("shipping") %>" />            <input type="hidden" name="shipping2_<%= idx %>" value="<%= items[i].get("shipping2") %>" />        </li>        <% } %>    </ul>    <div class="minicartk-footer">        <% if (hasItems) { %>            <div class="minicartk-subtotal">                <%= config.strings.subtotal %> <%= cart.total(totalFormat) %>            </div>            <button class="minicartk-submit" type="submit" data-minicartk-alt="<%= config.strings.buttonAlt %>"><%- config.strings.button %></button>        <% } else { %>            <p class="minicartk-empty-text"><%= config.strings.empty %></p>        <% } %>    </div>    <input type="hidden" name="cmd" value="_cart" />    <input type="hidden" name="upload" value="1" />    <% for (var key in settings) { %>        <input type="hidden" name="<%= key %>" value="<%= settings[key] %>" />    <% } %></form>'--%>
-<%--        template:myTemple--%>
-    }); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
-
-
-    paypalm.minicartk.cart.on('checkout', function (evt) {
-        var items = this.items(),
-            len = items.length,
-            total = 0,
-            i;
-
-        // Count the number of each item in the cart
-        for (i = 0; i < len; i++) {
-            total += items[i].get('quantity');
-        }
-
-        // if (total < 3) {
-        //     alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-        //     evt.preventDefault();
-        // }
-    });
-
-</script>
-<!-- //购物车结束-->
-
 <!-- price range (top products) -->
 <script src="js/jquery-ui.js"></script>
 <script>
@@ -603,14 +563,6 @@
 <!-- smooth-scrolling-of-move-up -->
 <script>
     $(document).ready(function () {
-        /*
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
-        */
         $().UItoTop({
             easingType: 'easeOutQuart'
         });
@@ -623,19 +575,40 @@
 <script src="js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
 <!-- //js-files -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 <script>
-    function addcart(item_id) {
-        $.ajax({
-            url: "${pageContext.request.contextPath}/order/addcart",
-            type: "POST",
-            data: {
-                item_id: item_id
+    let member = "<%=session.getAttribute("member")%>";
+    // let member = window.sessionStorage.getItem("member");
+    console.log(member);
+    $(function () {
+        $("input[name = addcart]").click(function () {
+            console.log(member);
+            if (member === "null"){
+                alert("请先登录！");
+
+            }else {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/order/addcart",
+                    type: "POST",
+                    data: {
+                        serialNum : $(this).parent().find("input[name = itemId]").val()
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        if (result === 'false'){
+                            alert("添加失败！")
+                        }else {
+                            alert("添加成功！");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
             }
         })
-        alert("success");
-    }
+    });
 </script>
 </body>
 

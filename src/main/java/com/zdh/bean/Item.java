@@ -67,6 +67,10 @@ public class Item implements Serializable {
      * 下架原因
      */
     private String undercarriageReason;
+    /**
+     * 点击量
+     */
+    private Integer viewedTimes;
 
     public Integer getId() {
         return id;
@@ -187,4 +191,13 @@ public class Item implements Serializable {
     public void setUndercarriageReason(String undercarriageReason) {
         this.undercarriageReason = undercarriageReason;
     }
+
+    public Integer getViewedTimes() {
+        return viewedTimes;
+    }
+
+    public void setViewedTimes(Integer viewedTimes) {
+        this.viewedTimes = viewedTimes;
+    }
+
 }

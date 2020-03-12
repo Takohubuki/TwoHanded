@@ -97,7 +97,7 @@ public class MemberServiceImpl implements MemberService {
              */
             System.out.println("redirect:"+uri);
 
-            if (uri.contains("checkout")){
+            if (uri.contains("checkout") || uri.contains("addcart")){
                 modelAndView.setViewName("redirect:/");
             }else {
                 modelAndView.setViewName("redirect:"+uri);

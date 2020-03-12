@@ -22,15 +22,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zdh.bean.Order">
-    insert into order (id, order_id, sum_price, 
+    insert into `order` (id, order_id, sum_price,
       item_num, item_id, buyer_id, 
       create_time, update_time, is_paid, 
       is_received, is_canceled, is_checked
@@ -178,11 +178,12 @@
         select * from `order` where buyer_id = #{sid};
     </select>
     <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
-insert into order (id, order_id, sum_price,
+    insert into
+    `order` (id, order_id, sum_price,
       item_num, item_id, buyer_id,
       create_time, update_time, is_paid,
       is_received, is_canceled, is_checked
-      )
+    )
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{sumPrice,jdbcType=VARCHAR},
       #{itemNum,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT},

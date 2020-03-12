@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Tako
-  Date: 2019/7/29
-  Time: 16:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
@@ -19,8 +12,134 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <!-- jquery -->
     <script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/script.js"></script>
     <!-- //jquery -->
+    <style>
+        .shopping-car-container {
+            padding: 50px 40px;
+        }
 
+        .shopping-car-container .car-headers-menu {
+            border-bottom: 1px solid #f5f5f5;
+            padding: 0 15px;
+        }
+
+        .shopping-car-container .panel-body {
+            padding: 15px 0;
+        }
+
+        #checkAll {
+            vertical-align: text-bottom;
+        }
+
+        .shopping-car-container .car-menu {
+            text-align: center;
+        }
+        /*
+         商品区
+         * */
+
+        .shopping-car-container .goods-content {
+            margin-top: 15px;
+        }
+
+        .shopping-car-container .goods-content .goods-item {
+            margin-top: 20px;
+        }
+
+        .shopping-car-container .goods-content .goods-item .car-goods-info {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .shopping-car-container .goods-content .goods-item .goods-image-column img,
+        .shopping-car-container .goods-content .goods-item .goods-image-column span {
+            display: block;
+            float: left;
+        }
+
+        .shopping-car-container .goods-content .goods-item .goods-image-column span {
+            width: calc(100% - 100px);
+            box-sizing: border-box;
+            text-indent: 2rem;
+            line-height: 25px;
+            padding: 10px;
+        }
+
+        .goods-price {
+            color: red;
+            font-weight: bolder;
+        }
+
+        .form-control {
+            text-align: center;
+        }
+
+        .single-total {
+            color: red;
+            font-weight: bold;
+        }
+
+        .goods-params {
+            color: darkgray;
+        }
+
+        .bottom-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-menu #checkAllBottom {
+            vertical-align: text-bottom;
+        }
+
+        #deleteMulty {
+            color: cornflowerblue;
+            cursor: pointer;
+            vertical-align: text-bottom;
+        }
+
+        .bottom-menu-include {
+            background: #e5e5e5;
+        }
+
+        #selectGoodsCount {
+            color: orangered;
+            font-size: 16px;
+            font-weight: bolder;
+        }
+
+        #selectGoodsMoney {
+            color: orangered;
+            font-size: 16px;
+            font-weight: bolder;
+        }
+
+        .panel-default .submitData {
+            background: orangered;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            font-weight: bolder;
+            height: 58px;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .panel-default .submitDis {
+            background: #B0B0B0;
+            cursor: no-drop;
+        }
+
+        .shopping-car-container .panel-default {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
 <div class="header-most-top">
@@ -95,37 +214,229 @@
         <div class="clearfix"></div>
     </div>
 </div>
+<div class="shopping-car-container">
+    <div class="car-headers-menu">
+        <div class="row">
+            <div class="col-md-1 car-menu">
+                <label><input type="checkbox" id="check-goods-all" /><span id="checkAll">全选</span></label>
+            </div>
+            <div class="col-md-3 car-menu">商品信息</div>
+            <div class="col-md-2 car-menu">单价</div>
+            <div class="col-md-2 car-menu">数量</div>
+            <div class="col-md-2 car-menu">金额</div>
+            <div class="col-md-2 car-menu">操作</div>
+        </div>
+    </div>
+    <div class="goods-content">
+        <!--goods display-->
+        <c:forEach var="item_list" items="${item_list}" varStatus="i">
+            <div class="goods-item">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-1 car-goods-info">
+                            <label>
+<%--                                <input type="checkbox" class="goods-list-item"/>--%>
+                                <input type="checkbox" class="cbox goods-list-item" value="${item_list.serialNum}_${item_num_list.get(i.count-1)}">
+                            </label>
+                        </div>
+                        <div class="col-md-3 car-goods-info goods-image-column">
+                            <img class="goods-image" src="${pageContext.request.contextPath}/${item_list.image}" style="width: 100px; height: 100px;" />
+                            <span id="goods-info">${item_list.name}</span>
+                        </div>
+                        <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-price">${item_list.price}</span></div>
+                        <div class="col-md-2 car-goods-info">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default cart_quantity_down">-</button>
+                                </div>
+                                <input type="text" class="form-control quantity_text" value="${item_num_list.get(i.count-1)}" dataValue="${item_list.serialNum}" priceValue="${item_list.price}">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default cart_quantity_up">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-total">item.singleGoodsMoney</span></div>
+                        <div class="col-md-2 car-goods-info">
+                            <button type="button" class="btn btn-danger item-delete">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body bottom-menu-include">
+            <div class="col-md-1 check-all-bottom bottom-menu">
+                <label>
+                    <input type="checkbox" id="checked-all-bottom" />
+                    <span id="checkAllBottom">全选</span>
+                </label>
+            </div>
+            <div class="col-md-1 bottom-menu">
+				<span id="deleteMulty">
+						删除
+				</span>
+            </div>
+            <div class="col-md-6 bottom-menu">
 
-<form action="#" method="post" id="form">
-    <c:forEach var="item_list" items="${item_list}" varStatus="i">
-        商品名：${item_list.name}&nbsp;&nbsp;&nbsp;&nbsp;数量：${item_num_list.get(i.count-1)}<br>
-        <input type="text" style="visibility: hidden" name="itemId" id="itemId${i.count-1}" value="${item_list.serialNum}" />
-        <input type="text" style="visibility: hidden" name="itemNum" id="itemNum${i.count-1}" value="${item_num_list.get(i.count-1)}" />
-    </c:forEach>
-    <input type="button" class="btn-default btn-primary" onclick="checkOut()" value="结算">
-</form>
+            </div>
+            <div class="col-md-2 bottom-menu">
+                <span>已选商品 <span id="selectGoodsCount">0</span> 件</span>
+            </div>
+            <div class="col-md-1 bottom-menu">
+                <span>合计：<span id="selectGoodsMoney">0.00</span></span>
+            </div>
+            <div class="col-md-1 bottom-menu submitData submitDis">
+                结算
+            </div>
+        </div>
+    </div>
+<%--    <!--删除确认弹框-->--%>
+<%--    <div class="modal fade" tabindex="-1" role="dialog" id="deleteItemTip" aria-labelledby="gridSystemModalLabel">--%>
+<%--        <div class="modal-dialog" role="document">--%>
+<%--            <div class="modal-content">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+<%--                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>--%>
+<%--                </div>--%>
+<%--                <div class="modal-body">--%>
+<%--                    确认删除此商品？--%>
+<%--                </div>--%>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+<%--                    <button type="button" class="btn btn-primary deleteSure">确定</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <!--是否勾选商品提示-->--%>
+<%--    <div class="modal fade" tabindex="-1" role="dialog" id="selectItemTip" aria-labelledby="gridSystemModalLabel">--%>
+<%--        <div class="modal-dialog" role="document">--%>
+<%--            <div class="modal-content">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+<%--                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>--%>
+<%--                </div>--%>
+<%--                <div class="modal-body">--%>
+<%--                    请选择要删除的商品！--%>
+<%--                </div>--%>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    <!--批量删除商品-->--%>
+<%--    <div class="modal fade" tabindex="-1" role="dialog" id="deleteMultyTip" aria-labelledby="gridSystemModalLabel">--%>
+<%--        <div class="modal-dialog" role="document">--%>
+<%--            <div class="modal-content">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
+<%--                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>--%>
+<%--                </div>--%>
+<%--                <div class="modal-body">--%>
+<%--                    确认删除选择的商品！--%>
+<%--                </div>--%>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+<%--                    <button type="button" class="btn btn-primary deleteMultySure">确定</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+</div>
+
 <script>
+    let oldNum = 0;
+    let num = 0;
+    let id = '';
     let cartList = [];
-    let cartItem = {
-        itemId: '',
-        itemNum: ''
-    };
-    cartItem.itemId = $("#itemId").val();
-    cartItem.itemNum = $("#itemNum").val();
-    let s = JSON.stringify(cartItem);
-    console.log(s);
+    let cartItem = '';
 
-    cartList.push(cartItem);
-    console.log(cartList);
+    $(function () {
+        $(".cart_quantity_up").click(function () {
+            num = $(this).parent().parent().find("input").val();
+            id = $(this).parent().parent().find("input").attr("dataValue");
 
+            num = parseInt(num) + 1;
+            $(this).parent().find("input").val(num);
+            changeNum(id, num);
+        });
+        $(".cart_quantity_down").click(function () {
+            num = $(this).parent().parent().find("input").val();
+            id = $(this).parent().parent().find("input").attr("dataValue");
+
+            num = parseInt(num) - 1;
+            $(this).parent().parent().find("input").val(num);
+            changeNum(id, num);
+        });
+        $(".quantity_text").blur(function () {
+            num = $(this).val();
+            if (oldNum !== num){
+                id = $(this).attr("dataValue");
+                changeNum(id, num);
+            }
+        });
+        $(".quantity_text").focus(function () {
+            oldNum = $(this).val();
+        });
+        $(".submitData").click(function () {
+            checkOut();
+        });
+        $("input[type = checkbox]").change(function () {
+            validateList();
+        })
+    });
+
+    function changeNum(id, num) {
+        console.log(id);
+        console.log(num);
+        $.ajax({
+            url : "${pageContext.request.contextPath}/order/updateCartNum",
+            type : "POST",
+            data : {
+                'id' : id,
+                'num' : num
+            },
+            success : function(result) {
+                console.log(result);
+            },
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+
+    //复选框校验
+    function validateList() {
+        let len = $( "input:checked" ).length;
+        if (len <= 0){
+            $('.submitData').addClass('submitDis');
+            return true;
+        }else {
+            $('.submitData').removeClass('submitDis');
+            return false;
+        }
+    }
+
+    //购物车结算
     function checkOut(){
+
+        $( "input:checked" ).each(function () {
+            cartItem = cartItem + $(this).val() + '&';
+        });
+        console.log(cartItem);
         $.ajax({
             url : "${pageContext.request.contextPath}/order/checkout",
             type : "POST",
-            contentType: "application/json;charset=UTF-8",
-            data : JSON.stringify(cartList),
+            data : {
+                'cartList' : cartItem
+            },
+            async: false,
             success : function(result) {
                 console.log(result);
+                window.location.href = "${pageContext.servletContext.contextPath}/order/checkFin";
             },
             error : function(e){
                 console.log(e.status);
@@ -138,167 +449,9 @@
 
 <!-- js-files -->
 
-<!-- 弹出登录注册框-->
-<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-
-    });
-</script>
-<!-- Large modal -->
-<!-- <script>
-    $('#').modal('show');
-</script> -->
-<!-- //弹出控制结束-->
-
-<!-- 购物车 -->
-<script src="${pageContext.request.contextPath}/js/minicart.js"></script>
-<script>
-
-    var cart_action = "${pageContext.request.contextPath}/order/checkout"
-    paypalm.minicartk.render({
-        action:cart_action,
-    }); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
 
 
-    paypalm.minicartk.cart.on('checkout', function (evt) {
-        var items = this.items(),
-            len = items.length,
-            total = 0,
-            i;
 
-        // Count the number of each item in the cart
-        for (i = 0; i < len; i++) {
-            total += items[i].get('quantity');
-        }
-
-        // if (total < 3) {
-        //     alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-        //     evt.preventDefault();
-        // }
-    });
-
-</script>
-<!-- //购物车结束-->
-
-<!-- price range (top products) -->
-<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-<script>
-    //<![CDATA[
-    $(window).load(function () {
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 9000,
-            values: [50, 6000],
-            slide: function (event, ui) {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-
-    }); //]]>
-</script>
-<!-- //price range (top products) -->
-
-<!-- flexisel (for special offers) -->
-<script src="${pageContext.request.contextPath}/js/jquery.flexisel.js"></script>
-<script>
-    $(window).load(function () {
-        $("#flexiselDemo1").flexisel({
-            visibleItems: 3,
-            animationSpeed: 1000,
-            autoPlay: true,
-            autoPlaySpeed: 3000,
-            pauseOnHover: true,
-            enableResponsiveBreakpoints: true,
-            responsiveBreakpoints: {
-                portrait: {
-                    changePoint: 480,
-                    visibleItems: 1
-                },
-                landscape: {
-                    changePoint: 640,
-                    visibleItems: 2
-                },
-                tablet: {
-                    changePoint: 768,
-                    visibleItems: 2
-                }
-            }
-        });
-
-    });
-</script>
-<!-- //flexisel (for special offers) -->
-
-<!-- 输入密码相同检测 -->
-<script>
-    window.onload = function () {
-        document.getElementById("password1").onchange = validatePassword;
-        document.getElementById("password2").onchange = validatePassword;
-    }
-
-    function validatePassword() {
-        var pass2 = document.getElementById("password2").value;
-        var pass1 = document.getElementById("password1").value;
-        if (pass1 != pass2)
-            document.getElementById("password2").setCustomValidity("输入密码不匹配");
-        else
-            document.getElementById("password2").setCustomValidity('');
-    }
-</script>
-<!-- //检测结束 -->
-
-<!-- smoothscroll -->
-<script src="${pageContext.request.contextPath}/js/SmoothScroll.min.js"></script>
-<!-- //smoothscroll -->
-
-<!-- start-smooth-scrolling -->
-<script src="${pageContext.request.contextPath}/js/move-top.js"></script>
-<script src="${pageContext.request.contextPath}/js/easing.js"></script>
-<script>
-    jQuery(document).ready(function ($) {
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-
-            $('html,body').animate({
-                scrollTop: $(this.hash).offset().top
-            }, 1000);
-        });
-    });
-</script>
-<!-- //end-smooth-scrolling -->
-
-<!-- smooth-scrolling-of-move-up -->
-<script>
-    $(document).ready(function () {
-        /*
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
-        */
-        $().UItoTop({
-            easingType: 'easeOutQuart'
-        });
-
-    });
-</script>
-<!-- //smooth-scrolling-of-move-up -->
 
 <!-- for bootstrap working -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>

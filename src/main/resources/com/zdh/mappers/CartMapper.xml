@@ -91,10 +91,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="checkItemInMyCart" parameterType="java.lang.String" resultType="com.zdh.bean.Cart">
-        select * from cart where item_id = #{item_id} and member_sid = #{sid};
+        select * from cart where item_id = #{itemId} and member_sid = #{sid};
     </select>
     <insert id="addCart" parameterType="com.zdh.bean.Cart">
-        insert into cart (item_id, member_sid, item_num) values (#{itemId}, #{member_sid}, #{itemNum});
+        insert into cart (item_id, member_sid, item_num) values (#{itemId}, #{memberSid}, #{itemNum});
     </insert>
     <update id="addCartNum" parameterType="com.zdh.bean.Cart">
         update cart set item_num = #{itemNum} where item_id = #{itemId} and member_sid = #{memberSid};
@@ -102,4 +102,7 @@
   <select id="selectMyCart" resultMap="BaseResultMap">
         select * from cart where is_checked = '0' and member_sid = #{memberSid};
     </select>
+  <delete id="removeCart" parameterType="java.lang.String">
+    delete from cart where item_id = #{itemId} and member_sid = #{sid};
+  </delete>
 </mapper>

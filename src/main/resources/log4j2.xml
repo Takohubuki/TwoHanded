@@ -12,7 +12,7 @@
 <!--            <PatternLayout pattern="${PATTERN}" />-->
 <!--        </Console>-->
         <Console name="consolePrint" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level %logger{36} - %msg%n" />
         </Console>
     </Appenders>
 

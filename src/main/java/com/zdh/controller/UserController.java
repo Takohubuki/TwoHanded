@@ -49,7 +49,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/signin")
-    public ModelAndView signIn(ModelAndView modelAndView){
+    public ModelAndView signIn(ModelAndView modelAndView, String message){
         modelAndView.setViewName("login");
         return modelAndView;
     }

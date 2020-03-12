@@ -1,17 +1,17 @@
 package com.zdh.controller;
 
 
-import com.zdh.bean.Cart;
+import com.zdh.bean.Item;
 import com.zdh.service.OrderService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/order")
@@ -20,12 +20,9 @@ public class OrderController {
     @Resource
     OrderService orderService;
 
-    //TODO 添加购物车内商品
     @RequestMapping("/addcart")
-    public ModelAndView addCart(@RequestParam("item_id") String itemId,
-                                @RequestParam(value = "item_num", required = false, defaultValue = "1") String itemNum,
-                                HttpSession session, ModelAndView modelAndView){
-        return orderService.addCart(itemId, itemNum, session, modelAndView);
+    public String addCart(HttpSession session, ModelAndView modelAndView, Item item){
+        return orderService.addCart(item, session, modelAndView);
     }
 
     //TODO 删除购物车内商品
@@ -34,19 +31,26 @@ public class OrderController {
         return "";
     }
 
-    //TODO 查看购物车内商品
-    @RequestMapping("/querycart")
-    public String queryCart(){
-        return "";
-    }
+//    @RequestMapping("/querycart")
+//    public String queryCart(){
+//        return "";
+//    }
 
     @RequestMapping(path = "/checkout", method = RequestMethod.POST)
-    public ModelAndView checkOut(@RequestParam("cartItem") List<Cart> cartItem, HttpSession session, ModelAndView modelAndView){
-        return orderService.checkOut(cartItem, session, modelAndView);
+    public ModelAndView checkOut(String cartList, HttpSession session, ModelAndView modelAndView, HttpServletRequest request){
+        Map parameterMap = request.getParameterMap();
+        System.out.println(parameterMap);
+        return orderService.checkOut(cartList, session, modelAndView);
     }
 
     @RequestMapping("/mycart")
     public ModelAndView myCart(HttpSession session, ModelAndView modelAndView){
         return orderService.myCart(session, modelAndView);
+    }
+
+    @RequestMapping("/checkFin")
+    public ModelAndView checkFin(ModelAndView modelAndView){
+        modelAndView.setViewName("checkout");
+        return modelAndView;
     }
 }
