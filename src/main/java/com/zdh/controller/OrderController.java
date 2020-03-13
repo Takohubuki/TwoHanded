@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/order")
@@ -37,10 +36,8 @@ public class OrderController {
 //    }
 
     @RequestMapping(path = "/checkout", method = RequestMethod.POST)
-    public ModelAndView checkOut(String cartList, HttpSession session, ModelAndView modelAndView, HttpServletRequest request){
-        Map parameterMap = request.getParameterMap();
-        System.out.println(parameterMap);
-        return orderService.checkOut(cartList, session, modelAndView);
+    public ModelAndView checkOut(String[] cbox, HttpSession session, ModelAndView modelAndView, HttpServletRequest request){
+        return orderService.checkOut(cbox, session, modelAndView);
     }
 
     @RequestMapping("/mycart")
@@ -53,4 +50,6 @@ public class OrderController {
         modelAndView.setViewName("checkout");
         return modelAndView;
     }
+
+    // TODO: 2020/3/12 /order/updateCartNum购物车物品修改
 }

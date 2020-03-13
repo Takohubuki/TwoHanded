@@ -9,7 +9,7 @@ public interface OrderService {
 
     ModelAndView myCart(HttpSession session, ModelAndView modelAndView);
 
-    ModelAndView checkOut(String cartList, HttpSession session, ModelAndView modelAndView);
+    ModelAndView checkOut(String[] cartList, HttpSession session, ModelAndView modelAndView);
 
     String addCart(Item item, HttpSession session, ModelAndView modelAndView);
 

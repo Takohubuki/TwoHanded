@@ -40,7 +40,7 @@ public class ItemsController {
      */
     @RequestMapping("/listwtsbytime")
     public ModelAndView listWtsByTime(ModelAndView modelAndView){
-        return modelAndView;
+        return itemService.listWtsByTime(modelAndView);
     }
 
     /**

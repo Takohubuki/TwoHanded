@@ -57,13 +57,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ModelAndView checkOut(String cartList, HttpSession session, ModelAndView modelAndView) {
+    public ModelAndView checkOut(String[] cartList, HttpSession session, ModelAndView modelAndView) {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
 
         //获取前台传来的购物车列表
-        String[] cartItems = cartList.split("&");
-        for (String cartItem : cartItems) {
+        for (String cartItem : cartList) {
             String[] s = cartItem.split("_");
             String itemId = s[0];
             String item_num = s[1];

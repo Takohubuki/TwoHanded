@@ -215,82 +215,86 @@
     </div>
 </div>
 <div class="shopping-car-container">
-    <div class="car-headers-menu">
-        <div class="row">
-            <div class="col-md-1 car-menu">
-                <label><input type="checkbox" id="check-goods-all" /><span id="checkAll">全选</span></label>
+    <form action="${pageContext.request.contextPath}/order/checkout" method="post">
+        <div class="car-headers-menu">
+            <div class="row">
+                <div class="col-md-1 car-menu">
+                    <label><input type="checkbox" id="check-goods-all" /><span id="checkAll">全选</span></label>
+                </div>
+                <div class="col-md-3 car-menu">商品信息</div>
+                <div class="col-md-2 car-menu">单价</div>
+                <div class="col-md-2 car-menu">数量</div>
+                <div class="col-md-2 car-menu">金额</div>
+                <div class="col-md-2 car-menu">操作</div>
             </div>
-            <div class="col-md-3 car-menu">商品信息</div>
-            <div class="col-md-2 car-menu">单价</div>
-            <div class="col-md-2 car-menu">数量</div>
-            <div class="col-md-2 car-menu">金额</div>
-            <div class="col-md-2 car-menu">操作</div>
         </div>
-    </div>
-    <div class="goods-content">
-        <!--goods display-->
-        <c:forEach var="item_list" items="${item_list}" varStatus="i">
-            <div class="goods-item">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="col-md-1 car-goods-info">
-                            <label>
-<%--                                <input type="checkbox" class="goods-list-item"/>--%>
-                                <input type="checkbox" class="cbox goods-list-item" value="${item_list.serialNum}_${item_num_list.get(i.count-1)}">
-                            </label>
-                        </div>
-                        <div class="col-md-3 car-goods-info goods-image-column">
-                            <img class="goods-image" src="${pageContext.request.contextPath}/${item_list.image}" style="width: 100px; height: 100px;" />
-                            <span id="goods-info">${item_list.name}</span>
-                        </div>
-                        <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-price">${item_list.price}</span></div>
-                        <div class="col-md-2 car-goods-info">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default cart_quantity_down">-</button>
-                                </div>
-                                <input type="text" class="form-control quantity_text" value="${item_num_list.get(i.count-1)}" dataValue="${item_list.serialNum}" priceValue="${item_list.price}">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default cart_quantity_up">+</button>
+        <div class="goods-content">
+            <!--goods display-->
+            <c:forEach var="item_list" items="${item_list}" varStatus="i">
+                <div class="goods-item">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-md-1 car-goods-info">
+                                <label>
+                                        <%--                                <input type="checkbox" class="goods-list-item"/>--%>
+                                    <input type="checkbox" name="cbox" class="cbox goods-list-item" value="${item_list.serialNum}_${item_num_list.get(i.count-1)}">
+                                </label>
+                            </div>
+                            <div class="col-md-3 car-goods-info goods-image-column">
+                                <img class="goods-image" src="${pageContext.request.contextPath}/${item_list.image}" style="width: 100px; height: 100px;" />
+                                <span id="goods-info">${item_list.name}</span>
+                            </div>
+                            <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-price">${item_list.price}</span></div>
+                            <div class="col-md-2 car-goods-info">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default cart_quantity_down">-</button>
+                                    </div>
+                                    <input type="text" class="form-control quantity_text" value="${item_num_list.get(i.count-1)}" dataValue="${item_list.serialNum}" priceValue="${item_list.price}">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default cart_quantity_up">+</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-total">item.singleGoodsMoney</span></div>
-                        <div class="col-md-2 car-goods-info">
-                            <button type="button" class="btn btn-danger item-delete">删除</button>
+                            <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-total">item.singleGoodsMoney</span></div>
+                            <div class="col-md-2 car-goods-info">
+                                <button type="button" class="btn btn-danger item-delete">删除</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-body bottom-menu-include">
-            <div class="col-md-1 check-all-bottom bottom-menu">
-                <label>
-                    <input type="checkbox" id="checked-all-bottom" />
-                    <span id="checkAllBottom">全选</span>
-                </label>
-            </div>
-            <div class="col-md-1 bottom-menu">
+            </c:forEach>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body bottom-menu-include">
+                <div class="col-md-1 check-all-bottom bottom-menu">
+                    <label>
+                        <input type="checkbox" id="checked-all-bottom" />
+                        <span id="checkAllBottom">全选</span>
+                    </label>
+                </div>
+                <div class="col-md-1 bottom-menu">
 				<span id="deleteMulty">
 						删除
 				</span>
-            </div>
-            <div class="col-md-6 bottom-menu">
+                </div>
+                <div class="col-md-6 bottom-menu">
 
-            </div>
-            <div class="col-md-2 bottom-menu">
-                <span>已选商品 <span id="selectGoodsCount">0</span> 件</span>
-            </div>
-            <div class="col-md-1 bottom-menu">
-                <span>合计：<span id="selectGoodsMoney">0.00</span></span>
-            </div>
-            <div class="col-md-1 bottom-menu submitData submitDis">
-                结算
+                </div>
+                <div class="col-md-2 bottom-menu">
+                    <span>已选商品 <span id="selectGoodsCount">0</span> 件</span>
+                </div>
+                <div class="col-md-1 bottom-menu">
+                    <span>合计：<span id="selectGoodsMoney">0.00</span></span>
+                </div>
+                <div class="col-md-1">
+                    <input class="btn btn-primary disabled" type="submit" id="subBtn" />
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+
+    <!--FIXME 删除购物车物品-->
 <%--    <!--删除确认弹框-->--%>
 <%--    <div class="modal fade" tabindex="-1" role="dialog" id="deleteItemTip" aria-labelledby="gridSystemModalLabel">--%>
 <%--        <div class="modal-dialog" role="document">--%>
@@ -380,9 +384,9 @@
         $(".quantity_text").focus(function () {
             oldNum = $(this).val();
         });
-        $(".submitData").click(function () {
-            checkOut();
-        });
+        // $(".submitData").click(function () {
+        //     checkOut();
+        // });
         $("input[type = checkbox]").change(function () {
             validateList();
         })
@@ -412,10 +416,12 @@
     function validateList() {
         let len = $( "input:checked" ).length;
         if (len <= 0){
-            $('.submitData').addClass('submitDis');
+            // $('.submitData').addClass('submitDis');
+            $("#subBtn").addClass('disabled');
             return true;
         }else {
-            $('.submitData').removeClass('submitDis');
+            // $('.submitData').removeClass('submitDis');
+            $('#subBtn').removeClass('disabled');
             return false;
         }
     }
