@@ -382,7 +382,40 @@
                     <div class="clearfix"></div>
                 </div>
                 <!-- //first section (nuts) -->
+<script>
+    let member = "<%=session.getAttribute("member")%>";
+    // let member = window.sessionStorage.getItem("member");
+    console.log(member);
+    $(function () {
+        $("input[name = addcart]").click(function () {
+            console.log(member);
+            if (member === "null"){
+                alert("请先登录！");
 
+            }else {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/order/addcart",
+                    type: "POST",
+                    data: {
+                        serialNum : $(this).parent().find("input[name = itemId]").val()
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        if (result === 'false'){
+                            alert("添加失败！")
+                        }else {
+                            alert("添加成功！");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+            }
+        })
+    });
+</script>
                 <!-- third section (oils) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
@@ -576,40 +609,7 @@
 <!-- //for bootstrap working -->
 <!-- //js-files -->
 
-<script>
-    let member = "<%=session.getAttribute("member")%>";
-    // let member = window.sessionStorage.getItem("member");
-    console.log(member);
-    $(function () {
-        $("input[name = addcart]").click(function () {
-            console.log(member);
-            if (member === "null"){
-                alert("请先登录！");
 
-            }else {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/order/addcart",
-                    type: "POST",
-                    data: {
-                        serialNum : $(this).parent().find("input[name = itemId]").val()
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        if (result === 'false'){
-                            alert("添加失败！")
-                        }else {
-                            alert("添加成功！");
-                        }
-                    },
-                    error: function (e) {
-                        console.log(e.status);
-                        console.log(e.responseText);
-                    }
-                });
-            }
-        })
-    });
-</script>
 </body>
 
 </html>

@@ -392,7 +392,7 @@
             <div class="single-infoagile">
                 <ul>
                     <li>
-                        当面交易
+                        点击量：${item.viewedTimes}
                     </li>
                     <li>
                         联系方式：
@@ -405,352 +405,34 @@
             </div>
             <div class="product-single-w3l">
                 <p>
-                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>This is a
-                    <label>Vegetarian</label> product.</p>
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                    商品描述：
+                </p>
                 <ul>
                     <li>
-                        Best for Biryani and Pulao.
-                    </li>
-                    <li>
-                        After cooking, Zeeba Basmati rice grains attain an extra ordinary length of upto 2.4 cm/~1 inch.
-                    </li>
-                    <li>
-                        Zeeba Basmati rice adheres to the highest food afety standards as your health is paramount to us.
-                    </li>
-                    <li>
-                        Contains only the best and purest grade of basmati rice grain of Export quality.
+                        ${item.describes}
                     </li>
                 </ul>
-                <p>
-                    <i class="fa fa-refresh" aria-hidden="true"></i>All food products are
-                    <label>non-returnable.</label>
-                </p>
+
             </div>
             <div class="occasion-cart">
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                    <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                    <form action="#" method="post">
                         <fieldset>
-                            <input type="hidden" name="cmd" value="_cart" />
-                            <input type="hidden" name="add" value="1" />
-                            <input type="hidden" name="business" value=" " />
-                            <input type="hidden" name="name" value="${item.name}" />
-                            <input type="hidden" name="price" value="${item.price}" />
-                            <input type="hidden" name="discount_amount" value="1.00" />
-                            <input type="hidden" name="currency_code" value="USD" />
-                            <input type="hidden" name="return" value=" " />
-                            <input type="hidden" name="cancel_return" value=" " />
-                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                            <input type="hidden" name="itemId" value="${item.serialNum}"/>
+                            <input type="hidden" name="itemName" value="${item.name}" />
+                            <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                         </fieldset>
                     </form>
                 </div>
-
             </div>
-
         </div>
         <div class="clearfix"></div>
     </div>
 </div>
 <!-- //Single Page -->
-<!-- special offers -->
-<div class="featured-section" id="projects">
-    <div class="container">
-        <!-- tittle heading -->
-        <h3 class="tittle-w3l">Add More
-            <span class="heading-style">
-					<i></i>
-					<i></i>
-					<i></i>
-				</span>
-        </h3>
-        <!-- //tittle heading -->
-        <div class="content-bottom-in">
-            <ul id="flexiselDemo1">
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../../images/s1.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Aashirvaad, 5g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$220.00</h6>
-                                <p>Save $40.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Aashirvaad, 5g" />
-                                        <input type="hidden" name="amount" value="220.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../../images/s4.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Kissan Tomato Ketchup, 950g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$99.00</h6>
-                                <p>Save $20.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Kissan Tomato Ketchup, 950g" />
-                                        <input type="hidden" name="amount" value="99.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../../images/s2.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Madhur Pure Sugar, 1g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$69.00</h6>
-                                <p>Save $20.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Madhur Pure Sugar, 1g" />
-                                        <input type="hidden" name="amount" value="69.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single2.html">
-                                <img src="../../images/s3.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single2.html">Surf Excel Liquid, 1.02L</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$187.00</h6>
-                                <p>Save $30.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Surf Excel Liquid, 1.02L" />
-                                        <input type="hidden" name="amount" value="187.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../../images/s8.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Cadbury Choclairs, 655.5g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$160.00</h6>
-                                <p>Save $60.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Cadbury Choclairs, 655.5g" />
-                                        <input type="hidden" name="amount" value="160.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single2.html">
-                                <img src="../../images/s6.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single2.html">Fair & Lovely, 80 g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$121.60</h6>
-                                <p>Save $30.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Fair & Lovely, 80 g" />
-                                        <input type="hidden" name="amount" value="121.60" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single.html">
-                                <img src="../../images/s5.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single.html">Sprite, 2.25L (Pack of 2)</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$180.00</h6>
-                                <p>Save $30.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Sprite, 2.25L (Pack of 2)" />
-                                        <input type="hidden" name="amount" value="180.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="w3l-specilamk">
-                        <div class="speioffer-agile">
-                            <a href="single2.html">
-                                <img src="../../images/s9.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="product-name-w3l">
-                            <h4>
-                                <a href="single2.html">Lakme Eyeconic Kajal, 0.35 g</a>
-                            </h4>
-                            <div class="w3l-pricehkj">
-                                <h6>$153.00</h6>
-                                <p>Save $40.00</p>
-                            </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="Lakme Eyeconic Kajal, 0.35 g" />
-                                        <input type="hidden" name="amount" value="153.00" />
-                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- //special offers -->
 
 
-<!-- copyright -->
-<div class="copy-right">
-    <div class="container">
-        <p>Copyright &copy; 2018.Company name All rights reserved.</p>
-    </div>
-</div>
-<!-- //copyright -->
 
 <!-- js-files -->
 <!-- jquery -->
@@ -775,40 +457,7 @@
 
     });
 </script>
-<!-- Large modal -->
-<!-- <script>
-    $('#').modal('show');
-</script> -->
-<!-- //popup modal (for signin & signup)-->
 
-<!-- cart-js -->
-<script src="${pageContext.request.contextPath}/js/minicart.js"></script>
-<script>
-    var cart_action = "${pageContext.request.contextPath}/order/checkout"
-    paypalm.minicartk.render({
-        action:cart_action,
-        <%--template: '<% for (var i= 0, idx = i + 1, len = items.length; i < len; i++, idx++) { %>        <li class="minicartk-item">            <div class="minicartk-details-name">                <a class="minicartk-name" href="<%= items[i].get("href") %>"><%= items[i].get("item_name") %></a>                <ul class="minicartk-attributes">                    <% if (items[i].get("item_number")) { %>                    <li>                        <%= items[i].get("item_number") %>                        <input type="hidden" name="item_number_<%= idx %>" value="<%= items[i].get("item_number") %>" />                    </li>                    <% } %>                    <% if (items[i].discount()) { %>                    <li>                        <%= config.strings.discount %> <%= items[i].discount(priceFormat) %>                        <input type="hidden" name="discount_amount_<%= idx %>" value="<%= items[i].discount() %>" />                    </li>                    <% } %>                    <% for (var options = items[i].options(), j = 0, len2 = options.length; j < len2; j++) { %>                        <li>                            <%= options[j].key %>: <%= options[j].value %>                            <input type="hidden" name="on<%= j %>_<%= idx %>" value="<%= options[j].key %>" />                            <input type="hidden" name="os<%= j %>_<%= idx %>" value="<%= options[j].value %>" />                        </li>                    <% } %>                </ul>            </div>            <div class="minicartk-details-quantity">                <input class="minicartk-quantity" data-minicartk-idx="<%= i %>" name="quantity_<%= idx %>" type="text" pattern="[0-9]*" value="<%= items[i].get("quantity") %>" autocomplete="off" />            </div>            <div class="minicartk-details-remove">                <button type="button" class="minicartk-remove" data-minicartk-idx="<%= i %>">&times;</button>            </div>            <div class="minicartk-details-price">                <span class="minicartk-price"><%= items[i].total(priceFormat) %></span>            </div>            <input type="hidden" name="item_name_<%= idx %>" value="<%= items[i].get("item_name") %>" />            <input type="hidden" name="amount_<%= idx %>" value="<%= items[i].amount() %>" />            <input type="hidden" name="shipping_<%= idx %>" value="<%= items[i].get("shipping") %>" />            <input type="hidden" name="shipping2_<%= idx %>" value="<%= items[i].get("shipping2") %>" />        </li>        <% } %>    </ul>    <div class="minicartk-footer">        <% if (hasItems) { %>            <div class="minicartk-subtotal">                <%= config.strings.subtotal %> <%= cart.total(totalFormat) %>            </div>            <button class="minicartk-submit" type="submit" data-minicartk-alt="<%= config.strings.buttonAlt %>"><%- config.strings.button %></button>        <% } else { %>            <p class="minicartk-empty-text"><%= config.strings.empty %></p>        <% } %>    </div>    <input type="hidden" name="cmd" value="_cart" />    <input type="hidden" name="upload" value="1" />    <% for (var key in settings) { %>        <input type="hidden" name="<%= key %>" value="<%= settings[key] %>" />    <% } %></form>'--%>
-        <%--        template:myTemple--%>
-    }); //use only unique class names other than paypalm.minicartk.Also Replace same class name in css and minicart.min.js
-
-    paypalm.minicartk.cart.on('checkout', function (evt) {
-        var items = this.items(),
-            len = items.length,
-            total = 0,
-            i;
-
-        // Count the number of each item in the cart
-        for (i = 0; i < len; i++) {
-            total += items[i].get('quantity');
-        }
-
-        // if (total < 3) {
-        //     alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-        //     evt.preventDefault();
-        // }
-    });
-</script>
-<!-- //cart-js -->
 
 <!-- password-script -->
 <script>

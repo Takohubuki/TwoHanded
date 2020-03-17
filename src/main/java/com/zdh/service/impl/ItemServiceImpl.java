@@ -32,12 +32,11 @@ public class ItemServiceImpl implements ItemService {
 
         Item item = itemMapper.selectBySerialNum(itemId);
 
+        item.setViewedTimes(item.getViewedTimes() + 1);
+        itemMapper.updateItemInfo(item);
+
         String kind = item.getKind();
         List<Item> items = recommendSameKind(kind, item);
-
-//        List<Item> recommand_items = itemMapper.RecommandSameKind(kind);
-//        recommand_items.remove(item);
-
 
         modelAndView.addObject("item", item);
         modelAndView.addObject("recommand_items",items);
@@ -125,7 +124,11 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ModelAndView wtbItem(String itemId, ModelAndView modelAndView) {
         Item wtb_item = itemMapper.selectBySerialNum(itemId);
-        modelAndView.addObject("item",wtb_item);
+
+        wtb_item.setViewedTimes(wtb_item.getViewedTimes() + 1);
+        itemMapper.updateItemInfo(wtb_item);
+
+        modelAndView.addObject("item", wtb_item);
         modelAndView.setViewName("wtbItem");
         return modelAndView;
     }
@@ -179,11 +182,6 @@ public class ItemServiceImpl implements ItemService {
         item.setUndercarriageReason("待审核");
 
         itemMapper.addPublish(item);
-//        List<Item> wtb_item = itemMapper.select3WtbItemByTime();
-//        List<Item> wts_item = itemMapper.select3WtsItemByTime();
-//        modelAndView.addObject("wtb_item",wtb_item);
-//        modelAndView.addObject("wts_item",wts_item);
-//        modelAndView.setViewName("redirect:/");
         return getIndexItem(modelAndView);
     }
 

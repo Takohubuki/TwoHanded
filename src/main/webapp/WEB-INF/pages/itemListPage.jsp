@@ -48,18 +48,12 @@
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                             <form action="#" method="post">
                                 <fieldset>
-                                    <input type="hidden" name="cmd" value="_cart" />
-                                    <input type="hidden" name="add" value="1" />
-<%--                                    <input type="hidden" name="business" value="${itemlist.serialNum}" />--%>
-                                    <input type="hidden" name="item_name" value="${itemlist.name}" />
-                                    <input type="hidden" name="amount" value="${itemlist.price}" />
-                                    <input type="hidden" name="item_id" value="${itemlist.serialNum}"/>
-                                    <input type="hidden" name="currency_code" value="CNY" />
-                                    <input type="hidden" name="return" value=" " />
-                                    <input type="hidden" name="cancel_return" value=" " />
+                                    <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
+                                    <input type="hidden" name="itemName" value="${itemlist.name}" />
                                     <c:if test="${itemlist.conditions == '出售'}">
-                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                                     </c:if>
+
                                 </fieldset>
                             </form>
                         </div>
@@ -122,29 +116,40 @@
 </script> -->
 <!-- //popup modal (for signin & signup)-->
 
-<!-- cart-js -->
-<script src="${pageContext.request.contextPath}/js/minicart.js"></script>
 <script>
-    paypalm.minicartk.render(); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
+    let member = "<%=session.getAttribute("member")%>";
+    // let member = window.sessionStorage.getItem("member");
+    console.log(member);
+    $(function () {
+        $("input[name = addcart]").click(function () {
+            console.log(member);
+            if (member === "null"){
+                alert("请先登录！");
 
-    paypalm.minicartk.cart.on('checkout', function (evt) {
-        var items = this.items(),
-            len = items.length,
-            total = 0,
-            i;
-
-        // Count the number of each item in the cart
-        for (i = 0; i < len; i++) {
-            total += items[i].get('quantity');
-        }
-
-        if (total < 3) {
-            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-            evt.preventDefault();
-        }
+            }else {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/order/addcart",
+                    type: "POST",
+                    data: {
+                        serialNum : $(this).parent().find("input[name = itemId]").val()
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        if (result === 'false'){
+                            alert("添加失败！")
+                        }else {
+                            alert("添加成功！");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+            }
+        })
     });
-</script>
-<!-- //cart-js -->
+</script><!-- //cart-js -->
 
 <!-- password-script -->
 <script>

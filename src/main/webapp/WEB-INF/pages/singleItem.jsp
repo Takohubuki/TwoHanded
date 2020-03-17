@@ -314,7 +314,7 @@
             <div class="single-infoagile">
                 <ul>
                     <li>
-                        交易方式：当面交易
+                        点击量：${item.viewedTimes}
                     </li>
 
                     <li>
@@ -337,18 +337,12 @@
             </div>
             <div class="occasion-cart">
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                    <form action="${pageContext.request.contextPath}/order/addcart" method="post">
+                    <form action="#" method="post">
                         <fieldset>
-                            <input type="hidden" name="cmd" value="_cart" />
-                            <input type="hidden" name="add" value="1" />
-                            <input type="hidden" name="business" value="${item.serialNum}" />
-                            <input type="hidden" name="item_name" value="${item.name}" />
-                            <input type="hidden" name="amount" value="${item.price}" />
-                            <input type="hidden" name="item_id" value="${item.serialNum}"/>
-                            <input type="hidden" name="currency_code" value="CNY" />
-                            <input type="hidden" name="return" value=" " />
-                            <input type="hidden" name="cancel_return" value=" " />
-                            <input type="submit" name="submit" value="Add to cart" class="button" />
+                            <input type="hidden" name="itemId" value="${item.serialNum}"/>
+                            <input type="hidden" name="itemName" value="${item.name}" />
+                            <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
+                            <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                         </fieldset>
                     </form>
                 </div>
@@ -359,6 +353,41 @@
         <div class="clearfix"></div>
     </div>
 </div>
+<script>
+    let member = "<%=session.getAttribute("member")%>";
+    // let member = window.sessionStorage.getItem("member");
+    console.log(member);
+    $(function () {
+        $("input[name = addcart]").click(function () {
+            console.log(member);
+            if (member === "null"){
+                alert("请先登录！");
+
+            }else {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/order/addcart",
+                    type: "POST",
+                    data: {
+                        serialNum : $(this).parent().find("input[name = itemId]").val()
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        if (result === 'false'){
+                            alert("添加失败！")
+                        }else {
+                            alert("添加成功！");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+            }
+        })
+    });
+</script>
+
 <!-- //Single Page -->
 <!-- special offers -->
 <div class="featured-section" id="projects">
@@ -446,32 +475,6 @@
 </script> -->
 <!-- //popup modal (for signin & signup)-->
 
-<!-- cart-js -->
-<script src="${pageContext.request.contextPath}/js/minicart.js"></script>
-<script>
-    var myAction = '${pageContext.request.contextPath}/order/checkout'
-    paypalm.minicartk.render({
-        action:myAction
-    }); //use only unique class names other than paypal1.minicart1.Also Replace same class name in css and minicart.min.js
-
-    paypalm.minicartk.cart.on('checkout', function (evt) {
-        var items = this.items(),
-            len = items.length,
-            total = 0,
-            i;
-
-        // Count the number of each item in the cart
-        for (i = 0; i < len; i++) {
-            total += items[i].get('quantity');
-        }
-
-        // if (total < 3) {
-        //     alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-        //     evt.preventDefault();
-        // }
-    });
-</script>
-<!-- //cart-js -->
 
 <!-- password-script -->
 <script>

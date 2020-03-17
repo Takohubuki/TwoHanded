@@ -45,12 +45,6 @@ $(function () {
             $(".cart_quantity_up").addClass("disabled");
         }
     });
-    // $(".submitData").click(function () {
-    //     checkOut();
-    // });
-    $("input[type = checkbox]").change(function () {
-        validateList();
-    })
 });
 
 function changeNum(id, num) {
