@@ -86,12 +86,12 @@
     update cart
     set item_id = #{itemId,jdbcType=VARCHAR},
       member_sid = #{memberSid,jdbcType=VARCHAR},
-      `number` = #{number,jdbcType=INTEGER},
+      item_num = #{itemNum,jdbcType=INTEGER},
       is_checked = #{isChecked,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="checkItemInMyCart" parameterType="java.lang.String" resultType="com.zdh.bean.Cart">
-        select * from cart where item_id = #{itemId} and member_sid = #{sid};
+    <select id="checkItemInMyCart" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from cart where member_sid = #{sid} and item_id = #{itemId};
     </select>
     <insert id="addCart" parameterType="com.zdh.bean.Cart">
         insert into cart (item_id, member_sid, item_num) values (#{itemId}, #{memberSid}, #{itemNum});

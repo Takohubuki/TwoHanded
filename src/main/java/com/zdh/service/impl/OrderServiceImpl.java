@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
         String sid = member.getSid();
         String itemId = item.getSerialNum();
 
-        Cart cart = cartMapper.checkItemInMyCart(itemId, sid);
+        Cart cart = cartMapper.checkItemInMyCart(sid, itemId);
         if (cart == null){
             Cart new_item = new Cart();
             new_item.setMemberSid(member.getSid());
@@ -110,6 +110,19 @@ public class OrderServiceImpl implements OrderService {
             cart.setItemNum(cart.getItemNum() + 1);
             cartMapper.addCartNum(cart);
         }
+        return "success";
+    }
+
+    @Override
+    public String updateCartNum(String id, String num, HttpSession session) {
+
+        Member member = (Member) session.getAttribute("member");
+
+        String sid = member.getSid();
+        Cart cart = cartMapper.checkItemInMyCart(sid, id);
+        cart.setItemNum(Integer.valueOf(num));
+        cartMapper.updateByPrimaryKey(cart);
+
         return "success";
     }
 

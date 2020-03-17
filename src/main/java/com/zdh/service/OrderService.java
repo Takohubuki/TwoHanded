@@ -13,4 +13,5 @@ public interface OrderService {
 
     String addCart(Item item, HttpSession session, ModelAndView modelAndView);
 
+    String updateCartNum(String id, String num, HttpSession session);
 }

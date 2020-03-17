@@ -215,7 +215,7 @@
     </div>
 </div>
 <div class="shopping-car-container">
-    <form action="${pageContext.request.contextPath}/order/checkout" method="post">
+    <form action="#" method="post" id="form">
         <div class="car-headers-menu">
             <div class="row">
                 <div class="col-md-1 car-menu">
@@ -251,12 +251,12 @@
                                         <button type="button" class="btn btn-default cart_quantity_down">-</button>
                                     </div>
                                     <input type="text" class="form-control quantity_text" value="${item_num_list.get(i.count-1)}" dataValue="${item_list.serialNum}" priceValue="${item_list.price}">
-                                    <div class="input-group-btn">
+                                    <div class="input-group-btn" itemNum="${item_list.number}">
                                         <button type="button" class="btn btn-default cart_quantity_up">+</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-total">item.singleGoodsMoney</span></div>
+                            <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-total" id="${item_list.serialNum}" price="${item_list.price}">${item_num_list.get(i.count-1) * item_list.price}</span></div>
                             <div class="col-md-2 car-goods-info">
                                 <button type="button" class="btn btn-danger item-delete">删除</button>
                             </div>
@@ -287,8 +287,8 @@
                 <div class="col-md-1 bottom-menu">
                     <span>合计：<span id="selectGoodsMoney">0.00</span></span>
                 </div>
-                <div class="col-md-1">
-                    <input class="btn btn-primary disabled" type="submit" id="subBtn" />
+                <div class="col-md-1 bottom-menu">
+                    <button class="btn btn-primary" id="subBtn" onclick="check()">结算</button>
                 </div>
             </div>
         </div>
@@ -351,111 +351,12 @@
 </div>
 
 <script>
-    let oldNum = 0;
-    let num = 0;
-    let id = '';
-    let cartList = [];
-    let cartItem = '';
-
-    $(function () {
-        $(".cart_quantity_up").click(function () {
-            num = $(this).parent().parent().find("input").val();
-            id = $(this).parent().parent().find("input").attr("dataValue");
-
-            num = parseInt(num) + 1;
-            $(this).parent().find("input").val(num);
-            changeNum(id, num);
-        });
-        $(".cart_quantity_down").click(function () {
-            num = $(this).parent().parent().find("input").val();
-            id = $(this).parent().parent().find("input").attr("dataValue");
-
-            num = parseInt(num) - 1;
-            $(this).parent().parent().find("input").val(num);
-            changeNum(id, num);
-        });
-        $(".quantity_text").blur(function () {
-            num = $(this).val();
-            if (oldNum !== num){
-                id = $(this).attr("dataValue");
-                changeNum(id, num);
-            }
-        });
-        $(".quantity_text").focus(function () {
-            oldNum = $(this).val();
-        });
-        // $(".submitData").click(function () {
-        //     checkOut();
-        // });
-        $("input[type = checkbox]").change(function () {
-            validateList();
-        })
-    });
-
-    function changeNum(id, num) {
-        console.log(id);
-        console.log(num);
-        $.ajax({
-            url : "${pageContext.request.contextPath}/order/updateCartNum",
-            type : "POST",
-            data : {
-                'id' : id,
-                'num' : num
-            },
-            success : function(result) {
-                console.log(result);
-            },
-            error : function(e){
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        })
-    }
-
-    //复选框校验
-    function validateList() {
-        let len = $( "input:checked" ).length;
-        if (len <= 0){
-            // $('.submitData').addClass('submitDis');
-            $("#subBtn").addClass('disabled');
-            return true;
-        }else {
-            // $('.submitData').removeClass('submitDis');
-            $('#subBtn').removeClass('disabled');
-            return false;
-        }
-    }
-
-    //购物车结算
-    function checkOut(){
-
-        $( "input:checked" ).each(function () {
-            cartItem = cartItem + $(this).val() + '&';
-        });
-        console.log(cartItem);
-        $.ajax({
-            url : "${pageContext.request.contextPath}/order/checkout",
-            type : "POST",
-            data : {
-                'cartList' : cartItem
-            },
-            async: false,
-            success : function(result) {
-                console.log(result);
-                window.location.href = "${pageContext.servletContext.contextPath}/order/checkFin";
-            },
-            error : function(e){
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        })
-    }
 
 </script>
 
 <!-- js-files -->
 
-
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 
 

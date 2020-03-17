@@ -51,5 +51,9 @@ public class OrderController {
         return modelAndView;
     }
 
-    // TODO: 2020/3/12 /order/updateCartNum购物车物品修改
+    @RequestMapping(path = "/updateCartNum", method = RequestMethod.POST)
+    public String updateCartNum(String id, String num, HttpSession session){
+        return orderService.updateCartNum(id, num, session);
+    }
+
 }
