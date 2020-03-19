@@ -71,6 +71,9 @@
                                                 <th class="sorting" tabindex="4" aria-controls="example2">
                                                     描述
                                                 </th>
+                                                <th tabindex="5" aria-controls="example2">
+                                                    操作
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>

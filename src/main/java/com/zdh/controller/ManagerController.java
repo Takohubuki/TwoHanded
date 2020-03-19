@@ -16,8 +16,9 @@ public class ManagerController {
     ManagerService managerService;
 
     @RequestMapping("/managerlogin")
-    public String mamager(){
-        return "managerLogin";
+    public ModelAndView manager(ModelAndView modelAndView){
+        modelAndView.setViewName("managerLogin");
+        return modelAndView;
     }
 
 
@@ -51,7 +52,7 @@ public class ManagerController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping("/manage/order")
+    @RequestMapping("/manage/manageOrder")
     public ModelAndView order(ModelAndView modelAndView){
         return managerService.order(modelAndView);
     }

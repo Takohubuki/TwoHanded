@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>User Profile</title>
+    <title>个人中心</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -83,8 +83,6 @@
                     </a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/user/logout"><i class="fa fa-circle-o text-red"></i> <span>注销</span></a></li>
-<%--                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>--%>
-<%--                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>--%>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -107,11 +105,6 @@
         </section>
         <!-- /.content -->
     </div>
-
-
-
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
@@ -138,7 +131,7 @@
         $("#page").load("${pageContext.request.contextPath}/user/updateprofile");
     }
     function allorder() {
-        $("#page").load("${pageContext.request.contextPath}/user/allorder");
+        $("#page").load("${pageContext.request.contextPath}/order/myOrder");
     }
 </script>
 </body>

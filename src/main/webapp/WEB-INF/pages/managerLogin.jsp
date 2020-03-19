@@ -26,7 +26,7 @@
             <div class="col-md-5">
                 <div class="card p-4">
                     <div class="card-header text-center text-uppercase h4 font-weight-light">
-                        后台管理
+                        HBU二手交易平台后台管理系统
                     </div>
 
                     <div class="card-body py-5">

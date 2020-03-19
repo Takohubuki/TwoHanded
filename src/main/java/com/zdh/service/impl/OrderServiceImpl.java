@@ -126,6 +126,17 @@ public class OrderServiceImpl implements OrderService {
         return "success";
     }
 
+    // TODO: 2020/3/18 查看订单要求显示商品名称 
+    @Override
+    public ModelAndView myOrder(HttpSession session, ModelAndView modelAndView) {
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+        List<Order> orderList = orderMapper.selectMyOrder(sid);
+        modelAndView.addObject("my_order_list",orderList);
+        modelAndView.setViewName("allOrder");
+        return modelAndView;
+    }
+
     private Order generateOrder(String sid, String itemId, int itemNum){
         //生成新订单
         Order new_order = new Order();

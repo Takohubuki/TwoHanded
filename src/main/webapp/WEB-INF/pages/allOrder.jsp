@@ -71,21 +71,19 @@
                                     <c:forEach var="order_list" items="${my_order_list}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                ${order_list.order_id}
+                                                ${order_list.orderId}
                                             </td>
                                             <td>
-                                                ${order_list.item_id}
+                                                ${order_list.itemId}
                                             </td>
                                             <td>
-                                                <c:if test="${order_list.num2item != null}">
-                                                    ${order_list.num2item}
-                                                </c:if>
+                                                ${order_list.sumPrice}
                                             </td>
                                             <td>
-                                                ${order_list.item_num}
+                                                ${order_list.itemNum}
                                             </td>
                                             <td>
-                                                ${order_list}
+                                                ${order_list.isReceived}
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -136,4 +134,5 @@
         })
     })
 </script>
+</body>
 </html>

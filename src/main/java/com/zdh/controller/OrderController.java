@@ -56,4 +56,11 @@ public class OrderController {
         return orderService.updateCartNum(id, num, session);
     }
 
+    // TODO: 2020/2/21 需要继续编写
+    @RequestMapping("/myOrder")
+    public ModelAndView myOrder(HttpSession session, ModelAndView modelAndView){
+        return orderService.myOrder(session, modelAndView);
+    }
+
+
 }
