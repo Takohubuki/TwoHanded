@@ -66,10 +66,10 @@
 
                                             </td>
                                             <td>
-                                                <c:if test="${memberlist.isActive == 0}">
+                                                <c:if test="${memberlist.isActive == false}">
                                                     封禁
                                                 </c:if>
-                                                <c:if test="${memberlist.isActive == 1}">
+                                                <c:if test="${memberlist.isActive == true}">
                                                     正常
                                                 </c:if>
                                             </td>
@@ -98,27 +98,21 @@
     </div>
 
 </section>
-
 <script>
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable();
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
-            'autoWidth'   : false
+            'autoWidth'   : false,
+            'language'    : language
         })
-    })
+    });
 
-    function shutmember(sid) {
-        $("#page").load("${pageContext.request.contextPath}/manage/shutmember?sid="+sid);
 
-    }
-    function activemember(sid) {
-        $("#page").load("${pageContext.request.contextPath}/manage/activemember?sid="+sid);
-    }
 </script>
 </body>
 </html>

@@ -208,4 +208,7 @@
   <update id="updateRecentLogin" parameterType="com.zdh.bean.Member">
         update member set recent_login = #{recentLogin} where sid=#{sid};
     </update>
+  <select id="selectAllMember" resultMap="BaseResultMap">
+    select * from member;
+  </select>
 </mapper>

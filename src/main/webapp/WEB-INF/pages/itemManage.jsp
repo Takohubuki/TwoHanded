@@ -57,33 +57,33 @@
                                                 <img src="${pageContext.request.contextPath}/${itemlist.image}" style="width: 80px;height: 75px">
                                             </td>
                                             <td>
-                                                    ${itemlist.name}
+                                                ${itemlist.name}
                                             </td>
                                             <td>
-                                                    ${itemlist.kind}
+                                                ${itemlist.kind}
                                             </td>
                                             <td>
-                                                    ${itemlist.price}
+                                                ${itemlist.price}
                                             </td>
                                             <td>
-                                                    ${itemlist.quality}
+                                                ${itemlist.quality}
                                             </td>
                                             <td>
-                                                <c:if test="${itemlist.isUndercarriage == 0}">
+                                                <c:if test="${itemlist.isUndercarriage == false}">
                                                     未下架
                                                 </c:if>
-                                                <c:if test="${itemlist.isUndercarriage == 1}">
+                                                <c:if test="${itemlist.isUndercarriage == true}">
                                                     已下架
                                                 </c:if>
                                             </td>
                                             <td>
-                                                    ${itemlist.serialNum}
+                                                ${itemlist.serialNum}
                                             </td>
                                             <td>
                                                 <fmt:formatDate value="${itemlist.publishTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
                                             </td>
                                             <td>
-                                                    ${itemlist.publisher}
+                                                ${itemlist.publisher}
                                             </td>
                                             <td>
                                                 <a href="javascript:offitem(${itemlist.serialNum})" role="button" class="btn btn-primary">
@@ -110,20 +110,18 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable();
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
-            'autoWidth'   : false
+            'autoWidth'   : false,
+            'language'    : language
         })
-    })
+    });
 
-    function offitem(item_id) {
-        $("#page").load("${pageContext.request.contextPath}/manage/offitem?item_id="+item_id);
-    }
 </script>
 </body>
 </html>

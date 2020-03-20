@@ -176,7 +176,7 @@
                                 <p>今日发布求购数</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-pushed"></i>
+                                <i class="fa fa-book"></i>
                             </div>
                         </div>
                     </div>
@@ -213,10 +213,21 @@
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="${pageContext.request.contextPath}/js/demo.js"></script>
 <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 
 <script>
+    function offitem(item_id) {
+        $("#page").load("${pageContext.request.contextPath}/manage/offitem?item_id="+item_id);
+    }
+    function shutmember(sid) {
+        $("#page").load("${pageContext.request.contextPath}/manage/shutmember?sid="+sid);
+
+    }
+    function activemember(sid) {
+        $("#page").load("${pageContext.request.contextPath}/manage/activemember?sid="+sid);
+    }
+
     function member_manage() {
         $("#page").load("${pageContext.request.contextPath}/manage/member");
     }
@@ -232,6 +243,7 @@
     function wtbItem() {
         $("#page").load("${pageContext.request.contextPath}/manage/wtbitem");
     }
+
 </script>
 </body>
 </html>

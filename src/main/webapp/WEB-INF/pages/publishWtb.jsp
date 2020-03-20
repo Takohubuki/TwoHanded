@@ -9,33 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/icons/ionicons.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dataTables.bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_all-skins.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Main content -->
     <section class="content">
@@ -118,47 +91,20 @@
     <!-- /.content -->
     <div class="control-sidebar-bg"></div>
 
-<!-- jQuery 3 -->
-<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<!-- DataTables -->
-<script src="${pageContext.request.contextPath}/js/jquery.dataTables.js"></script>
-<script src="${pageContext.request.contextPath}/js/dataTables.bootstrap.js"></script>
-<!-- SlimScroll -->
-<script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
-<!-- FastClick -->
-<script src="${pageContext.request.contextPath}/js/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="${pageContext.request.contextPath}/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${pageContext.request.contextPath}/js/demo.js"></script>
-<!-- page script -->
 <script>
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
-            'autoWidth'   : false
+            'autoWidth'   : false,
+            'language'    : language
         })
-    })
-    function offmyitem(item_id) {
-        $("#page").load("${pageContext.request.contextPath}/user/offmyitem?item_id="+item_id);
-    }
-    function updateitem(item_id) {
-        $("#page").load("${pageContext.request.contextPath}/items/update?item_id="+item_id);
-        <%--$.post("${pageContext.request.contextPath}/items/update",--%>
-        <%--    {--%>
-        <%--        item_id:string--%>
-        <%--    },--%>
-        <%--    function () {--%>
-        <%--    alert("error!")--%>
-        <%--})--%>
-    }
+    });
+
 </script>
 </body>
 </html>

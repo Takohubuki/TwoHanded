@@ -25,6 +25,8 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/_all-skins.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dataTables.bootstrap.css">
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -117,10 +119,24 @@
 <script src="${pageContext.request.contextPath}/js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/js/adminlte.js"></script>
+<!-- DataTables -->
+<script src="${pageContext.request.contextPath}/js/jquery.dataTables.js"></script>
+<script src="${pageContext.request.contextPath}/js/dataTables.bootstrap.js"></script>
+
 <!-- AdminLTE for demo purposes -->
-<script src="${pageContext.request.contextPath}/js/demo.js"></script>
+<script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
+<!-- SlimScroll -->
+<script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
+
 
 <script type="text/javascript">
+    function offmyitem(item_id) {
+        $("#page").load("${pageContext.request.contextPath}/user/offmyitem?item_id="+item_id);
+    }
+    function updateitem(item_id) {
+        $("#page").load("${pageContext.request.contextPath}/items/update?item_id="+item_id);
+    }
+
     function myWts() {
         $("#page").load("${pageContext.request.contextPath}/user/publish/wts");
     }

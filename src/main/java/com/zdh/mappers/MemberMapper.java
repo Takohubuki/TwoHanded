@@ -29,4 +29,6 @@ public interface MemberMapper {
     void updateProfile(Member sid);
 
     void updateRecentLogin(Member member);
+
+    List<Member> selectAllMember();
 }

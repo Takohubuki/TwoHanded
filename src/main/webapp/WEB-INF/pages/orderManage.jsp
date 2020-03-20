@@ -32,7 +32,7 @@
                                         <th class="sorting" tabindex="4" aria-controls="example2">
                                             下单时间
                                         </th>
-                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                        <th tabindex="5" aria-controls="example2">
                                             订单金额
                                         </th>
                                     </tr>
@@ -41,22 +41,22 @@
                                     <c:forEach var="orderlist" items="${orderlist}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                    ${orderlist.orderId}
+                                                ${orderlist.orderId}
                                             </td>
                                             <td>
-                                                    ${orderlist.buyerId}
+                                                ${orderlist.buyerId}
                                             </td>
                                             <td>
-                                                    ${orderlist.itemId}
+                                                ${orderlist.itemId}
                                             </td>
                                             <td>
-                                                    ${orderlist.itemNum}
+                                                ${orderlist.itemNum}
                                             </td>
                                             <td>
                                                 <fmt:formatDate value="${orderlist.createTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
                                             </td>
                                             <td>
-                                                    ${orderlist.sumPrice}
+                                                ${orderlist.sumPrice}
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -75,19 +75,19 @@
     </div>
 
 </section>
-
 <script>
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable();
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,
-            'searching'   : false,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
-            'autoWidth'   : false
+            'autoWidth'   : false,
+            'language'    : language
         })
-    })
+    });
+
 </script>
-</body>
 </html>

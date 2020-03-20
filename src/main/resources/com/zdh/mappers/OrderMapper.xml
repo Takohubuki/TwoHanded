@@ -174,10 +174,10 @@
       is_checked = #{isChecked,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="selectMyOrder" resultMap="BaseResultMap">
+  <select id="selectMyOrder" resultMap="BaseResultMap">
         select * from `order` where buyer_id = #{sid};
     </select>
-    <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
+  <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
     insert into
     `order` (id, order_id, sum_price,
       item_num, item_id, buyer_id,
@@ -189,4 +189,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT},
       #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}
       )  </insert>
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select * from `order`;
+  </select>
 </mapper>

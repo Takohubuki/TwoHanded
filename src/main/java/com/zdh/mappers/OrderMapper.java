@@ -20,4 +20,6 @@ public interface OrderMapper {
     void generateNewOrder(Order new_order);
 
     List<Order> selectMyOrder(String sid);
+
+    List<Order> selectAllOrder();
 }

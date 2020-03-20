@@ -4,7 +4,10 @@ import com.zdh.bean.Item;
 import com.zdh.bean.Manager;
 import com.zdh.bean.Member;
 import com.zdh.bean.Order;
+import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.ManagerMapper;
+import com.zdh.mappers.MemberMapper;
+import com.zdh.mappers.OrderMapper;
 import com.zdh.service.ManagerService;
 import com.zdh.util.PasswordUtils;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,15 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Resource
     ManagerMapper managerMapper;
+
+    @Resource
+    ItemMapper itemMapper;
+
+    @Resource
+    OrderMapper orderMapper;
+
+    @Resource
+    MemberMapper memberMapper;
 
     @Override
     public ModelAndView login(String username, String password, ModelAndView modelAndView, HttpSession session) {
@@ -52,11 +64,10 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView order(ModelAndView modelAndView) {
-        List<Order> orders = managerMapper.selectAllOrder();
+        List<Order> orders = orderMapper.selectAllOrder();
         modelAndView.addObject("orderlist",orders);
         modelAndView.setViewName("orderManage");
         return modelAndView;
-
     }
 
     @Override
@@ -66,7 +77,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView manageMember(ModelAndView modelAndView) {
-        List<Member> members = managerMapper.selectAllMember();
+        List<Member> members = memberMapper.selectAllMember();
         modelAndView.addObject("memberlist",members);
         modelAndView.setViewName("memberManage");
         return modelAndView;
@@ -74,7 +85,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView manageWtsItem(ModelAndView modelAndView) {
-        List<Item> items = managerMapper.selectAllSellItems();
+        List<Item> items = itemMapper.selectWtsAllByTime();
         modelAndView.addObject("itemlist",items);
         modelAndView.setViewName("itemManage");
         return modelAndView;
@@ -83,7 +94,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView manageWtbItem(ModelAndView modelAndView) {
-        List<Item> items = managerMapper.selectAllBuyItems();
+        List<Item> items = itemMapper.selectWtbAllByTime();
         modelAndView.addObject("itemlist",items);
         modelAndView.setViewName("itemManage");
         return modelAndView;
