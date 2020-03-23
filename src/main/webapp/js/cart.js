@@ -2,6 +2,8 @@ let oldNum = 0;
 let num = 0;
 let id = '';
 let itemNum = 0;
+let atLeastOne = false;
+
 
 $(function () {
     $(".cart_quantity_up").click(function () {
@@ -45,6 +47,14 @@ $(function () {
             $(".cart_quantity_up").addClass("disabled");
         }
     });
+    $('#check-goods-all').on('change', function() {
+        if(this.checked) {
+            $('#checked-all-bottom').prop('checked', true)
+        } else {
+            $('#checked-all-bottom').prop('checked', false)
+        }
+    });
+
 });
 
 function changeNum(id, num) {
@@ -71,7 +81,9 @@ function changeNum(id, num) {
 
 
 function check(){
-    var atLeastOne = false;
+
+    atLeastOne = false;
+
     $(".cbox").each(function() {
         var isCheck = $(this).prop("checked");
         if(isCheck === true){

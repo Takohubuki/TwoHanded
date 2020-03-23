@@ -59,11 +59,11 @@
     </bean>
 
     <mvc:interceptors>
-        <bean class="com.zdh.controller.LoginInterceptor">
+        <bean class="com.zdh.Interceptor.LoginInterceptor">
         </bean>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.zdh.controller.LoginInterceptor">
+            <bean class="com.zdh.Interceptor.LoginInterceptor">
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>

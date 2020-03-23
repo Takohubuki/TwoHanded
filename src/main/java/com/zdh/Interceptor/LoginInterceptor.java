@@ -1,4 +1,4 @@
-package com.zdh.controller;
+package com.zdh.Interceptor;
 
 import com.zdh.bean.Member;
 import org.springframework.web.servlet.HandlerInterceptor;

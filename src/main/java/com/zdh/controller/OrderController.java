@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -36,8 +37,8 @@ public class OrderController {
 //    }
 
     @RequestMapping(path = "/checkout", method = RequestMethod.POST)
-    public ModelAndView checkOut(String[] cbox, HttpSession session, ModelAndView modelAndView, HttpServletRequest request){
-        return orderService.checkOut(cbox, session, modelAndView);
+    public void checkOut(String[] cbox, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        orderService.checkOut(cbox, session, response, request);
     }
 
     @RequestMapping("/mycart")

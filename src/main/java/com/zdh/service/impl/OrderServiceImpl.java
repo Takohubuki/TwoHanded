@@ -7,16 +7,17 @@ import com.zdh.bean.Order;
 import com.zdh.mappers.CartMapper;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.OrderMapper;
+import com.zdh.pay.AliPayDemo;
 import com.zdh.service.OrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -57,10 +58,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public ModelAndView checkOut(String[] cartList, HttpSession session, ModelAndView modelAndView) {
+    public void checkOut(String[] cartList, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
 
+        Date date = new Date();
         //获取前台传来的购物车列表
         for (String cartItem : cartList) {
             String[] s = cartItem.split("_");
@@ -72,13 +74,13 @@ public class OrderServiceImpl implements OrderService {
             int itemNum = item.getNumber() - integer;
 
             item.setNumber(itemNum);
-            if (itemNum == 0){
+            if (itemNum <= 0){
                 item.setIsUndercarriage(true);
                 item.setUndercarriageReason("库存不足");
             }
             itemMapper.updateItemInfo(item);
 
-            Order order = generateOrder(sid, itemId, integer);
+            Order order = generateOrder(sid, itemId, integer, date);
             int i = integer * item.getPrice();
             String sum = String.valueOf(i);
             order.setSumPrice("¥" + sum);
@@ -87,8 +89,12 @@ public class OrderServiceImpl implements OrderService {
 
             cartMapper.removeCart(sid, itemId);
         }
-        modelAndView.setViewName("checkout");
-        return modelAndView;
+        Map map = new HashMap();
+        map.put("orderId", "123456");
+        map.put("totalAmount", "10000000");
+        map.put("itemName", "test");
+        AliPayDemo.jumpToAliPay(request, response, map);
+
     }
 
     @Override
@@ -137,18 +143,17 @@ public class OrderServiceImpl implements OrderService {
         return modelAndView;
     }
 
-    private Order generateOrder(String sid, String itemId, int itemNum){
+    private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate){
         //生成新订单
         Order new_order = new Order();
 
         //生成订单号
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-        String format = simpleDateFormat.format(date);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        String format = simpleDateFormat.format(sysDate);
         String order_id = sid + format;
 
-        new_order.setCreateTime(date);
-        new_order.setUpdateTime(date);
+        new_order.setCreateTime(sysDate);
+        new_order.setUpdateTime(sysDate);
         new_order.setItemId(itemId);
         new_order.setBuyerId(sid);
         new_order.setItemNum(itemNum);
