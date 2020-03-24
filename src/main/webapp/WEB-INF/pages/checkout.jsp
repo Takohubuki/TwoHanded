@@ -20,24 +20,36 @@
 </head>
 <body>
 
-<h1 align="center">结算成功</h1>
-
-<a href="${pageContext.request.contextPath}/index/backindex" class="btn btn-primary center-block">返回</a>
+<h1 align="center">结算</h1>
+<div class="login-page">
+    <div class="login-box">
+        <div class="login-box-msg">
+            <span>选择结算方式</span>
+        </div>
+        <div class="login-box-body">
+            <label>
+                <select form="payForm">
+                    <option value="alipay">支付宝支付</option>
+                    <option value="cashpay">线下交易</option>
+                </select>
+            </label>
+            <form id="payForm">
+                <input type="hidden" name="orderId" value="${orderId}">
+                <input type="submit" id="payMethod" class="btn-primary btn">
+            </form>
+        </div>
+    </div>
+</div>
+<%--<a href="${pageContext.request.contextPath}/index/backindex" class="btn btn-primary center-block">返回</a>--%>
 </body>
 <!-- js-files -->
 <!-- jquery -->
 <script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
 <!-- //jquery -->
 
-
-<!-- smoothscroll -->
-<script src="${pageContext.request.contextPath}/js/SmoothScroll.min.js"></script>
-<!-- //smoothscroll -->
-
-
 <!-- for bootstrap working -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
-
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 </html>

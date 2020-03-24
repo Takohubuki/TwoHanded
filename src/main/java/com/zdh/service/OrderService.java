@@ -11,11 +11,15 @@ public interface OrderService {
 
     ModelAndView myCart(HttpSession session, ModelAndView modelAndView);
 
-    void checkOut(String[] cartList, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception;
+    ModelAndView checkOut(String[] cartList, HttpSession session, ModelAndView modelAndView) throws Exception;
 
     String addCart(Item item, HttpSession session, ModelAndView modelAndView);
 
     String updateCartNum(String id, String num, HttpSession session);
 
     ModelAndView myOrder(HttpSession session, ModelAndView modelAndView);
+
+    void alipay(String orderId, HttpServletResponse response, HttpServletRequest request) throws Exception;
+
+    ModelAndView cashpay(ModelAndView modelAndView, String orderId);
 }

@@ -9,6 +9,7 @@ import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.OrderMapper;
 import com.zdh.pay.AliPayDemo;
 import com.zdh.service.OrderService;
+import com.zdh.util.AmountUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,10 +59,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void checkOut(String[] cartList, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception {
+    public ModelAndView checkOut(String[] cartList, HttpSession session, ModelAndView modelAndView) throws Exception {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
-
+        String orderId = "";
         Date date = new Date();
         //获取前台传来的购物车列表
         for (String cartItem : cartList) {
@@ -82,18 +83,17 @@ public class OrderServiceImpl implements OrderService {
 
             Order order = generateOrder(sid, itemId, integer, date);
             int i = integer * item.getPrice();
+
             String sum = String.valueOf(i);
             order.setSumPrice("¥" + sum);
-
+            orderId = order.getOrderId();
             orderMapper.generateNewOrder(order);
 
             cartMapper.removeCart(sid, itemId);
         }
-        Map map = new HashMap();
-        map.put("orderId", "123456");
-        map.put("totalAmount", "10000000");
-        map.put("itemName", "test");
-        AliPayDemo.jumpToAliPay(request, response, map);
+        modelAndView.addObject("orderId", orderId);
+        modelAndView.setViewName("checkout");
+        return modelAndView;
 
     }
 
@@ -140,6 +140,38 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orderList = orderMapper.selectMyOrder(sid);
         modelAndView.addObject("my_order_list",orderList);
         modelAndView.setViewName("allOrder");
+        return modelAndView;
+    }
+
+    @Override
+    public void alipay(String orderId, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+        List<Order> orderByOrderId = orderMapper.getOrderByOrderId(orderId);
+
+        double totalAmount = 0;
+        double amount;
+        Map map = new HashMap();
+        map.put("method", "alipay");
+        map.put("orderId", orderId);
+        orderMapper.updatePayMethod(map);
+
+        for (Order order : orderByOrderId) {
+            amount = AmountUtils.getAmount(order.getSumPrice());
+            totalAmount = totalAmount + amount;
+        }
+
+        map.put("totalAmount", String.valueOf(totalAmount));
+        map.put("itemName", "HRBU二手交易下单");
+        AliPayDemo.jumpToAliPay(request, response, map);
+    }
+
+    @Override
+    public ModelAndView cashpay(ModelAndView modelAndView, String orderId) {
+        Map map = new HashMap();
+        map.put("orderId", orderId);
+        map.put("method", "cashpay");
+        orderMapper.updatePayMethod(map);
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 

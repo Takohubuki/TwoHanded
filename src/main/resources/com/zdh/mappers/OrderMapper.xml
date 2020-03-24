@@ -14,10 +14,12 @@
     <result column="is_received" jdbcType="BIT" property="isReceived" />
     <result column="is_canceled" jdbcType="BIT" property="isCanceled" />
     <result column="is_checked" jdbcType="BIT" property="isChecked" />
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
+
   </resultMap>
   <sql id="Base_Column_List">
     id, order_id, sum_price, item_num, item_id, buyer_id, create_time, update_time, is_paid, 
-    is_received, is_canceled, is_checked
+    is_received, is_canceled, is_checked, pay_method
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -179,17 +181,20 @@
     </select>
   <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
     insert into
-    `order` (id, order_id, sum_price,
-      item_num, item_id, buyer_id,
-      create_time, update_time, is_paid,
-      is_received, is_canceled, is_checked
+    `order` (<include refid="Base_Column_List"/>
     )
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{sumPrice,jdbcType=VARCHAR},
       #{itemNum,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT},
-      #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}
+      #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}, #{payMethod,jdbcType=VARCHAR}
       )  </insert>
   <select id="selectAllOrder" resultMap="BaseResultMap">
     select * from `order`;
   </select>
+  <select id="getOrderByOrderId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from `order` where order_id = #{orderId}
+  </select>
+  <update id="updatePayMethod" parameterType="java.util.Map">
+    update `order` set pay_method = #{method} where order_id = #{orderId}
+  </update>
 </mapper>

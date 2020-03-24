@@ -1,9 +1,7 @@
 package com.zdh.controller;
 
 import com.zdh.bean.Member;
-import com.zdh.mappers.OrderMapper;
 import com.zdh.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +17,6 @@ import java.io.IOException;
 @RequestMapping("/user")
 @Controller
 public class UserController {
-
-    @Autowired
-    OrderMapper orderMapper;
 
     @Resource
     MemberService memberService;

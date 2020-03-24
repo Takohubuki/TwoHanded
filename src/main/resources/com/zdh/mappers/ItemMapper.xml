@@ -281,15 +281,22 @@
         where publisher = #{old_sid}
     </update>
     <update id="updateItemInfo" parameterType="com.zdh.bean.Item">
-        update item set
-         name = #{name},
-         price = #{price},
-         image = #{image},
-         quality = #{quality},
-         number = #{number},
-         describes = #{describes},
-         conditions = #{conditions}
-         where serial_num = #{serialNum}
+    update item
+    set `name` = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      kind = #{kind,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=INTEGER},
+      conditions = #{conditions,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_undercarriage = #{isUndercarriage,jdbcType=BIT},
+      undercarriage_reason = #{undercarriageReason,jdbcType=VARCHAR},
+      viewed_times = #{viewedTimes,jdbcType=INTEGER}
+     where serial_num = #{serialNum}
     </update>
     <update id="updateItemNum" parameterType="java.lang.Integer">
         update item set

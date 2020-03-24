@@ -55,6 +55,18 @@ public class Order implements Serializable {
      * 结算状态 0未结算 1结算
      */
     private Boolean isChecked;
+    /**
+     * 支付方式
+     */
+    private String payMethod;
+
+    public String getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(String payMethod) {
+        this.payMethod = payMethod;
+    }
 
     public Integer getId() {
         return id;

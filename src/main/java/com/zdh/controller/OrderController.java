@@ -31,14 +31,9 @@ public class OrderController {
         return "";
     }
 
-//    @RequestMapping("/querycart")
-//    public String queryCart(){
-//        return "";
-//    }
-
     @RequestMapping(path = "/checkout", method = RequestMethod.POST)
-    public void checkOut(String[] cbox, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        orderService.checkOut(cbox, session, response, request);
+    public ModelAndView checkOut(String[] cbox, HttpSession session, ModelAndView modelAndView) throws Exception {
+        return orderService.checkOut(cbox, session, modelAndView);
     }
 
     @RequestMapping("/mycart")
@@ -46,22 +41,23 @@ public class OrderController {
         return orderService.myCart(session, modelAndView);
     }
 
-    @RequestMapping("/checkFin")
-    public ModelAndView checkFin(ModelAndView modelAndView){
-        modelAndView.setViewName("checkout");
-        return modelAndView;
-    }
-
     @RequestMapping(path = "/updateCartNum", method = RequestMethod.POST)
     public String updateCartNum(String id, String num, HttpSession session){
         return orderService.updateCartNum(id, num, session);
     }
 
-    // TODO: 2020/2/21 需要继续编写
     @RequestMapping("/myOrder")
     public ModelAndView myOrder(HttpSession session, ModelAndView modelAndView){
         return orderService.myOrder(session, modelAndView);
     }
 
+    @RequestMapping("/alipay")
+    public void alipay(String orderId, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        orderService.alipay(orderId, response, request);
+    }
 
+    @RequestMapping("/cashpay")
+    public ModelAndView cashpay(ModelAndView modelAndView, String orderId){
+        return orderService.cashpay(modelAndView, orderId);
+    }
 }

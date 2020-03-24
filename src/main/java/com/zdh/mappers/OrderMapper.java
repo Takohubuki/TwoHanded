@@ -3,6 +3,7 @@ package com.zdh.mappers;
 import com.zdh.bean.Order;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer id);
@@ -22,4 +23,8 @@ public interface OrderMapper {
     List<Order> selectMyOrder(String sid);
 
     List<Order> selectAllOrder();
+
+    List<Order> getOrderByOrderId(String orderId);
+
+    void updatePayMethod(Map map);
 }

@@ -49,10 +49,16 @@ $(function () {
     });
     $('#check-goods-all').on('change', function() {
         if(this.checked) {
-            $('#checked-all-bottom').prop('checked', true)
+            $('input[name = cbox]').prop('checked', true);
+            $('#checked-all-bottom').prop('checked', true);
         } else {
-            $('#checked-all-bottom').prop('checked', false)
+            $('input[name = cbox]').prop('checked', false);
+            $('#checked-all-bottom').prop('checked', false);
         }
+    });
+    $('#payMethod').click(function () {
+        let method = $('select').val();
+        payMethod(method);
     });
 
 });
@@ -96,4 +102,9 @@ function check(){
     }else {
         alert("未选择任何商品");
     }
+}
+
+function payMethod(payMethod) {
+    $("#payForm").attr("action", "/order/" + payMethod);
+    $("#payForm").submit();
 }
