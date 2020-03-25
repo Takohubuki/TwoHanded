@@ -132,7 +132,6 @@ public class OrderServiceImpl implements OrderService {
         return "success";
     }
 
-    // TODO: 2020/3/18 查看订单要求显示商品名称 
     @Override
     public ModelAndView myOrder(HttpSession session, ModelAndView modelAndView) {
         Member member = (Member) session.getAttribute("member");
@@ -196,4 +195,5 @@ public class OrderServiceImpl implements OrderService {
         new_order.setIsReceived(false);
         return new_order;
     }
+
 }

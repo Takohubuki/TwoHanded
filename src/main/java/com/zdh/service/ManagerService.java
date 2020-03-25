@@ -49,4 +49,6 @@ public interface ManagerService {
     public ModelAndView shutMember(ModelAndView modelAndView, String sid);
 
     public ModelAndView activeMember(ModelAndView modelAndView, String sid);
+
+    ModelAndView approval();
 }

@@ -129,6 +129,12 @@ public class ManagerServiceImpl implements ManagerService {
         return modelAndView;
     }
 
+    @Override
+    public ModelAndView approval() {
+        itemMapper.getApprovalItem();
+        return null;
+    }
+
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {
         Integer member_sum = managerMapper.countMember();
         Integer countItemWtbOnCarriiage = managerMapper.countItemWtbOnCarriiage();

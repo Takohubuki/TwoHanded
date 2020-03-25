@@ -21,6 +21,10 @@ public class ManagerController {
         return modelAndView;
     }
 
+    @RequestMapping("/manager/approval")
+    public ModelAndView approval(){
+        return managerService.approval();
+    }
 
     /**
      * 管理员登录

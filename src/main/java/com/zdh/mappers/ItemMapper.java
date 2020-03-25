@@ -41,4 +41,6 @@ public interface ItemMapper {
     void updateItemNum(int itemNum, String itemId);
 
     void updatePublisherByName(String sid, String sid1);
+
+    List<Item> getApprovalItem();
 }

@@ -47,7 +47,7 @@
                                                 ${orderlist.buyerId}
                                             </td>
                                             <td>
-                                                ${orderlist.itemId}
+                                                ${orderlist.item.name}
                                             </td>
                                             <td>
                                                 ${orderlist.itemNum}

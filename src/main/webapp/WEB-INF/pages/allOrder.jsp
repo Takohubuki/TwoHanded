@@ -52,7 +52,7 @@
                                                 ${order_list.orderId}
                                             </td>
                                             <td>
-                                                ${order_list.itemId}
+                                                ${order_list.item.name}
                                             </td>
                                             <td>
                                                 ${order_list.sumPrice}

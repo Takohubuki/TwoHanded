@@ -18,13 +18,11 @@
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body>
+<body class="login-page hold-transition">
 
-<h1 align="center">结算</h1>
-<div class="login-page">
     <div class="login-box">
         <div class="login-box-msg">
-            <span>选择结算方式</span>
+            <span>选择支付方式</span>
         </div>
         <div class="login-box-body">
             <label>
@@ -39,7 +37,7 @@
             </form>
         </div>
     </div>
-</div>
+
 <%--<a href="${pageContext.request.contextPath}/index/backindex" class="btn btn-primary center-block">返回</a>--%>
 </body>
 <!-- js-files -->
