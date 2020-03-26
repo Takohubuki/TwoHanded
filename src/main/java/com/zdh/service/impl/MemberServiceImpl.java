@@ -59,11 +59,12 @@ public class MemberServiceImpl implements MemberService {
             modelAndView.setViewName("redirect:"+uri);
             return modelAndView;
         }else {
-            modelAndView.setViewName("redirect:/index.jsp");
+            modelAndView.setViewName("redirect:/");
             return modelAndView;
         }
     }
 
+    // TODO: 2020/3/25 登录bug未修复
     @Override
     public ModelAndView login(String username, String password, HttpSession session, HttpServletRequest request, ModelAndView modelAndView) {
         System.out.println("--------------------开始登录-----------------");

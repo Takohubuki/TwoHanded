@@ -12,7 +12,6 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <!-- jquery -->
     <script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/script.js"></script>
     <!-- //jquery -->
     <style>
         .shopping-car-container {
@@ -237,7 +236,7 @@
                             <div class="col-md-1 car-goods-info">
                                 <label>
                                         <%--                                <input type="checkbox" class="goods-list-item"/>--%>
-                                    <input type="checkbox" name="cbox" class="cbox goods-list-item" value="${item_list.serialNum}_${item_num_list.get(i.count-1)}">
+                                    <input type="checkbox" id="cbox_${item_list.serialNum}" name="cbox" class="cbox goods-list-item" value="${item_list.serialNum}_${item_num_list.get(i.count-1)}">
                                 </label>
                             </div>
                             <div class="col-md-3 car-goods-info goods-image-column">
@@ -295,25 +294,25 @@
     </form>
 
     <!--FIXME 删除购物车物品-->
-<%--    <!--删除确认弹框-->--%>
-<%--    <div class="modal fade" tabindex="-1" role="dialog" id="deleteItemTip" aria-labelledby="gridSystemModalLabel">--%>
-<%--        <div class="modal-dialog" role="document">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header">--%>
-<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
-<%--                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>--%>
-<%--                </div>--%>
-<%--                <div class="modal-body">--%>
-<%--                    确认删除此商品？--%>
-<%--                </div>--%>
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
-<%--                    <button type="button" class="btn btn-primary deleteSure">确定</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    <!--是否勾选商品提示-->--%>
+    <!--删除确认弹框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="deleteItemTip" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                </div>
+                <div class="modal-body">
+                    确认删除此商品？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary deleteSure">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--是否勾选商品提示-->
 <%--    <div class="modal fade" tabindex="-1" role="dialog" id="selectItemTip" aria-labelledby="gridSystemModalLabel">--%>
 <%--        <div class="modal-dialog" role="document">--%>
 <%--            <div class="modal-content">--%>
@@ -330,7 +329,7 @@
 <%--            </div>--%>
 <%--        </div>--%>
 <%--    </div>--%>
-<%--    <!--批量删除商品-->--%>
+    <!--批量删除商品-->
 <%--    <div class="modal fade" tabindex="-1" role="dialog" id="deleteMultyTip" aria-labelledby="gridSystemModalLabel">--%>
 <%--        <div class="modal-dialog" role="document">--%>
 <%--            <div class="modal-content">--%>

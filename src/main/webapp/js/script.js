@@ -37,42 +37,6 @@ function ShoppingCarObserver(elInput, isAdd) {
 			this.elInput.val(this.count)
 		}
 	}
-	this.checkIsAll = function() {
-		var checkLen = $('.goods-list-item:checked').length
-		if (checkLen > 0) {
-			$('.submitData').removeClass('submitDis')
-		} else {
-			$('.submitData').addClass('submitDis')
-		}
-		if($('.goods-item').length === checkLen) {
-			$('#checked-all-bottom, #check-goods-all').prop('checked', true)
-		} else {
-			$('#checked-all-bottom, #check-goods-all').prop('checked', false)
-		}
-	}
-	this.checkedChange = function(isChecked) {
-		if(isChecked === undefined) {
-			var isChecked = this.parents.find('.goods-list-item')[0].checked
-		}
-		var itemTotalMoney = parseFloat(this.parents.find('.single-total').text())
-		var GoodsTotalMoney = parseFloat($('#selectGoodsMoney').text())
-		var itemCount = parseInt(this.parents.find('.goods-count').val())
-		var goodsTotalCount = parseInt($('#selectGoodsCount').text())
-		if(isChecked) {
-			$('#selectGoodsMoney').empty().append(itemTotalMoney + GoodsTotalMoney)
-			$('#selectGoodsCount').empty().append(itemCount + goodsTotalCount)
-		} else {
-			if (GoodsTotalMoney - itemTotalMoney === 0) {
-				$('#selectGoodsMoney').empty().append('0.00')
-				if (!$('.submitData').hasClass('submitDis')) {
-					$('.submitData').addClass('submitDis')
-				}
-			} else {
-				$('#selectGoodsMoney').empty().append(GoodsTotalMoney - itemTotalMoney)
-			}
-			$('#selectGoodsCount').empty().append(goodsTotalCount - itemCount)
-		}
-	}
 	this.deleteGoods = function() {
 		var isChecked = this.parents.find('.goods-list-item')[0].checked
 		if(isChecked) {

@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
-
+    // TODO: 2020/3/25 审核功能编写 包括信息发布审核及用户找回密码
     @Resource
     ManagerMapper managerMapper;
 
