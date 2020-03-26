@@ -102,7 +102,7 @@
   <select id="selectMyCart" resultMap="BaseResultMap">
         select * from cart where is_checked = '0' and member_sid = #{memberSid};
     </select>
-  <delete id="removeCart" parameterType="java.lang.String">
+  <delete id="removeCart" parameterType="java.util.Map">
     delete from cart where item_id = #{itemId} and member_sid = #{sid};
   </delete>
 </mapper>

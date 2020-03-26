@@ -257,7 +257,7 @@
                             </div>
                             <div class="col-md-2 car-goods-info"><span>￥</span><span class="single-total" id="${item_list.serialNum}" price="${item_list.price}">${item_num_list.get(i.count-1) * item_list.price}</span></div>
                             <div class="col-md-2 car-goods-info">
-                                <button type="button" class="btn btn-danger item-delete">删除</button>
+                                <button type="button" class="btn btn-danger item-delete" value="${item_list.serialNum}">删除</button>
                             </div>
                         </div>
                     </div>

@@ -364,14 +364,14 @@
 
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                            <form action="#" method="post">
+<%--                                            <form action="#" method="post">--%>
                                                 <fieldset>
                                                     <input type="hidden" name="itemId" value="${wts_item.serialNum}"/>
                                                     <input type="hidden" name="itemName" value="${wts_item.name}" />
 <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
                                                     <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                                                 </fieldset>
-                                            </form>
+<%--                                            </form>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -593,10 +593,10 @@
                     },
                     success: function (result) {
                         console.log(result);
-                        if (result === 'false'){
-                            alert("添加失败！")
+                        if (result === 'success'){
+                            alert("添加成功！")
                         }else {
-                            alert("添加成功！");
+                            alert("添加失败！");
                         }
                     },
                     error: function (e) {

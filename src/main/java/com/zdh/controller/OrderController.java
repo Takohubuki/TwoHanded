@@ -26,9 +26,9 @@ public class OrderController {
     }
 
     //TODO 删除购物车内商品
-    @RequestMapping("/deletecart")
-    public String deleteCart(){
-        return "";
+    @RequestMapping("/delCart")
+    public String deleteCart(String id, HttpSession session){
+        return orderService.delCart(id, session);
     }
 
     @RequestMapping(path = "/checkout", method = RequestMethod.POST)

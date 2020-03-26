@@ -1,9 +1,9 @@
 package com.zdh.mappers;
 
 import com.zdh.bean.Cart;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CartMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,7 +18,7 @@ public interface CartMapper {
 
     int updateByPrimaryKey(Cart record);
 
-    Cart checkItemInMyCart(@Param("sid") String sid, @Param("itemId") String itemId);
+    Cart checkItemInMyCart(Map map);
 
     void addCart(Cart new_item);
 
@@ -26,5 +26,5 @@ public interface CartMapper {
 
     List<Cart> selectMyCart(String sid);
 
-    void removeCart(@Param("sid") String sid, @Param("itemId") String itemId);
+    void removeCart(Map map);
 }

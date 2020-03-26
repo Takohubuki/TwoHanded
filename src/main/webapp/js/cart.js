@@ -60,8 +60,30 @@ $(function () {
         let method = $('select').val();
         payMethod(method);
     });
-
+    $('.item-delete').click(function () {
+        id = $(this).val();
+        delCart(id);
+    })
 });
+
+function delCart(id) {
+    $.ajax({
+        url : "/order/delCart",
+        type : "POST",
+        data : {
+            'id' : id,
+        },
+        success : function(result) {
+            console.log(result);
+            window.location.reload();
+        },
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    })
+
+}
 
 function changeNum(id, num) {
     console.log(id);

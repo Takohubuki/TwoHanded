@@ -89,7 +89,11 @@ public class OrderServiceImpl implements OrderService {
             orderId = order.getOrderId();
             orderMapper.generateNewOrder(order);
 
-            cartMapper.removeCart(sid, itemId);
+            Map map = new HashMap();
+            map.put("itemId", itemId);
+            map.put("sid", sid);
+
+            cartMapper.removeCart(map);
         }
         modelAndView.addObject("orderId", orderId);
         modelAndView.setViewName("checkout");
@@ -105,7 +109,11 @@ public class OrderServiceImpl implements OrderService {
         String sid = member.getSid();
         String itemId = item.getSerialNum();
 
-        Cart cart = cartMapper.checkItemInMyCart(sid, itemId);
+        Map map = new HashMap();
+        map.put("itemId", itemId);
+        map.put("sid", sid);
+
+        Cart cart = cartMapper.checkItemInMyCart(map);
         if (cart == null){
             Cart new_item = new Cart();
             new_item.setMemberSid(member.getSid());
@@ -125,7 +133,12 @@ public class OrderServiceImpl implements OrderService {
         Member member = (Member) session.getAttribute("member");
 
         String sid = member.getSid();
-        Cart cart = cartMapper.checkItemInMyCart(sid, id);
+
+        Map map = new HashMap();
+        map.put("itemId", id);
+        map.put("sid", sid);
+
+        Cart cart = cartMapper.checkItemInMyCart(map);
         cart.setItemNum(Integer.valueOf(num));
         cartMapper.updateByPrimaryKey(cart);
 
@@ -172,6 +185,18 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updatePayMethod(map);
         modelAndView.setViewName("redirect:/");
         return modelAndView;
+    }
+
+    @Override
+    public String delCart(String id, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+
+        Map map = new HashMap();
+        map.put("itemId", id);
+        map.put("sid", sid);
+        cartMapper.removeCart(map);
+        return "success";
     }
 
     private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate){

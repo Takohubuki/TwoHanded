@@ -22,4 +22,6 @@ public interface OrderService {
     void alipay(String orderId, HttpServletResponse response, HttpServletRequest request) throws Exception;
 
     ModelAndView cashpay(ModelAndView modelAndView, String orderId);
+
+    String delCart(String id, HttpSession session);
 }
