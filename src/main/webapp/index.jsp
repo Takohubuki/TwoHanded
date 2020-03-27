@@ -214,31 +214,13 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=电子产品">
-                                    电子产品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=体育用品">
-                                    体育用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=生活用品">
-                                    生活用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=衣物">
-                                    衣物
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=杂物">
-                                    杂物
-                                </a>
-                            </li>
+                            <c:forEach items="${kindList}" var="kindList">
+                                <li class="">
+                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                        ${kindList}
+                                    </a>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>

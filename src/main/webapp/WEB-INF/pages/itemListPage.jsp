@@ -46,7 +46,7 @@
 
                         </div>
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                            <form action="#" method="post">
+<%--                            <form action="#" method="post">--%>
                                 <fieldset>
                                     <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
                                     <input type="hidden" name="itemName" value="${itemlist.name}" />
@@ -55,7 +55,7 @@
                                     </c:if>
 
                                 </fieldset>
-                            </form>
+<%--                            </form>--%>
                         </div>
 
                     </div>
@@ -135,10 +135,10 @@
                     },
                     success: function (result) {
                         console.log(result);
-                        if (result === 'false'){
-                            alert("添加失败！")
+                        if (result === 'success'){
+                            alert("添加成功！")
                         }else {
-                            alert("添加成功！");
+                            alert("添加失败！");
                         }
                     },
                     error: function (e) {

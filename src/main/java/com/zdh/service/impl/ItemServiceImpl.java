@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.mappers.ItemKindMappers;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.service.ItemService;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+    @Resource
+    private ItemKindMappers itemKindMappers;
 
     @Resource
     private ItemMapper itemMapper;
@@ -54,6 +57,9 @@ public class ItemServiceImpl implements ItemService {
         List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
         modelAndView.addObject("wtb_item",wtb_item3);
 
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
@@ -66,6 +72,10 @@ public class ItemServiceImpl implements ItemService {
 
         List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
         servletContext.setAttribute("wtb_item",wtb_item3);
+
+        List<String> kindList = itemKindMappers.getKindList();
+        servletContext.setAttribute("kindList", kindList);
+
 
     }
 
@@ -82,6 +92,10 @@ public class ItemServiceImpl implements ItemService {
         Page<Item> wtsAllByTime = itemMapper.selectWtbAllByTime();
         PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
         modelAndView.addObject("itemPageInfo",itemPageInfo);
+
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         modelAndView.setViewName("itemList");
         return modelAndView;
     }
@@ -92,6 +106,10 @@ public class ItemServiceImpl implements ItemService {
         Page<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
         PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
         modelAndView.addObject("itemPageInfo",itemPageInfo);
+
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         modelAndView.setViewName("itemList");
         return modelAndView;
 
@@ -137,6 +155,10 @@ public class ItemServiceImpl implements ItemService {
     public ModelAndView queryWtsAllTime(ModelAndView modelAndView) {
         List<Item> items = itemMapper.selectWtsAllByTime();
         modelAndView.addObject("itemlist",items);
+
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         modelAndView.setViewName("itemList");
         return modelAndView;
     }
@@ -192,6 +214,10 @@ public class ItemServiceImpl implements ItemService {
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         modelAndView.addObject("itemPageInfo",itemPageInfo);
         modelAndView.setViewName("itemList");
+
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         return modelAndView;
 
     }
@@ -203,6 +229,10 @@ public class ItemServiceImpl implements ItemService {
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         modelAndView.addObject("itemPageInfo",itemPageInfo);
         modelAndView.setViewName("itemList");
+
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         return modelAndView;
     }
 

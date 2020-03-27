@@ -227,31 +227,14 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=电子产品">
-                                    电子产品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=体育用品">
-                                    体育用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=生活用品">
-                                    生活用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=衣物">
-                                    衣物
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=杂物">
-                                    杂物
-                                </a>
-                            </li>
+                            <c:forEach items="${kindList}" var="kindList">
+                                <li class="">
+                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                            ${kindList}
+                                    </a>
+                                </li>
+                            </c:forEach>
+
                         </ul>
                     </div>
                 </div>
@@ -310,7 +293,7 @@
 
                                 </div>
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                    <form action="#" method="post">
+<%--                                    <form action="#" method="post">--%>
                                         <fieldset>
                                             <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
                                             <input type="hidden" name="itemName" value="${itemlist.name}" />
@@ -319,7 +302,7 @@
                                             </c:if>
 
                                         </fieldset>
-                                    </form>
+<%--                                    </form>--%>
                                 </div>
 
                             </div>
@@ -396,10 +379,10 @@
                     },
                     success: function (result) {
                         console.log(result);
-                        if (result === 'false'){
-                            alert("添加失败！")
+                        if (result === 'success'){
+                            alert("添加成功！")
                         }else {
-                            alert("添加成功！");
+                            alert("添加失败！");
                         }
                     },
                     error: function (e) {

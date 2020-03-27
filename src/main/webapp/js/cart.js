@@ -6,6 +6,7 @@ let atLeastOne = false;
 
 
 $(function () {
+    //增加数量
     $(".cart_quantity_up").click(function () {
         num = $(this).parent().parent().find("input").val();
         id = $(this).parent().parent().find("input").attr("dataValue");
@@ -19,6 +20,7 @@ $(function () {
         $(this).parent().parent().find("input").val(num);
         changeNum(id, num);
     });
+    //减少商品数量
     $(".cart_quantity_down").click(function () {
         num = $(this).parent().parent().find("input").val();
         id = $(this).parent().parent().find("input").attr("dataValue");
@@ -29,23 +31,22 @@ $(function () {
         $(this).parent().parent().find("input").val(num);
         changeNum(id, num);
     });
+    //文本框修改商品数量
     $(".quantity_text").blur(function () {
         num = $(this).val();
         if (oldNum !== num){
+            itemNum = $(".cart_quantity_up").parent().attr("itemNum");
+            if (parseInt(num) > parseInt(itemNum)){
+                alert("添加失败！超过库存");
+                $(this).val(oldNum);
+                return;
+            }
             id = $(this).attr("dataValue");
             changeNum(id, num);
         }
     });
     $(".quantity_text").focus(function () {
         oldNum = $(this).val();
-    });
-    $(".quantity_text").change(function () {
-        num = $(this).val();
-        itemNum = $(".cart_quantity_up").attr("itemNum");
-
-        if (num === itemNum){
-            $(".cart_quantity_up").addClass("disabled");
-        }
     });
     $('#check-goods-all').on('change', function() {
         if(this.checked) {
@@ -66,6 +67,7 @@ $(function () {
     })
 });
 
+//删除购物车商品
 function delCart(id) {
     $.ajax({
         url : "/order/delCart",
@@ -85,6 +87,7 @@ function delCart(id) {
 
 }
 
+//修改购物车内商品数量
 function changeNum(id, num) {
     console.log(id);
     console.log(num);

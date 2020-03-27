@@ -24,7 +24,7 @@
                                             买家ID
                                         </th>
                                         <th class="sorting" tabindex="2" aria-controls="example2">
-                                            商品ID
+                                            商品名称
                                         </th>
                                         <th class="sorting" tabindex="3" aria-controls="example2">
                                             商品数量

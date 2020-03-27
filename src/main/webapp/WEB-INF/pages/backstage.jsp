@@ -48,12 +48,12 @@
 
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">NAVIGATION</li>
-                <li class="treeview">
+                <li class="">
                     <a href="${pageContext.request.contextPath}/manage/gen_sit">
                         <i class="fa fa-book"></i>  <span>概况总览</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="">
                     <a href="javascript:member_manage()">
                         <i class="fa fa-book"></i>  <span>用户管理</span>
                     </a>
@@ -74,7 +74,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="">
                     <a href="javascript:order_manage()">
                         <i class="fa fa-dashboard"></i> <span>订单管理</span>
                     </a>
@@ -83,12 +83,14 @@
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>信息审核</span>
                         <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
                             <span class="label label-primary pull-right">5</span>
                         </span>
                     </a>
                     <ul class="treeview-menu">
                         <li>
                             <a href="javascript:wtsItem()">
+                                <i class="fa fa-circle-o"></i>
                                 用户密码找回
                                 <span class="pull-right-container">
                                     <span class="label label-primary pull-right">5</span>
@@ -98,6 +100,7 @@
                         </li>
                         <li>
                             <a href="javascript:wtbItem()">
+                                <i class="fa fa-circle-o"></i>
                                 信息发布
                                 <span class="pull-right-container">
                                     <span class="label label-primary pull-right">5</span>
