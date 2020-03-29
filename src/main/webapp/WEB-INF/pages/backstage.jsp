@@ -55,7 +55,7 @@
                 </li>
                 <li class="">
                     <a href="javascript:member_manage()">
-                        <i class="fa fa-book"></i>  <span>用户管理</span>
+                        <i class="fa fa-book"></i> <span>用户管理</span>
                     </a>
                 </li>
                 <li class="treeview">
@@ -89,7 +89,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="javascript:wtsItem()">
+                            <a href="javascript:getPassword()">
                                 <i class="fa fa-circle-o"></i>
                                 用户密码找回
                                 <span class="pull-right-container">
@@ -99,7 +99,7 @@
 
                         </li>
                         <li>
-                            <a href="javascript:wtbItem()">
+                            <a href="javascript:publishInfo()">
                                 <i class="fa fa-circle-o"></i>
                                 信息发布
                                 <span class="pull-right-container">
@@ -246,6 +246,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
+<script src="${pageContext.request.contextPath}/js/script.js"></script>
 
 <script>
     function offitem(item_id) {
@@ -253,7 +254,6 @@
     }
     function shutmember(sid) {
         $("#page").load("${pageContext.request.contextPath}/manage/shutmember?sid="+sid);
-
     }
     function activemember(sid) {
         $("#page").load("${pageContext.request.contextPath}/manage/activemember?sid="+sid);
@@ -273,6 +273,9 @@
     }
     function wtbItem() {
         $("#page").load("${pageContext.request.contextPath}/manage/wtbitem");
+    }
+    function publishInfo() {
+        $('#page').load("${pageContext.request.contextPath}/manage/approval");
     }
 
 </script>

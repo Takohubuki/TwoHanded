@@ -126,7 +126,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 <!-- SlimScroll -->
-<script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
+<script src="${pageContext.request.contextPath}/js/script.js"></script>
 
 
 <script type="text/javascript">

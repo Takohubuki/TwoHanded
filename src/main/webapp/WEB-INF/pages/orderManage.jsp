@@ -85,7 +85,11 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false,
-            'language'    : language
+            'language'    : language,
+            "createdRow"  : function( row, data, dataIndex ) {
+                hide(0);
+                $(".marge").css("vertical-align","middle");
+            }
         })
     });
 

@@ -35,13 +35,19 @@
                                             名称
                                         </th>
                                         <th class="sorting" tabindex="2" aria-controls="example2">
-                                            单价
+
                                         </th>
                                         <th class="sorting" tabindex="3" aria-controls="example2">
                                             数量
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            成色
+                                            单价
+                                        </th>
+                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                            订单状态
+                                        </th>
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                            操作
                                         </th>
                                     </tr>
                                     </thead>
@@ -55,14 +61,38 @@
                                                 ${order_list.item.name}
                                             </td>
                                             <td>
-                                                ${order_list.sumPrice}
+                                                <img src="${pageContext.request.contextPath}/${order_list.item.image}" style="width: 80px;height: 75px">
                                             </td>
                                             <td>
                                                 ${order_list.itemNum}
                                             </td>
                                             <td>
-                                                ${order_list.isReceived}
+                                                ${order_list.sumPrice}
                                             </td>
+                                            <c:if test="${order_list.isCanceled == true}">
+                                                <td>
+                                                    已取消
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${order_list.isReceived == false && order_list.isCanceled == false}">
+                                                <td>
+                                                    待确认收货
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary operation">确认收货</button>
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false}">
+                                                <td>
+                                                    已付款
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary ">评价</button>
+                                                </td>
+                                            </c:if>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -93,7 +123,11 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false,
-            'language'    : language
+            'language'    : language,
+            "createdRow"  : function( row, data, dataIndex ) {
+                hide(0);
+                $(".marge").css("vertical-align","middle");
+            }
         })
     });
 </script>
