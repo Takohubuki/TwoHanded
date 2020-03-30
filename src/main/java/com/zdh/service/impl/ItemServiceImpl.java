@@ -11,6 +11,7 @@ import com.zdh.service.ItemService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
@@ -49,16 +50,16 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ModelAndView getIndexItem(ModelAndView modelAndView) {
+    public ModelAndView getIndexItem(ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
 
         List<Item> wts_item3 = itemMapper.select3WtsItemByTime();
-        modelAndView.addObject("wts_item",wts_item3);
+        redirectAttributes.addFlashAttribute("wts_item",wts_item3);
 
         List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
-        modelAndView.addObject("wtb_item",wtb_item3);
+        redirectAttributes.addFlashAttribute("wtb_item3",wtb_item3);
 
         List<String> kindList = itemKindMappers.getKindList();
-        modelAndView.addObject("kindList", kindList);
+        redirectAttributes.addFlashAttribute("kindList",kindList);
 
         modelAndView.setViewName("redirect:/");
         return modelAndView;
@@ -204,7 +205,8 @@ public class ItemServiceImpl implements ItemService {
         item.setUndercarriageReason("待审核");
 
         itemMapper.addPublish(item);
-        return getIndexItem(modelAndView);
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
     }
 
     @Override

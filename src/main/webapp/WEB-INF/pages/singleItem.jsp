@@ -352,40 +352,6 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<script>
-    let member = "<%=session.getAttribute("member")%>";
-    // let member = window.sessionStorage.getItem("member");
-    console.log(member);
-    $(function () {
-        $("input[name = addcart]").click(function () {
-            console.log(member);
-            if (member === "null"){
-                alert("请先登录！");
-
-            }else {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/order/addcart",
-                    type: "POST",
-                    data: {
-                        serialNum : $(this).parent().find("input[name = itemId]").val()
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        if (result === 'success'){
-                            alert("添加成功！")
-                        }else {
-                            alert("添加失败！");
-                        }
-                    },
-                    error: function (e) {
-                        console.log(e.status);
-                        console.log(e.responseText);
-                    }
-                });
-            }
-        })
-    });
-</script>
 
 <!-- //Single Page -->
 <!-- special offers -->
@@ -406,7 +372,7 @@
                     <li>
                         <div class="w3l-specilamk">
                             <div class="speioffer-agile">
-                                <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${recommand_items.serialNum}">
+                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">
                                     <img src="${pageContext.request.contextPath}/${recommand_items.image}" alt="">
                                 </a>
                             </div>
@@ -418,20 +384,11 @@
                                     <h6>￥${recommand_items.price}</h6>
                                 </div>
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                    <form action="#" method="post">
-                                        <fieldset>
-                                            <input type="hidden" name="cmd" value="_cart" />
-                                            <input type="hidden" name="add" value="1" />
-                                            <input type="hidden" name="business" value=" " />
-                                            <input type="hidden" name="item_name" value="${recommand_items.name}" />
-                                            <input type="hidden" name="amount" value="${recommand_items.price}" />
-                                            <input type="hidden" name="item_id" value="${recommand_items.serialNum}" />
-                                            <input type="hidden" name="currency_code" value="CNY" />
-                                            <input type="hidden" name="return" value=" " />
-                                            <input type="hidden" name="cancel_return" value=" " />
-                                            <input type="submit" name="submit" value="Add to cart" class="button" />
-                                        </fieldset>
-                                    </form>
+                                    <fieldset>
+                                        <input type="hidden" name="itemId" value="${recommand_items.serialNum}"/>
+                                        <input type="hidden" name="itemName" value="${recommand_items.name}" />
+                                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
@@ -585,6 +542,40 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
 <!-- //js-files -->
+<script>
+    let member = "<%=session.getAttribute("member")%>";
+    // let member = window.sessionStorage.getItem("member");
+    console.log(member);
+    $(function () {
+        $("input[name = addcart]").click(function () {
+            console.log(member);
+            if (member === "null"){
+                alert("请先登录！");
+
+            }else {
+                $.ajax({
+                    url: "${pageContext.request.contextPath}/order/addcart",
+                    type: "POST",
+                    data: {
+                        serialNum : $(this).parent().find("input[name = itemId]").val()
+                    },
+                    success: function (result) {
+                        console.log(result);
+                        if (result === 'success'){
+                            alert("添加成功！")
+                        }else {
+                            alert("添加失败！");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+            }
+        })
+    });
+</script>
 
 </body>
 

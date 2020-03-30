@@ -478,9 +478,6 @@
 </script>
 <!-- //password-script -->
 
-<!-- smoothscroll -->
-<script src="${pageContext.request.contextPath}/js/SmoothScroll.min.js"></script>
-<!-- //smoothscroll -->
 
 <!-- start-smooth-scrolling -->
 <script src="${pageContext.request.contextPath}/js/move-top.js"></script>

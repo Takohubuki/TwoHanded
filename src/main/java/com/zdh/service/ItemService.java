@@ -3,6 +3,7 @@ package com.zdh.service;
 import com.zdh.bean.Item;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,10 @@ public interface ItemService {
     /**
      * 获取首页展示商品信息
      * @param modelAndView
+     * @param redirectAttributes
      * @return
      */
-    public ModelAndView getIndexItem(ModelAndView modelAndView);
+    public ModelAndView getIndexItem(ModelAndView modelAndView, RedirectAttributes redirectAttributes);
 
     /**
      * 获取首页展示商品

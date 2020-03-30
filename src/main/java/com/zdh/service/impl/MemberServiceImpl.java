@@ -54,14 +54,12 @@ public class MemberServiceImpl implements MemberService {
     public ModelAndView logout(HttpSession session, HttpServletRequest request, ModelAndView modelAndView) {
         session.setAttribute("member",null);
         String uri = request.getHeader("Referer");
-        if (uri.contains("singleitem") || uri.contains("queryalltime") || uri.contains("wtbitem"))
-        {
+        if (uri.contains("singleitem") || uri.contains("queryalltime") || uri.contains("wtbitem")) {
             modelAndView.setViewName("redirect:"+uri);
-            return modelAndView;
         }else {
             modelAndView.setViewName("redirect:/");
-            return modelAndView;
         }
+        return modelAndView;
     }
 
     // TODO: 2020/3/25 登录bug未修复
