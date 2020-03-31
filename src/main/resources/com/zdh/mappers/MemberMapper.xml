@@ -23,14 +23,14 @@
 
   <insert id="insert" parameterType="com.zdh.bean.Member">
     insert into member (sid, username, `password`, 
-      dormitory, `name`, avatar, 
-      phone, is_active, signin_time, 
-      recent_login, positive_comment, negative_comment, 
+      dormitory, `name`, avatar,
+      phone, is_active, signin_time,
+      recent_login, positive_comment, negative_comment,
       trad_record_num)
     values (#{sid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{dormitory,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{signinTime,jdbcType=TIMESTAMP}, 
-      #{recentLogin,jdbcType=TIMESTAMP}, #{positiveComment,jdbcType=INTEGER}, #{negativeComment,jdbcType=INTEGER}, 
+      #{dormitory,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{signinTime,jdbcType=TIMESTAMP},
+      #{recentLogin,jdbcType=TIMESTAMP}, #{positiveComment,jdbcType=INTEGER}, #{negativeComment,jdbcType=INTEGER},
       #{tradRecordNum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zdh.bean.Member">

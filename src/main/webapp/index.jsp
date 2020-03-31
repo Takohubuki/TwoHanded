@@ -521,37 +521,6 @@
 </script>
 <!-- //检测结束 -->
 
-<!-- smoothscroll -->
-<script src="js/SmoothScroll.min.js"></script>
-<!-- //smoothscroll -->
-
-<!-- start-smooth-scrolling -->
-<script src="js/move-top.js"></script>
-<script src="js/easing.js"></script>
-<script>
-    jQuery(document).ready(function ($) {
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-
-            $('html,body').animate({
-                scrollTop: $(this.hash).offset().top
-            }, 1000);
-        });
-    });
-</script>
-<!-- //end-smooth-scrolling -->
-
-<!-- smooth-scrolling-of-move-up -->
-<script>
-    $(document).ready(function () {
-        $().UItoTop({
-            easingType: 'easeOutQuart'
-        });
-
-    });
-</script>
-<!-- //smooth-scrolling-of-move-up -->
-
 <!-- for bootstrap working -->
 <script src="js/bootstrap.js"></script>
 <!-- //for bootstrap working -->

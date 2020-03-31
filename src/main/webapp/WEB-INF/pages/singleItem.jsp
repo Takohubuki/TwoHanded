@@ -25,18 +25,21 @@
         }
     </script>
     <!--//tags -->
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
     <!--pop-up-box-->
-    <link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
     <!--//pop-up-box-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
+
     <!-- price range -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui1.css">
     <!-- flexslider -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen"/>
     <!-- fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
+          rel="stylesheet">
 </head>
 
 <body>
@@ -231,31 +234,15 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=电子产品">
-                                    电子产品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=体育用品">
-                                    体育用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=生活用品">
-                                    生活用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=衣物">
-                                    衣物
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=杂物">
-                                    杂物
-                                </a>
-                            </li>
+                            <c:forEach items="${kindList}" var="kindList">
+                                <li class="">
+                                    <a class="nav-stylehead"
+                                       href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                            ${kindList}
+                                    </a>
+                                </li>
+                            </c:forEach>
+
                         </ul>
                     </div>
                 </div>
@@ -291,13 +278,14 @@
 				</span>
         </h3>
         <!-- //tittle heading -->
-        <div class="col-md-5 single-right-left ">
+        <div class="col-md-4 single-right-left ">
             <div class="grid images_3_of_2">
                 <div class="flexslider">
                     <ul class="slides">
                         <li data-thumb="${pageContext.request.contextPath}/${item.image}">
                             <div class="thumb-image">
-                                <img src="${pageContext.request.contextPath}/${item.image}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                                <img src="${pageContext.request.contextPath}/${item.image}" data-imagezoom="true"
+                                     class="img-responsive" alt=""></div>
                         </li>
 
                     </ul>
@@ -305,7 +293,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-7 single-right-left simpleCart_shelfItem">
+        <div class="col-md-5 single-right-left simpleCart_shelfItem">
             <h3>${item.name}</h3>
 
             <p>
@@ -340,19 +328,42 @@
 <%--                    <form action="#" method="post">--%>
                         <fieldset>
                             <input type="hidden" name="itemId" value="${item.serialNum}"/>
-                            <input type="hidden" name="itemName" value="${item.name}" />
+                            <input type="hidden" name="itemName" value="${item.name}"/>
                             <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                         </fieldset>
-<%--                    </form>--%>
+                    <%--                    </form>--%>
                 </div>
 
             </div>
 
         </div>
+        <%--FIXME 展示卖家基本信息--%>
+        <div class="col-md-3 single-right-left">
+            <!-- Widget: user widget style 1 -->
+            <div class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-yellow">
+                    <div class="widget-user-image">
+                        <img class="img-circle" src="${pageContext.request.contextPath}/images/avatar/${seller.avatar}"
+                             alt="User Avatar">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username">${seller.username}</h3>
+                    <h5 class="widget-user-desc">Lead Developer</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
+                        <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
+                        <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
+                        <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="clearfix"></div>
     </div>
 </div>
-
 <!-- //Single Page -->
 <!-- special offers -->
 <div class="featured-section" id="projects">
@@ -378,7 +389,7 @@
                             </div>
                             <div class="product-name-w3l">
                                 <h4>
-                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemname=${recommand_items.serialNum}">${recommand_items.name}</a>
+                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">${recommand_items.name}</a>
                                 </h4>
                                 <div class="w3l-pricehkj">
                                     <h6>￥${recommand_items.price}</h6>
@@ -386,7 +397,7 @@
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                     <fieldset>
                                         <input type="hidden" name="itemId" value="${recommand_items.serialNum}"/>
-                                        <input type="hidden" name="itemName" value="${recommand_items.name}" />
+                                        <input type="hidden" name="itemName" value="${recommand_items.name}"/>
                                         <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                                     </fieldset>
                                 </div>
@@ -450,45 +461,6 @@
     }
 </script>
 <!-- //password-script -->
-
-<!-- smoothscroll -->
-<script src="${pageContext.request.contextPath}/js/SmoothScroll.min.js"></script>
-<!-- //smoothscroll -->
-
-<!-- start-smooth-scrolling -->
-<script src="${pageContext.request.contextPath}/js/move-top.js"></script>
-<script src="${pageContext.request.contextPath}/js/easing.js"></script>
-<script>
-    jQuery(document).ready(function ($) {
-        $(".scroll").click(function (event) {
-            event.preventDefault();
-
-            $('html,body').animate({
-                scrollTop: $(this.hash).offset().top
-            }, 1000);
-        });
-    });
-</script>
-<!-- //end-smooth-scrolling -->
-
-<!-- smooth-scrolling-of-move-up -->
-<script>
-    $(document).ready(function () {
-        /*
-        var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-        };
-        */
-        $().UItoTop({
-            easingType: 'easeOutQuart'
-        });
-
-    });
-</script>
-<!-- //smooth-scrolling-of-move-up -->
 
 <!-- imagezoom -->
 <script src="${pageContext.request.contextPath}/js/imagezoom.js"></script>

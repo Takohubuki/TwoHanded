@@ -7,6 +7,7 @@ import com.zdh.bean.Item;
 import com.zdh.bean.Member;
 import com.zdh.mappers.ItemKindMappers;
 import com.zdh.mappers.ItemMapper;
+import com.zdh.mappers.MemberMapper;
 import com.zdh.service.ItemService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,10 +32,16 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private ItemMapper itemMapper;
 
+    @Resource
+    private MemberMapper memberMapper;
+
     @Override
     public ModelAndView selectById(ModelAndView modelAndView, String itemId) {
 
         Item item = itemMapper.selectBySerialNum(itemId);
+
+        String sellerId = item.getPublisher();
+        Member seller = memberMapper.selectByPrimaryKey(sellerId);
 
         item.setViewedTimes(item.getViewedTimes() + 1);
         itemMapper.updateItemInfo(item);
@@ -42,8 +49,12 @@ public class ItemServiceImpl implements ItemService {
         String kind = item.getKind();
         List<Item> items = recommendSameKind(kind, item);
 
+        List<String> kindList = itemKindMappers.getKindList();
+        modelAndView.addObject("kindList", kindList);
+
         modelAndView.addObject("item", item);
-        modelAndView.addObject("recommand_items",items);
+        modelAndView.addObject("recommand_items", items);
+        modelAndView.addObject("seller", seller);
         modelAndView.setViewName("singleItem");
 
         return modelAndView;

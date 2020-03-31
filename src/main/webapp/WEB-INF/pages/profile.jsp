@@ -167,6 +167,7 @@
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 <!-- SlimScroll -->
 <script src="${pageContext.request.contextPath}/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 
 <script type="text/javascript">

@@ -41,11 +41,14 @@ public class MemberServiceImpl implements MemberService {
         String password = member.getPassword();
         String s = DigestUtils.md5DigestAsHex(password.getBytes());
         member.setPassword(s);
+        Date date = new Date();
+        member.setRecentLogin(date);
+        member.setSigninTime(date);
 
-        memberMapper.insert(member);
+        memberMapper.insertSelective(member);
         System.out.println("-----------------------注册成功-----------------------------");
-        session.setAttribute("member",member);
-        modelAndView.setViewName("redirect:"+uri);
+        session.setAttribute("member", member);
+        modelAndView.setViewName("redirect:" + uri);
 
         return modelAndView;
     }

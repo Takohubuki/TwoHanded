@@ -242,26 +242,26 @@
         order by update_time desc
         limit 3
     </select>
-    <select id="select1WtsItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+    <select id="select1WtsItemByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         *
         from item
         where conditions='出售' and name = #{itemname} and is_undercarriage = '0'
     </select>
-    <select id="select1WtbItemByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+    <select id="select1WtbItemByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         *
         from item
         where conditions='求购' and name = #{itemname} and is_undercarriage='0'
     </select>
-    <select id="selectByName" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from item where name like"%"#{name}"%"
     </select>
-    <select id="recommandSameKind" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
-        select * from item where kind = #{kind} and conditions='出售' limit 6
+    <select id="recommandSameKind" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from item where kind = #{kind} and conditions='出售' and is_undercarriage = '0' limit 6
     </select>
     <select id="selectByKind" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select * from item where kind = #{kind} and is_undercarriage='0'
+        select * from item where kind = #{kind} and is_undercarriage = '0'
     </select>
     <insert id="addPublish" parameterType="com.zdh.bean.Item">
         insert into item (id, name, price,
