@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -130,9 +132,11 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public ModelAndView approval() {
-        itemMapper.getApprovalItem();
-        return null;
+    public ModelAndView approval(ModelAndView modelAndView) {
+        List<Item> approvalItem = itemMapper.getApprovalItem();
+        modelAndView.addObject("infoList", approvalItem);
+        modelAndView.setViewName("approvalPublishInfo");
+        return modelAndView;
     }
 
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {
@@ -144,16 +148,31 @@ public class ManagerServiceImpl implements ManagerService {
         Integer item_wts_sum_today = managerMapper.countItemWtsToday();
         Integer item_wtb_sum_today = managerMapper.countItemWtbToday();
         Integer order_total = managerMapper.countOrderTotal();
+        Integer infoToHandle = managerMapper.countInfoToHandle();
 
-        modelAndView.addObject("loginToday",loginToday);
-        modelAndView.addObject("item_wts_sum_today",item_wts_sum_today);
-        modelAndView.addObject("item_wtb_sum_today",item_wtb_sum_today);
-        modelAndView.addObject("order_total",order_total);
-        modelAndView.addObject("member_sum",member_sum);
-        modelAndView.addObject("item_wts_sum",countItemWtsOnCarriiage);
-        modelAndView.addObject("item_wtb_sum",countItemWtbOnCarriiage);
-        modelAndView.addObject("order_today",orderedToday);
+        Map<String, Integer> param = new HashMap<>();
 
+        param.put("loginToday", loginToday);
+        param.put("item_wts_sum_today", item_wts_sum_today);
+        param.put("item_wtb_sum_today", item_wtb_sum_today);
+        param.put("order_total", order_total);
+        param.put("member_sum", member_sum);
+        param.put("item_wts_sum", countItemWtsOnCarriiage);
+        param.put("item_wtb_sum", countItemWtbOnCarriiage);
+        param.put("order_today", orderedToday);
+        param.put("infoToHandle", infoToHandle);
+
+/*
+        modelAndView.addObject("loginToday", loginToday);
+        modelAndView.addObject("item_wts_sum_today", item_wts_sum_today);
+        modelAndView.addObject("item_wtb_sum_today", item_wtb_sum_today);
+        modelAndView.addObject("order_total", order_total);
+        modelAndView.addObject("member_sum", member_sum);
+        modelAndView.addObject("item_wts_sum", countItemWtsOnCarriiage);
+        modelAndView.addObject("item_wtb_sum", countItemWtbOnCarriiage);
+        modelAndView.addObject("order_today", orderedToday);
+*/
+        modelAndView.addObject("generalSit", param);
         modelAndView.setViewName("backstage");
         return modelAndView;
     }

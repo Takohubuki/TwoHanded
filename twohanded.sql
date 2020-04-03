@@ -1,8 +1,8 @@
 /*
-SQLyog Professional v12.09 (64 bit)
-MySQL - 8.0.16 : Database - twohanded
+SQLyog Ultimate v13.1.1 (64 bit)
+MySQL - 8.0.11 : Database - twohanded
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,7 +12,7 @@ MySQL - 8.0.16 : Database - twohanded
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`twohanded` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`twohanded` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 
 USE `twohanded`;
 
@@ -22,14 +22,25 @@ DROP TABLE IF EXISTS `cart`;
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `item_id` varchar(255) DEFAULT NULL,
-  `member_sid` varchar(255) DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
+  `item_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品id',
+  `member_sid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户id',
+  `item_num` int(11) DEFAULT NULL COMMENT '单种商品数量',
+  `is_checked` tinyint(1) DEFAULT '0' COMMENT '是否结账 0已付 1未付',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `cart` */
+
+insert  into `cart`(`id`,`item_id`,`member_sid`,`item_num`,`is_checked`) values 
+(1,'2019071819193815025236','15025236',1,0),
+(2,'2019072011554916046621','15025236',1,0),
+(48,'2019060103344116053524','15022364',7,0),
+(49,'2019070518543016046621','15022364',17,0),
+(50,'2019070518303816046621','15022364',1,0),
+(51,'2019070103320512033531','15022364',1,0),
+(61,'2019070103320512033531','16046621',3,0),
+(62,'2019060103344116053524','16046621',3,0),
+(71,'2019060103344116053524','16025426',1,0);
 
 /*Table structure for table `item` */
 
@@ -37,22 +48,77 @@ DROP TABLE IF EXISTS `item`;
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `number` int(11) DEFAULT NULL,
-  `publisher` varchar(255) DEFAULT NULL,
-  `describes` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `quality` int(11) DEFAULT NULL,
-  `conditions` varchar(255) DEFAULT NULL,
-  `publish_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `serial_num` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品名称',
+  `price` int(11) DEFAULT NULL COMMENT '单价',
+  `number` int(11) DEFAULT NULL COMMENT '库存',
+  `publisher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '发布用户id',
+  `describes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '描述',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片',
+  `kind` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '杂物' COMMENT '分类',
+  `quality` int(11) DEFAULT NULL COMMENT '商品成色 x表示x成新',
+  `conditions` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '出售或求购',
+  `publish_time` datetime DEFAULT NULL COMMENT '发布时间',
+  `update_time` datetime DEFAULT NULL COMMENT '信息更新时间',
+  `is_undercarriage` tinyint(1) DEFAULT '0' COMMENT '是否下架',
+  `undercarriage_reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '下架原因',
+  `viewed_times` int(11) DEFAULT '0' COMMENT '点击量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `item` */
 
-insert  into `item`(`id`,`name`,`price`,`number`,`publisher`,`describes`,`image`,`quality`,`conditions`,`publish_time`,`update_time`) values (1,'Almonds, 100g',149,50,'16044254','商品3描述','images/m1.jpg',1,'出售','2019-07-01 03:31:28','2019-07-01 03:31:32'),(2,'Cashew Nuts, 100g',200,70,'12033531','商品2描述','images/m2.jpg',5,'出售','2019-07-01 03:32:05','2019-07-01 03:34:40'),(3,'Pista..., 250g',520,44,'15052342','商品4描述','images/m3.jpg',7,'出售','2019-07-01 03:34:37','2017-07-01 03:34:39'),(4,'test',100,23,'16053524','商品1描述','images/s1.jpg',10,'出售','2019-06-01 03:34:41','2020-05-01 03:34:44'),(5,'求购商品1',100,1,'17025356','求购需求','images/mk4.jpg',6,'求购','2010-05-04 01:38:19','2019-07-04 01:38:35'),(6,'求购商品2',50,10,'18026554','求购需求','images/mk5.jpg',9,'求购','2009-07-04 01:39:07','2019-09-04 01:39:16'),(7,'求购商品3',10,5,'16046257','求购需求','images/mk6.jpg',8,'求购','2013-07-04 01:39:51','2019-06-04 01:39:59'),(8,'求购商品4',200,1,'15052294','求购需求','images/mk5.jpg',7,'求购','2016-07-04 01:40:53','2019-10-04 01:41:01'),(11,'但如果',20,1,'16046621','5434','images/3.jpg',6,'出售','2019-07-05 18:30:38','2019-07-05 18:30:38'),(12,'地方',20,1,'16046621','dfdefrg','images/3.jpg',5,'求购','2019-07-05 18:50:09','2019-07-05 18:50:09'),(13,'地方',4,1,'16046621','rtyhrhyerg','images/3.jpg',6,'出售','2019-07-05 18:54:30','2019-07-05 18:54:30');
+insert  into `item`(`id`,`serial_num`,`name`,`price`,`number`,`publisher`,`describes`,`image`,`kind`,`quality`,`conditions`,`publish_time`,`update_time`,`is_undercarriage`,`undercarriage_reason`,`viewed_times`) values 
+(1,'2019070103312816044254','商品3',149,45,'16046621','商品3描述','images/m1.jpg','电子产品',1,'出售','2019-07-01 03:31:28','2019-07-01 03:31:32',0,NULL,8),
+(2,'2019070103320512033531','坚果',200,53,'15025236','商品2描述','images/m2.jpg','衣物',5,'出售','2019-07-01 03:32:05','2019-07-01 03:34:40',0,NULL,16),
+(3,'2019070103343715052342','商品4',520,44,'15025236','商品4描述','images/m3.jpg','电子产品',7,'出售','2019-07-01 03:34:37','2017-07-01 03:34:39',0,NULL,2),
+(4,'2019060103344116053524','test',100,8,'16053524','商品1描述','images/s1.jpg','杂物',10,'出售','2019-06-01 03:34:41','2020-05-01 03:34:44',0,'',8),
+(5,'2010050401381917025356','求购商品1',100,1,'15025236','求购需求','images/mk4.jpg','生活用品',6,'求购','2010-05-04 01:38:19','2019-07-04 01:38:35',0,NULL,0),
+(6,'2009070401390718026554','求购商品2',50,10,'16046621','求购需求','images/mk5.jpg','体育用品',9,'求购','2009-07-04 01:39:07','2019-09-04 01:39:16',0,NULL,3),
+(7,'2013070401395116046257','求购商品3',10,5,'16046257','求购需求','images/mk6.jpg','电子产品',8,'求购','2013-07-04 01:39:51','2019-06-04 01:39:59',0,NULL,0),
+(8,'2016070401405315052294','求购商品4',200,1,'15052294','求购需求','images/mk5.jpg','生活用品',7,'求购','2016-07-04 01:40:53','2019-10-04 01:41:01',0,NULL,0),
+(11,'2019070518303816046621','但如果',20,0,'16046621','5434','images/3.jpg','衣物',6,'出售','2019-07-05 18:30:38','2019-07-05 18:30:38',1,'库存不足',3),
+(12,'2019070518500916046621','地方',20,1,'16046621','dfdefrg','images/3.jpg','杂物',5,'求购','2019-07-05 18:50:09','2019-07-05 18:50:09',0,NULL,1),
+(13,'2019070518543016046621','出售商品02',4,0,'16046621','rtyhrhyerg','images/3.jpg','体育用品',6,'出售','2019-07-05 18:54:30','2019-07-05 18:54:30',1,'库存不足',0),
+(14,'2019071819193815025236','出售商品01',5,0,'15025236','拖把','images/a7.jpg','衣物',8,'出售','2019-07-18 19:19:38','2019-07-18 19:19:38',1,'库存不足',1),
+(15,'2019072011554916046621','xlj发布3',20,0,'16046621','洗衣液','images/a2.jpg','生活用品',6,'出售','2019-07-20 11:55:50','2019-07-20 11:55:50',1,'库存不足',0),
+(16,'2020031716582916025426','admin出售',10,2,'16025426','9成新自用扫把，有意者来',NULL,'杂物',9,'出售','2020-03-17 16:58:29','2020-03-17 16:58:29',1,'待审核',NULL),
+(17,'2020032417343716046621','二手电脑',5000,1,'16046621','8成新电脑  i5-9400f + 2080TI','images/1.jpg','电子产品',8,'出售','2020-03-24 17:34:38','2020-03-24 17:34:38',1,'待审核',NULL);
+
+/*Table structure for table `item_kind` */
+
+DROP TABLE IF EXISTS `item_kind`;
+
+CREATE TABLE `item_kind` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kind_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `item_kind` */
+
+insert  into `item_kind`(`id`,`kind_name`) values 
+(1,'电子产品'),
+(2,'体育用品'),
+(3,'生活用品'),
+(4,'衣物'),
+(5,'杂物');
+
+/*Table structure for table `key_config` */
+
+DROP TABLE IF EXISTS `key_config`;
+
+CREATE TABLE `key_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `public_key` varchar(511) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `private_key` varchar(2047) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `key_config` */
+
+insert  into `key_config`(`id`,`public_key`,`private_key`) values 
+(1,'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');
 
 /*Table structure for table `manager` */
 
@@ -67,26 +133,38 @@ CREATE TABLE `manager` (
 
 /*Data for the table `manager` */
 
-insert  into `manager`(`id`,`username`,`password`) values (1,'admin','4297f44b13955235245b2497399d7a93');
+insert  into `manager`(`id`,`username`,`password`) values 
+(1,'admin','4297f44b13955235245b2497399d7a93');
 
 /*Table structure for table `member` */
 
 DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
-  `sid` varchar(255) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `dormitory` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT 'default.jpg',
-  `phone` varchar(255) DEFAULT NULL,
+  `sid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '学号',
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户名',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户登录密码',
+  `dormitory` varchar(255) DEFAULT NULL COMMENT '寝室号（4位）',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '真实姓名',
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'default.jpg' COMMENT '用户头像路径',
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '电话号',
+  `is_active` tinyint(1) DEFAULT '1' COMMENT '封禁状态 0禁用 1正常',
+  `signin_time` datetime DEFAULT NULL COMMENT '注册时间',
+  `recent_login` datetime DEFAULT NULL COMMENT '最近登录时间',
+  `positive_comment` int(11) DEFAULT '0' COMMENT '好评数',
+  `negative_comment` int(11) DEFAULT '0' COMMENT '差评数',
+  `trad_record_num` int(11) DEFAULT '0' COMMENT '成交次数',
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `member` */
 
-insert  into `member`(`sid`,`username`,`password`,`dormitory`,`name`,`avatar`,`phone`) values ('15022364','123','4297f44b13955235245b2497399d7a93',5521,'但如果','default.jpg','15503125215'),('15025236','932421804','4297f44b13955235245b2497399d7a93',5521,'开户行沟通','default.jpg','15504618935'),('16025426','admin','4297f44b13955235245b2497399d7a93',2202,'地方','default.jpg','15504618935'),('16046621','xlj','4297f44b13955235245b2497399d7a93',2202,'xlj','xlj.png','15504618935');
+insert  into `member`(`sid`,`username`,`password`,`dormitory`,`name`,`avatar`,`phone`,`is_active`,`signin_time`,`recent_login`,`positive_comment`,`negative_comment`,`trad_record_num`) values 
+('15022364','123','4297f44b13955235245b2497399d7a93','5521','但如果','default.jpg','15503125215',1,'2009-07-19 09:43:58','2020-03-24 16:42:49',0,0,0),
+('15025236','932421804','4297f44b13955235245b2497399d7a93','5521','开户行沟通','default.jpg','15504618935',1,'2008-07-19 09:44:22','2019-08-02 14:37:20',0,0,0),
+('16025426','admin','4297f44b13955235245b2497399d7a93','2202','地方','default.jpg','15504618935',1,'2006-07-19 09:44:26','2020-03-31 15:18:36',0,0,0),
+('16046621','xlj','4297f44b13955235245b2497399d7a93','1101','xlj','right.png','15504618935',1,'2010-07-19 09:44:31','2020-03-25 17:50:55',0,0,0),
+('18047828','热心人','4297f44b13955235245b2497399d7a93','1011','想吃肉','default.jpg','15504618935',1,'2010-07-19 09:44:31','2020-03-25 17:50:55',0,0,0);
 
 /*Table structure for table `order` */
 
@@ -94,14 +172,66 @@ DROP TABLE IF EXISTS `order`;
 
 CREATE TABLE `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `is_paid` varchar(255) DEFAULT NULL,
-  `is_received` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `order_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '订单id',
+  `sum_price` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '单种商品总价',
+  `item_num` int(11) DEFAULT NULL COMMENT '商品数量',
+  `item_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品id',
+  `buyer_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '买家用户id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `is_paid` tinyint(1) DEFAULT NULL COMMENT '是否付款 0付款 1未付',
+  `is_received` tinyint(1) DEFAULT NULL COMMENT '是否收货 0未受 1收货',
+  `is_canceled` tinyint(1) DEFAULT NULL COMMENT '是否取消 0正常 1取消',
+  `is_checked` tinyint(1) DEFAULT '0' COMMENT '结算状态 0未结算 1结算',
+  `pay_method` varchar(255) DEFAULT NULL COMMENT '支付方式',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `order` */
+
+insert  into `order`(`id`,`order_id`,`sum_price`,`item_num`,`item_id`,`buyer_id`,`create_time`,`update_time`,`is_paid`,`is_received`,`is_canceled`,`is_checked`,`pay_method`) values 
+(47,'16025426202003202234','¥5',1,'2019071819193815025236','16025426','2020-03-20 22:34:47','2020-03-20 22:34:47',1,0,0,1,NULL),
+(48,'16025426202003231054','¥100',1,'2019060103344116053524','16025426','2020-03-23 10:54:20','2020-03-23 10:54:20',1,0,0,1,NULL),
+(49,'16025426202003231100','¥5',1,'2019071819193815025236','16025426','2020-03-23 11:00:54','2020-03-23 11:00:54',1,0,0,1,NULL),
+(50,'16025426202003231107','¥20',1,'2019072011554916046621','16025426','2020-03-23 11:07:19','2020-03-23 11:07:19',1,0,0,1,NULL),
+(51,'16025426202003231107','¥20',1,'2019072011554916046621','16025426','2020-03-23 11:07:32','2020-03-23 11:07:32',1,0,0,1,NULL),
+(52,'16025426202003231109','¥20',1,'2019072011554916046621','16025426','2020-03-23 11:09:32','2020-03-23 11:09:32',1,0,0,1,NULL),
+(53,'16025426202003231110','¥4',1,'2019070518543016046621','16025426','2020-03-23 11:10:45','2020-03-23 11:10:45',1,0,0,1,NULL),
+(54,'16025426202003231131','¥4',1,'2019070518543016046621','16025426','2020-03-23 11:31:35','2020-03-23 11:31:35',1,0,0,1,NULL),
+(55,'16025426202003231132','¥4',1,'2019070518543016046621','16025426','2020-03-23 11:32:25','2020-03-23 11:32:25',1,0,0,1,NULL),
+(56,'16025426202003231521','¥100',1,'2019060103344116053524','16025426','2020-03-23 15:21:45','2020-03-23 15:21:45',1,0,0,1,NULL),
+(57,'15022364202003241542','¥5',1,'2019071819193815025236','15022364','2020-03-24 15:42:51','2020-03-24 15:42:51',1,0,0,1,NULL),
+(58,'15022364202003241542','¥20',1,'2019072011554916046621','15022364','2020-03-24 15:42:51','2020-03-24 15:42:51',1,0,0,1,NULL),
+(59,'15022364202003241542','¥100',1,'2019060103344116053524','15022364','2020-03-24 15:42:51','2020-03-24 15:42:51',1,0,0,1,NULL),
+(60,'15022364202003241544','¥10',2,'2019071819193815025236','15022364','2020-03-24 15:44:57','2020-03-24 15:44:57',1,0,0,1,NULL),
+(61,'15022364202003241544','¥20',1,'2019072011554916046621','15022364','2020-03-24 15:44:57','2020-03-24 15:44:57',1,0,0,1,NULL),
+(62,'15022364202003241550','¥40',2,'2019072011554916046621','15022364','2020-03-24 15:50:59','2020-03-24 15:50:59',1,0,0,1,NULL),
+(63,'15022364202003241550','¥100',1,'2019060103344116053524','15022364','2020-03-24 15:50:59','2020-03-24 15:50:59',1,0,0,1,NULL),
+(64,'15022364202003241559','¥40',2,'2019072011554916046621','15022364','2020-03-24 15:59:40','2020-03-24 15:59:40',1,0,0,1,NULL),
+(65,'15022364202003241559','¥100',1,'2019060103344116053524','15022364','2020-03-24 15:59:40','2020-03-24 15:59:40',1,0,0,1,NULL),
+(66,'15022364202003241636','¥20',4,'2019071819193815025236','15022364','2020-03-24 16:36:51','2020-03-24 16:36:51',1,0,0,1,'cashpay'),
+(67,'15022364202003241636','¥100',1,'2019060103344116053524','15022364','2020-03-24 16:36:51','2020-03-24 16:36:51',1,0,0,1,'cashpay'),
+(68,'15022364202003241638','¥5',1,'2019071819193815025236','15022364','2020-03-24 16:38:15','2020-03-24 16:38:15',1,0,0,1,NULL),
+(69,'15022364202003241643','¥4',1,'2019070518543016046621','15022364','2020-03-24 16:43:14','2020-03-24 16:43:14',1,0,0,1,'alipay'),
+(70,'15022364202003241643','¥100',1,'2019060103344116053524','15022364','2020-03-24 16:43:14','2020-03-24 16:43:14',1,0,0,1,'alipay'),
+(71,'15022364202003241643','¥20',1,'2019070518303816046621','15022364','2020-03-24 16:43:14','2020-03-24 16:43:14',1,0,0,1,'alipay'),
+(72,'15022364202003241644','¥4',1,'2019070518543016046621','15022364','2020-03-24 16:44:23','2020-03-24 16:44:23',1,0,0,1,'alipay'),
+(73,'15022364202003241644','¥100',1,'2019060103344116053524','15022364','2020-03-24 16:44:23','2020-03-24 16:44:23',1,0,0,1,'alipay'),
+(74,'15022364202003241644','¥20',1,'2019070518303816046621','15022364','2020-03-24 16:44:23','2020-03-24 16:44:23',1,0,0,1,'alipay'),
+(75,'16046621202003241726','¥100',1,'2019060103344116053524','16046621','2020-03-24 17:26:07','2020-03-24 17:26:07',1,0,0,1,'alipay'),
+(76,'16046621202003241726','¥149',1,'2019070103312816044254','16046621','2020-03-24 17:26:07','2020-03-24 17:26:07',1,0,0,1,'alipay'),
+(77,'16046621202003251751','¥149',1,'2019070103312816044254','16046621','2020-03-25 17:51:12','2020-03-25 17:51:12',1,0,0,1,'alipay'),
+(78,'16046621202003251755','¥149',1,'2019070103312816044254','16046621','2020-03-25 17:55:04','2020-03-25 17:55:04',1,0,0,1,'cashpay'),
+(79,'16046621202003251756','¥100',1,'2019060103344116053524','16046621','2020-03-25 17:56:01','2020-03-25 17:56:01',1,0,0,1,'alipay'),
+(80,'16046621202003251756','¥200',1,'2019070103320512033531','16046621','2020-03-25 17:56:43','2020-03-25 17:56:43',1,0,0,1,'alipay'),
+(81,'16046621202003251756','¥100',1,'2019060103344116053524','16046621','2020-03-25 17:56:43','2020-03-25 17:56:43',1,0,0,1,'alipay'),
+(82,'16046621202003251757','¥149',1,'2019070103312816044254','16046621','2020-03-25 17:57:41','2020-03-25 17:57:41',1,0,0,1,'alipay'),
+(83,'16046621202003251757','¥200',1,'2019070103320512033531','16046621','2020-03-25 17:57:41','2020-03-25 17:57:41',1,0,0,1,'alipay'),
+(84,'16025426202003260937','¥300',3,'2019060103344116053524','16025426','2020-03-26 09:37:17','2020-03-26 09:37:17',1,0,0,1,'cashpay'),
+(85,'16025426202003260943','¥800',4,'2019070103320512033531','16025426','2020-03-26 09:43:14','2020-03-26 09:43:14',1,0,0,1,'alipay'),
+(86,'16025426202003260943','¥200',2,'2019060103344116053524','16025426','2020-03-26 09:43:14','2020-03-26 09:43:14',1,0,0,1,'alipay'),
+(87,'16025426202003281850','¥2200',11,'2019070103320512033531','16025426','2020-03-28 18:50:45','2020-03-28 18:50:45',1,0,0,1,'alipay'),
+(88,'16025426202003281850','¥149',1,'2019070103312816044254','16025426','2020-03-28 18:50:45','2020-03-28 18:50:45',1,0,0,1,'alipay');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

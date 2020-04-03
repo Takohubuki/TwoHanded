@@ -304,6 +304,6 @@
         where serial_num = #{itemId}
     </update>
     <select id="getApprovalItem" resultMap="BaseResultMap">
-        select * from item where undercarriage_reason = "待审核";
+        select * from item where undercarriage_reason = '待审核';
     </select>
 </mapper>

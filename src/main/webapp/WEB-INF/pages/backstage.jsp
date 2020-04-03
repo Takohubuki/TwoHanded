@@ -84,7 +84,7 @@
                         <i class="fa fa-dashboard"></i> <span>信息审核</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
-                            <span class="label label-primary pull-right">5</span>
+                            <span class="label label-primary pull-right">${generalSit.infoToHandle + 5}</span>
                         </span>
                     </a>
                     <ul class="treeview-menu">
@@ -103,7 +103,7 @@
                                 <i class="fa fa-circle-o"></i>
                                 信息发布
                                 <span class="pull-right-container">
-                                    <span class="label label-primary pull-right">5</span>
+                                    <span class="label label-primary pull-right">${generalSit.infoToHandle}</span>
                                 </span>
                             </a>
                         </li>
@@ -129,7 +129,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-red-gradient">
                             <div class="inner">
-                                <h3>${member_sum}</h3>
+                                <h3>${generalSit.member_sum}</h3>
                                 <p>注册用户数</p>
                             </div>
                             <div class="icon">
@@ -141,7 +141,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-aqua">
                             <div class="inner">
-                                <h3>${item_wts_sum}</h3>
+                                <h3>${generalSit.item_wts_sum}</h3>
                                 <p>在售商品数</p>
                             </div>
                             <div class="icon">
@@ -153,7 +153,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-yellow-active">
                             <div class="inner">
-                                <h3>${item_wtb_sum}</h3>
+                                <h3>${generalSit.item_wtb_sum}</h3>
                                 <p>求购信息数</p>
                             </div>
                             <div class="icon">
@@ -165,7 +165,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-green">
                             <div class="inner">
-                                <h3>${order_today}</h3>
+                                <h3>${generalSit.order_today}</h3>
                                 <p>今日完成订单</p>
                             </div>
                             <div class="icon">
@@ -179,7 +179,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-yellow">
                             <div class="inner">
-                                <h3>${loginToday}</h3>
+                                <h3>${generalSit.loginToday}</h3>
                                 <p>今日登录用户数</p>
                             </div>
                             <div class="icon">
@@ -191,7 +191,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-aqua">
                             <div class="inner">
-                                <h3>${item_wts_sum_today}</h3>
+                                <h3>${generalSit.item_wts_sum_today}</h3>
                                 <p>今日发布出售数</p>
                             </div>
                             <div class="icon">
@@ -203,7 +203,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-light-blue-gradient">
                             <div class="inner">
-                                <h3>${item_wtb_sum_today}</h3>
+                                <h3>${generalSit.item_wtb_sum_today}</h3>
                                 <p>今日发布求购数</p>
                             </div>
                             <div class="icon">
@@ -215,7 +215,7 @@
                     <div class="col-lg-3 col-xs-6">
                         <div class="small-box bg-blue-active">
                             <div class="inner">
-                                <h3>${order_total}</h3>
+                                <h3>${generalSit.order_total}</h3>
                                 <p>完成订单总数</p>
                             </div>
                             <div class="icon">

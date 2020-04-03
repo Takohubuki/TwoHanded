@@ -16,18 +16,19 @@ public class ManagerController {
     ManagerService managerService;
 
     @RequestMapping("/managerlogin")
-    public ModelAndView manager(ModelAndView modelAndView){
+    public ModelAndView manager(ModelAndView modelAndView) {
         modelAndView.setViewName("managerLogin");
         return modelAndView;
     }
 
-    @RequestMapping("/manager/approval")
-    public ModelAndView approval(){
-        return managerService.approval();
+    @RequestMapping("/manage/approval")
+    public ModelAndView approval(ModelAndView modelAndView) {
+        return managerService.approval(modelAndView);
     }
 
     /**
      * 管理员登录
+     *
      * @param username
      * @param password
      * @param modelAndView

@@ -51,4 +51,6 @@ public interface ManagerMapper {
     Integer countItemWtbToday();
 
     Integer countOrderTotal();
+
+    Integer countInfoToHandle();
 }

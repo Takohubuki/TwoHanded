@@ -50,5 +50,5 @@ public interface ManagerService {
 
     public ModelAndView activeMember(ModelAndView modelAndView, String sid);
 
-    ModelAndView approval();
+    ModelAndView approval(ModelAndView modelAndView);
 }

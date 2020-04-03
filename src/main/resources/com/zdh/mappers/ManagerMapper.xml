@@ -42,6 +42,9 @@
     <select id="countOrderTotal" resultType="java.lang.Integer">
         select count(*) from `order`;
     </select>
+    <select id="countInfoToHandle" resultType="java.lang.Integer">
+        select count(*) from item where undercarriage_reason = '待审核';
+    </select>
     <select id="selectAllMember" resultType="com.zdh.bean.Member">
         select * from member;
     </select>
