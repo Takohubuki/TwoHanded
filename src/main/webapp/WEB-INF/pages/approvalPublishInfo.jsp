@@ -81,11 +81,11 @@
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info" data-toggle="modal"
-                                                        data-target="#modal-info">
+                                                        data-target="#modal-info" data-id="${infoList.serialNum}">
                                                     同意
                                                 </button>
                                                 <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                        data-target="#modal-warning">
+                                                        data-target="#modal-danger" data-id="${infoList.serialNum}">
                                                     拒绝
                                                 </button>
                                             </td>
@@ -106,20 +106,55 @@
     </div>
 
     <%--    同意弹出框--%>
-    <div class="modal modal-info fade" id="modal-info">
+    <div class="modal modal-info fade" id="modal-info" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">确认同意该商品上架吗？</h4>
+                    <h4 class="modal-title">确认同意发布吗？</h4>
                 </div>
-                <%--                <div class="modal-body">--%>
-                <%--                    <p>One fine body&hellip;</p>--%>
-                <%--                </div>--%>
+                <form id="accessForm">
+                    <input type="hidden" name="id" id="accessId" class="hidden"/>
+                </form>
+                <%--
+                                    <div class="modal-body">
+                                        <p>One fine body&hellip;</p>
+                                    </div>
+                --%>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-outline">确定</button>
+                    <button type="button" class="btn btn-outline" id="accessBtn">确定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <%--    拒绝弹出框--%>
+    <div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确定拒绝吗？</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="denyForm">
+                        输入拒绝原因：
+                        <label>
+                            <input type="text" name="reason"/>
+                        </label>
+                        <input type="hidden" id="denyId" name="id" class="hidden"/>
+                    </form>
+                    <%--                    <p>One fine body&hellip;</p>--%>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline" id="denyBtn">提交</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -141,8 +176,55 @@
             'autoWidth': false,
             'language': language
         });
-    });
+        $('.modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var recipient = button.data('id');// Extract info from data-* attributes
+            var modal = $(this);
+            console.log(recipient);
+            modal.find('.hidden').val(recipient);
+        });
+        $('#accessBtn').click(function () {
 
+            let id = $('#accessId').val();
+            $.ajax({
+                url: '/manage/accessInfo',
+                type: 'post',
+                data: {
+                    'id': id
+                },
+                success: function () {
+                    alert('信息发布成功');
+                    $('#page').reload();
+                },
+                error: function (result) {
+                    $('#modal-info').modal('hide');
+                    console.log(result.responseText);
+                    $('#page').html(result.responseText);
+                }
+            })
+        });
+        $('#denyBtn').click(function () {
+
+            let id = $('#accessId').val();
+            let reason = $('#denyForm').find('input[name = reason]').val();
+            $.ajax({
+                url: '/manage/accessInfo',
+                type: 'post',
+                data: {
+                    'id': id,
+                    'reason': reason
+                },
+                success: function () {
+                    alert('信息发布成功');
+                    $('#page').reload();
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            })
+        });
+
+    });
 
 </script>
 </html>

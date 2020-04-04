@@ -21,7 +21,7 @@
             <div class="box-body">
                 <div class="form-group">
                     <label>学号</label>
-                    <input type="text" class="form-control disabled" name="sid" value="${member.sid}">
+                    <input type="text" class="form-control" name="sid" value="${member.sid}" disabled>
                 </div>
                 <div class="form-group">
                     <label>姓名</label>
