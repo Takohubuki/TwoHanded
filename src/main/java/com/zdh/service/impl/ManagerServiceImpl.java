@@ -139,6 +139,16 @@ public class ManagerServiceImpl implements ManagerService {
         return modelAndView;
     }
 
+    @Override
+    public String accessInfo(String id) {
+        Item item = new Item();
+        item.setSerialNum(id);
+        item.setIsUndercarriage(false);
+        item.setUndercarriageReason("");
+        itemMapper.updateItemInfo(item);
+        return "上架成功！";
+    }
+
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {
         Integer member_sum = managerMapper.countMember();
         Integer countItemWtbOnCarriiage = managerMapper.countItemWtbOnCarriiage();

@@ -51,4 +51,6 @@ public interface ManagerService {
     public ModelAndView activeMember(ModelAndView modelAndView, String sid);
 
     ModelAndView approval(ModelAndView modelAndView);
+
+    String accessInfo(String id);
 }

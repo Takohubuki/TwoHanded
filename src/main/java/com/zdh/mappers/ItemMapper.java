@@ -14,10 +14,6 @@ public interface ItemMapper {
 
     Item selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Item record);
-
-    int updateByPrimaryKey(Item record);
-
     Item selectBySerialNum(String itemId);
 
     List<Item> select3WtsItemByTime();

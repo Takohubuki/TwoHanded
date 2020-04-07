@@ -165,6 +165,11 @@
 
 </section>
 <script>
+    function printError(responseText) {
+        $('#page').load('/index/blank');
+        $('#page').html(responseText);
+    }
+
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
@@ -192,23 +197,23 @@
                 data: {
                     'id': id
                 },
-                success: function () {
+                success: function (result) {
                     alert('信息发布成功');
-                    $('#page').reload();
                 },
                 error: function (result) {
-                    $('#modal-info').modal('hide');
                     console.log(result.responseText);
-                    $('#page').html(result.responseText);
                 }
-            })
+            });
+            $('#modal-info').modal('hide');
+            $('#page').load('/manage/approval');
+
         });
         $('#denyBtn').click(function () {
 
             let id = $('#accessId').val();
             let reason = $('#denyForm').find('input[name = reason]').val();
             $.ajax({
-                url: '/manage/accessInfo',
+                url: '/manage/denyInfo',
                 type: 'post',
                 data: {
                     'id': id,
@@ -216,12 +221,14 @@
                 },
                 success: function () {
                     alert('信息发布成功');
-                    $('#page').reload();
                 },
                 error: function (result) {
-                    console.log(result);
+                    console.log(result.responseText);
                 }
-            })
+            });
+            $('#modal-info').modal('hide');
+            $('#page').load('/manage/approval');
+
         });
 
     });

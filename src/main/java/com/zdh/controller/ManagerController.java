@@ -127,13 +127,19 @@ public class ManagerController {
 
     /**
      * 解封用户
+     *
      * @param modelAndView
      * @param sid
      * @return
      */
     @RequestMapping("/manage/activemember")
-    public ModelAndView activeMember(ModelAndView modelAndView, String sid){
+    public ModelAndView activeMember(ModelAndView modelAndView, String sid) {
         return managerService.activeMember(modelAndView, sid);
+    }
+
+    @RequestMapping("/manage/accessInfo")
+    public String accessInfo(String id) {
+        return managerService.accessInfo(id);
     }
 
 }

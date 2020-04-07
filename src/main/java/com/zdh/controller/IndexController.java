@@ -11,13 +11,14 @@ import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 
 @RestController
+@RequestMapping("/index")
 public class IndexController implements ServletContextAware {
 
     @Resource
     ItemService itemService;
 
-    @RequestMapping("/index/backindex")
-    public ModelAndView goIndex(ModelAndView modelAndView, RedirectAttributes redirectAttributes){
+    @RequestMapping("/backindex")
+    public ModelAndView goIndex(ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
         return itemService.getIndexItem(modelAndView, redirectAttributes);
     }
 
@@ -26,4 +27,9 @@ public class IndexController implements ServletContextAware {
         itemService.getIndexItem(servletContext);
     }
 
+    @RequestMapping("/blank")
+    public ModelAndView blank(ModelAndView modelAndView) {
+        modelAndView.setViewName("blank");
+        return modelAndView;
+    }
 }
