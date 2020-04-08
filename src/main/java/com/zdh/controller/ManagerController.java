@@ -142,4 +142,8 @@ public class ManagerController {
         return managerService.accessInfo(id);
     }
 
+    @RequestMapping("/manage/denyInfo")
+    public String denyInfo(String id, String reason) {
+        return managerService.denyInfo(id, reason);
+    }
 }

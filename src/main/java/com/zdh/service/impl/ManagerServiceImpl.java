@@ -149,6 +149,15 @@ public class ManagerServiceImpl implements ManagerService {
         return "上架成功！";
     }
 
+    @Override
+    public String denyInfo(String id, String reason) {
+        Item item = new Item();
+        item.setSerialNum(id);
+        item.setUndercarriageReason(reason);
+        itemMapper.updateItemInfo(item);
+        return "拒绝上架";
+    }
+
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {
         Integer member_sum = managerMapper.countMember();
         Integer countItemWtbOnCarriiage = managerMapper.countItemWtbOnCarriiage();

@@ -53,4 +53,6 @@ public interface ManagerService {
     ModelAndView approval(ModelAndView modelAndView);
 
     String accessInfo(String id);
+
+    String denyInfo(String id, String reason);
 }
