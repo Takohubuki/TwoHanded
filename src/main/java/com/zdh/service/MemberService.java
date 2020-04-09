@@ -79,7 +79,18 @@ public interface MemberService {
 
     /**
      * 发送重置密码的链接
+     *
+     * @param email
+     * @return
      */
-    void sendPasswordResetLink();
+    String sendPasswordResetLink(String email) throws MessagingException;
 
+    /**
+     * 验证邮箱验证码
+     *
+     * @param sid
+     * @param verifyCode
+     * @return
+     */
+    String verifyEmail(String sid, String verifyCode);
 }

@@ -131,14 +131,38 @@ public class UserController {
         return memberService.upProfile(member, session, file, request, modelAndView);
     }
 
+    /**
+     * 跳转忘记密码 邮箱验证页面
+     *
+     * @param modelAndView
+     * @return
+     */
     @RequestMapping("/forgetPWD")
     public ModelAndView forgetPWD(ModelAndView modelAndView) {
         modelAndView.setViewName("forgetPWD");
         return modelAndView;
     }
 
+    /**
+     * 发送邮箱验证码
+     *
+     * @param sid
+     * @param email
+     * @return
+     * @throws MessagingException
+     */
     @RequestMapping(path = "/sendVerifyCode", produces = {"text/plain;charset=UTF-8"})
     public String sendVerifyCode(String sid, String email) throws MessagingException {
         return memberService.sendCode(sid, email);
+    }
+
+    @RequestMapping(path = "/verifyEmail", produces = {"text/plain;charset=UTF-8"})
+    public String verifyEmail(String sid, String verifyCode) {
+        return memberService.verifyEmail(sid, verifyCode);
+    }
+
+    @RequestMapping(path = "/sendResetLink", produces = {"text/plain;charset=UTF-8"})
+    public String sendResetLink(String email) throws MessagingException {
+        return memberService.sendPasswordResetLink(email);
     }
 }

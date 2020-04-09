@@ -33,7 +33,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">验证邮箱</p>
 
-        <form action="" method="post">
+        <form action="" method="post" id="verifyEmail">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="请输入学号" id="sid">
             </div>
@@ -42,14 +42,13 @@
                 <div class="input-group-btn">
                     <input type="button" id="btn" value="获取验证码" onclick="send(this)" class="btn btn-primary"/>
                 </div>
-
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="验证码" name="verifyCode">
+                <input type="text" class="form-control" placeholder="验证码" id="verifyCode">
             </div>
             <div class="row">
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">验证</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" id="verifyBtn">验证</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -68,6 +67,55 @@
 <script type="text/javascript">
     var countdown = 60;
     let sent = false;
+    let sid;
+    let email;
+    let verifyCode;
+
+    function sendResetPasswordLink() {
+        $.ajax({
+            url: '/user/sendResetLink',
+            data: {
+                'email': email
+            },
+            async: false,
+            datatype: 'text',
+            type: 'post',
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        })
+    }
+
+    $(function () {
+        $('#verifyBtn').click(function () {
+            verifyCode = $('#verifyCode').val();
+            $.ajax({
+                url: '/user/verifyEmail',
+                data: {
+                    'sid': sid,
+                    'verifyCode': verifyCode
+                },
+                async: false,
+                datatype: 'text',
+                type: 'post',
+                success: function (result) {
+                    alert(result);
+                    if (result === '验证成功！系统将自动发送修改密码的链接') {
+                        sendResetPasswordLink();
+                    }
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+            let verifyEmail = $('#verifyEmail');
+            verifyEmail.attr('action',);
+            verifyEmail.submit();
+        })
+    });
 
     function send(val) {
         if (send) {
@@ -96,8 +144,8 @@
     }
 
     function sendVerifyCode() {
-        let sid = $('#sid').val();
-        let email = $('#email').val();
+        sid = $('#sid').val();
+        email = $('#email').val();
         $.ajax({
             url: '/user/sendVerifyCode',
             data: {

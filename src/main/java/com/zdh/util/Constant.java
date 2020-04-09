@@ -4,6 +4,12 @@ package com.zdh.util;
  * 常量类
  */
 public class Constant {
+
+    //修改密码地址（本地）
+    public final static String RESET_PASSWORD_URL_LOCAL = "http://localhost:8080/user/resetPassword";
+    //修改密码地址（服务器端）
+    public final static String RESET_PASSWORD_URL_REMOTE = "http://45.63.111.162/:8080/user/resetPassword";
+
     //验证码用字符集合
     public final static String VERIFY_CODE_CHARSET = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     //token生成密钥

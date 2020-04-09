@@ -18,6 +18,11 @@
         from verify_code
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <select id="verifyEmail" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from verify_code where user = #{sid} and verify_code = #{verifyCode}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from verify_code
     where id = #{id,jdbcType=INTEGER}

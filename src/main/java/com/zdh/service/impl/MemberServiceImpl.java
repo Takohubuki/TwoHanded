@@ -28,7 +28,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.zdh.util.PasswordUtils.passwordConfirm;
 
@@ -37,6 +39,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     JavaMailSender javaMailSender;
+
     @Resource
     VerifyCodeMapper verifyCodeMapper;
 
@@ -206,7 +209,7 @@ public class MemberServiceImpl implements MemberService {
             return "参数为空！";
         }
         //发送验证码邮件
-        if (!verifyEmail(sid, email)) {
+        if (!verifyEmailOfUser(sid, email)) {
             return "该邮箱与用户不匹配！";
         }
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -245,7 +248,7 @@ public class MemberServiceImpl implements MemberService {
         return "发送成功";
     }
 
-    private boolean verifyEmail(String sid, String email) {
+    private boolean verifyEmailOfUser(String sid, String email) {
         Member member = memberMapper.selectByPrimaryKey(sid);
         if (member == null) {
             return false;
@@ -255,8 +258,57 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void sendPasswordResetLink() {
+    public String sendPasswordResetLink(String email) throws MessagingException {
 
+        String url = Constant.RESET_PASSWORD_URL_LOCAL + "?token=" + TokenTools.createToken();
+
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+
+        messageHelper.setFrom(Constant.MAIL_SENDER);
+        messageHelper.setSubject("重置密码");
+        messageHelper.setText("<html>\n" +
+                "<body>\n" +
+                "<p>\n" +
+                "来自HRBU二手交易平台的修改密码链接：\n" +
+                "<a href=\"" + url + "\">" + url + "</a>\n" +
+                "</p>\n" +
+                "<p>" +
+                "该链接24小时之内有效" +
+                "</p>" +
+                "</body>\n" +
+                "</html>", true);
+        messageHelper.setTo(email);
+
+        logger.debug("开始发送验证码邮件");
+        javaMailSender.send(mimeMessage);
+        logger.debug("发送成功");
+
+        return "发送成功";
+    }
+
+    @Override
+    public String verifyEmail(String sid, String verifyCode) {
+        Map<String, String> param = new HashMap<>();
+        param.put("sid", sid);
+        param.put("verifyCode", verifyCode);
+        VerifyCode code = verifyCodeMapper.verifyEmail(param);
+        if (code == null) {
+            logger.error("验证失败！");
+            return "验证失败！";
+        }
+
+        Date expireTime = code.getExpireTime();
+        boolean isExpired = expireTime.before(new Date());
+        String state = code.getState();
+
+        if (!isExpired && "U".equals(state)) {
+            code.setState("V");
+            verifyCodeMapper.updateByPrimaryKeySelective(code);
+            return "验证成功！系统将自动发送修改密码的链接";
+        }
+
+        return "验证失败";
     }
 
 }
