@@ -12,10 +12,10 @@ import java.util.Map;
 
 public class AliPayDemo {
     public static void jumpToAliPay(HttpServletRequest request, HttpServletResponse response, Map params) throws Exception {
-        AlipayClient aliPayClient = new DefaultAlipayClient(Constant.URL,
-                Constant.APP_ID,
+        AlipayClient aliPayClient = new DefaultAlipayClient(Constant.ALIPAY_SANDBOX_GATEWAY_URL,
+                Constant.ALIPAY_SANDBOX_APP_ID,
                 Constant.APP_PRIVATE_KEY,
-                Constant.FORMAT,
+                Constant.JSON,
                 Constant.CHARSET,
                 Constant.ALIPAY_PUBLIC_KEY,
                 Constant.SIGN_TYPE);

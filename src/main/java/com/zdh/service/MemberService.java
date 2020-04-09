@@ -4,6 +4,7 @@ import com.zdh.bean.Member;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -66,5 +67,19 @@ public interface MemberService {
      */
     public ModelAndView upProfile(Member member, HttpSession session, MultipartFile file, HttpServletRequest request, ModelAndView modelAndView) throws IOException;
 
+    /**
+     * 发送邮箱验证码
+     *
+     * @param sid   用户学号
+     * @param email
+     * @return
+     * @throws MessagingException
+     */
+    String sendCode(String sid, String email) throws MessagingException;
+
+    /**
+     * 发送重置密码的链接
+     */
+    void sendPasswordResetLink();
 
 }

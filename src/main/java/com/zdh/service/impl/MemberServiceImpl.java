@@ -2,15 +2,27 @@ package com.zdh.service.impl;
 
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.bean.VerifyCode;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
+import com.zdh.mappers.VerifyCodeMapper;
 import com.zdh.service.MemberService;
+import com.zdh.util.Constant;
+import com.zdh.util.TimeUtils;
+import com.zdh.util.TokenTools;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -24,10 +36,16 @@ import static com.zdh.util.PasswordUtils.passwordConfirm;
 public class MemberServiceImpl implements MemberService {
 
     @Resource
+    JavaMailSender javaMailSender;
+    @Resource
+    VerifyCodeMapper verifyCodeMapper;
+
+    @Resource
     MemberMapper memberMapper;
 
     @Resource
     ItemMapper itemMapper;
+    private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
     @Override
     public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request) {
@@ -67,10 +85,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ModelAndView login(String username, String password, HttpSession session, HttpServletRequest request, ModelAndView modelAndView) {
-        System.out.println("--------------------开始登录-----------------");
-
+        logger.debug("登录开始");
         String uri = request.getHeader("Referer");
-//        Map cart_list = (HashMap) session.getAttribute("cart_list");
 
         if (uri.contains("signin")){
             uri = "/";
@@ -96,7 +112,7 @@ public class MemberServiceImpl implements MemberService {
             用户登录成功返回上一个请求
             并记录最近登录时间
              */
-            System.out.println("redirect:"+uri);
+            logger.debug("登录成功 返回上一个请求：" + uri);
 
             if (uri.contains("checkout") || uri.contains("addcart") || uri.contains("login") || uri.contains("signin")){
                 modelAndView.setViewName("redirect:/");
@@ -175,12 +191,72 @@ public class MemberServiceImpl implements MemberService {
             }
             memberMapper.updateProfile(member);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("error!rollback!");
         }
 
         modelAndView.setViewName("profile");
         return modelAndView;
+    }
+
+    @Override
+    public String sendCode(String sid, String email) throws MessagingException {
+        if (StringUtils.isEmpty(sid) && StringUtils.isEmpty(email)) {
+            logger.error("入参为空！");
+            return "参数为空！";
+        }
+        //发送验证码邮件
+        if (!verifyEmail(sid, email)) {
+            return "该邮箱与用户不匹配！";
+        }
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
+
+        messageHelper.setFrom(Constant.MAIL_SENDER);
+        messageHelper.setSubject("邮箱验证");
+        String verifyCode = TokenTools.createVerifyCode();
+        messageHelper.setText("<html>\n" +
+                "<body>\n" +
+                "<p>\n" +
+                "来自HRBU二手交易平台的邮箱验证码：<b>" +
+                verifyCode + "</b>\n" +
+                "</p>\n" +
+                "<p>" +
+                "该验证码5分钟内有效" +
+                "</p>" +
+                "</body>\n" +
+                "</html>", true);
+        messageHelper.setTo(email);
+
+        logger.debug("开始发送验证码邮件");
+        javaMailSender.send(mimeMessage);
+        logger.debug("发送成功");
+
+        Date createTime = new Date();
+        Date expireTime = TimeUtils.minsFromNow(5);
+        VerifyCode code = new VerifyCode();
+        code.setUser(sid);
+        code.setVerifyCode(verifyCode);
+        code.setCreateTime(createTime);
+        code.setExpireTime(expireTime);
+        code.setState("U");
+
+        verifyCodeMapper.insertSelective(code);
+        return "发送成功";
+    }
+
+    private boolean verifyEmail(String sid, String email) {
+        Member member = memberMapper.selectByPrimaryKey(sid);
+        if (member == null) {
+            return false;
+        }
+        String email1 = member.getEmail();
+        return email1.equals(email);
+    }
+
+    @Override
+    public void sendPasswordResetLink() {
+
     }
 
 }

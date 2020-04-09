@@ -22,9 +22,9 @@ public class Member implements Serializable {
      */
     private String password;
     /**
-     * 寝室号（4位）
+     * 电子邮箱
      */
-    private String dormitory;
+    private String email;
     /**
      * 真实姓名
      */
@@ -86,12 +86,12 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    public String getDormitory() {
-        return dormitory;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDormitory(String dormitory) {
-        this.dormitory = dormitory;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {

@@ -2,20 +2,21 @@ package com.zdh.controller;
 
 import com.zdh.bean.Member;
 import com.zdh.service.MemberService;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RequestMapping("/user")
-@Controller
+@RestController
 public class UserController {
 
     @Resource
@@ -74,11 +75,14 @@ public class UserController {
 
     /**
      * 转跳用户个人中心
+     *
+     * @param modelAndView
      * @return
      */
     @RequestMapping("/profile")
-    public String profile(){
-        return "profile";
+    public ModelAndView profile(ModelAndView modelAndView) {
+        modelAndView.setViewName("profile");
+        return modelAndView;
     }
 
 
@@ -106,8 +110,9 @@ public class UserController {
     }
 
     @RequestMapping("/updateprofile")
-    public String updateProfile(){
-        return "updateProfile";
+    public ModelAndView updateProfile(ModelAndView modelAndView) {
+        modelAndView.setViewName("updateProfile");
+        return modelAndView;
     }
 
     /**
@@ -126,4 +131,14 @@ public class UserController {
         return memberService.upProfile(member, session, file, request, modelAndView);
     }
 
+    @RequestMapping("/forgetPWD")
+    public ModelAndView forgetPWD(ModelAndView modelAndView) {
+        modelAndView.setViewName("forgetPWD");
+        return modelAndView;
+    }
+
+    @RequestMapping(path = "/sendVerifyCode", produces = {"text/plain;charset=UTF-8"})
+    public String sendVerifyCode(String sid, String email) throws MessagingException {
+        return memberService.sendCode(sid, email);
+    }
 }

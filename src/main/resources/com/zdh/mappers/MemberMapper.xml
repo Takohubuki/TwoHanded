@@ -5,7 +5,7 @@
     <id column="sid" jdbcType="VARCHAR" property="sid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="dormitory" jdbcType="VARCHAR" property="dormitory" />
+    <result column="email" jdbcType="VARCHAR" property="email"/>
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
@@ -17,18 +17,18 @@
     <result column="trad_record_num" jdbcType="INTEGER" property="tradRecordNum" />
   </resultMap>
   <sql id="Base_Column_List">
-    sid, username, `password`, dormitory, `name`, avatar, phone, is_active, signin_time, 
+    sid, username, `password`, email, `name`, avatar, phone, is_active, signin_time,
     recent_login, positive_comment, negative_comment, trad_record_num
   </sql>
 
   <insert id="insert" parameterType="com.zdh.bean.Member">
     insert into member (sid, username, `password`, 
-      dormitory, `name`, avatar,
+      email, `name`, avatar,
       phone, is_active, signin_time,
       recent_login, positive_comment, negative_comment,
       trad_record_num)
     values (#{sid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{dormitory,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{signinTime,jdbcType=TIMESTAMP},
       #{recentLogin,jdbcType=TIMESTAMP}, #{positiveComment,jdbcType=INTEGER}, #{negativeComment,jdbcType=INTEGER},
       #{tradRecordNum,jdbcType=INTEGER})
@@ -45,8 +45,8 @@
       <if test="password != null">
         `password`,
       </if>
-      <if test="dormitory != null">
-        dormitory,
+      <if test="email != null">
+        email,
       </if>
       <if test="name != null">
         `name`,
@@ -86,8 +86,8 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="dormitory != null">
-        #{dormitory,jdbcType=VARCHAR},
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -127,8 +127,8 @@
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="dormitory != null">
-        dormitory = #{dormitory,jdbcType=VARCHAR},
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
@@ -164,7 +164,7 @@
     update member
     set username = #{username,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
-      dormitory = #{dormitory,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
@@ -199,7 +199,7 @@
     update member
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      dormitory = #{dormitory,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR}
