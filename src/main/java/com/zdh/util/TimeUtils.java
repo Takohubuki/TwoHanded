@@ -7,4 +7,10 @@ public class TimeUtils {
         long currentTime = System.currentTimeMillis() + mins * 60 * 1000;
         return new Date(currentTime);
     }
+
+    public static Date hoursFromNow(int hours) {
+        long currentTime = System.currentTimeMillis() + hours * 60 * 60 * 1000;
+        return new Date(currentTime);
+
+    }
 }

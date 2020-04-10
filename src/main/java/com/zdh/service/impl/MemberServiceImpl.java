@@ -1,10 +1,14 @@
 package com.zdh.service.impl;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.Claim;
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.bean.Token;
 import com.zdh.bean.VerifyCode;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
+import com.zdh.mappers.TokenMapper;
 import com.zdh.mappers.VerifyCodeMapper;
 import com.zdh.service.MemberService;
 import com.zdh.util.Constant;
@@ -36,6 +40,8 @@ import static com.zdh.util.PasswordUtils.passwordConfirm;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+    @Resource
+    TokenMapper tokenMapper;
 
     @Resource
     JavaMailSender javaMailSender;
@@ -49,7 +55,6 @@ public class MemberServiceImpl implements MemberService {
     @Resource
     ItemMapper itemMapper;
     private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
-
     @Override
     public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request) {
         System.out.println("-----------------------开始注册------------------------");
@@ -258,9 +263,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String sendPasswordResetLink(String email) throws MessagingException {
+    public String sendPasswordResetLink(String email, String sid) throws MessagingException {
+        String token = TokenTools.createToken(sid);
+        String url = Constant.RESET_PASSWORD_URL_LOCAL + "?token=" + token;
 
-        String url = Constant.RESET_PASSWORD_URL_LOCAL + "?token=" + TokenTools.createToken();
+        //生成token之后存入数据库
+        Token token1 = new Token();
+        token1.setUser(sid);
+        token1.setToken(token);
+        token1.setIssueDate(new Date());
+        token1.setExpireDate(TimeUtils.hoursFromNow(12));
+        token1.setStatus("U");
+        tokenMapper.insertSelective(token1);
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true);
@@ -271,10 +285,10 @@ public class MemberServiceImpl implements MemberService {
                 "<body>\n" +
                 "<p>\n" +
                 "来自HRBU二手交易平台的修改密码链接：\n" +
-                "<a href=\"" + url + "\">" + url + "</a>\n" +
+                "<br><a href=\"" + url + "\">" + url + "</a>\n" +
                 "</p>\n" +
                 "<p>" +
-                "该链接24小时之内有效" +
+                "该链接12小时之内有效" +
                 "</p>" +
                 "</body>\n" +
                 "</html>", true);
@@ -309,6 +323,34 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return "验证失败";
+    }
+
+    @Override
+    public ModelAndView resetPassword(String token, ModelAndView modelAndView) {
+        modelAndView.setViewName("resetPassword");
+
+        //验证token是否过期 是否合法等
+        Map<String, Claim> tokenVerifier;
+        try {
+            tokenVerifier = TokenTools.tokenVerifier(token);
+        } catch (JWTVerificationException e) {
+            modelAndView.addObject("invalidToken", "无效的token！");
+            logger.error("token验证失败！");
+            return modelAndView;
+        }
+        String sid = tokenVerifier.get("sid").asString();
+        HashMap<String, String> param = new HashMap<>();
+        param.put("sid", sid);
+        param.put("token", token);
+        Token token1 = tokenMapper.verifyToken(param);
+        if (token1 != null && token1.getStatus().equals("U")) {
+            modelAndView.addObject("invalidToken", "");
+            token1.setStatus("V");
+            tokenMapper.updateByPrimaryKeySelective(token1);
+        } else {
+            modelAndView.addObject("invalidToken", "无效的token！");
+        }
+        return modelAndView;
     }
 
 }

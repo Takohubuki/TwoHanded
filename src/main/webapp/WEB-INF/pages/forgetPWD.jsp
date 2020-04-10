@@ -75,6 +75,7 @@
         $.ajax({
             url: '/user/sendResetLink',
             data: {
+                'sid': sid,
                 'email': email
             },
             async: false,
@@ -120,9 +121,7 @@
     function send(val) {
         if (send) {
             sendVerifyCode();
-            if (sent) {
-                setTime(val);
-            }
+            setTime(val);
         }
     }
 
@@ -156,10 +155,7 @@
             datatype: 'text',
             type: 'post',
             success: function (result) {
-                alert(result);
-                if (result === '发送成功') {
-                    sent = true;
-                }
+                console.log(result);
             },
             error: function (result) {
                 console.log(result);

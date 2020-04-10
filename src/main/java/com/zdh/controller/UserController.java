@@ -162,7 +162,12 @@ public class UserController {
     }
 
     @RequestMapping(path = "/sendResetLink", produces = {"text/plain;charset=UTF-8"})
-    public String sendResetLink(String email) throws MessagingException {
-        return memberService.sendPasswordResetLink(email);
+    public String sendResetLink(String email, String sid) throws MessagingException {
+        return memberService.sendPasswordResetLink(email, sid);
+    }
+
+    @RequestMapping(path = "/resetPassword", produces = {"text/plain;charset=UTF-8"})
+    public ModelAndView resetPassword(String token, ModelAndView modelAndView) {
+        return memberService.resetPassword(token, modelAndView);
     }
 }

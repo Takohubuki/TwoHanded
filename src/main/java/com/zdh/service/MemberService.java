@@ -81,9 +81,10 @@ public interface MemberService {
      * 发送重置密码的链接
      *
      * @param email
+     * @param sid
      * @return
      */
-    String sendPasswordResetLink(String email) throws MessagingException;
+    String sendPasswordResetLink(String email, String sid) throws MessagingException;
 
     /**
      * 验证邮箱验证码
@@ -93,4 +94,13 @@ public interface MemberService {
      * @return
      */
     String verifyEmail(String sid, String verifyCode);
+
+    /**
+     * 验证链接是否过期并重置密码
+     *
+     * @param token
+     * @param modelAndView
+     * @return
+     */
+    ModelAndView resetPassword(String token, ModelAndView modelAndView);
 }
