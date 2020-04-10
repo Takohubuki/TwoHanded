@@ -21,7 +21,6 @@ import java.util.Map;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
-    // TODO: 2020/3/25 审核功能编写 包括信息发布审核及用户找回密码
     @Resource
     ManagerMapper managerMapper;
 
@@ -181,16 +180,6 @@ public class ManagerServiceImpl implements ManagerService {
         param.put("order_today", orderedToday);
         param.put("infoToHandle", infoToHandle);
 
-/*
-        modelAndView.addObject("loginToday", loginToday);
-        modelAndView.addObject("item_wts_sum_today", item_wts_sum_today);
-        modelAndView.addObject("item_wtb_sum_today", item_wtb_sum_today);
-        modelAndView.addObject("order_total", order_total);
-        modelAndView.addObject("member_sum", member_sum);
-        modelAndView.addObject("item_wts_sum", countItemWtsOnCarriiage);
-        modelAndView.addObject("item_wtb_sum", countItemWtbOnCarriiage);
-        modelAndView.addObject("order_today", orderedToday);
-*/
         modelAndView.addObject("generalSit", param);
         modelAndView.setViewName("backstage");
         return modelAndView;

@@ -12,6 +12,7 @@ import com.zdh.mappers.TokenMapper;
 import com.zdh.mappers.VerifyCodeMapper;
 import com.zdh.service.MemberService;
 import com.zdh.util.Constant;
+import com.zdh.util.PasswordUtils;
 import com.zdh.util.TimeUtils;
 import com.zdh.util.TokenTools;
 import org.slf4j.Logger;
@@ -344,6 +345,7 @@ public class MemberServiceImpl implements MemberService {
         param.put("token", token);
         Token token1 = tokenMapper.verifyToken(param);
         if (token1 != null && token1.getStatus().equals("U")) {
+            modelAndView.addObject("sid", sid);
             modelAndView.addObject("invalidToken", "");
             token1.setStatus("V");
             tokenMapper.updateByPrimaryKeySelective(token1);
@@ -351,6 +353,16 @@ public class MemberServiceImpl implements MemberService {
             modelAndView.addObject("invalidToken", "无效的token！");
         }
         return modelAndView;
+    }
+
+    @Override
+    public String newPassword(String sid, String newPassword) {
+        String md5 = PasswordUtils.convertToMd5(newPassword);
+        Member member = new Member();
+        member.setSid(sid);
+        member.setPassword(md5);
+        memberMapper.updateProfile(member);
+        return "修改成功！";
     }
 
 }

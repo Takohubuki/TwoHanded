@@ -9,11 +9,15 @@ public class PasswordUtils {
 
         String md5 = DigestUtils.md5DigestAsHex(password2.getBytes());
 
-        if (password1.equals(md5)){
+        if (password1.equals(md5)) {
             return true;
-        }else{
+        } else {
             return false;
         }
+    }
+
+    public static String convertToMd5(String password) {
+        return DigestUtils.md5DigestAsHex(password.getBytes());
     }
 
 }

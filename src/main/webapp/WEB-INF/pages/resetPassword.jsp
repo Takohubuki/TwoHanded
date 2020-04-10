@@ -32,7 +32,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">重置密码</p>
 
-        <form action="" method="post">
+        <form action="" method="post" id="resetPassword">
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="新的密码" id="password1" name="password">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -41,9 +41,10 @@
                 <input type="password" class="form-control" placeholder="再次输入新密码" id="password2">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
+            <input type="hidden" value="${sid}" name="sid"/>
             <div class="row">
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">确认修改</button>
+                    <input type="button" class="btn btn-primary btn-block btn-flat" id="confirm" value="确认修改"/>
                 </div>
                 <!-- /.col -->
             </div>
@@ -66,6 +67,30 @@
             alert(message);
             window.location.href = '${pageContext.servletContext.contextPath}/index/backindex';
         }
+        $('#confirm').click(function () {
+            let newPassword = $('#password1').val();
+            let sid = '${sid}';
+            $.ajax({
+                url: '/user/newPassword',
+                async: false,
+                datatype: 'text',
+                type: 'post',
+                data: {
+                    'sid': sid,
+                    'newPassword': newPassword
+                },
+                success: function (result) {
+                    alert(result);
+                    message = 'success';
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+            if (message === 'success') {
+                window.location.href = '${pageContext.request.contextPath}/index/backindex';
+            }
+        })
     })
 </script>
 </body>

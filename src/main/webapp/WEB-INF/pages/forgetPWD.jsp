@@ -48,7 +48,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat" id="verifyBtn">验证</button>
+                    <input type="button" class="btn btn-primary btn-block btn-flat" id="verifyBtn" value="验证"/>
                 </div>
                 <!-- /.col -->
             </div>
@@ -70,6 +70,7 @@
     let sid;
     let email;
     let verifyCode;
+    let message;
 
     function sendResetPasswordLink() {
         $.ajax({
@@ -78,7 +79,7 @@
                 'sid': sid,
                 'email': email
             },
-            async: false,
+            async: true,
             datatype: 'text',
             type: 'post',
             success: function (result) {
@@ -105,6 +106,7 @@
                 success: function (result) {
                     alert(result);
                     if (result === '验证成功！系统将自动发送修改密码的链接') {
+                        message = 'success';
                         sendResetPasswordLink();
                     }
                 },
@@ -112,16 +114,16 @@
                     console.log(result);
                 }
             });
-            let verifyEmail = $('#verifyEmail');
-            verifyEmail.attr('action',);
-            verifyEmail.submit();
+            if (message === 'success') {
+                window.location.href = '${pageContext.request.contextPath}/index/backindex';
+            }
         })
     });
 
     function send(val) {
         if (send) {
-            sendVerifyCode();
             setTime(val);
+            sendVerifyCode();
         }
     }
 
@@ -151,7 +153,7 @@
                 'sid': sid,
                 'email': email
             },
-            async: false,
+            async: true,
             datatype: 'text',
             type: 'post',
             success: function (result) {

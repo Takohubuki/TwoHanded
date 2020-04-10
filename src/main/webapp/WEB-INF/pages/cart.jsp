@@ -293,7 +293,6 @@
         </div>
     </form>
 
-    <!--FIXME 删除购物车物品-->
     <!--删除确认弹框-->
     <div class="modal fade" tabindex="-1" role="dialog" id="deleteItemTip" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">

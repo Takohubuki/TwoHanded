@@ -170,4 +170,9 @@ public class UserController {
     public ModelAndView resetPassword(String token, ModelAndView modelAndView) {
         return memberService.resetPassword(token, modelAndView);
     }
+
+    @RequestMapping(path = "/newPassword", produces = {"text/plain;charset=UTF-8"})
+    public String newPassword(String sid, String newPassword) {
+        return memberService.newPassword(sid, newPassword);
+    }
 }

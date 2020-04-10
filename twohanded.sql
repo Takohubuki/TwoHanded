@@ -69,21 +69,21 @@ CREATE TABLE `item` (
 /*Data for the table `item` */
 
 insert  into `item`(`id`,`serial_num`,`name`,`price`,`number`,`publisher`,`describes`,`image`,`kind`,`quality`,`conditions`,`publish_time`,`update_time`,`is_undercarriage`,`undercarriage_reason`,`viewed_times`) values 
-(1,'2019070103312816044254','商品3',149,45,'16046621','商品3描述','images/m1.jpg','电子产品',1,'出售','2019-07-01 03:31:28','2019-07-01 03:31:32',0,NULL,8),
-(2,'2019070103320512033531','坚果',200,53,'15025236','商品2描述','images/m2.jpg','衣物',5,'出售','2019-07-01 03:32:05','2019-07-01 03:34:40',0,NULL,16),
-(3,'2019070103343715052342','商品4',520,44,'15025236','商品4描述','images/m3.jpg','电子产品',7,'出售','2019-07-01 03:34:37','2017-07-01 03:34:39',0,NULL,2),
-(4,'2019060103344116053524','test',100,8,'16053524','商品1描述','images/s1.jpg','杂物',10,'出售','2019-06-01 03:34:41','2020-05-01 03:34:44',0,'',8),
+(1,'2019070103312816044254','商品3',149,45,'16046621','商品3描述','images/m1.jpg','电子产品',1,'出售','2019-07-01 03:31:28','2019-07-01 03:31:32',0,'',8),
+(2,'2019070103320512033531','坚果',200,53,'15025236','商品2描述','images/m2.jpg','衣物',5,'出售','2019-07-01 03:32:05','2019-07-01 03:34:40',0,'',16),
+(3,'2019070103343715052342','商品4',520,44,'15025236','商品4描述','images/m3.jpg','电子产品',7,'出售','2019-07-01 03:34:37','2017-07-01 03:34:39',0,'',2),
+(4,'2019060103344116053524','test',100,8,'16053524','商品1描述','images/s1.jpg','杂物',10,'出售','2019-06-01 03:34:41','2020-05-01 03:34:44',0,'',9),
 (5,'2010050401381917025356','求购商品1',100,1,'15025236','求购需求','images/mk4.jpg','生活用品',6,'求购','2010-05-04 01:38:19','2019-07-04 01:38:35',0,NULL,0),
 (6,'2009070401390718026554','求购商品2',50,10,'16046621','求购需求','images/mk5.jpg','体育用品',9,'求购','2009-07-04 01:39:07','2019-09-04 01:39:16',0,NULL,3),
 (7,'2013070401395116046257','求购商品3',10,5,'16046257','求购需求','images/mk6.jpg','电子产品',8,'求购','2013-07-04 01:39:51','2019-06-04 01:39:59',0,NULL,0),
-(8,'2016070401405315052294','求购商品4',200,1,'15052294','求购需求','images/mk5.jpg','生活用品',7,'求购','2016-07-04 01:40:53','2019-10-04 01:41:01',0,NULL,0),
+(8,'2016070401405315052294','求购商品4',200,1,'15052294','求购需求','images/mk5.jpg','生活用品',7,'求购','2016-07-04 01:40:53','2019-10-04 01:41:01',0,NULL,1),
 (11,'2019070518303816046621','但如果',20,0,'16046621','5434','images/3.jpg','衣物',6,'出售','2019-07-05 18:30:38','2019-07-05 18:30:38',1,'库存不足',3),
 (12,'2019070518500916046621','地方',20,1,'16046621','dfdefrg','images/3.jpg','杂物',5,'求购','2019-07-05 18:50:09','2019-07-05 18:50:09',0,NULL,1),
 (13,'2019070518543016046621','出售商品02',4,0,'16046621','rtyhrhyerg','images/3.jpg','体育用品',6,'出售','2019-07-05 18:54:30','2019-07-05 18:54:30',1,'库存不足',0),
 (14,'2019071819193815025236','出售商品01',5,0,'15025236','拖把','images/a7.jpg','衣物',8,'出售','2019-07-18 19:19:38','2019-07-18 19:19:38',1,'库存不足',1),
 (15,'2019072011554916046621','xlj发布3',20,0,'16046621','洗衣液','images/a2.jpg','生活用品',6,'出售','2019-07-20 11:55:50','2019-07-20 11:55:50',1,'库存不足',0),
-(16,'2020031716582916025426','admin出售',10,2,'16025426','9成新自用扫把，有意者来',NULL,'杂物',9,'出售','2020-03-17 16:58:29','2020-03-17 16:58:29',1,'待审核',NULL),
-(17,'2020032417343716046621','二手电脑',5000,1,'16046621','8成新电脑  i5-9400f + 2080TI','images/1.jpg','电子产品',8,'出售','2020-03-24 17:34:38','2020-03-24 17:34:38',1,'待审核',NULL);
+(16,'2020031716582916025426','admin出售',10,2,'16025426','9成新自用扫把，有意者来',NULL,'杂物',9,'出售','2020-03-17 16:58:29','2020-03-17 16:58:29',0,'',0),
+(17,'2020032417343716046621','二手电脑',5000,1,'16046621','8成新电脑  i5-9400f + 2080TI','images/1.jpg','电子产品',8,'出售','2020-03-24 17:34:38','2020-03-24 17:34:38',0,'',1);
 
 /*Table structure for table `item_kind` */
 
@@ -144,7 +144,7 @@ CREATE TABLE `member` (
   `sid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '学号',
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户登录密码',
-  `dormitory` varchar(255) DEFAULT NULL COMMENT '寝室号（4位）',
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '邮箱',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '真实姓名',
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'default.jpg' COMMENT '用户头像路径',
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '电话号',
@@ -159,12 +159,12 @@ CREATE TABLE `member` (
 
 /*Data for the table `member` */
 
-insert  into `member`(`sid`,`username`,`password`,`dormitory`,`name`,`avatar`,`phone`,`is_active`,`signin_time`,`recent_login`,`positive_comment`,`negative_comment`,`trad_record_num`) values 
-('15022364','123','4297f44b13955235245b2497399d7a93','5521','但如果','default.jpg','15503125215',1,'2009-07-19 09:43:58','2020-03-24 16:42:49',0,0,0),
-('15025236','932421804','4297f44b13955235245b2497399d7a93','5521','开户行沟通','default.jpg','15504618935',1,'2008-07-19 09:44:22','2019-08-02 14:37:20',0,0,0),
-('16025426','admin','4297f44b13955235245b2497399d7a93','2202','地方','default.jpg','15504618935',1,'2006-07-19 09:44:26','2020-03-31 15:18:36',0,0,0),
-('16046621','xlj','4297f44b13955235245b2497399d7a93','1101','xlj','right.png','15504618935',1,'2010-07-19 09:44:31','2020-03-25 17:50:55',0,0,0),
-('18047828','热心人','4297f44b13955235245b2497399d7a93','1011','想吃肉','default.jpg','15504618935',1,'2010-07-19 09:44:31','2020-03-25 17:50:55',0,0,0);
+insert  into `member`(`sid`,`username`,`password`,`email`,`name`,`avatar`,`phone`,`is_active`,`signin_time`,`recent_login`,`positive_comment`,`negative_comment`,`trad_record_num`) values 
+('15022364','123','4297f44b13955235245b2497399d7a93','243510508@qq.com','但如果','default.jpg','15503125215',1,'2009-07-19 09:43:58','2020-03-24 16:42:49',0,0,0),
+('15025236','932421804','4297f44b13955235245b2497399d7a93','932421804@qq.com','开户行沟通','default.jpg','15504618935',1,'2008-07-19 09:44:22','2019-08-02 14:37:20',0,0,0),
+('16025426','admin','4297f44b13955235245b2497399d7a93','Takohubuki@163.com','地方','default.jpg','15504618935',1,'2006-07-19 09:44:26','2020-04-04 21:08:11',0,0,0),
+('16046621','htd','4297f44b13955235245b2497399d7a93','670526299@qq.com','xlj','right.png','15504618935',1,'2010-07-19 09:44:31','2020-03-25 17:50:55',0,0,0),
+('18047828','热心人','4297f44b13955235245b2497399d7a93','a932421804@gmail.com','想吃肉','default.jpg','15504618935',1,'2010-07-19 09:44:31','2020-03-25 17:50:55',0,0,0);
 
 /*Table structure for table `order` */
 
@@ -232,6 +232,57 @@ insert  into `order`(`id`,`order_id`,`sum_price`,`item_num`,`item_id`,`buyer_id`
 (86,'16025426202003260943','¥200',2,'2019060103344116053524','16025426','2020-03-26 09:43:14','2020-03-26 09:43:14',1,0,0,1,'alipay'),
 (87,'16025426202003281850','¥2200',11,'2019070103320512033531','16025426','2020-03-28 18:50:45','2020-03-28 18:50:45',1,0,0,1,'alipay'),
 (88,'16025426202003281850','¥149',1,'2019070103312816044254','16025426','2020-03-28 18:50:45','2020-03-28 18:50:45',1,0,0,1,'alipay');
+
+/*Table structure for table `token` */
+
+DROP TABLE IF EXISTS `token`;
+
+CREATE TABLE `token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(512) DEFAULT NULL COMMENT 'token',
+  `user` varchar(255) DEFAULT NULL COMMENT 'token接收方学号',
+  `issue_date` datetime DEFAULT NULL COMMENT 'token签发时间',
+  `expire_date` datetime DEFAULT NULL COMMENT 'token过期时间',
+  `status` varchar(1) DEFAULT NULL COMMENT 'token状态 U可用 E过期 V已验证',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `token` */
+
+insert  into `token`(`id`,`token`,`user`,`issue_date`,`expire_date`,`status`) values 
+(1,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJIUkJfU0VDT05EX0hBTkRfUExBVEZPUk0iLCJleHAiOjE1ODY1NTcwNjQsImlhdCI6MTU4NjUxMzg2NCwic2lkIjoiMTYwMjU0MjYifQ.ActWYs9RhjZRJGTnlrt0BoAWnnellmTFsuxDlCzVyww','16025426','2020-04-10 18:17:46','2020-04-11 06:17:46','E'),
+(2,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJIUkJfU0VDT05EX0hBTkRfUExBVEZPUk0iLCJleHAiOjE1ODY1NTc0NzAsImlhdCI6MTU4NjUxNDI3MCwic2lkIjoiMTYwMjU0MjYifQ.O2MATPkmDF604nlNcn23swkzuzFFjZN_9-Nm4Y0gd4Y','16025426','2020-04-10 18:24:30','2020-04-11 06:24:30','U'),
+(3,'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJIUkJfU0VDT05EX0hBTkRfUExBVEZPUk0iLCJleHAiOjE1ODY1NTg0NjgsImlhdCI6MTU4NjUxNTI2OCwic2lkIjoiMTYwMjU0MjYifQ.bgImDacBzC_yULaOunsV_FOvgULfCt-TahOyzbAsFMg','16025426','2020-04-10 18:41:09','2020-04-11 06:41:09','U');
+
+/*Table structure for table `verify_code` */
+
+DROP TABLE IF EXISTS `verify_code`;
+
+CREATE TABLE `verify_code` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `user` varchar(255) NOT NULL COMMENT '申请验证码的用户学号',
+  `verify_code` varchar(255) NOT NULL COMMENT '验证码',
+  `create_time` datetime NOT NULL COMMENT '验证码申请时间',
+  `expire_time` datetime NOT NULL COMMENT '验证码过期时间',
+  `state` varchar(1) DEFAULT NULL COMMENT '验证码状态 U可用 E过期 V已验证',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `verify_code` */
+
+insert  into `verify_code`(`id`,`user`,`verify_code`,`create_time`,`expire_time`,`state`) values 
+(1,'16025426','lfswP3','2020-04-09 20:42:32','2020-04-09 20:47:32','V'),
+(2,'16025426','5A38LY','2020-04-09 22:16:46','2020-04-09 22:21:46','V'),
+(3,'16025426','0Lxq8c','2020-04-09 22:18:52','2020-04-09 22:23:52','V'),
+(4,'16025426','TKQq4a','2020-04-09 22:21:24','2020-04-09 22:26:24','V'),
+(5,'16025426','uMjPwz','2020-04-09 22:22:34','2020-04-09 22:27:34','V'),
+(6,'16025426','crQWlG','2020-04-09 22:26:57','2020-04-09 22:31:57','V'),
+(7,'16025426','gFH5sp','2020-04-09 22:29:21','2020-04-09 22:34:21','V'),
+(8,'16025426','V6m2Py','2020-04-09 22:31:11','2020-04-09 22:36:11','V'),
+(9,'16025426','WfUOuU','2020-04-09 22:34:25','2020-04-09 22:39:25','V'),
+(10,'16025426','mb8p2E','2020-04-10 18:17:16','2020-04-10 18:22:16','V'),
+(11,'16025426','DKeINP','2020-04-10 18:24:15','2020-04-10 18:29:15','V'),
+(12,'16025426','0wSPU0','2020-04-10 18:35:49','2020-04-10 18:40:49','V');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

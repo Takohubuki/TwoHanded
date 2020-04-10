@@ -103,4 +103,13 @@ public interface MemberService {
      * @return
      */
     ModelAndView resetPassword(String token, ModelAndView modelAndView);
+
+    /**
+     * 重置密码
+     *
+     * @param sid
+     * @param newPassword
+     * @return
+     */
+    String newPassword(String sid, String newPassword);
 }

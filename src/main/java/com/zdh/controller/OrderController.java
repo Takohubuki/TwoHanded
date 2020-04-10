@@ -25,7 +25,6 @@ public class OrderController {
         return orderService.addCart(item, session, modelAndView);
     }
 
-    //TODO 删除购物车内商品
     @RequestMapping("/delCart")
     public String deleteCart(String id, HttpSession session){
         return orderService.delCart(id, session);

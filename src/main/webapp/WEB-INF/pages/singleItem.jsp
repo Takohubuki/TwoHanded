@@ -150,6 +150,7 @@
                             <input type="password" placeholder="Password" name="password" required="">
                         </div>
                         <input type="submit" value="登录">
+                        <a href="${pageContext.request.contextPath}/user/forgetPWD">忘记密码</a>
 
                     </form>
                     <div class="clearfix"></div>
@@ -187,7 +188,7 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="text" placeholder="寝室号 如2公寓202为2202" name="dormitory" required="">
+                            <input type="text" placeholder="电子邮箱" name="dormitory" required="">
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">
@@ -196,7 +197,8 @@
                             <input type="password" placeholder="密码" name="password" id="password1" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2" required="">
+                            <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2"
+                                   required="">
                         </div>
                         <input type="submit" value="注册">
                     </form>
