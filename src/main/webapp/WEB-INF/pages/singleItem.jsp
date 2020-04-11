@@ -285,7 +285,8 @@
                         <li data-thumb="${pageContext.request.contextPath}/${item.image}">
                             <div class="thumb-image">
                                 <img src="${pageContext.request.contextPath}/${item.image}" data-imagezoom="true"
-                                     class="img-responsive" alt=""></div>
+                                     class="img-responsive" alt="">
+                            </div>
                         </li>
 
                     </ul>
@@ -325,12 +326,12 @@
             </div>
             <div class="occasion-cart">
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-<%--                    <form action="#" method="post">--%>
-                        <fieldset>
-                            <input type="hidden" name="itemId" value="${item.serialNum}"/>
-                            <input type="hidden" name="itemName" value="${item.name}"/>
-                            <input type="submit" name="addcart" class="button" value="添加到购物车"/>
-                        </fieldset>
+                    <%--                    <form action="#" method="post">--%>
+                    <fieldset>
+                        <input type="hidden" name="itemId" value="${item.serialNum}"/>
+                        <input type="hidden" name="itemName" value="${item.name}"/>
+                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                    </fieldset>
                     <%--                    </form>--%>
                 </div>
 
@@ -349,14 +350,16 @@
                     </div>
                     <!-- /.widget-user-image -->
                     <h3 class="widget-user-username">${seller.username}</h3>
-                    <h5 class="widget-user-desc">Lead Developer</h5>
+                    <h5 class="widget-user-desc">卖家</h5>
                 </div>
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
-                        <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                        <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                        <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                        <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${seller.positiveComment}</span></a>
+                        </li>
+                        <li><a href="#">差评数 <span class="pull-right badge bg-red">${seller.negativeComment}</span></a>
+                        </li>
+                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${seller.tradRecordNum}</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -384,7 +387,8 @@
                         <div class="w3l-specilamk">
                             <div class="speioffer-agile">
                                 <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">
-                                    <img src="${pageContext.request.contextPath}/${recommand_items.image}" alt="">
+                                    <img src="${pageContext.request.contextPath}/${recommand_items.image}" alt=""
+                                         style="width: 159px;height: 150px">
                                 </a>
                             </div>
                             <div class="product-name-w3l">
@@ -436,31 +440,6 @@
 
     });
 </script>
-<!-- Large modal -->
-<!-- <script>
-    $('#').modal('show');
-</script> -->
-<!-- //popup modal (for signin & signup)-->
-
-
-<!-- password-script -->
-<script>
-    window.onload = function () {
-        document.getElementById("password1").onchange = validatePassword;
-        document.getElementById("password2").onchange = validatePassword;
-    }
-
-    function validatePassword() {
-        var pass2 = document.getElementById("password2").value;
-        var pass1 = document.getElementById("password1").value;
-        if (pass1 != pass2)
-            document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-        else
-            document.getElementById("password2").setCustomValidity('');
-        //empty string means no validation error
-    }
-</script>
-<!-- //password-script -->
 
 <!-- imagezoom -->
 <script src="${pageContext.request.contextPath}/js/imagezoom.js"></script>
@@ -548,6 +527,10 @@
         })
     });
 </script>
+
+<!-- password-script -->
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
+<!-- //password-script -->
 
 </body>
 

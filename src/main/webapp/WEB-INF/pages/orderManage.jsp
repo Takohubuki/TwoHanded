@@ -30,10 +30,10 @@
                                             商品数量
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            下单时间
+                                            单种商品总价
                                         </th>
-                                        <th tabindex="5" aria-controls="example2">
-                                            订单金额
+                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                            下单时间
                                         </th>
                                     </tr>
                                     </thead>
@@ -47,17 +47,19 @@
                                                 ${orderlist.buyerId}
                                             </td>
                                             <td>
-                                                ${orderlist.item.name}
+                                                    ${orderlist.item.name}
                                             </td>
                                             <td>
-                                                ${orderlist.itemNum}
+                                                    ${orderlist.itemNum}
                                             </td>
                                             <td>
-                                                <fmt:formatDate value="${orderlist.createTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
+                                                    ${orderlist.sumPrice}
                                             </td>
                                             <td>
-                                                ${orderlist.sumPrice}
+                                                <fmt:formatDate value="${orderlist.createTime}"
+                                                                pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
                                             </td>
+
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -87,7 +89,7 @@
             'autoWidth'   : false,
             'language'    : language,
             "createdRow"  : function( row, data, dataIndex ) {
-                hide(0);
+                manageHide(0);
             }
         })
     });

@@ -246,17 +246,19 @@
 <!-- AdminLTE for demo purposes -->
 <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
-<script src="${pageContext.request.contextPath}/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/js/ordersRowspan.js"></script>
 
 <script>
     function offitem(item_id) {
-        $("#page").load("${pageContext.request.contextPath}/manage/offitem?item_id="+item_id);
+        $("#page").load("${pageContext.request.contextPath}/manage/offitem?item_id=" + item_id);
     }
+
     function shutmember(sid) {
-        $("#page").load("${pageContext.request.contextPath}/manage/shutmember?sid="+sid);
+        $("#page").load("${pageContext.request.contextPath}/manage/shutmember?sid=" + sid);
     }
+
     function activemember(sid) {
-        $("#page").load("${pageContext.request.contextPath}/manage/activemember?sid="+sid);
+        $("#page").load("${pageContext.request.contextPath}/manage/activemember?sid=" + sid);
     }
 
     function member_manage() {

@@ -35,13 +35,13 @@
                                             名称
                                         </th>
                                         <th class="sorting" tabindex="2" aria-controls="example2">
-
+                                            商品图片
                                         </th>
                                         <th class="sorting" tabindex="3" aria-controls="example2">
                                             数量
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            单价
+                                            单种商品总价
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
                                             订单状态
@@ -82,12 +82,14 @@
                                                     待确认收货
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-primary operation">确认收货</button>
+                                                    <button class="btn btn-primary operation"
+                                                            value="${order_list.orderId}">确认收货
+                                                    </button>
                                                 </td>
                                             </c:if>
                                             <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false}">
                                                 <td>
-                                                    已付款
+                                                    已收货
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-primary ">评价</button>
@@ -125,7 +127,7 @@
             'autoWidth'   : false,
             'language'    : language,
             "createdRow"  : function( row, data, dataIndex ) {
-                hide(0);
+                userHide(0);
             }
         })
     });
