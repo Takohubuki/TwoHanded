@@ -25,7 +25,6 @@ function userHide(v) {//参数：输入要隐藏的列数，要查第几列，�
 
 			if (ford !== "" && ford === behind) {
 				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + parseInt(v) + ")").hide();
-				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 1 + ")").hide();
 				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 5 + ")").hide();
 				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 6 + ")").hide();
 				mark = mark + 1;
@@ -33,9 +32,6 @@ function userHide(v) {//参数：输入要隐藏的列数，要查第几列，�
 				index = i - mark;
 				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + parseInt(v) + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
 				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + parseInt(v) + ")").attr("class", "marge");
-
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 1 + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 1 + ")").attr("class", "marge");
 
 				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 5 + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
 				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 5 + ")").attr("class", "marge");

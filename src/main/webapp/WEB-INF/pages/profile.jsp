@@ -108,15 +108,15 @@
                         <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">好评数</span>
+                            <span class="info-box-number">${member.positiveComment}</span>
 
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description">
-                                70% Increase in 30 Days
-                            </span>
+                            <%--                            <div class="progress">--%>
+                            <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
+                            <%--                            </div>--%>
+                            <%--                            <span class="progress-description">--%>
+                            <%--                                70% Increase in 30 Days--%>
+                            <%--                            </span>--%>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -127,15 +127,15 @@
                         <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">差评数</span>
+                            <span class="info-box-number">${member.negativeComment}</span>
 
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
-                            </div>
-                            <span class="progress-description">
-                                70% Increase in 30 Days
-                            </span>
+                            <%--                            <div class="progress">--%>
+                            <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
+                            <%--                            </div>--%>
+                            <%--                            <span class="progress-description">--%>
+                            <%--                                70% Increase in 30 Days--%>
+                            <%--                            </span>--%>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -167,10 +167,13 @@
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 <!-- SlimScroll -->
 <script src="${pageContext.request.contextPath}/js/ordersRowspan.js"></script>
+<script src="${pageContext.request.contextPath}/js/modal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 
 <script type="text/javascript">
+    let orderId;
+
     function offmyitem(item_id) {
         $("#page").load("${pageContext.request.contextPath}/user/offmyitem?item_id=" + item_id);
     }

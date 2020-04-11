@@ -27,4 +27,6 @@ public interface OrderMapper {
     List<Order> getOrderByOrderId(String orderId);
 
     void updatePayMethod(Map map);
+
+    void cfmGetItem(String orderId);
 }

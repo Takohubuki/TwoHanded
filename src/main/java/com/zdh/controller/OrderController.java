@@ -56,7 +56,12 @@ public class OrderController {
     }
 
     @RequestMapping("/cashpay")
-    public ModelAndView cashpay(ModelAndView modelAndView, String orderId){
+    public ModelAndView cashpay(ModelAndView modelAndView, String orderId) {
         return orderService.cashpay(modelAndView, orderId);
+    }
+
+    @RequestMapping("/cfmGetItem")
+    public void cfmGetItem(String orderId) {
+        orderService.cfmGetItem(orderId);
     }
 }

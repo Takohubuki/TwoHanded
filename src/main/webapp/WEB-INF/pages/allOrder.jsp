@@ -83,7 +83,8 @@
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-primary operation"
-                                                            value="${order_list.orderId}">确认收货
+                                                            value="${order_list.orderId}" onclick="cfmGetItem(this)"
+                                                            data-toggle="modal" data-target="#modal-info">确认收货
                                                     </button>
                                                 </td>
                                             </c:if>
@@ -115,22 +116,66 @@
 <!-- /.content -->
 <div class="control-sidebar-bg"></div>
 
+<%--    同意弹出框--%>
+<div class="modal modal-info fade" id="modal-info" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">是否确认收货？</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" id="cfmBtn">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <script>
+
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
-            'paging'      : true,
+            'paging': true,
             'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            'language'    : language,
-            "createdRow"  : function( row, data, dataIndex ) {
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'language': language,
+            "createdRow": function (row, data, dataIndex) {
                 userHide(0);
             }
+        });
+        $('#cfmBtn').click(function () {
+            $.ajax({
+                url: '/order/cfmGetItem',
+                type: 'post',
+                async: false,
+                data: {
+                    'orderId': orderId
+                },
+                success: function (result) {
+                },
+                error: function (result) {
+                    console.log(result.responseText);
+                }
+            });
+            hideModal('info');
+            $('#page').load('/order/myOrder');
+
         })
     });
+
+    function cfmGetItem(cfmBtn) {
+        orderId = cfmBtn.value;
+    }
+
 </script>
 </body>
 </html>

@@ -247,6 +247,7 @@
 <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 <script src="${pageContext.request.contextPath}/js/ordersRowspan.js"></script>
+<script src="${pageContext.request.contextPath}/js/modal.js"></script>
 
 <script>
     function offitem(item_id) {

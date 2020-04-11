@@ -199,7 +199,12 @@ public class OrderServiceImpl implements OrderService {
         return "success";
     }
 
-    private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate){
+    @Override
+    public void cfmGetItem(String orderId) {
+        orderMapper.cfmGetItem(orderId);
+    }
+
+    private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate) {
         //生成新订单
         Order new_order = new Order();
 

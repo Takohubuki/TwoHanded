@@ -24,4 +24,6 @@ public interface OrderService {
     ModelAndView cashpay(ModelAndView modelAndView, String orderId);
 
     String delCart(String id, HttpSession session);
+
+    void cfmGetItem(String orderId);
 }

@@ -165,11 +165,6 @@
 
 </section>
 <script>
-    function printError(responseText) {
-        $('#page').load('/index/blank');
-        $('#page').html(responseText);
-    }
-
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
@@ -197,6 +192,7 @@
                 data: {
                     'id': id
                 },
+                async: false,
                 success: function (result) {
                     alert('信息发布成功');
                 },
@@ -204,8 +200,8 @@
                     console.log(result.responseText);
                 }
             });
-            $('#modal-info').modal('hide');
-            $('#page').load('/manage/approval');
+            hideModal('info');
+            $('#page').load('${pageContext.request.contextPath}/manage/approval');
 
         });
         $('#denyBtn').click(function () {
@@ -226,7 +222,7 @@
                     console.log(result.responseText);
                 }
             });
-            $('#modal-info').modal('hide');
+            hideModal('danger');
             $('#page').load('/manage/approval');
 
         });
