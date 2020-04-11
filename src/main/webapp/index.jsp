@@ -169,7 +169,7 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="text" placeholder="电子邮箱" name="dormitory" required="">
+                            <input type="text" placeholder="电子邮箱" name="email" required="">
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">

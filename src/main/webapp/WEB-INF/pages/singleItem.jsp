@@ -105,19 +105,17 @@
                 </form>
             </div>
             <!-- //搜索结束 -->
-            <!-- cart details -->
+            <!-- 购物车模块 -->
             <div class="top_nav_right">
                 <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                    <form action="#" method="post" class="last">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="display" value="1">
+                    <form action="${pageContext.request.contextPath}/order/mycart" method="post" class="last">
                         <button class="w3view-cart" type="submit" name="submit" value="">
                             <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
             </div>
-            <!-- //cart details -->
+            <!-- //购物车结束 -->
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>

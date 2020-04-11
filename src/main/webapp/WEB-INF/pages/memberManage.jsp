@@ -27,7 +27,7 @@
                                             姓名
                                         </th>
                                         <th class="sorting" tabindex="3" aria-controls="example2">
-                                            寝室
+                                            电子邮箱
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
                                             联系电话
@@ -56,7 +56,7 @@
                                                     ${memberlist.name}
                                             </td>
                                             <td>
-                                                    ${memberlist.dormitory}
+                                                    ${memberlist.email}
                                             </td>
                                             <td>
                                                     ${memberlist.phone}

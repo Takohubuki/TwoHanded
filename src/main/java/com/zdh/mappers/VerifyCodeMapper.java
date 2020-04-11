@@ -2,6 +2,7 @@ package com.zdh.mappers;
 
 import com.zdh.bean.VerifyCode;
 
+import java.util.List;
 import java.util.Map;
 
 public interface VerifyCodeMapper {
@@ -18,4 +19,8 @@ public interface VerifyCodeMapper {
     int updateByPrimaryKey(VerifyCode record);
 
     VerifyCode verifyEmail(Map param);
+
+    List<VerifyCode> getCodeWithStatus(String status);
+
+    void batchUpdateStatus(List<VerifyCode> verifyCodeList);
 }

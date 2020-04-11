@@ -106,4 +106,9 @@
       `status` = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="batchUpdateStatus" parameterType="java.util.List">
+        <foreach collection="list" separator=";" item="tokenList">
+            update token set status = #{tokenList.status} where id = #{tokenList.id}
+        </foreach>
+    </update>
 </mapper>

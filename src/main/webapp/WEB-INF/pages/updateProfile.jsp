@@ -32,22 +32,22 @@
                     <input type="text" class="form-control" name="username" value="${member.username}">
                 </div>
                 <div class="form-group">
-                        <label>联系电话</label>
-                        <input type="text" class="form-control" name="phone" value="${member.phone}">
-                    </div>
-                    <div class="form-group">
-                        <label>宿舍</label>
-                        <input type="text" class="form-control" name="dormitory" value="${member.dormitory}">
-                    </div>
-                    <div class="form-group">
-                        <label>上传头像</label>
-                        <input type="file" class="form-control" name="imagefile">
-                    </div>
-                    <div class="form-group">
-                        <label>修改密码</label>
-                        <input type="password" class="form-control" name="password" placeholder="此处留空为不修改">
-                    </div>
+                    <label>联系电话</label>
+                    <input type="text" class="form-control" name="phone" value="${member.phone}">
                 </div>
+                <div class="form-group">
+                    <label>电子邮箱</label>
+                    <input type="text" class="form-control" name="dormitory" value="${member.email}">
+                </div>
+                <div class="form-group">
+                    <label>上传头像</label>
+                    <input type="file" class="form-control" name="imagefile">
+                </div>
+                <div class="form-group">
+                    <label>修改密码</label>
+                    <input type="password" class="form-control" name="password" placeholder="此处留空为不修改">
+                </div>
+            </div>
                 <div class="footer">
                     <button class="btn btn-primary" type="submit">保存</button>
                 </div>

@@ -55,7 +55,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     ItemMapper itemMapper;
+
     private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+
     @Override
     public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request) {
         System.out.println("-----------------------开始注册------------------------");
@@ -176,6 +178,7 @@ public class MemberServiceImpl implements MemberService {
             System.out.println(path);
             //上传文件名
             String filename = file.getOriginalFilename();
+            assert filename != null;
             File filepath = new File(path,filename);
             //判断路径是否存在，如果不存在就创建一个
             if (!filepath.getParentFile().exists()) {

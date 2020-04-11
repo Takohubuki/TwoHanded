@@ -6,16 +6,35 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email"/>
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="is_active" jdbcType="BIT" property="isActive" />
-    <result column="signin_time" jdbcType="TIMESTAMP" property="signinTime" />
-    <result column="recent_login" jdbcType="TIMESTAMP" property="recentLogin" />
-    <result column="positive_comment" jdbcType="INTEGER" property="positiveComment" />
-    <result column="negative_comment" jdbcType="INTEGER" property="negativeComment" />
-    <result column="trad_record_num" jdbcType="INTEGER" property="tradRecordNum" />
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="is_active" jdbcType="BIT" property="isActive"/>
+    <result column="signin_time" jdbcType="TIMESTAMP" property="signinTime"/>
+    <result column="recent_login" jdbcType="TIMESTAMP" property="recentLogin"/>
+    <result column="positive_comment" jdbcType="INTEGER" property="positiveComment"/>
+    <result column="negative_comment" jdbcType="INTEGER" property="negativeComment"/>
+    <result column="trad_record_num" jdbcType="INTEGER" property="tradRecordNum"/>
   </resultMap>
+  <resultMap id="ItemList" type="com.zdh.bean.Item">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="serial_num" jdbcType="VARCHAR" property="serialNum"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="price" jdbcType="INTEGER" property="price"/>
+    <result column="number" jdbcType="INTEGER" property="number"/>
+    <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+    <result column="describes" jdbcType="VARCHAR" property="describes"/>
+    <result column="image" jdbcType="VARCHAR" property="image"/>
+    <result column="kind" jdbcType="VARCHAR" property="kind"/>
+    <result column="quality" jdbcType="INTEGER" property="quality"/>
+    <result column="conditions" jdbcType="VARCHAR" property="conditions"/>
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage"/>
+    <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
+    <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
     sid, username, `password`, email, `name`, avatar, phone, is_active, signin_time,
     recent_login, positive_comment, negative_comment, trad_record_num
@@ -185,10 +204,10 @@
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from member where username=#{username}
     </select>
-  <select id="selectMyWts" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+  <select id="selectMyWts" parameterType="java.lang.String" resultMap="ItemList">
         select * from item where publisher=#{sid} and conditions='出售' order by update_time desc
     </select>
-  <select id="selectMyWtb" parameterType="java.lang.String" resultType="com.zdh.bean.Item">
+  <select id="selectMyWtb" parameterType="java.lang.String" resultMap="ItemList">
         select * from item where publisher=#{sid} and conditions='求购' order by update_time desc
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

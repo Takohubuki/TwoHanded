@@ -72,25 +72,6 @@
     let verifyCode;
     let message;
 
-    function sendResetPasswordLink() {
-        $.ajax({
-            url: '/user/sendResetLink',
-            data: {
-                'sid': sid,
-                'email': email
-            },
-            async: true,
-            datatype: 'text',
-            type: 'post',
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (result) {
-                console.log(result);
-            }
-        })
-    }
-
     $(function () {
         $('#verifyBtn').click(function () {
             verifyCode = $('#verifyCode').val();
@@ -119,6 +100,25 @@
             }
         })
     });
+
+    function sendResetPasswordLink() {
+        $.ajax({
+            url: '/user/sendResetLink',
+            data: {
+                'sid': sid,
+                'email': email
+            },
+            async: true,
+            datatype: 'text',
+            type: 'post',
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (result) {
+                console.log(result);
+            }
+        })
+    }
 
     function send(val) {
         if (send) {

@@ -196,7 +196,7 @@
         select
         <include refid="Base_Column_List" />
         from item
-        where serial_num = #{id,jdbcType=VARCHAR}
+        where serial_num = #{itemId}
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
         select * from item;
