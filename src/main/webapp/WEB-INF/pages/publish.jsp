@@ -80,7 +80,8 @@
                     </li>
                     <li class="navbar-right">
                         你好！<a href="#" >
-                        <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle" style="width: 20px;height: 20px">
+                        <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle"
+                             style="width: 20px;height: 20px">
                             ${member.username}
                     </a>
                     </li>
@@ -88,29 +89,27 @@
                 </c:if>
             </ul>
             <!-- //header lists -->
-            <!-- search -->
+            <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="#" method="post">
-                    <input name="Search" type="search" placeholder="How can we help you today?" required="">
+                <form action="${pageContext.request.contextPath}/items/searchbyname" method="post">
+                    <input name="search" type="search" placeholder="想搜点什么？" required="">
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
                 </form>
             </div>
-            <!-- //search -->
-            <!-- cart details -->
+            <!-- //搜索结束 -->
+            <!-- 购物车模块 -->
             <div class="top_nav_right">
                 <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                    <form action="#" method="post" class="last">
-                        <input type="hidden" name="cmd" value="_cart">
-                        <input type="hidden" name="display" value="1">
+                    <form action="${pageContext.request.contextPath}/order/mycart" method="post" class="last">
                         <button class="w3view-cart" type="submit" name="submit" value="">
                             <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                         </button>
                     </form>
                 </div>
             </div>
-            <!-- //cart details -->
+            <!-- //购物车结束 -->
             <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
@@ -143,6 +142,7 @@
                             <input type="password" placeholder="Password" name="password" required="">
                         </div>
                         <input type="submit" value="登录">
+                        <a href="${pageContext.request.contextPath}/user/forgetPWD">忘记密码</a>
 
                     </form>
                     <div class="clearfix"></div>
@@ -180,7 +180,7 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="text" placeholder="寝室号 如2公寓202为2202" name="dormitory" required="">
+                            <input type="text" placeholder="电子邮箱" name="email" required="">
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">
@@ -189,7 +189,8 @@
                             <input type="password" placeholder="密码" name="password" id="password1" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2" required="">
+                            <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2"
+                                   required="">
                         </div>
                         <input type="submit" value="注册">
                     </form>
@@ -201,7 +202,6 @@
     </div>
 </div>
 <!-- //注册结束 -->
-<!-- //header-bot -->
 <!-- 导航栏模块 -->
 <div class="ban-top">
     <div class="container">
@@ -227,31 +227,14 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=电子产品">
-                                    电子产品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=体育用品">
-                                    体育用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=生活用品">
-                                    生活用品
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=衣物">
-                                    衣物
-                                </a>
-                            </li>
-                            <li class="">
-                                <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=杂物">
-                                    杂物
-                                </a>
-                            </li>
+                            <c:forEach items="${kindList}" var="kindList">
+                                <li class="">
+                                    <a class="nav-stylehead"
+                                       href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                            ${kindList}
+                                    </a>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>

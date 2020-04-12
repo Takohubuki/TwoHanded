@@ -31,4 +31,6 @@ public interface MemberMapper {
     void updateRecentLogin(Member member);
 
     List<Member> selectAllMember();
+
+    void updateTradRecord(List<String> sellerList);
 }

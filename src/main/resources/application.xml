@@ -35,6 +35,9 @@
                                         allowPublicKeyRetrieval=true"/>
         <property name="password" value="root"/>
         <property name="user" value="root"/>
+        <property name="testConnectionOnCheckout" value="false"/>
+        <property name="testConnectionOnCheckin" value="true"/>
+        <property name="idleConnectionTestPeriod" value="30"/>
     </bean>
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">

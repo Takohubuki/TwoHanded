@@ -194,32 +194,40 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectMyOrder" resultMap="OrderAndItems">
-        select * from `order` where buyer_id = #{sid};
-    </select>
+      select * from `order` where buyer_id = #{sid};
+  </select>
+  <select id="selectOrderAndItems" resultMap="OrderAndItems">
+      select * from `order` where order_id = #{orderId};
+  </select>
   <insert id="generateNewOrder" parameterType="com.zdh.bean.Order">
     insert into
-    `order` (<include refid="Base_Column_List"/>
+    `order` (
+    <include refid="Base_Column_List"/>
     )
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{sumPrice,jdbcType=VARCHAR},
-      #{itemNum,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR},
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT},
-      #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}, #{payMethod,jdbcType=VARCHAR}
-      )  </insert>
+    #{itemNum,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPaid,jdbcType=BIT},
+    #{isReceived,jdbcType=BIT}, #{isCanceled,jdbcType=BIT}, #{isChecked,jdbcType=BIT}, #{payMethod,jdbcType=VARCHAR}
+    )
+  </insert>
   <select id="selectAllOrder" resultMap="OrderAndItems">
     select * from `order`;
   </select>
-    <select id="getOrderByOrderId" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from `order` where order_id = #{orderId}
-    </select>
-    <update id="updatePayMethod" parameterType="java.util.Map">
-    update `order` set pay_method = #{method} where order_id = #{orderId}
+  <select id="getOrderByOrderId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `order` where order_id = #{orderId}
+  </select>
+  <update id="updatePayMethod" parameterType="java.util.Map">
+  update `order` set pay_method = #{method}, is_paid = '1' where order_id = #{orderId}
   </update>
-    <select id="getItemListInOrder" resultType="com.zdh.bean.Item">
+  <select id="getItemListInOrder" resultType="com.zdh.bean.Item">
     select * from item where serial_num = #{itemId}
   </select>
-    <update id="cfmGetItem" parameterType="java.lang.String">
+  <update id="cfmGetItem" parameterType="java.lang.String">
     update `order` set is_received = '1' where order_id = #{orderId}
+  </update>
+  <update id="updatePayStatus" parameterType="java.lang.String">
+    update `order` set is_paid = '1' where order_id = #{orderId}
   </update>
 </mapper>

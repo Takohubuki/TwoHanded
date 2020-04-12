@@ -254,12 +254,18 @@
         trad_record_num = #{tradRecordNum,jdbcType=INTEGER},
       </if>
     </set>
-    where sid = #{sid,jdbcType=VARCHAR}
+      where sid = #{sid,jdbcType=VARCHAR}
   </update>
-  <update id="updateRecentLogin" parameterType="com.zdh.bean.Member">
-        update member set recent_login = #{recentLogin} where sid=#{sid};
-    </update>
-  <select id="selectAllMember" resultMap="BaseResultMap">
+    <update id="updateRecentLogin" parameterType="com.zdh.bean.Member">
+    update member set recent_login = #{recentLogin} where sid=#{sid};
+  </update>
+    <select id="selectAllMember" resultMap="BaseResultMap">
     select * from member;
   </select>
+    <update id="updateTradRecord" parameterType="java.util.List">
+        <foreach collection="list" item="sellerList" separator=";">
+            update member set trad_record_num = trad_record_num + 1 where sid=#{sellerList}
+        </foreach>
+    </update>
+
 </mapper>

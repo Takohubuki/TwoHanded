@@ -67,7 +67,7 @@
                                                 ${order_list.itemNum}
                                             </td>
                                             <td>
-                                                ${order_list.sumPrice}
+                                                    ${order_list.sumPrice}
                                             </td>
                                             <c:if test="${order_list.isCanceled == true}">
                                                 <td>
@@ -77,7 +77,19 @@
 
                                                 </td>
                                             </c:if>
-                                            <c:if test="${order_list.isReceived == false && order_list.isCanceled == false}">
+                                            <c:if test="${order_list.isPaid == false}">
+                                                <td>
+                                                    待付款
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary operation"
+                                                            value="${order_list.orderId}" onclick="cfmGetItem(this)"
+                                                            data-toggle="modal" data-target="#modal-info">支付
+                                                    </button>
+                                                </td>
+                                            </c:if>
+
+                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == false && order_list.isCanceled == false}">
                                                 <td>
                                                     待确认收货
                                                 </td>

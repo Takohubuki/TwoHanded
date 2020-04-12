@@ -6,6 +6,7 @@ import com.zdh.bean.Member;
 import com.zdh.bean.Order;
 import com.zdh.mappers.CartMapper;
 import com.zdh.mappers.ItemMapper;
+import com.zdh.mappers.MemberMapper;
 import com.zdh.mappers.OrderMapper;
 import com.zdh.pay.AliPayDemo;
 import com.zdh.service.OrderService;
@@ -23,6 +24,8 @@ import java.util.*;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    @Resource
+    MemberMapper memberMapper;
 
     @Resource
     OrderMapper orderMapper;
@@ -201,6 +204,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void cfmGetItem(String orderId) {
+        List<String> sellerList = new ArrayList<>();
+        List<Order> orderByOrderId = orderMapper.selectOrderAndItems(orderId);
+        for (Order order : orderByOrderId) {
+            String publisher = order.getItem().getPublisher();
+            sellerList.add(publisher);
+        }
+        memberMapper.updateTradRecord(sellerList);
         orderMapper.cfmGetItem(orderId);
     }
 
@@ -221,7 +231,7 @@ public class OrderServiceImpl implements OrderService {
         new_order.setOrderId(order_id);
         new_order.setIsCanceled(false);
         new_order.setIsChecked(true);
-        new_order.setIsPaid(true);
+        new_order.setIsPaid(false);
         new_order.setIsReceived(false);
         return new_order;
     }

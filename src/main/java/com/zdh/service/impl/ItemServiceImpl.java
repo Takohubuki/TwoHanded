@@ -207,6 +207,7 @@ public class ItemServiceImpl implements ItemService {
         item.setPublisher(sid);
         item.setPublishTime(date);
         item.setUpdateTime(date);
+        item.setViewedTimes(0);
 
         //生成商品序列号
         item.setSerialNum(format+sid);
