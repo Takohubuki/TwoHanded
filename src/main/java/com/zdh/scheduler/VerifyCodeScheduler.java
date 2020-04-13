@@ -15,7 +15,7 @@ import java.util.List;
 public class VerifyCodeScheduler {
     private Logger logger = LoggerFactory.getLogger(VerifyCodeScheduler.class);
 
-    private Date now = new Date();
+    private Date now = null;
 
     @Resource
     private VerifyCodeMapper verifyCodeMapper;
@@ -28,6 +28,7 @@ public class VerifyCodeScheduler {
 
         logger.info("开始处理过期验证码");
 
+        now = new Date();
         boolean flag = false;
 
         List<VerifyCode> verifyCodeList = verifyCodeMapper.getCodeWithStatus("U");

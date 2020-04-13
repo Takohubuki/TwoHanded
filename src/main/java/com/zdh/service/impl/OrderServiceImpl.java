@@ -9,6 +9,7 @@ import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
 import com.zdh.mappers.OrderMapper;
 import com.zdh.pay.AliPayDemo;
+import com.zdh.service.ItemService;
 import com.zdh.service.OrderService;
 import com.zdh.util.AmountUtils;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     CartMapper cartMapper;
+
+    @Resource
+    private ItemService itemService;
 
     @Override
     public ModelAndView myCart(HttpSession session, ModelAndView modelAndView) {
@@ -212,6 +216,25 @@ public class OrderServiceImpl implements OrderService {
         }
         memberMapper.updateTradRecord(sellerList);
         orderMapper.cfmGetItem(orderId);
+    }
+
+    @Override
+    public ModelAndView payLater(String orderId, ModelAndView modelAndView) {
+        modelAndView.addObject("orderId", orderId);
+        modelAndView.setViewName("checkout");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView cancelOrder(String orderId, ModelAndView modelAndView) {
+
+        List<Order> orders = orderMapper.selectOrderAndItems(orderId);
+        List<Item> itemList = itemService.returnItemsFromOrder(orders);
+
+        itemMapper.batchUpdateItemNum(itemList);
+        orderMapper.batchCancelOrder(orders);
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
     }
 
     private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate) {

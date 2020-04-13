@@ -15,7 +15,7 @@ import java.util.List;
 public class TokenScheduler {
     private Logger logger = LoggerFactory.getLogger(TokenScheduler.class);
 
-    private Date now = new Date();
+    private Date now = null;
 
     @Resource
     private TokenMapper tokenMapper;
@@ -25,6 +25,7 @@ public class TokenScheduler {
 
         logger.info("开始处理过期token");
 
+        now = new Date();
         boolean flag = false;
 
         List<Token> tokenList = tokenMapper.getTokenByStatus("U");

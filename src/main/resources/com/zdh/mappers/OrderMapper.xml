@@ -7,32 +7,52 @@
     <result column="sum_price" jdbcType="VARCHAR" property="sumPrice" />
     <result column="item_num" jdbcType="INTEGER" property="itemNum" />
     <result column="item_id" jdbcType="VARCHAR" property="itemId" />
-    <result column="buyer_id" jdbcType="VARCHAR" property="buyerId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="is_paid" jdbcType="BIT" property="isPaid" />
-    <result column="is_received" jdbcType="BIT" property="isReceived" />
-    <result column="is_canceled" jdbcType="BIT" property="isCanceled" />
-    <result column="is_checked" jdbcType="BIT" property="isChecked" />
-    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
+      <result column="buyer_id" jdbcType="VARCHAR" property="buyerId"/>
+      <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+      <result column="is_paid" jdbcType="BIT" property="isPaid"/>
+      <result column="is_received" jdbcType="BIT" property="isReceived"/>
+      <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
+      <result column="is_checked" jdbcType="BIT" property="isChecked"/>
+      <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
   </resultMap>
 
-  <resultMap id="OrderAndItems" type="com.zdh.bean.Order">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
-    <result column="sum_price" jdbcType="VARCHAR" property="sumPrice" />
-    <result column="item_num" jdbcType="INTEGER" property="itemNum" />
-    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
-    <result column="buyer_id" jdbcType="VARCHAR" property="buyerId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="is_paid" jdbcType="BIT" property="isPaid" />
-    <result column="is_received" jdbcType="BIT" property="isReceived" />
-    <result column="is_canceled" jdbcType="BIT" property="isCanceled" />
-    <result column="is_checked" jdbcType="BIT" property="isChecked" />
-    <result column="pay_method" jdbcType="VARCHAR" property="payMethod" />
-    <collection property="item" column="item_id" select="getItemListInOrder" ofType="com.zdh.bean.Item"/>
-  </resultMap>
+    <resultMap id="ItemInOrder" type="com.zdh.bean.Item">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="serial_num" jdbcType="VARCHAR" property="serialNum"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="describes" jdbcType="VARCHAR" property="describes"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="kind" jdbcType="VARCHAR" property="kind"/>
+        <result column="quality" jdbcType="INTEGER" property="quality"/>
+        <result column="conditions" jdbcType="VARCHAR" property="conditions"/>
+        <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage"/>
+        <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
+        <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
+    </resultMap>
+
+    <resultMap id="OrderAndItems" type="com.zdh.bean.Order">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="sum_price" jdbcType="VARCHAR" property="sumPrice"/>
+        <result column="item_num" jdbcType="INTEGER" property="itemNum"/>
+        <result column="item_id" jdbcType="VARCHAR" property="itemId"/>
+        <result column="buyer_id" jdbcType="VARCHAR" property="buyerId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_paid" jdbcType="BIT" property="isPaid"/>
+        <result column="is_received" jdbcType="BIT" property="isReceived"/>
+        <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
+        <result column="is_checked" jdbcType="BIT" property="isChecked"/>
+        <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
+        <collection property="item" column="item_id" select="getItemListInOrder" ofType="com.zdh.bean.Item">
+        </collection>
+    </resultMap>
 
   <sql id="Base_Column_List">
     id, order_id, sum_price, item_num, item_id, buyer_id, create_time, update_time, is_paid, 
@@ -221,13 +241,19 @@
   <update id="updatePayMethod" parameterType="java.util.Map">
   update `order` set pay_method = #{method}, is_paid = '1' where order_id = #{orderId}
   </update>
-  <select id="getItemListInOrder" resultType="com.zdh.bean.Item">
+    <select id="getItemListInOrder" resultMap="ItemInOrder">
     select * from item where serial_num = #{itemId}
   </select>
-  <update id="cfmGetItem" parameterType="java.lang.String">
+    <update id="cfmGetItem" parameterType="java.lang.String">
     update `order` set is_received = '1' where order_id = #{orderId}
   </update>
-  <update id="updatePayStatus" parameterType="java.lang.String">
+    <update id="updatePayStatus" parameterType="java.lang.String">
     update `order` set is_paid = '1' where order_id = #{orderId}
   </update>
+    <update id="batchCancelOrder" parameterType="java.util.List">
+        <foreach collection="list" item="orders" separator=";">
+            update `order` set is_canceled = '1' where order_id = #{orders.orderId}
+        </foreach>
+    </update>
+
 </mapper>

@@ -31,4 +31,8 @@ public interface OrderMapper {
     void cfmGetItem(String orderId);
 
     List<Order> selectOrderAndItems(String orderId);
+
+    void batchCancelOrder(List<Order> orders);
+
+    List<Order> getUnpaidOrder();
 }

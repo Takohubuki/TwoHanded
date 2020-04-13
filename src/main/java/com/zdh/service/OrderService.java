@@ -26,4 +26,8 @@ public interface OrderService {
     String delCart(String id, HttpSession session);
 
     void cfmGetItem(String orderId);
+
+    ModelAndView payLater(String orderId, ModelAndView modelAndView);
+
+    ModelAndView cancelOrder(String orderId, ModelAndView modelAndView);
 }

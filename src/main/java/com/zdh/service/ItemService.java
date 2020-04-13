@@ -1,6 +1,7 @@
 package com.zdh.service;
 
 import com.zdh.bean.Item;
+import com.zdh.bean.Order;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -125,4 +126,5 @@ public interface ItemService {
      */
     public ModelAndView updateItem(ModelAndView modelAndView, Item item, MultipartFile file, HttpServletRequest request) throws IOException;
 
+    public List<Item> returnItemsFromOrder(List<Order> orderList);
 }

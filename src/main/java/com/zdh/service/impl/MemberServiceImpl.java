@@ -292,7 +292,7 @@ public class MemberServiceImpl implements MemberService {
                 "<br><a href=\"" + url + "\">" + url + "</a>\n" +
                 "</p>\n" +
                 "<p>" +
-                "该链接12小时之内有效" +
+                "请在12小时之内重置密码" +
                 "</p>" +
                 "</body>\n" +
                 "</html>", true);
@@ -338,7 +338,7 @@ public class MemberServiceImpl implements MemberService {
         try {
             tokenVerifier = TokenTools.tokenVerifier(token);
         } catch (JWTVerificationException e) {
-            modelAndView.addObject("invalidToken", "无效的token！");
+            modelAndView.addObject("invalidToken", "无效的链接！");
             logger.error("token验证失败！");
             return modelAndView;
         }
@@ -353,7 +353,7 @@ public class MemberServiceImpl implements MemberService {
             token1.setStatus("V");
             tokenMapper.updateByPrimaryKeySelective(token1);
         } else {
-            modelAndView.addObject("invalidToken", "无效的token！");
+            modelAndView.addObject("invalidToken", "无效的链接！");
         }
         return modelAndView;
     }

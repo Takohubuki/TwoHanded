@@ -77,14 +77,18 @@
 
                                                 </td>
                                             </c:if>
-                                            <c:if test="${order_list.isPaid == false}">
+                                            <c:if test="${order_list.isCanceled == false && order_list.isPaid == false}">
                                                 <td>
-                                                    待付款
+                                                    待付款(24小时内未付款自动取消订单！)
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-primary operation"
-                                                            value="${order_list.orderId}" onclick="cfmGetItem(this)"
-                                                            data-toggle="modal" data-target="#modal-info">支付
+                                                            value="${order_list.orderId}" onclick="getOrderId(this)"
+                                                            data-toggle="modal" data-target="#modal-info2">去支付
+                                                    </button>
+                                                    <button class="btn btn-danger operation"
+                                                            value="${order_list.orderId}" onclick="getOrderId(this)"
+                                                            data-toggle="modal" data-target="#modal-danger">取消订单
                                                     </button>
                                                 </td>
                                             </c:if>
@@ -95,8 +99,8 @@
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-primary operation"
-                                                            value="${order_list.orderId}" onclick="cfmGetItem(this)"
-                                                            data-toggle="modal" data-target="#modal-info">确认收货
+                                                            value="${order_list.orderId}" onclick="getOrderId(this)"
+                                                            data-toggle="modal" data-target="#modal-info1">确认收货
                                                     </button>
                                                 </td>
                                             </c:if>
@@ -129,7 +133,7 @@
 <div class="control-sidebar-bg"></div>
 
 <%--    同意弹出框--%>
-<div class="modal modal-info fade" id="modal-info" tabindex="-1" role="dialog">
+<div class="modal modal-info fade" id="modal-info1" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -138,7 +142,61 @@
                 <h4 class="modal-title">是否确认收货？</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline" id="cfmBtn">确定</button>
+                <button type="button" class="btn btn-outline pull-left" id="cfmBtn">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<%--    前往支付弹出框--%>
+<div class="modal modal-info fade" id="modal-info2" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">是否前去支付？</h4>
+            </div>
+            <form id="goPay">
+                <input type="hidden" name="orderId" id="orderToPay"/>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="goPayBtn">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<%--    拒绝弹出框--%>
+<div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确定取消下单吗？</h4>
+            </div>
+            <div class="modal-body">
+                <%--                <form id="denyForm">--%>
+                <%--                    输入拒绝原因：--%>
+                <%--                    <label>--%>
+                <%--                        <input type="text" name="reason"/>--%>
+                <%--                    </label>--%>
+                <%--                    <input type="hidden" id="denyId" name="id" class="hidden"/>--%>
+                <%--                </form>--%>
+                <%--                    <p>One fine body&hellip;</p>--%>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="denyBtn">确定</button>
                 <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
             </div>
         </div>
@@ -164,6 +222,14 @@
                 userHide(0);
             }
         });
+
+        $('#goPayBtn').click(function () {
+            let $goPay = $('#goPay');
+            $goPay.attr('action', '/order/payLater');
+            $goPay.attr('method', 'post');
+            $goPay.submit();
+        });
+
         $('#cfmBtn').click(function () {
             $.ajax({
                 url: '/order/cfmGetItem',
@@ -178,14 +244,33 @@
                     console.log(result.responseText);
                 }
             });
-            hideModal('info');
+            hideModal('info1');
             $('#page').load('/order/myOrder');
 
+        });
+        $('#denyBtn').click(function () {
+            $.ajax({
+                url: '/order/cancel',
+                type: 'post',
+                async: false,
+                data: {
+                    'orderId': orderId
+                },
+                success: function (result) {
+                    alert('成功取消订单！');
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+            hideModal('danger');
+            $('#page').load('/order/myOrder');
         })
     });
 
-    function cfmGetItem(cfmBtn) {
+    function getOrderId(cfmBtn) {
         orderId = cfmBtn.value;
+        $('#orderToPay').val(orderId);
     }
 
 </script>

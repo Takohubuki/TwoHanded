@@ -13,4 +13,15 @@ public class TimeUtils {
         return new Date(currentTime);
 
     }
+
+    public static Date daysFromNow(int days) {
+        long currentTime = System.currentTimeMillis() + days * 24 * 60 * 60 * 1000;
+        return new Date(currentTime);
+    }
+
+    public static Date daysFrom(int days, Date date) {
+        long time = date.getTime();
+        time = time + days * 24 * 60 * 60 * 1000;
+        return new Date(time);
+    }
 }

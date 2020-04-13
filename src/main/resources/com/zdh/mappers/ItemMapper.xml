@@ -402,12 +402,12 @@
         </set>
         where serial_num = #{serialNum}
     </update>
-    <update id="updateItemNum" parameterType="java.lang.Integer">
-        update item set
-            number = #{itemNum}
-        where serial_num = #{itemId}
-    </update>
     <select id="getApprovalItem" resultMap="BaseResultMap">
         select * from item where undercarriage_reason = '待审核';
     </select>
+    <update id="batchUpdateItemNum" parameterType="java.util.List">
+        <foreach collection="list" separator=";" item="itemList">
+            update item set `number` = #{itemList.number} where serial_num = #{itemList.serialNum}
+        </foreach>
+    </update>
 </mapper>

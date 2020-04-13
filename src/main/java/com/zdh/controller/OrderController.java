@@ -64,4 +64,14 @@ public class OrderController {
     public void cfmGetItem(String orderId) {
         orderService.cfmGetItem(orderId);
     }
+
+    @RequestMapping("/payLater")
+    public ModelAndView payLater(String orderId, ModelAndView modelAndView) {
+        return orderService.payLater(orderId, modelAndView);
+    }
+
+    @RequestMapping("/cancel")
+    public ModelAndView cancelOrder(String orderId) {
+        return orderService.cancelOrder(orderId, new ModelAndView());
+    }
 }

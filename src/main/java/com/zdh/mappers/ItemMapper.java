@@ -34,9 +34,9 @@ public interface ItemMapper {
 
     void updateItemInfo(Item item);
 
-    void updateItemNum(int itemNum, String itemId);
-
     void updatePublisherByName(String sid, String sid1);
 
     List<Item> getApprovalItem();
+
+    void batchUpdateItemNum(List<Item> itemList);
 }

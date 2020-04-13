@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.bean.Order;
 import com.zdh.mappers.ItemKindMappers;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -287,5 +289,32 @@ public class ItemServiceImpl implements ItemService {
 
         modelAndView.setViewName("profile");
         return modelAndView;
+    }
+
+    @Override
+    public List<Item> returnItemsFromOrder(List<Order> orderList) {
+
+        List<Item> itemList = new ArrayList<>();
+        Item item;
+        Integer itemNum;
+
+        for (Order order : orderList) {
+
+            item = order.getItem();
+            itemNum = order.getItemNum();
+            itemNum = item.getNumber() + itemNum;
+            item.setNumber(itemNum);
+
+            if (item.getIsUndercarriage() && "库存不足".equals(item.getUndercarriageReason())) {
+                item.setIsUndercarriage(false);
+                item.setUndercarriageReason("");
+            }
+
+            itemList.add(item);
+
+            order.setIsCanceled(true);
+        }
+
+        return itemList;
     }
 }

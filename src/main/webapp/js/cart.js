@@ -61,6 +61,10 @@ $(function () {
         let method = $('select').val();
         payMethod(method);
     });
+    $('#cancelOrder').click(function () {
+        $('#payForm').attr('action', '/order/cancel');
+        $('#payForm').submit();
+    });
     $('.item-delete').click(function () {
         id = $(this).val();
         delCart(id);
@@ -100,8 +104,11 @@ function changeNum(id, num) {
         },
         success : function(result) {
             console.log(result);
-            let price = document.getElementById(id).getAttribute("price");
-            document.getElementById(id).innerHTML = parseInt(price) * parseInt(num) + "";
+            let id = $('#' + id);
+            let price = id.attr('price');
+            id.html(parseInt(price) * parseInt(num) + '');
+            // let price = document.getElementById(id).getAttribute("price");
+            // document.getElementById(id).innerHTML = parseInt(price) * parseInt(num) + "";
             $('#' + 'cbox_' + id).val(id + '_' + num);
         },
         error : function(e){
