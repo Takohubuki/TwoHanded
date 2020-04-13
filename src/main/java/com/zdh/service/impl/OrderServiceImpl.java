@@ -229,9 +229,13 @@ public class OrderServiceImpl implements OrderService {
     public ModelAndView cancelOrder(String orderId, ModelAndView modelAndView) {
 
         List<Order> orders = orderMapper.selectOrderAndItems(orderId);
-        List<Item> itemList = itemService.returnItemsFromOrder(orders);
 
-        itemMapper.batchUpdateItemNum(itemList);
+        itemService.returnItemsFromOrder(orders);
+
+        for (Order order : orders) {
+            order.setUpdateTime(new Date());
+        }
+
         orderMapper.batchCancelOrder(orders);
         modelAndView.setViewName("redirect:/");
         return modelAndView;

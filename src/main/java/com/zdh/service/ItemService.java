@@ -126,5 +126,5 @@ public interface ItemService {
      */
     public ModelAndView updateItem(ModelAndView modelAndView, Item item, MultipartFile file, HttpServletRequest request) throws IOException;
 
-    public List<Item> returnItemsFromOrder(List<Order> orderList);
+    public void returnItemsFromOrder(List<Order> orderList);
 }

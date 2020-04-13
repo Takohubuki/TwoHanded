@@ -1,8 +1,6 @@
 package com.zdh.scheduler;
 
-import com.zdh.bean.Item;
 import com.zdh.bean.Order;
-import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.OrderMapper;
 import com.zdh.service.ItemService;
 import com.zdh.util.TimeUtils;
@@ -29,9 +27,6 @@ public class OrderScheduler {
     @Resource
     private ItemService itemService;
 
-    @Resource
-    private ItemMapper itemMapper;
-
     @Scheduled(cron = "0 0/30 * * * ?")
     public void cancelOrder() {
 
@@ -55,8 +50,7 @@ public class OrderScheduler {
 
         logger.info("将订单内商品回归库存");
 
-        List<Item> itemList = itemService.returnItemsFromOrder(orderToCancel);
-        itemMapper.batchUpdateItemNum(itemList);
+        itemService.returnItemsFromOrder(orderToCancel);
 
         logger.info("处理完成");
     }

@@ -292,7 +292,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> returnItemsFromOrder(List<Order> orderList) {
+    public void returnItemsFromOrder(List<Order> orderList) {
 
         List<Item> itemList = new ArrayList<>();
         Item item;
@@ -315,6 +315,6 @@ public class ItemServiceImpl implements ItemService {
             order.setIsCanceled(true);
         }
 
-        return itemList;
+        itemMapper.batchUpdateItemNum(itemList);
     }
 }
