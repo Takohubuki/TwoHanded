@@ -80,34 +80,42 @@
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>信息审核</span>
+                    <a href="javascript:publishInfo()">
+                        <i class="fa fa-circle-o"></i>
+                        待审核
                         <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                            <span class="label label-primary pull-right">${generalSit.infoToHandle + 5}</span>
+                            <span class="label label-danger pull-right">${generalSit.infoToHandle}</span>
                         </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="javascript:getPassword()">
-                                <i class="fa fa-circle-o"></i>
-                                用户密码找回
-                                <span class="pull-right-container">
-                                    <span class="label label-primary pull-right">5</span>
-                                </span>
-                            </a>
 
-                        </li>
-                        <li>
-                            <a href="javascript:publishInfo()">
-                                <i class="fa fa-circle-o"></i>
-                                信息发布
-                                <span class="pull-right-container">
-                                    <span class="label label-primary pull-right">${generalSit.infoToHandle}</span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
+                    <%--                    <a href="#">--%>
+                    <%--                        <i class="fa fa-dashboard"></i> <span>信息审核</span>--%>
+                    <%--                        <span class="pull-right-container">--%>
+                    <%--                            <i class="fa fa-angle-left pull-right"></i>--%>
+                    <%--                            <span class="label label-primary pull-right">${generalSit.infoToHandle + 5}</span>--%>
+                    <%--                        </span>--%>
+                    <%--                    </a>--%>
+                    <%--                    <ul class="treeview-menu">--%>
+                    <%--                        <li>--%>
+                    <%--                            <a href="javascript:getPassword()">--%>
+                    <%--                                <i class="fa fa-circle-o"></i>--%>
+                    <%--                                用户密码找回--%>
+                    <%--                                <span class="pull-right-container">--%>
+                    <%--                                    <span class="label label-primary pull-right">5</span>--%>
+                    <%--                                </span>--%>
+                    <%--                            </a>--%>
+
+                    <%--                        </li>--%>
+                    <%--                        <li>--%>
+                    <%--                            <a href="javascript:publishInfo()">--%>
+                    <%--                                <i class="fa fa-circle-o"></i>--%>
+                    <%--                                信息发布--%>
+                    <%--                                <span class="pull-right-container">--%>
+                    <%--                                    <span class="label label-primary pull-right">${generalSit.infoToHandle}</span>--%>
+                    <%--                                </span>--%>
+                    <%--                            </a>--%>
+                    <%--                        </li>--%>
+                    <%--                    </ul>--%>
                 </li>
 
             </ul>

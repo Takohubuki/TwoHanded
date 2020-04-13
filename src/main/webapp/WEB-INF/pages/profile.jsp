@@ -55,13 +55,15 @@
                 </div>
                 <div class="pull-left info">
                     <p>${member.username}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
 
 
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">NAVIGATION</li>
+                <li><a href="${pageContext.request.contextPath}/user/profile"><i class="fa fa-user"></i>
+                    <span>用户概况</span></a></li>
                 <li><a href="javascript:updateprofile()"><i class="fa fa-book"></i> <span>修改资料</span></a></li>
                 <li class="treeview">
                     <a href="#">
@@ -77,13 +79,37 @@
                         <li>
                             <a href="javascript:myWtb()"><i class="fa fa-circle-o"></i>我的求购</a>
                         </li>
+                        <li>
+                            <a href="javascript:waitToPass()">
+                                <i class="fa fa-pencil"></i>
+                                审核中
+                                <span class="pull-right-container">
+                                    <span class="label label-danger pull-right">5</span>
+                                </span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
-                <li>
-                    <a href="javascript:allorder()">
-                        <i class="fa fa-dashboard"></i> <span>所有订单</span>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-sticky-note"></i> <span>我的订单</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="javascript:allorder()">
+                                <i class="fa fa-paste"></i> <span>购买记录</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:soldItem()"><i class="fa fa-shopping-cart"></i>出售记录</a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li><a href="${pageContext.request.contextPath}/user/logout"><i class="fa fa-circle-o text-red"></i> <span>注销</span></a></li>
             </ul>
         </section>
@@ -103,45 +129,93 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">好评数</span>
-                            <span class="info-box-number">${member.positiveComment}</span>
-
-                            <%--                            <div class="progress">--%>
-                            <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
-                            <%--                            </div>--%>
-                            <%--                            <span class="progress-description">--%>
-                            <%--                                70% Increase in 30 Days--%>
-                            <%--                            </span>--%>
-                        </div>
-                        <!-- /.info-box-content -->
+                <div class="box box-default">
+                    <div class="box-header">
+                        <h3 class="box-title">账号概况</h3>
                     </div>
-                    <!-- /.info-box -->
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-red">
-                        <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
+                    <div class="box-body">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-green">
+                                <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">差评数</span>
-                            <span class="info-box-number">${member.negativeComment}</span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">好评数</span>
+                                    <span class="info-box-number">${member.positiveComment}</span>
 
-                            <%--                            <div class="progress">--%>
-                            <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
-                            <%--                            </div>--%>
-                            <%--                            <span class="progress-description">--%>
-                            <%--                                70% Increase in 30 Days--%>
-                            <%--                            </span>--%>
+                                    <%--                            <div class="progress">--%>
+                                    <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
+                                    <%--                            </div>--%>
+                                    <%--                            <span class="progress-description">--%>
+                                    <%--                                70% Increase in 30 Days--%>
+                                    <%--                            </span>--%>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
                         </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-red">
+                                <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
 
+                                <div class="info-box-content">
+                                    <span class="info-box-text">差评数</span>
+                                    <span class="info-box-number">${member.negativeComment}</span>
+
+                                    <%--                            <div class="progress">--%>
+                                    <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
+                                    <%--                            </div>--%>
+                                    <%--                            <span class="progress-description">--%>
+                                    <%--                                70% Increase in 30 Days--%>
+                                    <%--                            </span>--%>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-red">
+                                <span class="info-box-icon"><i class="fa fa-thumbs-o-down"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">卖出商品件数</span>
+                                    <span class="info-box-number">${member.negativeComment}</span>
+
+                                    <%--                            <div class="progress">--%>
+                                    <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
+                                    <%--                            </div>--%>
+                                    <%--                            <span class="progress-description">--%>
+                                    <%--                                70% Increase in 30 Days--%>
+                                    <%--                            </span>--%>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%--通知信息展示--%>
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <div class="box box-default">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">最新消息</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+                                </button>
+                                <h4><i class="icon fa fa-check"></i> 审核通过！</h4>
+                                管理员已经同意您的商品：二手游戏机上架。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
             </div>
 
         </section>

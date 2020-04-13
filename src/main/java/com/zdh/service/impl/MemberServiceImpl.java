@@ -298,7 +298,7 @@ public class MemberServiceImpl implements MemberService {
                 "</html>", true);
         messageHelper.setTo(email);
 
-        logger.debug("开始发送验证码邮件");
+        logger.debug("开始发送重置密码邮件");
         javaMailSender.send(mimeMessage);
         logger.debug("发送成功");
 

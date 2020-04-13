@@ -38,28 +38,42 @@
                                             成色
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
+                                            状态
+                                        </th>
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             操作
                                         </th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach var="mywts" items="${mywts}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                <img src="${pageContext.request.contextPath}/${mywts.image}" style="width: 80px;height: 75px">
+                                                <img src="${pageContext.request.contextPath}/${mywts.image}"
+                                                     style="width: 80px;height: 75px">
                                             </td>
                                             <td>
                                                     ${mywts.name}
                                             </td>
                                             <td>
-                                                    ${mywts.price}
+                                                ￥${mywts.price}
+                                            </td>
+                                            <td>
+                                                    ${mywts.number}
                                             </td>
                                             <td>
                                                     ${mywts.quality}
                                             </td>
                                             <td>
-                                                    ${mywts.conditions}
+                                                <c:if test="${mywts.isUndercarriage == true}">
+                                                    下架
+                                                </c:if>
+                                                <c:if test="${mywts.isUndercarriage == false}">
+                                                    出售中
+                                                </c:if>
                                             </td>
+
                                             <td>
                                                 <a href="javascript:updateitem('${mywts.serialNum}')">修改</a>
                                                 <a href="javascript:offmyitem('${mywts.serialNum}')">下架</a>
