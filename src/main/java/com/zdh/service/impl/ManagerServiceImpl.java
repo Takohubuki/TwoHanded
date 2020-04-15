@@ -87,8 +87,8 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ModelAndView manageWtsItem(ModelAndView modelAndView) {
         List<Item> items = itemMapper.selectWtsAllByTime();
-        modelAndView.addObject("itemlist",items);
-        modelAndView.setViewName("itemManage");
+        modelAndView.addObject("itemlist", items);
+        modelAndView.setViewName("wtsManage");
         return modelAndView;
 
     }
@@ -96,8 +96,8 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ModelAndView manageWtbItem(ModelAndView modelAndView) {
         List<Item> items = itemMapper.selectWtbAllByTime();
-        modelAndView.addObject("itemlist",items);
-        modelAndView.setViewName("itemManage");
+        modelAndView.addObject("itemlist", items);
+        modelAndView.setViewName("wtsManage");
         return modelAndView;
 
     }
@@ -106,8 +106,8 @@ public class ManagerServiceImpl implements ManagerService {
     public ModelAndView offItem(ModelAndView modelAndView, String itemId) {
         managerMapper.offItem(itemId);
         List<Item> items = managerMapper.selectAllSellItems();
-        modelAndView.addObject("itemlist",items);
-        modelAndView.setViewName("itemManage");
+        modelAndView.addObject("itemlist", items);
+        modelAndView.setViewName("wtsManage");
         return modelAndView;
 
     }
@@ -154,7 +154,7 @@ public class ManagerServiceImpl implements ManagerService {
         item.setSerialNum(id);
         item.setUndercarriageReason(reason);
         itemMapper.updateItemInfo(item);
-        return "拒绝上架";
+        return "success";
     }
 
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {

@@ -35,49 +35,58 @@
                                             数量
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            成色
+                                            商品描述
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
                                             状态
                                         </th>
                                         <th class="sorting" tabindex="6" aria-controls="example2">
-                                            操作
+
                                         </th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="mywts" items="${mywts}">
+                                    <c:forEach var="myWts" items="${myWts}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                <img src="${pageContext.request.contextPath}/${mywts.image}"
+                                                <img src="${pageContext.request.contextPath}/${myWts.image}"
                                                      style="width: 80px;height: 75px">
                                             </td>
                                             <td>
-                                                    ${mywts.name}
+                                                    ${myWts.name}
                                             </td>
                                             <td>
-                                                ￥${mywts.price}
+                                                ￥${myWts.price}
                                             </td>
                                             <td>
-                                                    ${mywts.number}
+                                                    ${myWts.number}
                                             </td>
                                             <td>
-                                                    ${mywts.quality}
-                                            </td>
-                                            <td>
-                                                <c:if test="${mywts.isUndercarriage == true}">
-                                                    下架
-                                                </c:if>
-                                                <c:if test="${mywts.isUndercarriage == false}">
-                                                    出售中
-                                                </c:if>
+                                                    ${myWts.describes}
                                             </td>
 
-                                            <td>
-                                                <a href="javascript:updateitem('${mywts.serialNum}')">修改</a>
-                                                <a href="javascript:offmyitem('${mywts.serialNum}')">下架</a>
-                                            </td>
+                                            <c:if test="${myWts.isUndercarriage == true}">
+                                                <td>
+                                                    已下架
+                                                </td>
+                                                <td>${myWts.undercarriageReason}</td>
+                                            </c:if>
+
+                                            <c:if test="${myWts.isUndercarriage == false}">
+                                                <td>
+                                                    出售中
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary"
+                                                            onclick="updateitem('${myWts.serialNum}')">修改
+                                                    </button>
+                                                    <button class="btn btn-danger" onclick="getItemId(this)"
+                                                            data-toggle="modal" data-target="#modal-danger"
+                                                            value="${myWts.serialNum}">下架
+                                                    </button>
+                                                </td>
+                                            </c:if>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -96,21 +105,80 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+
 <div class="control-sidebar-bg"></div>
+<%--    拒绝弹出框--%>
+<div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确定下架该商品吗？</h4>
+            </div>
+            <div class="modal-body">
+                <form id="offForm">
+                    输入下架原因：（可以留空）
+                    <label>
+                        <input type="text" name="reason"/>
+                    </label>
+                    <input type="hidden" id="offItemId" name="id" class="hidden"/>
+                </form>
+                <%--                    <p>One fine body&hellip;</p>--%>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="offBtn">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <script>
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
-            'paging'      : true,
+            'paging': true,
             'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            'language'    : language
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'language': language
+        });
+        $('#offBtn').click(function () {
+            let reason = $('#offForm').find('input [name = reason]').val();
+            $.ajax({
+                url: '/items/offMyItem',
+                type: 'post',
+                data: {
+                    'itemId': itemId,
+                    'reason': reason
+                },
+                success: function (result) {
+                    if (result === 'success') {
+                        alert('成功下架！');
+                    }
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+            hideModal('danger');
+            $('#page').load('/user/publish/wts');
+
         })
     });
+    let itemId;
+
+    function getItemId(btn) {
+        itemId = btn.value;
+        console.log(itemId);
+        $('#offItemId').val(itemId);
+    }
 
 </script>
 </body>

@@ -35,6 +35,10 @@
                                         <th class="sorting" tabindex="5" aria-controls="example2">
                                             下单时间
                                         </th>
+                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                            订单状态
+                                        </th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -59,6 +63,27 @@
                                                 <fmt:formatDate value="${orderlist.createTime}"
                                                                 pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
                                             </td>
+                                            <c:if test="${orderlist.isCanceled == true}">
+                                                <td>
+                                                    已取消
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${orderlist.isCanceled == false && orderlist.isPaid == false}">
+                                                <td>
+                                                    待付款(24小时内未付款自动取消订单！)
+                                                </td>
+                                            </c:if>
+
+                                            <c:if test="${orderlist.isPaid == true && orderlist.isReceived == false && orderlist.isCanceled == false}">
+                                                <td>
+                                                    待确认收货
+                                                </td>
+                                            </c:if>
+                                            <c:if test="${orderlist.isPaid == true && orderlist.isReceived == true && orderlist.isCanceled == false}">
+                                                <td>
+                                                    完成
+                                                </td>
+                                            </c:if>
 
                                         </tr>
                                     </c:forEach>

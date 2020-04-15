@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.zdh.bean.Item;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ItemMapper {
     int deleteByPrimaryKey(Integer id);
@@ -39,4 +40,6 @@ public interface ItemMapper {
     List<Item> getApprovalItem();
 
     void batchUpdateItemNum(List<Item> itemList);
+
+    void offItem(Map<String, String> param);
 }

@@ -64,7 +64,7 @@
                 <li class="header">NAVIGATION</li>
                 <li><a href="${pageContext.request.contextPath}/user/profile"><i class="fa fa-user"></i>
                     <span>用户概况</span></a></li>
-                <li><a href="javascript:updateprofile()"><i class="fa fa-book"></i> <span>修改资料</span></a></li>
+                <li><a href="javascript:updateProfile()"><i class="fa fa-book"></i> <span>修改资料</span></a></li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>我的发布</span>
@@ -100,7 +100,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="javascript:allorder()">
+                            <a href="javascript:allOrder()">
                                 <i class="fa fa-paste"></i> <span>购买记录</span>
                             </a>
                         </li>
@@ -248,7 +248,7 @@
 <script type="text/javascript">
     let orderId;
 
-    function offmyitem(item_id) {
+    function offMyItem(item_id) {
         $("#page").load("${pageContext.request.contextPath}/user/offmyitem?item_id=" + item_id);
     }
 
@@ -262,10 +262,12 @@
     function myWtb() {
         $("#page").load("${pageContext.request.contextPath}/user/publish/wtb");
     }
-    function updateprofile() {
+
+    function updateProfile() {
         $("#page").load("${pageContext.request.contextPath}/user/updateprofile");
     }
-    function allorder() {
+
+    function allOrder() {
         $("#page").load("${pageContext.request.contextPath}/order/myOrder");
     }
 </script>

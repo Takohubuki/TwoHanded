@@ -1,6 +1,7 @@
 package com.zdh.controller;
 
 import com.zdh.bean.Item;
+import com.zdh.service.ItemKindService;
 import com.zdh.service.ItemService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,22 +14,27 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/items")
 public class ItemsController {
 
     @Resource
-    ItemService itemService;
+    private ItemService itemService;
+
+    @Resource
+    private ItemKindService itemKindService;
 
     /**
      * 转跳求购商品列表
      * 根据时间降序排列商品
+     *
      * @param modelAndView
      * @return
      */
     @RequestMapping("/listwtbbytime")
-    public ModelAndView listWtbByTime(ModelAndView modelAndView){
+    public ModelAndView listWtbByTime(ModelAndView modelAndView) {
         return itemService.listWtbByTime(modelAndView);
     }
 
@@ -92,7 +98,9 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/publish")
-    public ModelAndView publish(ModelAndView modelAndView){
+    public ModelAndView publish(ModelAndView modelAndView) {
+        List<String> allKind = itemKindService.getAllKind();
+        modelAndView.addObject("kindList", allKind);
         modelAndView.setViewName("publish");
         return modelAndView;
     }
@@ -142,12 +150,17 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/update")
-    public ModelAndView updateItemInfo(ModelAndView modelAndView, String item_id){
+    public ModelAndView updateItemInfo(ModelAndView modelAndView, String item_id) {
         return itemService.updateItemInfo(modelAndView, item_id);
     }
 
     @RequestMapping("/updateitem")
     public ModelAndView updateItem(ModelAndView modelAndView, Item item, @RequestParam("imagefile") MultipartFile file, HttpServletRequest request) throws IOException {
         return itemService.updateItem(modelAndView, item, file, request);
+    }
+
+    @RequestMapping(path = "/offMyItem", produces = {"text/plain;charset=UTF-8"})
+    public String offMyItem(String reason, String itemId) {
+        return itemService.offMyItem(reason, itemId);
     }
 }

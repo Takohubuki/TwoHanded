@@ -247,13 +247,16 @@
   <update id="cfmGetItem" parameterType="java.lang.String">
     update `order` set is_received = '1', update_time = now() where order_id = #{orderId}
   </update>
-  <update id="updatePayStatus" parameterType="java.lang.String">
+    <update id="updatePayStatus" parameterType="java.lang.String">
     update `order` set is_paid = '1', update_time = now() where order_id = #{orderId}
   </update>
-  <update id="batchCancelOrder" parameterType="java.util.List">
-    <foreach collection="list" item="orders" separator=";">
-      update `order` set is_canceled = '1', update_time = #{orders.updateTime} where order_id = #{orders.orderId}
-    </foreach>
-  </update>
+    <update id="batchCancelOrder" parameterType="java.util.List">
+        <foreach collection="list" item="orders" separator=";">
+            update `order` set is_canceled = '1', update_time = #{orders.updateTime} where order_id = #{orders.orderId}
+        </foreach>
+    </update>
 
+    <select id="getUnpaidOrder" parameterType="java.util.List" resultMap="OrderAndItems">
+    select * from `order` where is_paid = '0'
+  </select>
 </mapper>

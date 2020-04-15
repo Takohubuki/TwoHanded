@@ -66,11 +66,11 @@
                                                 ${itemlist.price}
                                             </td>
                                             <td>
-                                                ${itemlist.quality}
+                                                ${itemlist.number}
                                             </td>
                                             <td>
                                                 <c:if test="${itemlist.isUndercarriage == false}">
-                                                    未下架
+                                                    出售中
                                                 </c:if>
                                                 <c:if test="${itemlist.isUndercarriage == true}">
                                                     已下架

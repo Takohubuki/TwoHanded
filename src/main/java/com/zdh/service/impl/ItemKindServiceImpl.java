@@ -21,4 +21,9 @@ public class ItemKindServiceImpl implements ItemKindService {
         servletContext.setAttribute("kindList", kindList);
         return kindList;
     }
+
+    @Override
+    public List<String> getAllKind() {
+        return itemKindMappers.getKindList();
+    }
 }

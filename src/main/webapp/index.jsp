@@ -24,7 +24,6 @@
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
         <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
         <link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
@@ -366,6 +365,7 @@
                     <div class="clearfix"></div>
                 </div>
                 <!-- //first section (nuts) -->
+
                 <!-- third section (oils) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
@@ -448,11 +448,6 @@
 
     });
 </script>
-<!-- Large modal -->
-<!-- <script>
-    $('#').modal('show');
-</script> -->
-<!-- //弹出控制结束-->
 
 <!-- price range (top products) -->
 <script src="js/jquery-ui.js"></script>

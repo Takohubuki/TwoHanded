@@ -127,4 +127,6 @@ public interface ItemService {
     public ModelAndView updateItem(ModelAndView modelAndView, Item item, MultipartFile file, HttpServletRequest request) throws IOException;
 
     public void returnItemsFromOrder(List<Order> orderList);
+
+    String offMyItem(String reason, String itemId);
 }

@@ -11,6 +11,7 @@ import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
 import com.zdh.service.ItemService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,9 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -316,5 +315,17 @@ public class ItemServiceImpl implements ItemService {
         }
 
         itemMapper.batchUpdateItemNum(itemList);
+    }
+
+    @Override
+    public String offMyItem(String reason, String itemId) {
+        if (StringUtils.isEmpty(reason)) {
+            reason = "";
+        }
+        Map<String, String> param = new HashMap<>();
+        param.put("itemId", itemId);
+        param.put("reason", reason);
+        itemMapper.offItem(param);
+        return "success";
     }
 }

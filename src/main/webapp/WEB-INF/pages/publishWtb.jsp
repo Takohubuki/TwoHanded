@@ -50,26 +50,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="mywtb" items="${mywtb}">
+                                            <c:forEach var="myWtb" items="${myWtb}">
                                                 <tr role="row">
                                                     <td class="sorting">
-                                                        <img src="${pageContext.request.contextPath}/${mywtb.image}" style="width: 80px;height: 75px">
+                                                        <img src="${pageContext.request.contextPath}/${myWtb.image}"
+                                                             style="width: 80px;height: 75px">
                                                     </td>
                                                     <td>
-                                                        ${mywtb.name}
+                                                            ${myWtb.name}
                                                     </td>
                                                     <td>
-                                                        ${mywtb.price}
+                                                            ${myWtb.price}
                                                     </td>
                                                     <td>
-                                                        ${mywtb.quality}
+                                                            ${myWtb.quality}
                                                     </td>
                                                     <td>
-                                                        ${mywtb.describes}
+                                                            ${myWtb.describes}
                                                     </td>
                                                     <td>
-                                                        <a href="javascript:updateitem('${mywtb.serialNum}')">修改</a>
-                                                        <a href="javascript:offmyitem('${mywtb.serialNum}')">下架</a>
+                                                        <a href="javascript:updateitem('${myWtb.serialNum}')">修改</a>
+                                                        <a href="javascript:offMyItem('${myWtb.serialNum}')">下架</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

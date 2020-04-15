@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
         List<Item> myWts = memberMapper.selectMyWts(sid);
-        modelAndView.addObject("mywts",myWts);
+        modelAndView.addObject("myWts", myWts);
         modelAndView.setViewName("publishWts");
         return modelAndView;
 
@@ -163,7 +163,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
         List<Item> myWtb = memberMapper.selectMyWtb(sid);
-        modelAndView.addObject("mywtb",myWtb);
+        modelAndView.addObject("myWtb", myWtb);
         modelAndView.setViewName("publishWtb");
         return modelAndView;
     }
