@@ -405,6 +405,10 @@
     <select id="getApprovalItem" resultMap="BaseResultMap">
         select * from item where undercarriage_reason = '待审核';
     </select>
+    <select id="getApprovalItemOfUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select * from item where undercarriage_reason = '待审核' and publisher = #{sid};
+    </select>
+
     <update id="batchUpdateItemNum" parameterType="java.util.List">
         <foreach collection="list" separator=";" item="itemList">
             update item set `number` = #{itemList.number} where serial_num = #{itemList.serialNum}

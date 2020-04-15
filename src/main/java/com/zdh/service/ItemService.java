@@ -129,4 +129,6 @@ public interface ItemService {
     public void returnItemsFromOrder(List<Order> orderList);
 
     String offMyItem(String reason, String itemId);
+
+    ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView);
 }

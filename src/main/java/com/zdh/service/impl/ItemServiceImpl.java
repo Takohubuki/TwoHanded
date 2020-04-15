@@ -328,4 +328,14 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.offItem(param);
         return "success";
     }
+
+    @Override
+    public ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView) {
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+        List<Item> approvalItem = itemMapper.getApprovalItemOfUser(sid);
+        modelAndView.addObject("itemWaitForAccess", approvalItem);
+        modelAndView.setViewName("itemWaitToAccessOfUser");
+        return modelAndView;
+    }
 }

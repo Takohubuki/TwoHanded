@@ -163,4 +163,9 @@ public class ItemsController {
     public String offMyItem(String reason, String itemId) {
         return itemService.offMyItem(reason, itemId);
     }
+
+    @RequestMapping("/waitForAccess")
+    public ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView) {
+        return itemService.waitForAccess(session, modelAndView);
+    }
 }

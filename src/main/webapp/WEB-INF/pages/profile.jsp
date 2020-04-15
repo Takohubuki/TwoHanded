@@ -80,7 +80,7 @@
                             <a href="javascript:myWtb()"><i class="fa fa-circle-o"></i>我的求购</a>
                         </li>
                         <li>
-                            <a href="javascript:waitToPass()">
+                            <a href="javascript:waitForAccess()">
                                 <i class="fa fa-pencil"></i>
                                 审核中
                                 <span class="pull-right-container">
@@ -141,13 +141,6 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text">好评数</span>
                                     <span class="info-box-number">${member.positiveComment}</span>
-
-                                    <%--                            <div class="progress">--%>
-                                    <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
-                                    <%--                            </div>--%>
-                                    <%--                            <span class="progress-description">--%>
-                                    <%--                                70% Increase in 30 Days--%>
-                                    <%--                            </span>--%>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -160,13 +153,6 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text">差评数</span>
                                     <span class="info-box-number">${member.negativeComment}</span>
-
-                                    <%--                            <div class="progress">--%>
-                                    <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
-                                    <%--                            </div>--%>
-                                    <%--                            <span class="progress-description">--%>
-                                    <%--                                70% Increase in 30 Days--%>
-                                    <%--                            </span>--%>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -178,14 +164,7 @@
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">卖出商品件数</span>
-                                    <span class="info-box-number">${member.negativeComment}</span>
-
-                                    <%--                            <div class="progress">--%>
-                                    <%--                                <div class="progress-bar" style="width: 70%"></div>--%>
-                                    <%--                            </div>--%>
-                                    <%--                            <span class="progress-description">--%>
-                                    <%--                                70% Increase in 30 Days--%>
-                                    <%--                            </span>--%>
+                                    <span class="info-box-number">${member.tradRecordNum}</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -269,6 +248,10 @@
 
     function allOrder() {
         $("#page").load("${pageContext.request.contextPath}/order/myOrder");
+    }
+
+    function waitForAccess() {
+        $('#page').load('${pageContext.request.contextPath}/items/waitForAccess')
     }
 </script>
 </body>

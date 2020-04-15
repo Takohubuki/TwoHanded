@@ -42,4 +42,6 @@ public interface ItemMapper {
     void batchUpdateItemNum(List<Item> itemList);
 
     void offItem(Map<String, String> param);
+
+    List<Item> getApprovalItemOfUser(String sid);
 }
