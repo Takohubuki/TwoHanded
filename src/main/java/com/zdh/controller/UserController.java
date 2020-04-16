@@ -174,4 +174,9 @@ public class UserController {
     public String newPassword(String sid, String newPassword) {
         return memberService.newPassword(sid, newPassword);
     }
+
+    @RequestMapping("/mySoldOut")
+    public ModelAndView mySoldOut(ModelAndView modelAndView, HttpSession session) {
+        return memberService.mySoldOut(modelAndView, session);
+    }
 }

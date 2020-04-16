@@ -35,4 +35,6 @@ public interface OrderMapper {
     void batchCancelOrder(List<Order> orders);
 
     List<Order> getUnpaidOrder();
+
+    List<Order> getUserSoldOut(String sid);
 }

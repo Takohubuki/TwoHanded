@@ -108,7 +108,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:soldItem()"><i class="fa fa-shopping-cart"></i>出售记录</a>
+                            <a href="javascript:mySoldOut()"><i class="fa fa-shopping-cart"></i>出售记录</a>
                         </li>
                     </ul>
                 </li>
@@ -255,7 +255,11 @@
     }
 
     function waitForAccess() {
-        $('#page').load('${pageContext.request.contextPath}/items/waitForAccess')
+        $('#page').load('${pageContext.request.contextPath}/items/waitForAccess');
+    }
+
+    function mySoldOut() {
+        $('#page').load('${pageContext.request.contextPath}/user/mySoldOut');
     }
 </script>
 </body>

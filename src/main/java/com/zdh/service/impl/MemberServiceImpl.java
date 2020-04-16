@@ -2,14 +2,8 @@ package com.zdh.service.impl;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
-import com.zdh.bean.Item;
-import com.zdh.bean.Member;
-import com.zdh.bean.Token;
-import com.zdh.bean.VerifyCode;
-import com.zdh.mappers.ItemMapper;
-import com.zdh.mappers.MemberMapper;
-import com.zdh.mappers.TokenMapper;
-import com.zdh.mappers.VerifyCodeMapper;
+import com.zdh.bean.*;
+import com.zdh.mappers.*;
 import com.zdh.service.MemberService;
 import com.zdh.util.Constant;
 import com.zdh.util.PasswordUtils;
@@ -55,6 +49,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Resource
     ItemMapper itemMapper;
+
+    @Resource
+    private OrderMapper orderMapper;
 
     private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
@@ -375,6 +372,17 @@ public class MemberServiceImpl implements MemberService {
 
         modelAndView.addObject("itemsWaitForAccess", countApprovalItemOfUser);
         modelAndView.setViewName("profile");
+        return modelAndView;
+    }
+
+    @Override
+    public ModelAndView mySoldOut(ModelAndView modelAndView, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+
+        String sid = member.getSid();
+        List<Order> soldList = orderMapper.getUserSoldOut(sid);
+        modelAndView.addObject("soldList", soldList);
+        modelAndView.setViewName("mySoldOut");
         return modelAndView;
     }
 

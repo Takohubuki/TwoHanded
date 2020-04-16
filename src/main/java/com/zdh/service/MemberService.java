@@ -114,4 +114,6 @@ public interface MemberService {
     String newPassword(String sid, String newPassword);
 
     ModelAndView userCenter(ModelAndView modelAndView, HttpSession session);
+
+    ModelAndView mySoldOut(ModelAndView modelAndView, HttpSession session);
 }
