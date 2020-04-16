@@ -294,16 +294,17 @@
 
                                 </div>
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-<%--                                    <form action="#" method="post">--%>
-                                        <fieldset>
-                                            <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
-                                            <input type="hidden" name="itemName" value="${itemlist.name}" />
-                                            <c:if test="${itemlist.conditions == '出售'}">
-                                                <input type="submit" name="addcart" class="button" value="添加到购物车"/>
-                                            </c:if>
+                                        <%--                                    <form action="#" method="post">--%>
+                                    <fieldset>
+                                        <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
+                                        <input type="hidden" name="itemName" value="${itemlist.name}"/>
+                                        <input type="hidden" name="publisher" value="${itemlist.publisher}"/>
+                                        <c:if test="${itemlist.conditions == '出售'}">
+                                            <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                                        </c:if>
 
-                                        </fieldset>
-<%--                                    </form>--%>
+                                    </fieldset>
+                                        <%--                                    </form>--%>
                                 </div>
 
                             </div>
@@ -361,40 +362,6 @@
 
     });
 </script>
-<script>
-    let member = "<%=session.getAttribute("member")%>";
-    // let member = window.sessionStorage.getItem("member");
-    console.log(member);
-    $(function () {
-        $("input[name = addcart]").click(function () {
-            console.log(member);
-            if (member === "null"){
-                alert("请先登录！");
-
-            }else {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/order/addcart",
-                    type: "POST",
-                    data: {
-                        serialNum : $(this).parent().find("input[name = itemId]").val()
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        if (result === 'success'){
-                            alert("添加成功！")
-                        }else {
-                            alert("添加失败！");
-                        }
-                    },
-                    error: function (e) {
-                        console.log(e.status);
-                        console.log(e.responseText);
-                    }
-                });
-            }
-        })
-    });
-</script><!-- //cart-js -->
 
 <!-- imagezoom -->
 <script src="${pageContext.request.contextPath}/js/imagezoom.js"></script>
@@ -423,6 +390,12 @@
 </script>
 
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
+
+<script>
+    let member = "<%=session.getAttribute("member")%>";
+    console.log(member);
+</script>
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 <!-- //js-files -->
 

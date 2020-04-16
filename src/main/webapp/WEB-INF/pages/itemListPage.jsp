@@ -30,15 +30,16 @@
 
                         </div>
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-<%--                            <form action="#" method="post">--%>
-                                <fieldset>
-                                    <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
-                                    <input type="hidden" name="itemName" value="${itemlist.name}" />
-                                    <c:if test="${itemlist.conditions == '出售'}">
-                                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
-                                    </c:if>
-                                </fieldset>
-<%--                            </form>--%>
+                                <%--                            <form action="#" method="post">--%>
+                            <fieldset>
+                                <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
+                                <input type="hidden" name="itemName" value="${itemlist.name}"/>
+                                <input type="hidden" name="publisher" value="${itemlist.publisher}"/>
+                                <c:if test="${itemlist.conditions == '出售'}">
+                                    <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                                </c:if>
+                            </fieldset>
+                                <%--                            </form>--%>
                         </div>
 
                     </div>
