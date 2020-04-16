@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +46,10 @@
                                         <th class="sorting" tabindex="4" aria-controls="example2">
                                             描述
                                         </th>
-                                        <th tabindex="5" aria-controls="example2">
+                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                            发布时间
+                                        </th>
+                                        <th tabindex="6" aria-controls="example2">
                                             类型
                                         </th>
                                     </tr>
@@ -64,11 +68,16 @@
                                                     ${itemWaitForAccess.price}
                                             </td>
                                             <td>
-                                                    ${itemWaitForAccess.quality}
+                                                    ${itemWaitForAccess.number}
                                             </td>
                                             <td>
                                                     ${itemWaitForAccess.describes}
                                             </td>
+                                            <td>
+                                                <fmt:formatDate value="${itemWaitForAccess.publishTime}"
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
+                                            </td>
+
                                             <td>
                                                     ${itemWaitForAccess.conditions}
                                             </td>

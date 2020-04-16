@@ -408,6 +408,9 @@
     <select id="getApprovalItemOfUser" resultMap="BaseResultMap" parameterType="java.lang.String">
         select * from item where undercarriage_reason = '待审核' and publisher = #{sid};
     </select>
+    <select id="countApprovalItemOfUser" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(0) from item where undercarriage_reason = '待审核' and publisher = #{sid};
+    </select>
 
     <update id="batchUpdateItemNum" parameterType="java.util.List">
         <foreach collection="list" separator=";" item="itemList">

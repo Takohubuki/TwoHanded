@@ -44,4 +44,6 @@ public interface ItemMapper {
     void offItem(Map<String, String> param);
 
     List<Item> getApprovalItemOfUser(String sid);
+
+    Integer countApprovalItemOfUser(String sid);
 }

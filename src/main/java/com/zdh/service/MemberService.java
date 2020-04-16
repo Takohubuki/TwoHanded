@@ -112,4 +112,6 @@ public interface MemberService {
      * @return
      */
     String newPassword(String sid, String newPassword);
+
+    ModelAndView userCenter(ModelAndView modelAndView, HttpSession session);
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
@@ -83,9 +84,11 @@
                             <a href="javascript:waitForAccess()">
                                 <i class="fa fa-pencil"></i>
                                 审核中
-                                <span class="pull-right-container">
-                                    <span class="label label-danger pull-right">5</span>
-                                </span>
+                                <c:if test="${itemsWaitForAccess != 0}">
+                                    <span class="pull-right-container">
+                                        <span class="label label-danger pull-right">${itemsWaitForAccess}</span>
+                                    </span>
+                                </c:if>
                             </a>
                         </li>
 
@@ -238,6 +241,7 @@
     function myWts() {
         $("#page").load("${pageContext.request.contextPath}/user/publish/wts");
     }
+
     function myWtb() {
         $("#page").load("${pageContext.request.contextPath}/user/publish/wtb");
     }

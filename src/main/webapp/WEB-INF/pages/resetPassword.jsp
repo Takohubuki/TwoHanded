@@ -80,7 +80,6 @@
                     'newPassword': newPassword
                 },
                 success: function (result) {
-                    alert(result);
                     message = 'success';
                 },
                 error: function (result) {

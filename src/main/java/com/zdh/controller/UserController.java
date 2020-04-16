@@ -80,9 +80,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/profile")
-    public ModelAndView profile(ModelAndView modelAndView) {
-        modelAndView.setViewName("profile");
-        return modelAndView;
+    public ModelAndView profile(ModelAndView modelAndView, HttpSession session) {
+        return memberService.userCenter(modelAndView, session);
     }
 
 

@@ -365,7 +365,17 @@ public class MemberServiceImpl implements MemberService {
         member.setSid(sid);
         member.setPassword(md5);
         memberMapper.updateProfile(member);
-        return "修改成功！";
+        return Constant.SUCCESS_CODE;
+    }
+
+    @Override
+    public ModelAndView userCenter(ModelAndView modelAndView, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        Integer countApprovalItemOfUser = itemMapper.countApprovalItemOfUser(member.getSid());
+
+        modelAndView.addObject("itemsWaitForAccess", countApprovalItemOfUser);
+        modelAndView.setViewName("profile");
+        return modelAndView;
     }
 
 }

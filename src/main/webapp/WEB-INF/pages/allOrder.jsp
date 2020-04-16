@@ -186,14 +186,6 @@
                 <h4 class="modal-title">确定取消下单吗？</h4>
             </div>
             <div class="modal-body">
-                <%--                <form id="denyForm">--%>
-                <%--                    输入拒绝原因：--%>
-                <%--                    <label>--%>
-                <%--                        <input type="text" name="reason"/>--%>
-                <%--                    </label>--%>
-                <%--                    <input type="hidden" id="denyId" name="id" class="hidden"/>--%>
-                <%--                </form>--%>
-                <%--                    <p>One fine body&hellip;</p>--%>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" id="denyBtn">确定</button>
