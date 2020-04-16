@@ -4,8 +4,38 @@ let id = '';
 let itemNum = 0;
 let atLeastOne = false;
 
-
 $(function () {
+
+    $("input[name = addcart]").click(function () {
+        console.log(member);
+        if (member === "null") {
+            alert("请先登录！");
+
+        } else {
+            $.ajax({
+                url: "/order/addcart",
+                type: "POST",
+                data: {
+                    'serialNum': $(this).parent().find('input[name = itemId]').val(),
+                    'publisher': $(this).parent().find('input[name = publisher]').val()
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result === '0') {
+                        alert('添加成功！')
+                    }
+                    if (result === '1') {
+                        alert('不能购买自己发布的商品！');
+                    }
+                },
+                error: function (e) {
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+        }
+    });
+
     //增加数量
     $(".cart_quantity_up").click(function () {
         num = $(this).parent().parent().find("input").val();
@@ -13,7 +43,7 @@ $(function () {
         itemNum = $(this).parent().attr("itemNum");
         console.log(itemNum);
 
-        if (num === itemNum){
+        if (num === itemNum) {
             return;
         }
         num = parseInt(num) + 1;

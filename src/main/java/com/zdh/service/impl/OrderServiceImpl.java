@@ -12,6 +12,7 @@ import com.zdh.pay.AliPayDemo;
 import com.zdh.service.ItemService;
 import com.zdh.service.OrderService;
 import com.zdh.util.AmountUtils;
+import com.zdh.util.Constant;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -116,12 +117,16 @@ public class OrderServiceImpl implements OrderService {
         String sid = member.getSid();
         String itemId = item.getSerialNum();
 
+        if (sid.equals(item.getPublisher())) {
+            return Constant.BUY_OWN_ITEM;
+        }
+
         Map map = new HashMap();
         map.put("itemId", itemId);
         map.put("sid", sid);
 
         Cart cart = cartMapper.checkItemInMyCart(map);
-        if (cart == null){
+        if (cart == null) {
             Cart new_item = new Cart();
             new_item.setMemberSid(member.getSid());
             new_item.setItemId(itemId);
@@ -131,7 +136,7 @@ public class OrderServiceImpl implements OrderService {
             cart.setItemNum(cart.getItemNum() + 1);
             cartMapper.addCartNum(cart);
         }
-        return "success";
+        return Constant.SUCCESS_CODE;
     }
 
     @Override

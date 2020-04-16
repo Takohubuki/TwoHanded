@@ -330,6 +330,8 @@
                     <fieldset>
                         <input type="hidden" name="itemId" value="${item.serialNum}"/>
                         <input type="hidden" name="itemName" value="${item.name}"/>
+                        <input type="hidden" name="publisher" value="${item.publisher}"/>
+                        <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
                         <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                     </fieldset>
                     <%--                    </form>--%>
@@ -495,38 +497,9 @@
 <!-- //js-files -->
 <script>
     let member = "<%=session.getAttribute("member")%>";
-    // let member = window.sessionStorage.getItem("member");
     console.log(member);
-    $(function () {
-        $("input[name = addcart]").click(function () {
-            console.log(member);
-            if (member === "null"){
-                alert("请先登录！");
-
-            }else {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/order/addcart",
-                    type: "POST",
-                    data: {
-                        serialNum : $(this).parent().find("input[name = itemId]").val()
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        if (result === 'success'){
-                            alert("添加成功！")
-                        }else {
-                            alert("添加失败！");
-                        }
-                    },
-                    error: function (e) {
-                        console.log(e.status);
-                        console.log(e.responseText);
-                    }
-                });
-            }
-        })
-    });
 </script>
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 <!-- password-script -->
 <script src="${pageContext.request.contextPath}/js/common.js"></script>

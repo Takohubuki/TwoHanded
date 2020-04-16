@@ -24,6 +24,10 @@ public class Constant {
     //默认时间格式
     public final static String COMMON_DATE_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
+    //返回前台的状态码
+    public final static String SUCCESS_CODE = "0";
+    public final static String BUY_OWN_ITEM = "1";
+
     //支付宝沙箱网关地址
     public static final String ALIPAY_SANDBOX_GATEWAY_URL = "https://openapi.alipaydev.com/gateway.do";
     //app_id    沙箱 2016101800719515
