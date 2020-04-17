@@ -146,4 +146,14 @@ public class ManagerController {
     public String denyInfo(String id, String reason) {
         return managerService.denyInfo(id, reason);
     }
+
+    @RequestMapping(path = "/manage/itemKind", produces = {"application/json;charset=UTF-8"})
+    public String itemKind() {
+        return managerService.itemKindManage();
+    }
+
+    @RequestMapping(path = "/manage/addItemKind", produces = {"application/json;charset=UTF-8"})
+    public String addItemKind(String newKind) {
+        return managerService.addItemKind(newKind);
+    }
 }

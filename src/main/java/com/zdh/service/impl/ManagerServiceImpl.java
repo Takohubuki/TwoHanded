@@ -1,14 +1,10 @@
 package com.zdh.service.impl;
 
-import com.zdh.bean.Item;
-import com.zdh.bean.Manager;
-import com.zdh.bean.Member;
-import com.zdh.bean.Order;
-import com.zdh.mappers.ItemMapper;
-import com.zdh.mappers.ManagerMapper;
-import com.zdh.mappers.MemberMapper;
-import com.zdh.mappers.OrderMapper;
+import com.alibaba.fastjson.JSON;
+import com.zdh.bean.*;
+import com.zdh.mappers.*;
 import com.zdh.service.ManagerService;
+import com.zdh.util.Constant;
 import com.zdh.util.PasswordUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,15 +29,18 @@ public class ManagerServiceImpl implements ManagerService {
     @Resource
     MemberMapper memberMapper;
 
+    @Resource
+    private ItemKindMappers itemKindMapper;
+
     @Override
     public ModelAndView login(String username, String password, ModelAndView modelAndView, HttpSession session) {
         Manager manager = managerMapper.selectByName(username);
-        if (manager == null){
-            modelAndView.addObject("manager_message","用户名错误！");
+        if (manager == null) {
+            modelAndView.addObject("manager_message", "用户名错误！");
             modelAndView.setViewName("managerLogin");
             return modelAndView;
-        }else if (!PasswordUtils.passwordConfirm(manager.getPassword(),password)){
-            modelAndView.addObject("manager_message","密码错误！");
+        } else if (!PasswordUtils.passwordConfirm(manager.getPassword(), password)) {
+            modelAndView.addObject("manager_message", "密码错误！");
             modelAndView.setViewName("managerLogin");
             return modelAndView;
         }else if (PasswordUtils.passwordConfirm(manager.getPassword(),password)){
@@ -97,7 +96,7 @@ public class ManagerServiceImpl implements ManagerService {
     public ModelAndView manageWtbItem(ModelAndView modelAndView) {
         List<Item> items = itemMapper.selectWtbAllByTime();
         modelAndView.addObject("itemlist", items);
-        modelAndView.setViewName("wtsManage");
+        modelAndView.setViewName("wtbManage");
         return modelAndView;
 
     }
@@ -155,6 +154,20 @@ public class ManagerServiceImpl implements ManagerService {
         item.setUndercarriageReason(reason);
         itemMapper.updateItemInfo(item);
         return "success";
+    }
+
+    @Override
+    public String itemKindManage() {
+        List<String> kindList = itemKindMapper.getKindList();
+        return JSON.toJSON(kindList).toString();
+    }
+
+    @Override
+    public String addItemKind(String newKind) {
+        ItemKind itemKind = new ItemKind();
+        itemKind.setKindName(newKind);
+        itemKindMapper.insertSelective(itemKind);
+        return Constant.SUCCESS_CODE;
     }
 
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {

@@ -55,4 +55,8 @@ public interface ManagerService {
     String accessInfo(String id);
 
     String denyInfo(String id, String reason);
+
+    String itemKindManage();
+
+    String addItemKind(String newKind);
 }

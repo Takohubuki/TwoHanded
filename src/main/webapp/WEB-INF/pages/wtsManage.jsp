@@ -5,6 +5,7 @@
 <html>
 <section class="content-header">
     <h1>商品管理</h1>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default1" id="itemKindMange">分类管理</button>
 </section>
 
 <section class="content">
@@ -108,19 +109,105 @@
 
 </section>
 
+<div class="modal fade" id="modal-default1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">现有分类</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="addItemKind">添加</button>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="modal-default2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加分类</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="输入要添加的分类" id="newKind">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-left" id="subNewKind">确定</button>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <script>
     $(function () {
-        $('#example1').DataTable();
         $('#example2').DataTable({
-            'paging'      : true,
+            'paging': true,
             'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            'language'    : language
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'language': language
+        });
+        $('#itemKindMange').click(function () {
+            let html = '';
+            $.ajax({
+                url: '/manage/itemKind',
+                datatype: 'json',
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    for (let x in result) {
+                        html = html + '<div class="radio"><label><input type="radio" value="' + result[x] + '">' + result[x] + '</label></div>';
+                    }
+                    $('#modal-default1').find('.modal-body').html(html);
+                },
+                error: function (result) {
+                    console.log(result)
+                }
+            })
+        });
+        $('#addItemKind').click(function () {
+            hideModal('default1');
+            $('#modal-default2').modal('show');
+        });
+        $('#subNewKind').click(function () {
+            let val = $('#newKind').val();
+            $.ajax({
+                url: '/manage/addItemKind',
+                data: {
+                    'newKind': val
+                },
+                async: false,
+                success: function (result) {
+                    if (result === 0) {
+                        alert('添加成功');
+                    }
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+            hideModal('default2');
+            $('#page').load('/manage/wtsitem');
         })
     });
+
 
 </script>
 </body>
