@@ -131,4 +131,6 @@ public interface ItemService {
     String offMyItem(String reason, String itemId);
 
     ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView);
+
+    String wtsItem(String serialNum, HttpSession session);
 }

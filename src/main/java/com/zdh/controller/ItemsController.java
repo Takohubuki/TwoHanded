@@ -168,4 +168,10 @@ public class ItemsController {
     public ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView) {
         return itemService.waitForAccess(session, modelAndView);
     }
+
+    @RequestMapping(path = "/wtsItem", produces = {"text/plain;charset=UTF-8"})
+    public String wtsItem(String serialNum, HttpSession session) {
+        return itemService.wtsItem(serialNum, session);
+    }
+
 }

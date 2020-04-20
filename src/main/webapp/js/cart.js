@@ -6,6 +6,7 @@ let atLeastOne = false;
 
 $(function () {
 
+    //添加到购物车
     $("input[name = addcart]").click(function () {
         console.log(member);
         if (member === "null") {
@@ -26,6 +27,36 @@ $(function () {
                     }
                     if (result === '1') {
                         alert('不能购买自己发布的商品！');
+                    }
+                },
+                error: function (e) {
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+        }
+    });
+
+    //回应求购信息
+    $("input[name = wts]").click(function () {
+        console.log(member);
+        if (member === "null") {
+            alert("请先登录！");
+        } else {
+            $.ajax({
+                url: "/items/wtsItem",
+                type: "POST",
+                async: false,
+                data: {
+                    'serialNum': $(this).parent().find('input[name = itemId]').val(),
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result === '0') {
+                        alert('成功通知发布人！')
+                    }
+                    if (result === '1') {
+                        alert('这是你发布的求购！');
                     }
                 },
                 error: function (e) {

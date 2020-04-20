@@ -380,35 +380,19 @@
                                     <img src="${wtb_item.image}" alt="" style="width: 159px;height: 150px">
                                     <div class="men-cart-pro">
                                         <div class="inner-men-cart-pro">
-                                            <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serialNum}" class="link-product-add-cart">详情</a>
+                                            <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${wtb_item.serialNum}"
+                                               class="link-product-add-cart">详情</a>
                                         </div>
                                     </div>
                                     <span class="product-new-top">New</span>
                                 </div>
                                 <div class="item-info-product ">
                                     <h4>
-                                        <a href="${pageContext.request.contextPath}/items/wtbitem?itemId=${wtb_item.serialNum}">${wtb_item.name}</a>
+                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${wtb_item.serialNum}">${wtb_item.name}</a>
                                     </h4>
                                     <div class="info-product-price">
                                         <span class="item_price">￥${wtb_item.price}</span>
                                     </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="Freedom Sunflower Oil, 1L" />
-                                                <input type="hidden" name="amount" value="78.00" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="CNY" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-<%--                                                <input type="submit" name="submit" value="Add to cart" class="button" />--%>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

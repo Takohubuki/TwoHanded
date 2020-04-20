@@ -2,14 +2,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: Tako
-  Date: 2019/6/30
-  Time: 20:04
+  Date: 2019/6/29
+  Time: 19:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<html>
+<html lang="zxx">
+
 <head>
-    <title>商品列表</title>
+    <title>商品详情</title>
     <!--/tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,20 +25,25 @@
         }
     </script>
     <!--//tags -->
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
     <!--pop-up-box-->
-    <link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
     <!--//pop-up-box-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
+
     <!-- price range -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui1.css">
     <!-- flexslider -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/flexslider.css" type="text/css" media="screen"/>
     <!-- fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
+          rel="stylesheet">
 </head>
+
 <body>
+<!-- top-header -->
 <div class="header-most-top">
     <p>哈学院官方唯一指定二手交易平台</p>
 </div>
@@ -52,7 +58,7 @@
                     <span>H</span>RBU
                     <span>S</span>econdHand
                     <span>P</span>latform
-                    <img src="${pageContext.request.contextPath}/images/logo2.png" alt=" ">
+                    <img src="images/logo2.png" alt=" ">
                 </a>
             </h1>
         </div>
@@ -115,7 +121,6 @@
         <div class="clearfix"></div>
     </div>
 </div>
-
 <!-- 登录模块 -->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -144,6 +149,7 @@
                         </div>
                         <input type="submit" value="登录">
                         <a href="${pageContext.request.contextPath}/user/forgetPWD">忘记密码</a>
+
                     </form>
                     <div class="clearfix"></div>
                 </div>
@@ -180,7 +186,7 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="text" placeholder="电子邮箱" name="email" required="">
+                            <input type="text" placeholder="电子邮箱" name="dormitory" required="">
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">
@@ -230,7 +236,8 @@
                             </li>
                             <c:forEach items="${kindList}" var="kindList">
                                 <li class="">
-                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                    <a class="nav-stylehead"
+                                       href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
                                             ${kindList}
                                     </a>
                                 </li>
@@ -244,7 +251,6 @@
     </div>
 </div>
 <!-- //导航栏结束 -->
-
 <!-- page -->
 <div class="services-breadcrumb">
     <div class="agile_inner_breadcrumb">
@@ -254,7 +260,7 @@
                     <a href="${pageContext.request.contextPath}/index/backindex">主页</a>
                     <i>|</i>
                 </li>
-                <li>商品列表</li>
+                <li>商品详情</li>
             </ul>
         </div>
     </div>
@@ -264,7 +270,7 @@
 <div class="banner-bootom-w3-agileits">
     <div class="container">
         <!-- tittle heading -->
-        <h3 class="tittle-w3l">商品列表
+        <h3 class="tittle-w3l">商品详情
             <span class="heading-style">
 					<i></i>
 					<i></i>
@@ -272,104 +278,146 @@
 				</span>
         </h3>
         <!-- //tittle heading -->
-        <!-- product right -->
-        <div class="agileinfo-ads-display center-block">
-            <div class="wrapper">
-                <!-- first section (nuts) -->
-                <div class="product-sec1" id="paging">
-                    <h3 class="heading-tittle">出售</h3>
-                    <div class="row">
-                        <c:forEach var="itemlist" items="${itemPageInfo.list}">
-                            <div class="col-md-4 product-men">
-                                <div class="men-pro-item simpleCart_shelfItem">
-                                    <div class="men-thumb-item">
-                                        <img src="${pageContext.request.contextPath}/${itemlist.image}" alt=""
-                                             style="width: 159px;height: 150px">
-                                        <div class="men-cart-pro">
-                                            <div class="inner-men-cart-pro">
-                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}"
-                                                   class="link-product-add-cart">详情</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item-info-product ">
-                                        <h4>
-                                            <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}">${itemlist.name}</a>
-                                        </h4>
-                                        <div class="info-product-price">
-                                            <span class="item_price">￥${itemlist.price}</span>
-
-                                        </div>
-                                        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                <%--                                    <form action="#" method="post">--%>
-                                            <fieldset>
-                                                <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
-                                                <input type="hidden" name="itemName" value="${itemlist.name}"/>
-                                                <input type="hidden" name="publisher" value="${itemlist.publisher}"/>
-                                                <c:if test="${itemlist.conditions == '出售'}">
-                                                    <input type="submit" name="addcart" class="button" value="添加到购物车"/>
-                                                </c:if>
-
-                                            </fieldset>
-                                        </div>
-
-                                    </div>
-                                </div>
+        <div class="col-md-4 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li data-thumb="${pageContext.request.contextPath}/${item.image}">
+                            <div class="thumb-image">
+                                <img src="${pageContext.request.contextPath}/${item.image}" data-imagezoom="true"
+                                     class="img-responsive" alt="">
                             </div>
-                        </c:forEach>
-                    </div>
-                    <div class="row">
-                        <ul class="pagination">
-                            <c:if test="${!itemPageInfo.isFirstPage}">
-                                <li><a href="javascript:queryDeviceRecords(${itemPageInfo.navigateFirstPage});">首页</a>
-                                </li>
-                                <li><a href="javascript:queryDeviceRecords(${itemPageInfo.prePage});">上一页</a></li>
-                            </c:if>
-                            <c:forEach items="${itemPageInfo.navigatepageNums}" var="navigatepageNum">
+                        </li>
 
-                                <c:if test="${navigatepageNum==itemPageInfo.pageNum}">
-                                    <li class="active"><a
-                                            href="javascript:queryAllDevices(${navigatepageNum});">${navigatepageNum}</a>
-                                    </li>
-                                </c:if>
-                                <c:if test="${navigatepageNum!=itemPageInfo.pageNum}">
-                                    <li>
-                                        <a href="javascript:queryDeviceRecords(${navigatepageNum});">${navigatepageNum}</a>
-                                    </li>
-                                </c:if>
-                            </c:forEach>
-                            <c:if test="${!itemPageInfo.isLastPage}">
-                                <li><a href="javascript:queryDeviceRecords(${itemPageInfo.nextPage});">下一页</a></li>
-                                <li><a href="javascript:queryDeviceRecords(${itemPageInfo.navigateLastPage});">最后一页</a>
-                                </li>
-                            </c:if>
-                        </ul>
-
-                    </div>
+                    </ul>
                     <div class="clearfix"></div>
                 </div>
-                <!-- //first section (nuts) -->
-
-                <!-- third section (oils) -->
-                <div class="product-sec1">
-                    <h3 class="heading-tittle">求购</h3>
-                    <div class="row center-block">
-                        <a class="btn btn-primary" role="button"
-                           href="${pageContext.request.contextPath}/items/listwtbbytime">更多</a>
-                    </div>
-
-                    <div class="clearfix"></div>
-                </div>
-                <!-- //third section (oils) -->
-
             </div>
         </div>
-        <!-- //product right -->
+        <div class="col-md-5 single-right-left simpleCart_shelfItem">
+            <h3>${item.name}</h3>
 
+            <p>
+                <span class="item_price">￥${item.price}</span>
+            </p>
+            <div class="single-infoagile">
+                <ul>
+                    <li>
+                        点击量：${item.viewedTimes}
+                    </li>
+
+                    <li>
+                        库存：${item.number}
+                    </li>
+
+                </ul>
+            </div>
+            <div class="product-single-w3l">
+                <p>
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                    商品描述：
+                </p>
+                <ul>
+                    <li>
+                        ${item.describes}
+                    </li>
+                </ul>
+
+            </div>
+            <div class="occasion-cart">
+                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                    <%--                    <form action="#" method="post">--%>
+                    <fieldset>
+                        <input type="hidden" name="itemId" value="${item.serialNum}"/>
+                        <input type="hidden" name="itemName" value="${item.name}"/>
+                        <input type="hidden" name="publisher" value="${item.publisher}"/>
+                        <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
+                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                    </fieldset>
+                    <%--                    </form>--%>
+                </div>
+
+            </div>
+
+        </div>
+        <%--FIXME 展示卖家基本信息--%>
+        <div class="col-md-3 single-right-left">
+            <!-- Widget: user widget style 1 -->
+            <div class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-yellow">
+                    <div class="widget-user-image">
+                        <img class="img-circle" src="${pageContext.request.contextPath}/images/avatar/${seller.avatar}"
+                             alt="User Avatar">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username">${seller.username}</h3>
+                    <h5 class="widget-user-desc">卖家</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${seller.positiveComment}</span></a>
+                        </li>
+                        <li><a href="#">差评数 <span class="pull-right badge bg-red">${seller.negativeComment}</span></a>
+                        </li>
+                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${seller.tradRecordNum}</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="clearfix"></div>
     </div>
 </div>
 <!-- //Single Page -->
+<!-- special offers -->
+<div class="featured-section" id="projects">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">为你推荐
+            <span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span>
+        </h3>
+        <!-- //tittle heading -->
+        <div class="content-bottom-in">
+            <ul id="flexiselDemo1">
+                <c:forEach var="recommand_items" items="${recommand_items}">
+                    <li>
+                        <div class="w3l-specilamk">
+                            <div class="speioffer-agile">
+                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">
+                                    <img src="${pageContext.request.contextPath}/${recommand_items.image}" alt=""
+                                         style="width: 159px;height: 150px">
+                                </a>
+                            </div>
+                            <div class="product-name-w3l">
+                                <h4>
+                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">${recommand_items.name}</a>
+                                </h4>
+                                <div class="w3l-pricehkj">
+                                    <h6>￥${recommand_items.price}</h6>
+                                </div>
+                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                    <fieldset>
+                                        <input type="hidden" name="itemId" value="${recommand_items.serialNum}"/>
+                                        <input type="hidden" name="itemName" value="${recommand_items.name}"/>
+                                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- //special offers -->
+
+
 
 <!-- js-files -->
 <!-- jquery -->
@@ -412,24 +460,50 @@
 </script>
 <!-- //FlexSlider-->
 
+<!-- flexisel (for special offers) -->
+<script src="${pageContext.request.contextPath}/js/jquery.flexisel.js"></script>
+<script>
+    $(window).load(function () {
+        $("#flexiselDemo1").flexisel({
+            visibleItems: 3,
+            animationSpeed: 1000,
+            autoPlay: true,
+            autoPlaySpeed: 3000,
+            pauseOnHover: true,
+            enableResponsiveBreakpoints: true,
+            responsiveBreakpoints: {
+                portrait: {
+                    changePoint: 480,
+                    visibleItems: 1
+                },
+                landscape: {
+                    changePoint: 640,
+                    visibleItems: 2
+                },
+                tablet: {
+                    changePoint: 768,
+                    visibleItems: 2
+                }
+            }
+        });
+
+    });
+</script>
+<!-- //flexisel (for special offers) -->
+
 <!-- for bootstrap working -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
-<script type="text/javascript">
-    function queryDeviceRecords(pageNum) {
-        $("#paging").load("${pageContext.request.contextPath}/items/itempage?pageNum=" + pageNum);
-    }
-</script>
-
-<script src="${pageContext.request.contextPath}/js/common.js"></script>
-
+<!-- //js-files -->
 <script>
     let member = "<%=session.getAttribute("member")%>";
     console.log(member);
 </script>
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
-<!-- //js-files -->
+<!-- password-script -->
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
+<!-- //password-script -->
 
 </body>
 

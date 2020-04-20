@@ -115,93 +115,6 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<!-- 登录模块 -->
-<div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body modal-body-sub_agile">
-                <div class="main-mailposi">
-                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                </div>
-                <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">登 录 </h3>
-                    <p>
-                        没有账号？点击注册
-                        <a href="#" data-toggle="modal" data-target="#myModal2">
-                            去注册</a>
-                    </p>
-                    <form action="${pageContext.request.contextPath}/user/login" method="post">
-                        <div class="styled-input agile-styled-input-top">
-                            <input type="text" placeholder="User Name" name="username" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="password" placeholder="Password" name="password" required="">
-                        </div>
-                        <input type="submit" value="登录">
-                        <a href="${pageContext.request.contextPath}/user/forgetPWD">忘记密码</a>
-
-                    </form>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <!-- //Modal content-->
-    </div>
-</div>
-<!-- //登录结束 -->
-<!-- 注册模块 -->
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body modal-body-sub_agile">
-                <div class="main-mailposi">
-                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
-                </div>
-                <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">注 册</h3>
-
-                    <form action="${pageContext.request.contextPath}/user/signup" method="post">
-                        <div class="styled-input agile-styled-input-top">
-                            <input type="text" placeholder="学号" name="sid" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="text" placeholder="真实姓名" name="name" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="text" placeholder="用户名" name="username" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="text" placeholder="电子邮箱" name="email" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="text" placeholder="联系电话" name="phone" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="password" placeholder="密码" name="password" id="password1" required="">
-                        </div>
-                        <div class="styled-input">
-                            <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2"
-                                   required="">
-                        </div>
-                        <input type="submit" value="注册">
-                    </form>
-
-                </div>
-            </div>
-        </div>
-        <!-- //Modal content-->
-    </div>
-</div>
-<!-- //注册结束 -->
 <!-- 导航栏模块 -->
 <div class="ban-top">
     <div class="container">
@@ -276,54 +189,47 @@
                 <div class="box-header with-border">
 
                 </div>
-                <form class="" action="${pageContext.request.contextPath}/items/addpublish" enctype="multipart/form-data" method="post">
+                <form class="" action="${pageContext.request.contextPath}/items/addpublish"
+                      enctype="multipart/form-data" method="post">
                     <div class="box-body">
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="商品名" name="name">
+                            <label>选择发布类型</label>
+                            <select class="form-control selectpicker" title="选择出售或求购" name="conditions">
+                                <option value="出售">出售</option>
+                                <option value="求购">求购</option>
+                            </select>
                         </div>
-                        <%--
-                                                <div class="form-group">
-                                                    <select class="form-control selectpicker" title="商品成色" name="quality">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                        <option value="6">6</option>
-                                                        <option value="7">7</option>
-                                                        <option value="8">8</option>
-                                                        <option value="9">9</option>
-                                                        <option value="10">全新</option>
-                                                        <option value="0">其他</option>
-                                                    </select>
-                                                </div>
-                        --%>
+
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="商品数量" name="number">
+                            <label>商品名称</label>
+                            <input class="form-control" type="text" placeholder="" name="name">
                         </div>
-                        <div class="form-group">
-                            <select class="form-control selectpicker" title="选择商品类型" name="kind">
+                        <div class="form-group wtbHidden">
+                            <label id="number">商品数量</label>
+                            <input class="form-control" type="text" placeholder="" name="number">
+                        </div>
+                        <div class="form-group wtbHidden">
+                            <label>选择商品类型</label>
+                            <select class="form-control selectpicker" title="" name="kind">
                                 <c:forEach items="${kindList}" var="kindList">
                                     <option value="${kindList}">${kindList}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon">￥</span>
-                            <input class="form-control" type="text" placeholder="商品单价" name="price">
+                        <div class="form-group">
+                            <label id="price">商品单价</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input class="form-control" type="text" placeholder="" name="price">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>上传商品图片</label>
                             <input class="form-control" type="file" name="imagefile">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="商品描述" name="describes">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control selectpicker" title="选择出售或求购" name="conditions">
-                                <option value="出售">出售</option>
-                                <option value="求购">求购</option>
-                            </select>
+                            <label>商品描述</label>
+                            <input class="form-control" type="text" placeholder="" name="describes">
                         </div>
                     </div>
                     <div class="box-footer">
@@ -379,7 +285,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 <!-- //js-files -->
+<script>
+    $(function () {
+        $('select[name = conditions]').change(function () {
+            let conditions = $(this).val();
+            if (conditions === '出售') {
+                $('.wtbHidden').removeClass('hidden');
+                $('#price').html('商品价格');
+            }
+            if (conditions === '求购') {
+                $('.wtbHidden').addClass('hidden');
+                $('#price').html('期望价格');
 
+            }
+        })
+    })
+</script>
 </body>
 
 </html>

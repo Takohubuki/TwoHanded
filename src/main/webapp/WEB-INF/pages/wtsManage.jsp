@@ -205,7 +205,7 @@
             });
             hideModal('default2');
             $('#page').load('/manage/wtsitem');
-        })
+        });
     });
 
 

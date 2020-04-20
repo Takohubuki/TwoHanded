@@ -1,11 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
-  Date: 2019/6/29
-  Time: 19:15
+  Date: 2020/4/20
+  Time: 18:13
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html lang="zxx">
 
@@ -13,8 +13,8 @@
     <title>商品详情</title>
     <!--/tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
     <script>
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
@@ -58,7 +58,7 @@
                     <span>H</span>RBU
                     <span>S</span>econdHand
                     <span>P</span>latform
-                    <img src="../../images/logo2.png" alt=" ">
+                    <img src="images/logo2.png" alt=" ">
                 </a>
             </h1>
         </div>
@@ -86,8 +86,9 @@
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 注 销</a>
                     </li>
                     <li class="navbar-right">
-                        你好！<a href="${pageContext.request.contextPath}/user/profile" >
-                        <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle" style="width: 20px;height: 20px">
+                        你好！<a href="${pageContext.request.contextPath}/user/profile">
+                        <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle"
+                             style="width: 20px;height: 20px">
                             ${member.username}
                     </a>
                     </li>
@@ -218,7 +219,8 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1"
                                 aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -303,11 +305,10 @@
             <div class="single-infoagile">
                 <ul>
                     <li>
-                        点击量：${item.viewedTimes}
+                        已被浏览过${item.viewedTimes}次
                     </li>
-
                     <li>
-                        库存：${item.number}
+                        已有${item.number}人愿意出售
                     </li>
 
                 </ul>
@@ -332,7 +333,7 @@
                         <input type="hidden" name="itemName" value="${item.name}"/>
                         <input type="hidden" name="publisher" value="${item.publisher}"/>
                         <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
-                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                        <input type="submit" name="wts" class="button" value="我想卖"/>
                     </fieldset>
                     <%--                    </form>--%>
                 </div>
@@ -347,20 +348,22 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-yellow">
                     <div class="widget-user-image">
-                        <img class="img-circle" src="${pageContext.request.contextPath}/images/avatar/${seller.avatar}"
+                        <img class="img-circle"
+                             src="${pageContext.request.contextPath}/images/avatar/${publisher.avatar}"
                              alt="User Avatar">
                     </div>
                     <!-- /.widget-user-image -->
-                    <h3 class="widget-user-username">${seller.username}</h3>
-                    <h5 class="widget-user-desc">卖家</h5>
+                    <h3 class="widget-user-username">${publisher.username}</h3>
+                    <h5 class="widget-user-desc">发布人</h5>
                 </div>
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
-                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${seller.positiveComment}</span></a>
+                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${publisher.positiveComment}</span></a>
                         </li>
-                        <li><a href="#">差评数 <span class="pull-right badge bg-red">${seller.negativeComment}</span></a>
+                        <li><a href="#">差评数 <span
+                                class="pull-right badge bg-red">${publisher.negativeComment}</span></a>
                         </li>
-                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${seller.tradRecordNum}</span></a>
+                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${publisher.tradRecordNum}</span></a>
                         </li>
                     </ul>
                 </div>
@@ -370,54 +373,6 @@
     </div>
 </div>
 <!-- //Single Page -->
-<!-- special offers -->
-<div class="featured-section" id="projects">
-    <div class="container">
-        <!-- tittle heading -->
-        <h3 class="tittle-w3l">为你推荐
-            <span class="heading-style">
-					<i></i>
-					<i></i>
-					<i></i>
-				</span>
-        </h3>
-        <!-- //tittle heading -->
-        <div class="content-bottom-in">
-            <ul id="flexiselDemo1">
-                <c:forEach var="recommand_items" items="${recommand_items}">
-                    <li>
-                        <div class="w3l-specilamk">
-                            <div class="speioffer-agile">
-                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">
-                                    <img src="${pageContext.request.contextPath}/${recommand_items.image}" alt=""
-                                         style="width: 159px;height: 150px">
-                                </a>
-                            </div>
-                            <div class="product-name-w3l">
-                                <h4>
-                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${recommand_items.serialNum}">${recommand_items.name}</a>
-                                </h4>
-                                <div class="w3l-pricehkj">
-                                    <h6>￥${recommand_items.price}</h6>
-                                </div>
-                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                    <fieldset>
-                                        <input type="hidden" name="itemId" value="${recommand_items.serialNum}"/>
-                                        <input type="hidden" name="itemName" value="${recommand_items.name}"/>
-                                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- //special offers -->
-
-
 
 <!-- js-files -->
 <!-- jquery -->

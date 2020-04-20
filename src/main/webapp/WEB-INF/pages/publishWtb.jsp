@@ -36,13 +36,13 @@
                                                     名称
                                                 </th>
                                                 <th class="sorting" tabindex="2" aria-controls="example2">
-                                                    单价
+                                                    期望价格
                                                 </th>
                                                 <th class="sorting" tabindex="3" aria-controls="example2">
-                                                    数量
+                                                    描述
                                                 </th>
                                                 <th class="sorting" tabindex="4" aria-controls="example2">
-                                                    描述
+
                                                 </th>
                                                 <th tabindex="5" aria-controls="example2">
                                                     操作
@@ -63,10 +63,10 @@
                                                             ${myWtb.price}
                                                     </td>
                                                     <td>
-                                                            ${myWtb.quality}
+                                                            ${myWtb.describes}
                                                     </td>
                                                     <td>
-                                                            ${myWtb.describes}
+                                                        已有${myWtb.number}人愿意出售
                                                     </td>
                                                     <td>
                                                         <a href="javascript:updateitem('${myWtb.serialNum}')">修改</a>

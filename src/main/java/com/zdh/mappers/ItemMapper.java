@@ -46,4 +46,6 @@ public interface ItemMapper {
     List<Item> getApprovalItemOfUser(String sid);
 
     Integer countApprovalItemOfUser(String sid);
+
+    void wtsItem(String serialNum);
 }

@@ -10,6 +10,7 @@ import com.zdh.mappers.ItemKindMappers;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
 import com.zdh.service.ItemService;
+import com.zdh.util.Constant;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +43,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemMapper.selectBySerialNum(itemId);
 
         String sellerId = item.getPublisher();
-        Member seller = memberMapper.selectByPrimaryKey(sellerId);
+        Member publisher = memberMapper.selectByPrimaryKey(sellerId);
 
         item.setViewedTimes(item.getViewedTimes() + 1);
         itemMapper.updateItemInfo(item);
@@ -53,11 +54,16 @@ public class ItemServiceImpl implements ItemService {
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
 
-        modelAndView.addObject("item", item);
-        modelAndView.addObject("recommand_items", items);
-        modelAndView.addObject("seller", seller);
-        modelAndView.setViewName("singleItem");
-
+        if ("出售".equals(item.getConditions())) {
+            modelAndView.addObject("item", item);
+            modelAndView.addObject("recommand_items", items);
+            modelAndView.addObject("publisher", publisher);
+            modelAndView.setViewName("wtsInfo");
+        } else if ("求购".equals(item.getConditions())) {
+            modelAndView.addObject("item", item);
+            modelAndView.addObject("publisher", publisher);
+            modelAndView.setViewName("wtbInfo");
+        }
         return modelAndView;
     }
 
@@ -160,7 +166,7 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.updateItemInfo(wtb_item);
 
         modelAndView.addObject("item", wtb_item);
-        modelAndView.setViewName("wtbItem");
+        modelAndView.setViewName("wtbInfo");
         return modelAndView;
     }
 
@@ -224,7 +230,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ModelAndView searchByName(ModelAndView modelAndView, String search) {
-        PageHelper.startPage(1,6);
+        PageHelper.startPage(1, 3);
         List<Item> items = itemMapper.selectByName(search);
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         modelAndView.addObject("itemPageInfo",itemPageInfo);
@@ -337,5 +343,14 @@ public class ItemServiceImpl implements ItemService {
         modelAndView.addObject("itemWaitForAccess", approvalItem);
         modelAndView.setViewName("itemWaitToAccessOfUser");
         return modelAndView;
+    }
+
+    @Override
+    public String wtsItem(String serialNum, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        String sid = member.getSid();
+
+        itemMapper.wtsItem(serialNum);
+        return Constant.SUCCESS_CODE;
     }
 }
