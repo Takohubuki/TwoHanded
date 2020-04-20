@@ -151,6 +151,7 @@ public class ManagerServiceImpl implements ManagerService {
     public String denyInfo(String id, String reason) {
         Item item = new Item();
         item.setSerialNum(id);
+        item.setIsUndercarriage(true);
         item.setUndercarriageReason(reason);
         itemMapper.updateItemInfo(item);
         return "success";

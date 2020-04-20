@@ -231,9 +231,13 @@
 <script src="${pageContext.request.contextPath}/js/modal.js"></script>
 
 <script>
-    function offitem(item_id) {
-        $("#page").load("${pageContext.request.contextPath}/manage/offitem?item_id=" + item_id);
+    let url = '';
+
+    /*
+        function offitem(item_id) {
+            $("#page").load("${pageContext.request.contextPath}/manage/offitem?item_id=" + item_id);
     }
+*/
 
     function shutmember(sid) {
         $("#page").load("${pageContext.request.contextPath}/manage/shutmember?sid=" + sid);

@@ -78,18 +78,20 @@
                                                 </c:if>
                                             </td>
                                             <td>
-                                                ${itemlist.serialNum}
+                                                    ${itemlist.serialNum}
                                             </td>
                                             <td>
-                                                <fmt:formatDate value="${itemlist.publishTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
+                                                <fmt:formatDate value="${itemlist.publishTime}"
+                                                                pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
                                             </td>
                                             <td>
-                                                ${itemlist.publisher}
+                                                    ${itemlist.publisher}
                                             </td>
                                             <td>
-                                                <a href="javascript:offitem(${itemlist.serialNum})" role="button" class="btn btn-primary">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#modal-danger" data-id="${itemlist.serialNum}">
                                                     下架
-                                                </a>
+                                                </button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -108,6 +110,33 @@
     </div>
 
 </section>
+<%--    拒绝弹出框--%>
+<div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确定要下架商品吗？</h4>
+            </div>
+            <div class="modal-body">
+                <form id="denyForm">
+                    输入下架原因：
+                    <input type="text" name="reason"/>
+                    <input type="hidden" id="denyId" name="id" class="hidden"/>
+                </form>
+                <%--                    <p>One fine body&hellip;</p>--%>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-outline" id="denyBtn">提交</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <div class="modal fade" id="modal-default1">
     <div class="modal-dialog">
@@ -154,6 +183,7 @@
 <!-- /.modal -->
 
 <script>
+    url = '/manage/wtsitem';
     $(function () {
         $('#example2').DataTable({
             'paging': true,
@@ -210,5 +240,6 @@
 
 
 </script>
-</body>
+<script src="${pageContext.request.contextPath}/js/approvalPublishInfo.js"></script>
+
 </html>

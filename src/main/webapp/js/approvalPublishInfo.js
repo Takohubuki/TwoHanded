@@ -31,7 +31,7 @@ $(function () {
 
     $('#denyBtn').click(function () {
 
-        let id = $('#accessId').val();
+        let id = $('#denyId').val();
         let reason = $('#denyForm').find('input[name = reason]').val();
         $.ajax({
             url: '/manage/denyInfo',
@@ -41,14 +41,14 @@ $(function () {
                 'reason': reason
             },
             success: function () {
-                alert('信息发布成功');
+                alert('操作成功');
             },
             error: function (result) {
                 console.log(result.responseText);
             }
         });
         hideModal('danger');
-        $('#page').load('/manage/approval');
+        $('#page').load(url);
 
     })
 });

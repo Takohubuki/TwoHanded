@@ -145,9 +145,7 @@
                 <div class="modal-body">
                     <form id="denyForm">
                         输入拒绝原因：
-                        <label>
-                            <input type="text" name="reason"/>
-                        </label>
+                        <input type="text" name="reason"/>
                         <input type="hidden" id="denyId" name="id" class="hidden"/>
                     </form>
                     <%--                    <p>One fine body&hellip;</p>--%>
@@ -165,6 +163,7 @@
 
 </section>
 <script>
+    url = '/manage/approval';
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({

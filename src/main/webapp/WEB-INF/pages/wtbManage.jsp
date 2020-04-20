@@ -26,24 +26,21 @@
                                             商品名称
                                         </th>
                                         <th class="sorting" tabindex="2" aria-controls="example2">
-                                            商品类型
+                                            期望价格
                                         </th>
                                         <th class="sorting" tabindex="3" aria-controls="example2">
-                                            商品单价
+
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            库存量
-                                        </th>
-                                        <th class="sorting" tabindex="5" aria-controls="example2">
                                             是否下架
                                         </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                        <th class="sorting" tabindex="5" aria-controls="example2">
                                             商品编号
                                         </th>
-                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             发布时间
                                         </th>
-                                        <th class="sorting" tabindex="8" aria-controls="example2">
+                                        <th class="sorting" tabindex="7" aria-controls="example2">
                                             发布者
                                         </th>
                                         <th>
@@ -62,17 +59,14 @@
                                                     ${itemlist.name}
                                             </td>
                                             <td>
-                                                    ${itemlist.kind}
-                                            </td>
-                                            <td>
                                                     ${itemlist.price}
                                             </td>
                                             <td>
-                                                    ${itemlist.number}
+                                                    ${itemlist.number}人愿意出售
                                             </td>
                                             <td>
                                                 <c:if test="${itemlist.isUndercarriage == false}">
-                                                    出售中
+                                                    发布中
                                                 </c:if>
                                                 <c:if test="${itemlist.isUndercarriage == true}">
                                                     已下架
@@ -89,10 +83,10 @@
                                                     ${itemlist.publisher}
                                             </td>
                                             <td>
-                                                <a href="javascript:offitem(${itemlist.serialNum})" role="button"
-                                                   class="btn btn-primary">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#modal-danger" data-id="${itemlist.serialNum}">
                                                     下架
-                                                </a>
+                                                </button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -111,8 +105,36 @@
     </div>
 
 </section>
+<%--    拒绝弹出框--%>
+<div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确定要下架商品吗？</h4>
+            </div>
+            <div class="modal-body">
+                <form id="denyForm">
+                    输入下架原因：
+                    <input type="text" name="reason"/>
+                    <input type="hidden" id="denyId" name="id" class="hidden"/>
+                </form>
+                <%--                    <p>One fine body&hellip;</p>--%>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-outline" id="denyBtn">提交</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 <script>
+    url = '/manage/wtbitem';
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
@@ -127,5 +149,6 @@
     });
 
 </script>
-</body>
+<script src="${pageContext.request.contextPath}/js/approvalPublishInfo.js"></script>
+
 </html>
