@@ -110,7 +110,7 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(1,6);
         Page<Item> wtsAllByTime = itemMapper.selectWtbAllByTime();
         PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
-        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.addObject("wtbPageInfo", itemPageInfo);
 
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
@@ -124,7 +124,7 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(1,6);
         Page<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
         PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
-        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.addObject("wtsPageInfo", itemPageInfo);
 
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
@@ -135,25 +135,41 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request) {
-        PageHelper.startPage(pageNum,6);
+    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request, String searchName) {
         PageInfo<Item> itemPageInfo = null;
-        if (request.getHeader("Referer").contains("listwtsbytime")){
+        if (request.getHeader("Referer").contains("listwtsbytime")) {
+
+            PageHelper.startPage(pageNum, 6);
             Page<Item> itemPage = itemMapper.selectWtsAllByTime();
             itemPageInfo = new PageInfo<>(itemPage);
-        }else if (request.getHeader("Referer").contains("searchbyname")){
-            String search = request.getParameter("search");
-            List<Item> items = itemMapper.selectByName(search);
-            itemPageInfo = new PageInfo<>(items);
-        }else if (request.getHeader("Referer").contains("searchbykind")){
+
+        } else if (request.getHeader("Referer").contains("searchbyname")) {
+            String uri = request.getHeader("Referer");
+
+            PageHelper.startPage(pageNum, 3);
+            List<Item> wtsByName = itemMapper.selectWtsByName(searchName);
+
+            PageHelper.startPage(pageNum, 3);
+            List<Item> wtbByName = itemMapper.selectWtbByName(searchName);
+
+            itemPageInfo = new PageInfo<>(wtsByName);
+            PageInfo<Item> wtbPageInfo = new PageInfo<>(wtbByName);
+            modelAndView.addObject("wtbPageInfo", wtbPageInfo);
+
+        }else if (request.getHeader("Referer").contains("searchbykind")) {
+
+            PageHelper.startPage(pageNum, 6);
             String kind = request.getParameter("kind");
             List<Item> items = itemMapper.selectByKind(kind);
             itemPageInfo = new PageInfo<>(items);
-        }else if (request.getHeader("Referer").contains("listwtbbytime")){
+
+        }else if (request.getHeader("Referer").contains("listwtbbytime")) {
+
+            PageHelper.startPage(pageNum, 6);
             Page<Item> items = itemMapper.selectWtbAllByTime();
             itemPageInfo = new PageInfo<>(items);
         }
-        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.addObject("wtsPageInfo", itemPageInfo);
         modelAndView.setViewName("itemListPage");
         return modelAndView;
     }
@@ -231,9 +247,17 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ModelAndView searchByName(ModelAndView modelAndView, String search) {
         PageHelper.startPage(1, 3);
-        List<Item> items = itemMapper.selectByName(search);
-        PageInfo<Item> itemPageInfo = new PageInfo<>(items);
-        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        List<Item> wtsByName = itemMapper.selectWtsByName(search);
+
+        PageHelper.startPage(1, 3);
+        List<Item> wtbByName = itemMapper.selectWtbByName(search);
+
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtsByName);
+        PageInfo<Item> wtbPageInfo = new PageInfo<>(wtbByName);
+
+        modelAndView.addObject("wtsPageInfo", itemPageInfo);
+        modelAndView.addObject("wtbPageInfo", wtbPageInfo);
+
         modelAndView.setViewName("itemList");
 
         List<String> kindList = itemKindMappers.getKindList();
@@ -248,7 +272,7 @@ public class ItemServiceImpl implements ItemService {
         PageHelper.startPage(1,6);
         List<Item> items = itemMapper.selectByKind(kind);
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
-        modelAndView.addObject("itemPageInfo",itemPageInfo);
+        modelAndView.addObject("wtsPageInfo", itemPageInfo);
         modelAndView.setViewName("itemList");
 
         List<String> kindList = itemKindMappers.getKindList();

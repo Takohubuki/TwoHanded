@@ -48,4 +48,8 @@ public interface ItemMapper {
     Integer countApprovalItemOfUser(String sid);
 
     void wtsItem(String serialNum);
+
+    List<Item> selectWtsByName(String name);
+
+    List<Item> selectWtbByName(String name);
 }

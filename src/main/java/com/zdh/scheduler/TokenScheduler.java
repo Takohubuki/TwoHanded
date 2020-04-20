@@ -20,25 +20,26 @@ public class TokenScheduler {
     @Resource
     private TokenMapper tokenMapper;
 
-    @Scheduled(cron = "0 0 0/12 * * ?")
-    public void handleExpiredToken() {
+//    每隔12小时检查一次
+@Scheduled(cron = "0 0 0/12 * * ?")
+public void handleExpiredToken() {
 
-        logger.info("开始处理过期token");
+    logger.info("开始处理过期token");
 
-        now = new Date();
-        boolean flag = false;
+    now = new Date();
+    boolean flag = false;
 
-        List<Token> tokenList = tokenMapper.getTokenByStatus("U");
-        for (Token token : tokenList) {
-            if (token.getExpireDate().before(now)) {
-                token.setStatus("E");
-                flag = true;
-            }
+    List<Token> tokenList = tokenMapper.getTokenByStatus("U");
+    for (Token token : tokenList) {
+        if (token.getExpireDate().before(now)) {
+            token.setStatus("E");
+            flag = true;
         }
-        if (flag) {
-            tokenMapper.batchUpdateStatus(tokenList);
-        }
-
-        logger.info("处理完成");
     }
+    if (flag) {
+        tokenMapper.batchUpdateStatus(tokenList);
+    }
+
+    logger.info("处理完成");
+}
 }

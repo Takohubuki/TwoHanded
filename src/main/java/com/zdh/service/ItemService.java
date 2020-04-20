@@ -59,12 +59,14 @@ public interface ItemService {
 
     /**
      * 商品信息分页列表
+     *
      * @param modelAndView
      * @param pageNum
      * @param request
+     * @param searchName
      * @return
      */
-    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request);
+    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request, String searchName);
 
     /**
      * 获取求购信息

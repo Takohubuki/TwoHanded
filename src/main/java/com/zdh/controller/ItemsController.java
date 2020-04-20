@@ -3,8 +3,8 @@ package com.zdh.controller;
 import com.zdh.bean.Item;
 import com.zdh.service.ItemKindService;
 import com.zdh.service.ItemService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,14 +51,15 @@ public class ItemsController {
 
     /**
      * 商品列表分页
+     *
      * @param modelAndView
      * @param pageNum
      * @param request
      * @return
      */
-    @RequestMapping("/itempage")
-    public ModelAndView itemPage(ModelAndView modelAndView, @Param("pageNum")int pageNum, HttpServletRequest request){
-        return itemService.itemPage(modelAndView, pageNum, request);
+    @RequestMapping(path = "/itempage", method = RequestMethod.GET)
+    public ModelAndView itemPage(ModelAndView modelAndView, @RequestParam(value = "pageNum") int pageNum, @RequestParam(value = "search", required = false) String searchName, HttpServletRequest request) {
+        return itemService.itemPage(modelAndView, pageNum, request, searchName);
     }
 
     /**

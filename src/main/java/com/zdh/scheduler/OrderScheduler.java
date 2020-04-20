@@ -27,6 +27,7 @@ public class OrderScheduler {
     @Resource
     private ItemService itemService;
 
+    //每隔30分钟检查一次
     @Scheduled(cron = "0 0/30 * * * ?")
     public void cancelOrder() {
 

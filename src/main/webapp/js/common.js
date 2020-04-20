@@ -1,3 +1,4 @@
+let searchName;
 $(function () {
     $('#password1').on('change', function () {
         validatePassword();
@@ -5,7 +6,10 @@ $(function () {
     $('#password2').on('change', function () {
         validatePassword();
     });
-
+    $('#searchBtn').click(function () {
+        searchName = $('#searchBar').val();
+        window.sessionStorage.setItem('searchName', searchName);
+    })
 });
 
 function validatePassword() {

@@ -235,8 +235,11 @@
         from item
         where conditions='求购' and name = #{itemname} and is_undercarriage='0'
     </select>
-    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select * from item where name like'%'#{name}'%'
+    <select id="selectWtsByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from item where name like concat('%', #{name}, '%') and is_undercarriage = '0' and conditions = '出售'
+    </select>
+    <select id="selectWtbByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from item where name like concat('%', #{name}, '%') and is_undercarriage = '0' and conditions = '求购'
     </select>
     <select id="recommandSameKind" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from item where kind = #{kind} and conditions = '出售' and is_undercarriage = '0' limit 6

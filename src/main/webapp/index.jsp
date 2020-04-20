@@ -68,9 +68,10 @@
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 注 销</a>
                     </li>
                     <li class="navbar-right">
-                        你好！<a href="${pageContext.request.contextPath}/user/profile" >
-                                <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle" style="width: 20px;height: 20px">
-                                ${member.username}
+                        你好！<a href="${pageContext.request.contextPath}/user/profile">
+                        <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle"
+                             style="width: 20px;height: 20px">
+                            ${member.username}
                     </a>
                     </li>
 
@@ -78,9 +79,9 @@
             </ul>
             <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="${pageContext.request.contextPath}/items/searchbyname" method="post">
-                    <input name="search" type="search" placeholder="想搜点什么？" required="">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                <form action="${pageContext.request.contextPath}/items/searchbyname" method="get">
+                    <input name="search" type="search" placeholder="想搜点什么？" required="" id="searchBar">
+                    <button type="submit" class="btn btn-default" aria-label="Left Align" id="searchBtn">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
                 </form>
