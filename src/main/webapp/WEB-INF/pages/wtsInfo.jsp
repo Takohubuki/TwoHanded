@@ -347,20 +347,22 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-yellow">
                     <div class="widget-user-image">
-                        <img class="img-circle" src="${pageContext.request.contextPath}/images/avatar/${seller.avatar}"
+                        <img class="img-circle"
+                             src="${pageContext.request.contextPath}/images/avatar/${publisher.avatar}"
                              alt="User Avatar">
                     </div>
                     <!-- /.widget-user-image -->
-                    <h3 class="widget-user-username">${seller.username}</h3>
+                    <h3 class="widget-user-username">${publisher.username}</h3>
                     <h5 class="widget-user-desc">卖家</h5>
                 </div>
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
-                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${seller.positiveComment}</span></a>
+                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${publisher.positiveComment}</span></a>
                         </li>
-                        <li><a href="#">差评数 <span class="pull-right badge bg-red">${seller.negativeComment}</span></a>
+                        <li><a href="#">差评数 <span
+                                class="pull-right badge bg-red">${publisher.negativeComment}</span></a>
                         </li>
-                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${seller.tradRecordNum}</span></a>
+                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${publisher.tradRecordNum}</span></a>
                         </li>
                     </ul>
                 </div>
