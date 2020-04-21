@@ -116,4 +116,6 @@ public interface MemberService {
     ModelAndView userCenter(ModelAndView modelAndView, HttpSession session);
 
     ModelAndView mySoldOut(ModelAndView modelAndView, HttpSession session);
+
+    String comment(HttpSession session, String comment, String itemId, String orderId);
 }

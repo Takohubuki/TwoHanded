@@ -238,6 +238,7 @@
 
 <script type="text/javascript">
     let orderId;
+    let itemId;
 
     function offMyItem(item_id) {
         $("#page").load("${pageContext.request.contextPath}/user/offmyitem?item_id=" + item_id);

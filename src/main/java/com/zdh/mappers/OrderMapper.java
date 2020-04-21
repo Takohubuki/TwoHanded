@@ -1,6 +1,7 @@
 package com.zdh.mappers;
 
 import com.zdh.bean.Order;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public interface OrderMapper {
 
     void updatePayMethod(Map map);
 
-    void cfmGetItem(String orderId);
+    void cfmGetItem(@Param("orderId") String orderId, @Param("itemId") String itemId);
 
     List<Order> selectOrderAndItems(String orderId);
 
@@ -37,4 +38,6 @@ public interface OrderMapper {
     List<Order> getUnpaidOrder();
 
     List<Order> getUserSoldOut(String sid);
+
+    void commentOrder(@Param("orderId") String orderId, @Param("itemId") String itemId);
 }

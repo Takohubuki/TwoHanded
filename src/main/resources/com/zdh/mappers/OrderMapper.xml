@@ -245,10 +245,13 @@
     select * from item where serial_num = #{itemId}
   </select>
   <update id="cfmGetItem" parameterType="java.lang.String">
-    update `order` set is_received = '1', update_time = now() where order_id = #{orderId}
+    update `order` set is_received = '1', update_time = now() where order_id = #{orderId} and item_id = #{itemId}
   </update>
   <update id="updatePayStatus" parameterType="java.lang.String">
     update `order` set is_paid = '1', update_time = now() where order_id = #{orderId}
+  </update>
+  <update id="commentOrder" parameterType="java.lang.String">
+    update `order` set is_checked = '1', update_time = now() where order_id = #{orderId} and item_id = #{itemId}
   </update>
   <update id="batchCancelOrder" parameterType="java.util.List">
     <foreach collection="list" item="orders" separator=";">

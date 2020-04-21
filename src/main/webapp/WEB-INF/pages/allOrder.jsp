@@ -99,19 +99,34 @@
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-primary operation"
-                                                            value="${order_list.orderId}" onclick="getOrderId(this)"
+                                                            value="${order_list.orderId}" itemid="${order_list.itemId}"
+                                                            onclick="getOrderId(this)"
                                                             data-toggle="modal" data-target="#modal-info1">确认收货
                                                     </button>
                                                 </td>
                                             </c:if>
-                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false}">
+                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false && order_list.isChecked == false}">
                                                 <td>
                                                     已收货
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-primary ">评价</button>
+                                                    <button class="btn btn-primary commentBtn"
+                                                            value="${order_list.orderId}" itemid="${order_list.itemId}"
+                                                            data-toggle="modal" data-target="#modal-info3"
+                                                            onclick="getOrderId(this)">评价
+                                                    </button>
                                                 </td>
                                             </c:if>
+
+                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false && order_list.isChecked == true}">
+                                                <td>
+                                                    已评价
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </c:if>
+
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -198,8 +213,40 @@
 </div>
 <!-- /.modal -->
 
-<script>
+<%--    同意弹出框--%>
+<div class="modal modal-info fade" id="modal-info3" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">评价卖家</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="commentDiv">
+                    <label>
+                        <input type="radio" value="good" class="" name="comment"/>
+                        好评
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" value="bad" class="" name="comment"/>
+                        差评
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="submitComment">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
+<script>
     $(function () {
         $('#example1').DataTable();
         $('#example2').DataTable({
@@ -228,7 +275,8 @@
                 type: 'post',
                 async: false,
                 data: {
-                    'orderId': orderId
+                    'orderId': orderId,
+                    'itemId': itemId
                 },
                 success: function (result) {
                 },
@@ -257,10 +305,36 @@
             });
             hideModal('danger');
             $('#page').load('/order/myOrder');
+        });
+
+        $('#submitComment').click(function () {
+            let comment = $('#commentDiv').find('input[name = comment]:checked').val();
+            console.log(comment);
+            console.log(orderId);
+            $.ajax({
+                url: '/user/comment',
+                async: false,
+                data: {
+                    'itemId': itemId,
+                    'orderId': orderId,
+                    'comment': comment
+                },
+                success: function (result) {
+                    if (result === '0') {
+                        alert('评价成功');
+                    }
+                },
+                error: function (result) {
+                    console.log(result)
+                }
+            });
+            hideModal('info3');
+            $('#page').load('/order/myOrder');
         })
     });
 
     function getOrderId(cfmBtn) {
+        itemId = $(cfmBtn).attr('itemid');
         orderId = cfmBtn.value;
         $('#orderToPay').val(orderId);
     }

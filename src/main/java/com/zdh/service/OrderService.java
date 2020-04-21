@@ -25,7 +25,7 @@ public interface OrderService {
 
     String delCart(String id, HttpSession session);
 
-    void cfmGetItem(String orderId);
+    void cfmGetItem(String orderId, String itemId);
 
     ModelAndView payLater(String orderId, ModelAndView modelAndView);
 

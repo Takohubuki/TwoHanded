@@ -61,8 +61,8 @@ public class OrderController {
     }
 
     @RequestMapping("/cfmGetItem")
-    public void cfmGetItem(String orderId) {
-        orderService.cfmGetItem(orderId);
+    public void cfmGetItem(String orderId, String itemId) {
+        orderService.cfmGetItem(orderId, itemId);
     }
 
     @RequestMapping("/payLater")

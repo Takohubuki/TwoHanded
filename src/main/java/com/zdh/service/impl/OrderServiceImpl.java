@@ -233,7 +233,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void cfmGetItem(String orderId) {
+    public void cfmGetItem(String orderId, String itemId) {
         List<String> sellerList = new ArrayList<>();
         List<Order> orderByOrderId = orderMapper.selectOrderAndItems(orderId);
         for (Order order : orderByOrderId) {
@@ -245,7 +245,7 @@ public class OrderServiceImpl implements OrderService {
             noticeService.newNotice(text, order.getItem().getPublisher());
         }
         memberMapper.updateTradRecord(sellerList);
-        orderMapper.cfmGetItem(orderId);
+        orderMapper.cfmGetItem(orderId, itemId);
     }
 
     @Override
@@ -292,7 +292,7 @@ public class OrderServiceImpl implements OrderService {
         new_order.setItemNum(itemNum);
         new_order.setOrderId(order_id);
         new_order.setIsCanceled(false);
-        new_order.setIsChecked(true);
+        new_order.setIsChecked(false);
         new_order.setIsPaid(false);
         new_order.setIsReceived(false);
         return new_order;

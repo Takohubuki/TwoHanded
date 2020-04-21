@@ -51,4 +51,9 @@ public class NoticeServiceImpl implements NoticeService {
 
         noticeMapper.insertSelective(notice);
     }
+
+    @Override
+    public List<Notice> getNoticeBySidAndStatus(Map param) {
+        return noticeMapper.getMyNotice(param);
+    }
 }

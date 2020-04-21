@@ -164,7 +164,6 @@
 
         })
     });
-    let itemId;
 
     function getItemId(btn) {
         itemId = btn.value;

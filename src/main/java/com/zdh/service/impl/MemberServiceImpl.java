@@ -5,6 +5,7 @@ import com.auth0.jwt.interfaces.Claim;
 import com.zdh.bean.*;
 import com.zdh.mappers.*;
 import com.zdh.service.MemberService;
+import com.zdh.service.NoticeService;
 import com.zdh.util.Constant;
 import com.zdh.util.PasswordUtils;
 import com.zdh.util.TimeUtils;
@@ -54,7 +55,7 @@ public class MemberServiceImpl implements MemberService {
     private OrderMapper orderMapper;
 
     @Resource
-    private NoticeMapper noticeMapper;
+    private NoticeService noticeService;
 
     private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
@@ -376,7 +377,7 @@ public class MemberServiceImpl implements MemberService {
         Map param = new HashMap();
         param.put("status", "U");
         param.put("receiver", member.getSid());
-        List<Notice> noticesList = noticeMapper.getMyNotice(param);
+        List<Notice> noticesList = noticeService.getNoticeBySidAndStatus(param);
 
         modelAndView.addObject("unreadNotice", noticesList);
         modelAndView.addObject("itemsWaitForAccess", countApprovalItemOfUser);
@@ -393,6 +394,33 @@ public class MemberServiceImpl implements MemberService {
         modelAndView.addObject("soldList", soldList);
         modelAndView.setViewName("mySoldOut");
         return modelAndView;
+    }
+
+    @Override
+    public String comment(HttpSession session, String comment, String itemId, String orderId) {
+        //通知卖家
+        Member member = (Member) session.getAttribute("member");
+        String username = member.getUsername();
+
+        String text = "";
+        Item item = itemMapper.selectBySerialNum(itemId);
+        String publisher = item.getPublisher();
+
+        if ("good".equals(comment)) {
+
+            text = "收到来自 " + username + " 的好评";
+            memberMapper.goodComment(publisher);
+
+        } else if ("bad".equals(comment)) {
+
+            text = "收到来自 " + username + " 的差评";
+            memberMapper.badComment(publisher);
+        }
+
+        orderMapper.commentOrder(orderId, itemId);
+
+        noticeService.newNotice(text, publisher);
+        return Constant.SUCCESS_CODE;
     }
 
 }

@@ -33,4 +33,8 @@ public interface MemberMapper {
     List<Member> selectAllMember();
 
     void updateTradRecord(List<String> sellerList);
+
+    void goodComment(String sid);
+
+    void badComment(String sid);
 }

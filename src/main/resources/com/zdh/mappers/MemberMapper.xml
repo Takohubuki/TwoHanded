@@ -268,5 +268,10 @@
       update member set trad_record_num = trad_record_num + 1 where sid = #{sellerList}
     </foreach>
   </update>
-
+  <update id="goodComment" parameterType="java.lang.String">
+    update member set positive_comment = positive_comment + 1 where sid = #{sid}
+  </update>
+  <update id="badComment" parameterType="java.lang.String">
+    update member set negative_comment = negative_comment + 1 where sid = #{sid}
+  </update>
 </mapper>

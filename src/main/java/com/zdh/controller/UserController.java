@@ -194,4 +194,9 @@ public class UserController {
     public ModelAndView noticeHistory(HttpSession session) {
         return noticeService.noticeHistory(new ModelAndView(), session);
     }
+
+    @RequestMapping("/comment")
+    public String comment(HttpSession session, String comment, String itemId, String orderId) {
+        return memberService.comment(session, comment, itemId, orderId);
+    }
 }
