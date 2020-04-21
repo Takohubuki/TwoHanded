@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdh.mappers.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.zdh.bean.Member">
+    <id column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="is_active" jdbcType="BIT" property="isActive"/>
+    <result column="signin_time" jdbcType="TIMESTAMP" property="signinTime"/>
+    <result column="recent_login" jdbcType="TIMESTAMP" property="recentLogin"/>
+    <result column="positive_comment" jdbcType="INTEGER" property="positiveComment"/>
+    <result column="negative_comment" jdbcType="INTEGER" property="negativeComment"/>
+    <result column="trad_record_num" jdbcType="INTEGER" property="tradRecordNum"/>
+  </resultMap>
+
+  <resultMap id="ItemList" type="com.zdh.bean.Item">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="serial_num" jdbcType="VARCHAR" property="serialNum"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="price" jdbcType="INTEGER" property="price"/>
+    <result column="number" jdbcType="INTEGER" property="number"/>
+    <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+    <result column="describes" jdbcType="VARCHAR" property="describes"/>
+    <result column="image" jdbcType="VARCHAR" property="image"/>
+    <result column="kind" jdbcType="VARCHAR" property="kind"/>
+    <result column="quality" jdbcType="INTEGER" property="quality"/>
+    <result column="conditions" jdbcType="VARCHAR" property="conditions"/>
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage"/>
+    <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
+    <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    sid, username, `password`, email, `name`, avatar, phone, is_active, signin_time,
+    recent_login, positive_comment, negative_comment, trad_record_num
+  </sql>
+
+  <insert id="insert" parameterType="com.zdh.bean.Member">
+    insert into member (sid, username, `password`, 
+      email, `name`, avatar,
+      phone, is_active, signin_time,
+      recent_login, positive_comment, negative_comment,
+      trad_record_num)
+    values (#{sid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{isActive,jdbcType=BIT}, #{signinTime,jdbcType=TIMESTAMP},
+      #{recentLogin,jdbcType=TIMESTAMP}, #{positiveComment,jdbcType=INTEGER}, #{negativeComment,jdbcType=INTEGER},
+      #{tradRecordNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zdh.bean.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="isActive != null">
+        is_active,
+      </if>
+      <if test="signinTime != null">
+        signin_time,
+      </if>
+      <if test="recentLogin != null">
+        recent_login,
+      </if>
+      <if test="positiveComment != null">
+        positive_comment,
+      </if>
+      <if test="negativeComment != null">
+        negative_comment,
+      </if>
+      <if test="tradRecordNum != null">
+        trad_record_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        #{isActive,jdbcType=BIT},
+      </if>
+      <if test="signinTime != null">
+        #{signinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recentLogin != null">
+        #{recentLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positiveComment != null">
+        #{positiveComment,jdbcType=INTEGER},
+      </if>
+      <if test="negativeComment != null">
+        #{negativeComment,jdbcType=INTEGER},
+      </if>
+      <if test="tradRecordNum != null">
+        #{tradRecordNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Member">
+    update member
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="signinTime != null">
+        signin_time = #{signinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recentLogin != null">
+        recent_login = #{recentLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positiveComment != null">
+        positive_comment = #{positiveComment,jdbcType=INTEGER},
+      </if>
+      <if test="negativeComment != null">
+        negative_comment = #{negativeComment,jdbcType=INTEGER},
+      </if>
+      <if test="tradRecordNum != null">
+        trad_record_num = #{tradRecordNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zdh.bean.Member">
+    update member
+    set username = #{username,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      is_active = #{isActive,jdbcType=BIT},
+      signin_time = #{signinTime,jdbcType=TIMESTAMP},
+      recent_login = #{recentLogin,jdbcType=TIMESTAMP},
+      positive_comment = #{positiveComment,jdbcType=INTEGER},
+      negative_comment = #{negativeComment,jdbcType=INTEGER},
+      trad_record_num = #{tradRecordNum,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where sid = #{sid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from member where username = #{username}
+    </select>
+  <select id="selectMyWts" parameterType="java.lang.String" resultMap="ItemList">
+        select * from item where publisher = #{sid} and conditions = '出售' and undercarriage_reason != '待审核' order by update_time desc
+    </select>
+  <select id="selectMyWtb" parameterType="java.lang.String" resultMap="ItemList">
+        select * from item where publisher = #{sid} and conditions = '求购' and undercarriage_reason != '待审核' order by update_time desc
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from member
+    where sid = #{sid,jdbcType=VARCHAR}
+  </delete>
+  <update id="updateProfile" parameterType="com.zdh.bean.Member">
+    update member
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isActive != null">
+        is_active = #{isActive,jdbcType=BIT},
+      </if>
+      <if test="signinTime != null">
+        signin_time = #{signinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recentLogin != null">
+        recent_login = #{recentLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="positiveComment != null">
+        positive_comment = #{positiveComment,jdbcType=INTEGER},
+      </if>
+      <if test="negativeComment != null">
+        negative_comment = #{negativeComment,jdbcType=INTEGER},
+      </if>
+      <if test="tradRecordNum != null">
+        trad_record_num = #{tradRecordNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateRecentLogin" parameterType="com.zdh.bean.Member">
+    update member set recent_login = #{recentLogin} where sid = #{sid};
+  </update>
+  <select id="selectAllMember" resultMap="BaseResultMap">
+    select * from member;
+  </select>
+  <update id="updateTradRecord" parameterType="java.util.List">
+    <foreach collection="list" item="sellerList" separator=";">
+      update member set trad_record_num = trad_record_num + 1 where sid = #{sellerList}
+    </foreach>
+  </update>
+
+</mapper>

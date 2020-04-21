@@ -52,4 +52,6 @@ public interface ItemMapper {
     List<Item> selectWtsByName(String name);
 
     List<Item> selectWtbByName(String name);
+
+    List<Item> select3MostViewedWts();
 }

@@ -240,7 +240,6 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1" class=""></li>
         <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-        <li data-target="#myCarousel" data-slide-to="3" class=""></li>
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
@@ -250,45 +249,35 @@
                         <span>精选</span>
                     </h3>
                     <p>
-                        <span>10%</span> Cashback</p>
-                    <a class="button2" href="#">查看详情 </a>
+                        ${mostViewed.get(0).name}</p>
+                    <a class="button2"
+                       href="${pageContext.request.contextPath}/items/singleitem?itemId=${mostViewed.get(0).serialNum}">查看详情 </a>
                 </div>
             </div>
         </div>
         <div class="item item2">
             <div class="container">
                 <div class="carousel-caption">
-                    <h3>Healthy
-                        <span>Saving</span>
+                    <h3>大家
+                        <span>都在看</span>
                     </h3>
-                    <p>Get Upto
-                        <span>30%</span> Off</p>
-                    <a class="button2" href="#">查看详情 </a>
+                    <p>被点击
+                        <span>${mostViewed.get(1).viewedTimes}</span> 次</p>
+                    <a class="button2"
+                       href="${pageContext.request.contextPath}/items/singleitem?itemId=${mostViewed.get(1).serialNum}">查看详情 </a>
                 </div>
             </div>
         </div>
         <div class="item item3">
             <div class="container">
                 <div class="carousel-caption">
-                    <h3>Big
-                        <span>Deal</span>
+                    <h3>热门
+                        <span>商品</span>
                     </h3>
-                    <p>Get Best Offer Upto
-                        <span>20%</span>
+                    <p>${mostViewed.get(2).name}
                     </p>
-                    <a class="button2" href="#">查看详情 </a>
-                </div>
-            </div>
-        </div>
-        <div class="item item4">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h3>大家
-                        <span>都在看</span>
-                    </h3>
-                    <p>Get Now
-                        <span>40%</span> Discount</p>
-                    <a class="button2" href="#">查看详情</a>
+                    <a class="button2"
+                       href="${pageContext.request.contextPath}/items/singleitem?itemId=${mostViewed.get(2).serialNum}">查看详情 </a>
                 </div>
             </div>
         </div>

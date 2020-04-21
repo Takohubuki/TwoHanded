@@ -1,0 +1,223 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"package install",
+				"Install Package Control"
+			],
+			[
+				"pac",
+				"Install Package Control"
+			],
+			[
+				"packa",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 157.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/java/payment-center/payment-center-demo/src/main/resources/aisystem.ini",
+		"/D/java/TwoHanded/src/main/resource/application.xml",
+		"/F/qq/932421804/FileRecv/aisystem.ini",
+		"/D/java/payment-center/manage和view分环境配置.md",
+		"/F/qq/932421804/FileRecv/appframe_configtool/AIConfig.xml",
+		"/F/qq/932421804/FileRecv/fasong/StudentDAOImpl.java",
+		"/F/qq/932421804/FileRecv/fasong/StudentPractice.jsp",
+		"/F/qq/932421804/FileRecv/fasong/ActionStudent.java",
+		"/F/qq/932421804/FileRecv/fasong/ISrAllConfigSV.java",
+		"/F/qq/932421804/FileRecv/fasong/IStudentDAO.java",
+		"/F/qq/932421804/FileRecv/fasong/SrAllConfigSVImpl.java",
+		"/F/qq/932421804/FileRecv/appframe_configtool/system/service/defaults.xml",
+		"/F/qq/932421804/FileRecv/appframe_configtool (2)/appframe_configtool/appframe_configtool/aisystem.ini",
+		"/F/Changzhi/WINDOWS.X64_180000_db_home/network/admin/tnsnames.ora",
+		"/D/ss节点.txt",
+		"/D/java/CountPeople/全依赖.txt",
+		"/F/Changzhi/WINDOWS.X64_180000_db_home/network/admin/sqlnet.ora",
+		"/F/Changzhi/WINDOWS.X64_180000_db_home/admin/tnsnames.ora",
+		"/F/qq/932421804/FileRecv/appframe/AppFramework数据库访问组件_代码生成插件_V1.1/Config/Sample.DaoGen",
+		"/F/Changzhi/twts_173_carbon/twts_173_carbon/dist/1.html",
+		"/F/Changzhi/twts_173_carbon/twts_173_carbon/dist/tables.html",
+		"/F/Changzhi/twts_173_carbon/twts_173_carbon/dist/index.html",
+		"/F/Changzhi/AdminLTE-2.4.12/AdminLTE-2.4.12/pages/tables/data.html",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/D/迅雷下载/cpts_1691_dcu/cpts_1691_dcu/single.html",
+		"/D/tomcat-8.5.41/apache-tomcat-8.5.41/webapps/ROOT/css/fontawesome-all.css",
+		"/F/Changzhi/twts_173_carbon/twts_173_carbon/dist/login.html",
+		"/D/迅雷下载/cpts_1691_dcu/cpts_1691_dcu/checkout.html",
+		"/D/tomcat-8.5.41/apache-tomcat-8.5.41/conf/server.xml",
+		"/D/IntelliJ IDEA 2018.3.5/bin/idea.exe.vmoptions",
+		"/D/IntelliJ IDEA 2018.3.5/bin/idea64.exe.vmoptions",
+		"/D/tomcat-8.5.41/apache-tomcat-8.5.41/conf/logging.properties",
+		"/F/Changzhi/AdminLTE-2.4.12/AdminLTE-2.4.12/pages/examples/profile.html",
+		"/F/Changzhi/twts_173_carbon/twts_173_carbon/dist/css/styles.css",
+		"/D/java/高级框架复习.txt",
+		"/E/BaiduYunDownload/照片/src/mian.iyu",
+		"/G/Readme.txt",
+		"/C/Users/Tako/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Tako/AppData/Roaming/Sublime Text 3/Packages/User/Localization.sublime-settings"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "TwoHanded.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 234.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

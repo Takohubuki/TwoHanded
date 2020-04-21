@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TwoHanded">
+    <output-path>$PROJECT_DIR$/out/artifacts/TwoHanded</output-path>
+    <root id="archive" name="TwoHanded_war.war">
+      <element id="artifact" artifact-name="TwoHanded:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="file-copy" path="$PROJECT_DIR$/remoteProperities/application.xml" />
+          <element id="file-copy" path="$PROJECT_DIR$/remoteProperities/log4j2.xml" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

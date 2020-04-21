@@ -71,13 +71,16 @@ public class ItemServiceImpl implements ItemService {
     public ModelAndView getIndexItem(ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
 
         List<Item> wts_item3 = itemMapper.select3WtsItemByTime();
-        redirectAttributes.addFlashAttribute("wts_item",wts_item3);
+        redirectAttributes.addFlashAttribute("wts_item", wts_item3);
 
         List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
-        redirectAttributes.addFlashAttribute("wtb_item3",wtb_item3);
+        redirectAttributes.addFlashAttribute("wtb_item3", wtb_item3);
+
+        List<Item> mostViewed = itemMapper.select3MostViewedWts();
+        redirectAttributes.addFlashAttribute("mostViewed", mostViewed);
 
         List<String> kindList = itemKindMappers.getKindList();
-        redirectAttributes.addFlashAttribute("kindList",kindList);
+        redirectAttributes.addFlashAttribute("kindList", kindList);
 
         modelAndView.setViewName("redirect:/");
         return modelAndView;
@@ -87,14 +90,16 @@ public class ItemServiceImpl implements ItemService {
     public void getIndexItem(ServletContext servletContext) {
 
         List<Item> wts_item3 = itemMapper.select3WtsItemByTime();
-        servletContext.setAttribute("wts_item",wts_item3);
+        servletContext.setAttribute("wts_item", wts_item3);
 
         List<Item> wtb_item3 = itemMapper.select3WtbItemByTime();
-        servletContext.setAttribute("wtb_item",wtb_item3);
+        servletContext.setAttribute("wtb_item", wtb_item3);
+
+        List<Item> mostViewed = itemMapper.select3MostViewedWts();
+        servletContext.setAttribute("mostViewed", mostViewed);
 
         List<String> kindList = itemKindMappers.getKindList();
         servletContext.setAttribute("kindList", kindList);
-
 
     }
 
