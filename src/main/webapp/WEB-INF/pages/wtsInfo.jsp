@@ -26,13 +26,12 @@
     </script>
     <!--//tags -->
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="${pageContext.request.contextPath}/css/AdminLTE.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
     <!--pop-up-box-->
     <link href="${pageContext.request.contextPath}/css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
     <!--//pop-up-box-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminLTE.css">
-
     <!-- price range -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui1.css">
     <!-- flexslider -->
@@ -58,7 +57,7 @@
                     <span>H</span>RBU
                     <span>S</span>econdHand
                     <span>P</span>latform
-                    <img src="images/logo2.png" alt=" ">
+                    <img src="${pageContext.request.contextPath}/images/logo2.png" alt=" ">
                 </a>
             </h1>
         </div>
