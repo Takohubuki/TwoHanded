@@ -53,6 +53,9 @@ public class MemberServiceImpl implements MemberService {
     @Resource
     private OrderMapper orderMapper;
 
+    @Resource
+    private NoticeMapper noticeMapper;
+
     private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
     @Override
@@ -370,6 +373,12 @@ public class MemberServiceImpl implements MemberService {
         Member member = (Member) session.getAttribute("member");
         Integer countApprovalItemOfUser = itemMapper.countApprovalItemOfUser(member.getSid());
 
+        Map param = new HashMap();
+        param.put("status", "U");
+        param.put("receiver", member.getSid());
+        List<Notice> noticesList = noticeMapper.getMyNotice(param);
+
+        modelAndView.addObject("unreadNotice", noticesList);
         modelAndView.addObject("itemsWaitForAccess", countApprovalItemOfUser);
         modelAndView.setViewName("profile");
         return modelAndView;

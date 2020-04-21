@@ -10,6 +10,7 @@ import com.zdh.mappers.ItemKindMappers;
 import com.zdh.mappers.ItemMapper;
 import com.zdh.mappers.MemberMapper;
 import com.zdh.service.ItemService;
+import com.zdh.service.NoticeService;
 import com.zdh.util.Constant;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -36,6 +37,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Resource
     private MemberMapper memberMapper;
+
+    @Resource
+    private NoticeService noticeService;
 
     @Override
     public ModelAndView selectById(ModelAndView modelAndView, String itemId) {
@@ -377,8 +381,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public String wtsItem(String serialNum, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
-        String sid = member.getSid();
+        Item item = itemMapper.selectBySerialNum(serialNum);
 
+        String text = member.getUsername() + "回应了你的求购：" + item.getName();
+        noticeService.newNotice(text, item.getPublisher());
         itemMapper.wtsItem(serialNum);
         return Constant.SUCCESS_CODE;
     }

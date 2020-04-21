@@ -72,6 +72,16 @@ public class Item implements Serializable {
      */
     private Integer viewedTimes;
 
+    private Member member;
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
     public Integer getId() {
         return id;
     }

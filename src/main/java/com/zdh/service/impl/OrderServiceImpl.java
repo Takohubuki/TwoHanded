@@ -10,6 +10,7 @@ import com.zdh.mappers.MemberMapper;
 import com.zdh.mappers.OrderMapper;
 import com.zdh.pay.AliPayDemo;
 import com.zdh.service.ItemService;
+import com.zdh.service.NoticeService;
 import com.zdh.service.OrderService;
 import com.zdh.util.AmountUtils;
 import com.zdh.util.Constant;
@@ -40,6 +41,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private ItemService itemService;
+
+    @Resource
+    private NoticeService noticeService;
 
     @Override
     public ModelAndView myCart(HttpSession session, ModelAndView modelAndView) {
@@ -82,13 +86,19 @@ public class OrderServiceImpl implements OrderService {
             Item item = itemMapper.selectBySerialNum(itemId);
             int itemNum = item.getNumber() - integer;
 
+            //更新商品库存
             item.setNumber(itemNum);
-            if (itemNum <= 0){
+            if (itemNum <= 0) {
                 item.setIsUndercarriage(true);
                 item.setUndercarriageReason("库存不足");
+
+                //通知卖家库存不足
+                String text = "您的 " + item.getName() + " 已经售罄";
+                noticeService.newNotice(text, item.getPublisher());
             }
             itemMapper.updateItemInfo(item);
 
+            //生成订单
             Order order = generateOrder(sid, itemId, integer, date);
             int i = integer * item.getPrice();
 
@@ -97,11 +107,16 @@ public class OrderServiceImpl implements OrderService {
             orderId = order.getOrderId();
             orderMapper.generateNewOrder(order);
 
+            //从购物车中移除
             Map map = new HashMap();
             map.put("itemId", itemId);
             map.put("sid", sid);
 
             cartMapper.removeCart(map);
+
+            //通知卖家
+            String text = member.getUsername() + "已经拍下您的商品 " + item.getName();
+            noticeService.newNotice(text, item.getPublisher());
         }
         modelAndView.addObject("orderId", orderId);
         modelAndView.setViewName("checkout");
@@ -170,20 +185,26 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void alipay(String orderId, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
-        List<Order> orderByOrderId = orderMapper.getOrderByOrderId(orderId);
+        List<Order> orderByOrderId = orderMapper.selectOrderAndItems(orderId);
 
         double totalAmount = 0;
         double amount;
+
+        for (Order order : orderByOrderId) {
+            amount = AmountUtils.getAmount(order.getSumPrice());
+            totalAmount = totalAmount + amount;
+
+            Member member = memberMapper.selectByPrimaryKey(order.getBuyerId());
+            String text = member.getUsername() + "已经付款";
+            noticeService.newNotice(text, order.getItem().getPublisher());
+        }
+
         Map map = new HashMap();
         map.put("method", "alipay");
         map.put("orderId", orderId);
         orderMapper.updatePayMethod(map);
 
-        for (Order order : orderByOrderId) {
-            amount = AmountUtils.getAmount(order.getSumPrice());
-            totalAmount = totalAmount + amount;
-        }
-
+        //前往支付宝页面
         map.put("totalAmount", String.valueOf(totalAmount));
         map.put("itemName", "HRBU二手交易下单");
         AliPayDemo.jumpToAliPay(request, response, map);
@@ -218,6 +239,10 @@ public class OrderServiceImpl implements OrderService {
         for (Order order : orderByOrderId) {
             String publisher = order.getItem().getPublisher();
             sellerList.add(publisher);
+
+            Member member = memberMapper.selectByPrimaryKey(order.getBuyerId());
+            String text = member.getUsername() + "已经确认收货，订单完成";
+            noticeService.newNotice(text, order.getItem().getPublisher());
         }
         memberMapper.updateTradRecord(sellerList);
         orderMapper.cfmGetItem(orderId);
@@ -239,6 +264,11 @@ public class OrderServiceImpl implements OrderService {
 
         for (Order order : orders) {
             order.setUpdateTime(new Date());
+
+            Member member = memberMapper.selectByPrimaryKey(order.getBuyerId());
+            String text = member.getUsername() + "取消了订单";
+            noticeService.newNotice(text, order.getItem().getPublisher());
+
         }
 
         orderMapper.batchCancelOrder(orders);

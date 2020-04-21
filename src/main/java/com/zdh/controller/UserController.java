@@ -2,6 +2,7 @@ package com.zdh.controller;
 
 import com.zdh.bean.Member;
 import com.zdh.service.MemberService;
+import com.zdh.service.NoticeService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,12 @@ public class UserController {
     @Resource
     MemberService memberService;
 
+    @Resource
+    private NoticeService noticeService;
+
     /**
      * 用户登录
+     *
      * @param username
      * @param password
      * @param session
@@ -178,5 +183,15 @@ public class UserController {
     @RequestMapping("/mySoldOut")
     public ModelAndView mySoldOut(ModelAndView modelAndView, HttpSession session) {
         return memberService.mySoldOut(modelAndView, session);
+    }
+
+    @RequestMapping("/readNotice")
+    public void readNotice(String noticeId) {
+        noticeService.markAsRead(noticeId);
+    }
+
+    @RequestMapping("/noticeHistory")
+    public ModelAndView noticeHistory(HttpSession session) {
+        return noticeService.noticeHistory(new ModelAndView(), session);
     }
 }

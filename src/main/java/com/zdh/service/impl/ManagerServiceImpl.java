@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.zdh.bean.*;
 import com.zdh.mappers.*;
 import com.zdh.service.ManagerService;
+import com.zdh.service.NoticeService;
 import com.zdh.util.Constant;
 import com.zdh.util.PasswordUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Resource
     MemberMapper memberMapper;
+
+    @Resource
+    private NoticeService noticeService;
 
     @Resource
     private ItemKindMappers itemKindMapper;
@@ -139,20 +144,33 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public String accessInfo(String id) {
-        Item item = new Item();
-        item.setSerialNum(id);
+
+        Item item = itemMapper.selectBySerialNum(id);
         item.setIsUndercarriage(false);
         item.setUndercarriageReason("");
+
+        String text = "管理员已同意您的 " + item.getName() + " 的发布申请";
+
+        noticeService.newNotice(text, item.getPublisher());
         itemMapper.updateItemInfo(item);
         return "上架成功！";
     }
 
     @Override
     public String denyInfo(String id, String reason) {
-        Item item = new Item();
-        item.setSerialNum(id);
+
+        Item item = itemMapper.selectBySerialNum(id);
         item.setIsUndercarriage(true);
         item.setUndercarriageReason(reason);
+
+        String text;
+        if (StringUtils.isEmpty(reason)) {
+            text = "管理员拒绝了您发布 " + item.getName() + " 的申请";
+        } else {
+            text = "管理员拒绝了您发布 " + item.getName() + " 的申请：" + reason;
+        }
+
+        noticeService.newNotice(text, item.getPublisher());
         itemMapper.updateItemInfo(item);
         return "success";
     }

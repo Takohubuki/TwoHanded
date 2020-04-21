@@ -145,7 +145,7 @@
                 <div class="modal-body">
                     <form id="denyForm">
                         输入拒绝原因：
-                        <input type="text" name="reason"/>
+                        <input type="text" name="reason" class="form-control"/>
                         <input type="hidden" id="denyId" name="id" class="hidden"/>
                     </form>
                     <%--                    <p>One fine body&hellip;</p>--%>

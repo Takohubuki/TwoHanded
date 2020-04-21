@@ -184,15 +184,24 @@
                 <div class="col-md-8">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">最新消息</h3>
+                            <h3 class="box-title">未读消息</h3>
+                            <button type="button" class="btn btn-sm btn-primary pull-right" id="noticeHistory">历史消息
+                            </button>
                         </div>
                         <div class="box-body">
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
-                                </button>
-                                <h4><i class="icon fa fa-check"></i> 审核通过！</h4>
-                                管理员已经同意您的商品：二手游戏机上架。
-                            </div>
+                            <c:forEach var="notice" items="${unreadNotice}">
+                                <div class="alert alert-info alert-dismissible" data-id="${notice.id}">
+                                    <button type="button" class="close markAsRead" data-dismiss="alert"
+                                            aria-hidden="true">&times;
+                                    </button>
+                                    <h4><i class="icon fa fa-info"></i> 最新通知！</h4>
+                                        ${notice.body}
+                                    <button type="button" class="btn btn-sm btn-primary markAsRead pull-right"
+                                            data-dismiss="alert" aria-hidden="true">
+                                        知道了
+                                    </button>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -261,6 +270,27 @@
     function mySoldOut() {
         $('#page').load('${pageContext.request.contextPath}/user/mySoldOut');
     }
+
+    $(function () {
+        $('.markAsRead').click(function () {
+            let noticeId = $(this).parent().attr('data-id');
+            $.ajax({
+                url: '/user/readNotice',
+                data: {
+                    'noticeId': noticeId
+                },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log(result)
+                }
+            })
+        });
+        $('#noticeHistory').click(function () {
+            $('#page').load('/user/noticeHistory');
+        })
+    })
 </script>
 </body>
 </html>
