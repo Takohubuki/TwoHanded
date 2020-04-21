@@ -35,12 +35,6 @@
                                         <th class="sorting" tabindex="5" aria-controls="example2">
                                             注册时间
                                         </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
-                                            封禁状态
-                                        </th>
-                                        <th>
-                                            操作
-                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -64,22 +58,6 @@
                                             <td>
                                                 <fmt:formatDate value="${memberlist.signinTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
 
-                                            </td>
-                                            <td>
-                                                <c:if test="${memberlist.isActive == false}">
-                                                    封禁
-                                                </c:if>
-                                                <c:if test="${memberlist.isActive == true}">
-                                                    正常
-                                                </c:if>
-                                            </td>
-                                            <td>
-                                                <a href="javascript:shutmember(${memberlist.sid})" role="button" class="btn btn-primary">
-                                                    禁用
-                                                </a>
-                                                <a href="javascript:activemember(${memberlist.sid})" role="button" class="btn btn-primary">
-                                                    启用
-                                                </a>
                                             </td>
                                         </tr>
                                     </c:forEach>
