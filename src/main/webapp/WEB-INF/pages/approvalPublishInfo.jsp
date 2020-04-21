@@ -143,12 +143,9 @@
                     <h4 class="modal-title">确定拒绝吗？</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="denyForm">
-                        输入拒绝原因：
-                        <input type="text" name="reason" class="form-control"/>
-                        <input type="hidden" id="denyId" name="id" class="hidden"/>
-                    </form>
-                    <%--                    <p>One fine body&hellip;</p>--%>
+                    输入拒绝原因：
+                    <input type="text" id="denyReason" style="color: black"/>
+                    <input type="hidden" id="denyId" name="id" class="hidden"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">取消</button>

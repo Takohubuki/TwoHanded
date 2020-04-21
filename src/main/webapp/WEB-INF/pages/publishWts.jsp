@@ -114,14 +114,9 @@
                 <h4 class="modal-title">确定下架该商品吗？</h4>
             </div>
             <div class="modal-body">
-                <form id="offForm">
-                    输入下架原因：（可以留空）
-                    <label>
-                        <input type="text" name="reason"/>
-                    </label>
-                    <input type="hidden" id="offItemId" name="id" class="hidden"/>
-                </form>
-                <%--                    <p>One fine body&hellip;</p>--%>
+                输入下架原因：（可以留空）：
+                <input type="text" id="denyReason" style="color: black"/>
+                <input type="hidden" id="denyId" name="id" class="hidden"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" id="offBtn">确定</button>
@@ -147,7 +142,7 @@
             'language': language
         });
         $('#offBtn').click(function () {
-            let reason = $('#offForm').find('input [name = reason]').val();
+            let reason = $('#denyReason').val();
             $.ajax({
                 url: '/items/offMyItem',
                 type: 'post',

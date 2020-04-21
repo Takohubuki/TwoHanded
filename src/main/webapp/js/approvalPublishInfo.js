@@ -32,7 +32,7 @@ $(function () {
     $('#denyBtn').click(function () {
 
         let id = $('#denyId').val();
-        let reason = $('#denyForm').find('input[name = reason]').val();
+        let reason = $('#denyReason').val();
         $.ajax({
             url: '/manage/denyInfo',
             type: 'post',
