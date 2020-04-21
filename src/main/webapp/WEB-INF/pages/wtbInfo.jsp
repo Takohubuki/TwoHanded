@@ -309,7 +309,14 @@
                     <li>
                         已有${item.number}人愿意出售
                     </li>
-
+                    <li>
+                        <c:if test="${member == null}">
+                            登录即可查看发布人联系方式
+                        </c:if>
+                        <c:if test="${member != null}">
+                            联系方式：${publisher.phone}
+                        </c:if>
+                    </li>
                 </ul>
             </div>
             <div class="product-single-w3l">

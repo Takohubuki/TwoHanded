@@ -308,6 +308,14 @@
                     <li>
                         库存：${item.number}
                     </li>
+                    <li>
+                        <c:if test="${member == null}">
+                            登录即可查看卖家联系方式
+                        </c:if>
+                        <c:if test="${member != null}">
+                            联系方式：${publisher.phone}
+                        </c:if>
+                    </li>
 
                 </ul>
             </div>
