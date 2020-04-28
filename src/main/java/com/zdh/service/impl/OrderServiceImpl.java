@@ -65,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
         modelAndView.addObject("item_list", itemList);
         modelAndView.addObject("item_id_list", item_ids);
         modelAndView.addObject("item_num_list", item_num);
-        modelAndView.setViewName("cart");
+        modelAndView.setViewName("main/cart");
         return modelAndView;
 
     }
@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
             noticeService.newNotice(text, item.getPublisher());
         }
         modelAndView.addObject("orderId", orderId);
-        modelAndView.setViewName("checkout");
+        modelAndView.setViewName("main/checkout");
         return modelAndView;
 
     }
@@ -177,8 +177,8 @@ public class OrderServiceImpl implements OrderService {
         Member member = (Member) session.getAttribute("member");
         String sid = member.getSid();
         List<Order> orderList = orderMapper.selectMyOrder(sid);
-        modelAndView.addObject("my_order_list",orderList);
-        modelAndView.setViewName("allOrder");
+        modelAndView.addObject("my_order_list", orderList);
+        modelAndView.setViewName("userCenter/myBuying");
         return modelAndView;
     }
 
@@ -251,7 +251,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public ModelAndView payLater(String orderId, ModelAndView modelAndView) {
         modelAndView.addObject("orderId", orderId);
-        modelAndView.setViewName("checkout");
+        modelAndView.setViewName("main/checkout");
         return modelAndView;
     }
 

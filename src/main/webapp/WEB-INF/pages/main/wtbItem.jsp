@@ -55,7 +55,7 @@
                     <span>H</span>RBU
                     <span>S</span>econdHand
                     <span>P</span>latform
-                    <img src="../../images/logo2.png" alt=" ">
+                    <img src="../../../images/logo2.png" alt=" ">
                 </a>
             </h1>
         </div>

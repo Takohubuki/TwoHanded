@@ -44,9 +44,12 @@
                                             单种商品总价
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
-                                            订单状态
+                                            下单时间
                                         </th>
                                         <th class="sorting" tabindex="6" aria-controls="example2">
+                                            订单状态
+                                        </th>
+                                        <th class="sorting" tabindex="7" aria-controls="example2">
                                             操作
                                         </th>
                                     </tr>
@@ -58,16 +61,20 @@
                                                 ${order_list.orderId}
                                             </td>
                                             <td>
-                                                ${order_list.item.name}
+                                                    ${order_list.item.name}
                                             </td>
                                             <td>
-                                                <img src="${pageContext.request.contextPath}/${order_list.item.image}" style="width: 80px;height: 75px">
+                                                <img src="${pageContext.request.contextPath}/${order_list.item.image}"
+                                                     style="width: 80px;height: 75px">
                                             </td>
                                             <td>
-                                                ${order_list.itemNum}
+                                                    ${order_list.itemNum}
                                             </td>
                                             <td>
                                                     ${order_list.sumPrice}
+                                            </td>
+                                            <td>
+                                                    ${order_list.createTime}
                                             </td>
                                             <c:if test="${order_list.isCanceled == true}">
                                                 <td>

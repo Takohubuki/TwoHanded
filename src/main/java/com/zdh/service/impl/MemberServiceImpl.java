@@ -107,14 +107,14 @@ public class MemberServiceImpl implements MemberService {
 
         if (member == null){
 
-            modelAndView.setViewName("login");
-            modelAndView.addObject("message","用户名错误！");
+            modelAndView.setViewName("main/login");
+            modelAndView.addObject("message", "用户名错误！");
 
             return modelAndView;
         }else if (!passwordConfirm(member.getPassword(),password)){
 
-            modelAndView.setViewName("login");
-            modelAndView.addObject("message","密码错误！");
+            modelAndView.setViewName("main/login");
+            modelAndView.addObject("message", "密码错误！");
 
             return modelAndView;
 
@@ -140,8 +140,8 @@ public class MemberServiceImpl implements MemberService {
             return modelAndView;
         }else {
 
-            modelAndView.setViewName("login");
-            modelAndView.addObject("message","用户名或密码错误！");
+            modelAndView.setViewName("main/login");
+            modelAndView.addObject("message", "用户名或密码错误！");
 
             return modelAndView;
         }
@@ -154,7 +154,7 @@ public class MemberServiceImpl implements MemberService {
         String sid = member.getSid();
         List<Item> myWts = memberMapper.selectMyWts(sid);
         modelAndView.addObject("myWts", myWts);
-        modelAndView.setViewName("publishWts");
+        modelAndView.setViewName("userCenter/publishWts");
         return modelAndView;
 
     }
@@ -165,7 +165,7 @@ public class MemberServiceImpl implements MemberService {
         String sid = member.getSid();
         List<Item> myWtb = memberMapper.selectMyWtb(sid);
         modelAndView.addObject("myWtb", myWtb);
-        modelAndView.setViewName("publishWtb");
+        modelAndView.setViewName("userCenter/publishWtb");
         return modelAndView;
     }
 
@@ -208,7 +208,7 @@ public class MemberServiceImpl implements MemberService {
             System.out.println("error!rollback!");
         }
 
-        modelAndView.setViewName("profile");
+        modelAndView.setViewName("userCenter/profile");
         return modelAndView;
     }
 
@@ -332,7 +332,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ModelAndView resetPassword(String token, ModelAndView modelAndView) {
-        modelAndView.setViewName("resetPassword");
+        modelAndView.setViewName("main/resetPassword");
 
         //验证token是否过期 是否合法等
         Map<String, Claim> tokenVerifier;
@@ -381,7 +381,7 @@ public class MemberServiceImpl implements MemberService {
 
         modelAndView.addObject("unreadNotice", noticesList);
         modelAndView.addObject("itemsWaitForAccess", countApprovalItemOfUser);
-        modelAndView.setViewName("profile");
+        modelAndView.setViewName("userCenter/profile");
         return modelAndView;
     }
 
@@ -392,7 +392,7 @@ public class MemberServiceImpl implements MemberService {
         String sid = member.getSid();
         List<Order> soldList = orderMapper.getUserSoldOut(sid);
         modelAndView.addObject("soldList", soldList);
-        modelAndView.setViewName("mySoldOut");
+        modelAndView.setViewName("userCenter/mySoldOut");
         return modelAndView;
     }
 

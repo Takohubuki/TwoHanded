@@ -62,11 +62,11 @@ public class ItemServiceImpl implements ItemService {
             modelAndView.addObject("item", item);
             modelAndView.addObject("recommand_items", items);
             modelAndView.addObject("publisher", publisher);
-            modelAndView.setViewName("wtsInfo");
+            modelAndView.setViewName("main/wtsInfo");
         } else if ("求购".equals(item.getConditions())) {
             modelAndView.addObject("item", item);
             modelAndView.addObject("publisher", publisher);
-            modelAndView.setViewName("wtbInfo");
+            modelAndView.setViewName("main/wtbInfo");
         }
         return modelAndView;
     }
@@ -124,7 +124,7 @@ public class ItemServiceImpl implements ItemService {
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
 
-        modelAndView.setViewName("itemList");
+        modelAndView.setViewName("main/itemList");
         return modelAndView;
     }
 
@@ -138,7 +138,7 @@ public class ItemServiceImpl implements ItemService {
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
 
-        modelAndView.setViewName("itemList");
+        modelAndView.setViewName("main/itemList");
         return modelAndView;
 
     }
@@ -179,7 +179,7 @@ public class ItemServiceImpl implements ItemService {
             itemPageInfo = new PageInfo<>(items);
         }
         modelAndView.addObject("wtsPageInfo", itemPageInfo);
-        modelAndView.setViewName("itemListPage");
+        modelAndView.setViewName("main/itemListPage");
         return modelAndView;
     }
 
@@ -191,7 +191,7 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.updateItemInfo(wtb_item);
 
         modelAndView.addObject("item", wtb_item);
-        modelAndView.setViewName("wtbInfo");
+        modelAndView.setViewName("main/wtbInfo");
         return modelAndView;
     }
 
@@ -203,7 +203,7 @@ public class ItemServiceImpl implements ItemService {
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
 
-        modelAndView.setViewName("itemList");
+        modelAndView.setViewName("main/itemList");
         return modelAndView;
     }
 
@@ -267,7 +267,7 @@ public class ItemServiceImpl implements ItemService {
         modelAndView.addObject("wtsPageInfo", itemPageInfo);
         modelAndView.addObject("wtbPageInfo", wtbPageInfo);
 
-        modelAndView.setViewName("itemList");
+        modelAndView.setViewName("main/itemList");
 
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
@@ -282,7 +282,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> items = itemMapper.selectByKind(kind);
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         modelAndView.addObject("wtsPageInfo", itemPageInfo);
-        modelAndView.setViewName("itemList");
+        modelAndView.setViewName("main/itemList");
 
         List<String> kindList = itemKindMappers.getKindList();
         modelAndView.addObject("kindList", kindList);
@@ -293,8 +293,8 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ModelAndView updateItemInfo(ModelAndView modelAndView, String itemId) {
         Item item = itemMapper.selectBySerialNum(itemId);
-        modelAndView.addObject("item",item);
-        modelAndView.setViewName("update");
+        modelAndView.addObject("item", item);
+        modelAndView.setViewName("userCenter/update");
         return modelAndView;
     }
 
@@ -325,7 +325,7 @@ public class ItemServiceImpl implements ItemService {
 
         itemMapper.updateItemInfo(item);
 
-        modelAndView.setViewName("profile");
+        modelAndView.setViewName("userCenter/profile");
         return modelAndView;
     }
 
@@ -374,7 +374,7 @@ public class ItemServiceImpl implements ItemService {
         String sid = member.getSid();
         List<Item> approvalItem = itemMapper.getApprovalItemOfUser(sid);
         modelAndView.addObject("itemWaitForAccess", approvalItem);
-        modelAndView.setViewName("itemWaitToAccessOfUser");
+        modelAndView.setViewName("userCenter/itemWaitToAccessOfUser");
         return modelAndView;
     }
 

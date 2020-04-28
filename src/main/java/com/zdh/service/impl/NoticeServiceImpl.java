@@ -37,7 +37,7 @@ public class NoticeServiceImpl implements NoticeService {
         List<Notice> myNotice = noticeMapper.getMyNotice(param);
 
         modelAndView.addObject("noticeHistory", myNotice);
-        modelAndView.setViewName("noticeHistory");
+        modelAndView.setViewName("userCenter/noticeHistory");
         return modelAndView;
     }
 

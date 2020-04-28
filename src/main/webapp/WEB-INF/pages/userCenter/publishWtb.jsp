@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
@@ -42,12 +43,16 @@
 
                                                 </th>
                                                 <th tabindex="5" aria-controls="example2">
+                                                    发布时间
+                                                </th>
+                                                <th tabindex="6" aria-controls="example2">
                                                     操作
                                                 </th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="myWtb" items="${myWtb}">
+                                        <c:forEach var="myWtb" items="${myWtb}">
                                                 <tr role="row">
                                                     <td class="sorting">
                                                         <img src="${pageContext.request.contextPath}/${myWtb.image}"
@@ -66,11 +71,16 @@
                                                         已有${myWtb.number}人愿意出售
                                                     </td>
                                                     <td>
+                                                        <fmt:formatDate value="${myWtb.publishTime}"
+                                                                        pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
+
+                                                    </td>
+                                                    <td>
                                                         <a href="javascript:updateitem('${myWtb.serialNum}')">修改</a>
                                                         <a href="javascript:offMyItem('${myWtb.serialNum}')">下架</a>
                                                     </td>
                                                 </tr>
-                                            </c:forEach>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -91,7 +101,6 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable();
         $('#example2').DataTable({
             'paging'      : true,
             'lengthChange': false,

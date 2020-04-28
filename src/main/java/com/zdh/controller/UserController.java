@@ -48,7 +48,7 @@ public class UserController {
      */
     @RequestMapping("/signin")
     public ModelAndView signIn(ModelAndView modelAndView, String message){
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("main/login");
         return modelAndView;
     }
 
@@ -115,7 +115,7 @@ public class UserController {
 
     @RequestMapping("/updateprofile")
     public ModelAndView updateProfile(ModelAndView modelAndView) {
-        modelAndView.setViewName("updateProfile");
+        modelAndView.setViewName("userCenter/updateProfile");
         return modelAndView;
     }
 
@@ -143,7 +143,7 @@ public class UserController {
      */
     @RequestMapping("/forgetPWD")
     public ModelAndView forgetPWD(ModelAndView modelAndView) {
-        modelAndView.setViewName("forgetPWD");
+        modelAndView.setViewName("main/forgetPWD");
         return modelAndView;
     }
 

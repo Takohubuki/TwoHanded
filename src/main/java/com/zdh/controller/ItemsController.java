@@ -102,7 +102,7 @@ public class ItemsController {
     public ModelAndView publish(ModelAndView modelAndView) {
         List<String> allKind = itemKindService.getAllKind();
         modelAndView.addObject("kindList", allKind);
-        modelAndView.setViewName("publish");
+        modelAndView.setViewName("main/publish");
         return modelAndView;
     }
 
