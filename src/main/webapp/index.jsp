@@ -169,7 +169,8 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="text" placeholder="电子邮箱" name="email" required="">
+                            <label class="control-label" for="email" id="emailError"></label>
+                            <input type="text" placeholder="电子邮箱" name="email" required="" id="email">
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">
@@ -178,6 +179,7 @@
                             <input type="password" placeholder="密码" name="password" id="password1" required="">
                         </div>
                         <div class="styled-input">
+                            <label class="control-label" for="password2" id="pwdValidate"></label>
                             <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2"
                                    required="">
                         </div>

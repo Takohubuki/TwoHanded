@@ -17,7 +17,7 @@ public class ManagerController {
 
     @RequestMapping("/managerlogin")
     public ModelAndView manager(ModelAndView modelAndView) {
-        modelAndView.setViewName("manage/managerLogin");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 

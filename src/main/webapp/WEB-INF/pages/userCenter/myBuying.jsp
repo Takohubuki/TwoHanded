@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
@@ -58,10 +59,10 @@
                                     <c:forEach var="order_list" items="${my_order_list}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                ${order_list.orderId}
+                                                    ${order_list.orderId}
                                             </td>
                                             <td>
-                                                    ${order_list.item.name}
+                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${order_list.item.serialNum}">${order_list.item.name}</a>
                                             </td>
                                             <td>
                                                 <img src="${pageContext.request.contextPath}/${order_list.item.image}"
@@ -74,7 +75,8 @@
                                                     ${order_list.sumPrice}
                                             </td>
                                             <td>
-                                                    ${order_list.createTime}
+                                                <fmt:formatDate value="${order_list.createTime}"
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
                                             </td>
                                             <c:if test="${order_list.isCanceled == true}">
                                                 <td>

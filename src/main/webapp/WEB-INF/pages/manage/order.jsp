@@ -61,7 +61,7 @@
                                             </td>
                                             <td>
                                                 <fmt:formatDate value="${orderlist.createTime}"
-                                                                pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
                                             </td>
                                             <c:if test="${orderlist.isCanceled == true}">
                                                 <td>

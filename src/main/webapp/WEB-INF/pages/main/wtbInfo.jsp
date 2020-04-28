@@ -298,54 +298,61 @@
         <div class="col-md-5 single-right-left simpleCart_shelfItem">
             <h3>${item.name}</h3>
 
-            <p>
-                <span class="item_price">￥${item.price}</span>
-            </p>
-            <div class="single-infoagile">
-                <ul>
-                    <li>
-                        已被浏览过${item.viewedTimes}次
-                    </li>
-                    <li>
-                        已有${item.number}人愿意出售
-                    </li>
-                    <li>
-                        <c:if test="${member == null}">
-                            登录即可查看发布人联系方式
-                        </c:if>
-                        <c:if test="${member != null}">
-                            联系方式：${publisher.phone}
-                        </c:if>
-                    </li>
-                </ul>
-            </div>
-            <div class="product-single-w3l">
+            <c:if test="${item.isUndercarriage == false}">
                 <p>
-                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                    商品描述：
+                    <span class="item_price">￥${item.price}</span>
                 </p>
-                <ul>
-                    <li>
-                        ${item.describes}
-                    </li>
-                </ul>
+                <div class="single-infoagile">
+                    <ul>
+                        <li>
+                            已被浏览过${item.viewedTimes}次
+                        </li>
+                        <li>
+                            已有${item.number}人愿意出售
+                        </li>
+                        <li>
+                            <c:if test="${member == null}">
+                                登录即可查看发布人联系方式
+                            </c:if>
+                            <c:if test="${member != null}">
+                                联系方式：${publisher.phone}
+                            </c:if>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-single-w3l">
+                    <p>
+                        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                        商品描述：
+                    </p>
+                    <ul>
+                        <li>
+                                ${item.describes}
+                        </li>
+                    </ul>
 
-            </div>
-            <div class="occasion-cart">
-                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                    <%--                    <form action="#" method="post">--%>
-                    <fieldset>
-                        <input type="hidden" name="itemId" value="${item.serialNum}"/>
-                        <input type="hidden" name="itemName" value="${item.name}"/>
-                        <input type="hidden" name="publisher" value="${item.publisher}"/>
-                        <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
-                        <input type="submit" name="wts" class="button" value="我想卖"/>
-                    </fieldset>
-                    <%--                    </form>--%>
+                </div>
+                <div class="occasion-cart">
+                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                            <%--                    <form action="#" method="post">--%>
+                        <fieldset>
+                            <input type="hidden" name="itemId" value="${item.serialNum}"/>
+                            <input type="hidden" name="itemName" value="${item.name}"/>
+                            <input type="hidden" name="publisher" value="${item.publisher}"/>
+                                <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
+                            <input type="submit" name="wts" class="button" value="我想卖"/>
+                        </fieldset>
+                            <%--                    </form>--%>
+                    </div>
+
                 </div>
 
-            </div>
-
+            </c:if>
+            <c:if test="${item.isUndercarriage == true}">
+                <div class="callout callout-danger">
+                    <h4>商品已下架！</h4>
+                </div>
+            </c:if>
         </div>
         <div class="col-md-3 single-right-left">
             <!-- Widget: user widget style 1 -->

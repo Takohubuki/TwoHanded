@@ -2,7 +2,6 @@ package com.zdh.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * order
@@ -63,7 +62,7 @@ public class Order implements Serializable {
 
     private Item item;
 
-    private List<Item> items;
+    private Member buyer;
 
     public Item getItem() {
         return item;
@@ -73,13 +72,12 @@ public class Order implements Serializable {
         this.item = item;
     }
 
-
-    public List<Item> getItems() {
-        return items;
+    public Member getBuyer() {
+        return buyer;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setBuyer(Member buyer) {
+        this.buyer = buyer;
     }
 
     public String getPayMethod() {

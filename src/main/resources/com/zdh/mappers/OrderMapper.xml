@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdh.mappers.OrderMapper">
   <resultMap id="BaseResultMap" type="com.zdh.bean.Order">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
-    <result column="sum_price" jdbcType="VARCHAR" property="sumPrice" />
-    <result column="item_num" jdbcType="INTEGER" property="itemNum" />
-    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
-      <result column="buyer_id" jdbcType="VARCHAR" property="buyerId"/>
-      <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-      <result column="is_paid" jdbcType="BIT" property="isPaid"/>
-      <result column="is_received" jdbcType="BIT" property="isReceived"/>
-      <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
-      <result column="is_checked" jdbcType="BIT" property="isChecked"/>
-      <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+    <result column="sum_price" jdbcType="VARCHAR" property="sumPrice"/>
+    <result column="item_num" jdbcType="INTEGER" property="itemNum"/>
+    <result column="item_id" jdbcType="VARCHAR" property="itemId"/>
+    <result column="buyer_id" jdbcType="VARCHAR" property="buyerId"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="is_paid" jdbcType="BIT" property="isPaid"/>
+    <result column="is_received" jdbcType="BIT" property="isReceived"/>
+    <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
+    <result column="is_checked" jdbcType="BIT" property="isChecked"/>
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
   </resultMap>
 
     <resultMap id="ItemInOrder" type="com.zdh.bean.Item">
@@ -27,40 +27,57 @@
         <result column="describes" jdbcType="VARCHAR" property="describes"/>
         <result column="image" jdbcType="VARCHAR" property="image"/>
         <result column="kind" jdbcType="VARCHAR" property="kind"/>
-        <result column="quality" jdbcType="INTEGER" property="quality"/>
-        <result column="conditions" jdbcType="VARCHAR" property="conditions"/>
-        <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage"/>
-        <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
-        <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
+      <result column="quality" jdbcType="INTEGER" property="quality"/>
+      <result column="conditions" jdbcType="VARCHAR" property="conditions"/>
+      <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+      <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage"/>
+      <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
+      <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
     </resultMap>
 
-    <resultMap id="OrderAndItems" type="com.zdh.bean.Order">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
-        <result column="sum_price" jdbcType="VARCHAR" property="sumPrice"/>
-        <result column="item_num" jdbcType="INTEGER" property="itemNum"/>
-        <result column="item_id" jdbcType="VARCHAR" property="itemId"/>
-        <result column="buyer_id" jdbcType="VARCHAR" property="buyerId"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="is_paid" jdbcType="BIT" property="isPaid"/>
-        <result column="is_received" jdbcType="BIT" property="isReceived"/>
-        <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
-        <result column="is_checked" jdbcType="BIT" property="isChecked"/>
-        <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
-        <collection property="item" column="item_id" select="getItemListInOrder" ofType="com.zdh.bean.Item">
-        </collection>
-    </resultMap>
+  <resultMap id="OrderAndItems" type="com.zdh.bean.Order">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+    <result column="sum_price" jdbcType="VARCHAR" property="sumPrice"/>
+    <result column="item_num" jdbcType="INTEGER" property="itemNum"/>
+    <result column="item_id" jdbcType="VARCHAR" property="itemId"/>
+    <result column="buyer_id" jdbcType="VARCHAR" property="buyerId"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <result column="is_paid" jdbcType="BIT" property="isPaid"/>
+    <result column="is_received" jdbcType="BIT" property="isReceived"/>
+    <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
+    <result column="is_checked" jdbcType="BIT" property="isChecked"/>
+    <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
+    <collection property="item" column="item_id" select="getItemListInOrder" ofType="com.zdh.bean.Item">
+    </collection>
+    <collection property="buyer" column="buyer_id" select="getBuyer" ofType="com.zdh.bean.Member"/>
+  </resultMap>
+
+  <resultMap id="Buyer" type="com.zdh.bean.Member">
+    <id column="sid" jdbcType="VARCHAR" property="sid"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="is_active" jdbcType="BIT" property="isActive"/>
+    <result column="signin_time" jdbcType="TIMESTAMP" property="signinTime"/>
+    <result column="recent_login" jdbcType="TIMESTAMP" property="recentLogin"/>
+    <result column="positive_comment" jdbcType="INTEGER" property="positiveComment"/>
+    <result column="negative_comment" jdbcType="INTEGER" property="negativeComment"/>
+    <result column="trad_record_num" jdbcType="INTEGER" property="tradRecordNum"/>
+  </resultMap>
 
   <sql id="Base_Column_List">
     id, order_id, sum_price, item_num, item_id, buyer_id, create_time, update_time, is_paid, 
     is_received, is_canceled, is_checked, pay_method
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from `order`
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -266,4 +283,7 @@
     select * from `order` join item on `order`.item_id = item.serial_num where item.publisher = #{sid}
   </select>
 
+  <select id="getBuyer" resultMap="Buyer">
+    select * from member where sid = #{buyerId};
+  </select>
 </mapper>

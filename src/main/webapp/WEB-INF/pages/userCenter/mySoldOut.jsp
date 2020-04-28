@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -50,6 +51,9 @@
                                         <th class="sorting" tabindex="6" aria-controls="example2">
                                             买家
                                         </th>
+                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                            下单时间
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -93,7 +97,11 @@
                                                 </td>
                                             </c:if>
                                             <td>
-                                                    ${soldList.buyerId}
+                                                    ${soldList.buyer.username}
+                                            </td>
+                                            <td>
+                                                <fmt:formatDate value="${soldList.createTime}"
+                                                                pattern="yyyy-MM-dd HH:mm"/>
                                             </td>
 
                                         </tr>
