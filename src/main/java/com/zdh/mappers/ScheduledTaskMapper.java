@@ -2,6 +2,8 @@ package com.zdh.mappers;
 
 import com.zdh.bean.ScheduledTask;
 
+import java.util.Map;
+
 public interface ScheduledTaskMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface ScheduledTaskMapper {
     int updateByPrimaryKey(ScheduledTask record);
 
     ScheduledTask getTaskByName(String name);
+
+    void switchTask(Map param);
 }

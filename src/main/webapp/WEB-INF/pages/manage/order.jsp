@@ -5,6 +5,8 @@
 <html>
 <section class="content-header">
     <h1>订单管理</h1>
+    <label for="delOrderSwitch">自动删除订单</label>
+    <input type="checkbox" id="delOrderSwitch">
 </section>
 <section class="content">
     <div class="row">
@@ -14,7 +16,8 @@
                     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                       aria-describedby="example2_info">
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting" tabindex="0" aria-controls="example2">
@@ -133,6 +136,10 @@
 </section>
 <script>
     $(function () {
+        let flag = ${delOrderSwitch};
+        if (flag) {
+            $('#delOrderSwitch').prop('checked', true);
+        }
         let orderId;
         url = '/manage/manageOrder';
         $('#example2').DataTable({
@@ -166,6 +173,38 @@
             });
             hideModal('danger');
             $('#page').load(url);
+        });
+
+        $('#delOrderSwitch').on('change', function () {
+            if (this.checked) {
+                $.ajax({
+                    url: '/manage/delOrderSwitch',
+                    data: {
+                        'flag': 'on'
+                    },
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function (result) {
+                        console.log(result);
+                    }
+
+                })
+            } else {
+                $.ajax({
+                    url: '/manage/delOrderSwitch',
+                    data: {
+                        'flag': 'off'
+                    },
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function (result) {
+                        console.log(result);
+                    }
+
+                })
+            }
         })
     });
 

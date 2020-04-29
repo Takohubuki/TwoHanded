@@ -5,6 +5,7 @@ import com.zdh.bean.*;
 import com.zdh.mappers.*;
 import com.zdh.service.ManagerService;
 import com.zdh.service.NoticeService;
+import com.zdh.service.ScheduledTaskService;
 import com.zdh.util.Constant;
 import com.zdh.util.PasswordUtils;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Resource
     private ItemKindMappers itemKindMapper;
+
+    @Resource
+    private ScheduledTaskService scheduledTaskService;
 
     @Override
     public ModelAndView login(String username, String password, ModelAndView modelAndView, HttpSession session) {
@@ -69,8 +73,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView order(ModelAndView modelAndView) {
+        ScheduledTask delOrder = scheduledTaskService.getTTaskByName("delOrder");
+        Boolean flag = delOrder.getSwich();
+
         List<Order> orders = orderMapper.selectAllOrder();
         modelAndView.addObject("orderlist", orders);
+        modelAndView.addObject("delOrderSwitch", flag);
         modelAndView.setViewName("manage/order");
         return modelAndView;
     }

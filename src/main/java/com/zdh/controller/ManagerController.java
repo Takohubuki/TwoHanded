@@ -1,6 +1,7 @@
 package com.zdh.controller;
 
 import com.zdh.service.ManagerService;
+import com.zdh.service.ScheduledTaskService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +15,9 @@ public class ManagerController {
 
     @Resource
     ManagerService managerService;
+
+    @Resource
+    private ScheduledTaskService scheduledTaskService;
 
     @RequestMapping("/managerlogin")
     public ModelAndView manager(ModelAndView modelAndView) {
@@ -155,5 +159,10 @@ public class ManagerController {
     @RequestMapping(path = "/manage/addItemKind", produces = {"application/json;charset=UTF-8"})
     public String addItemKind(String newKind) {
         return managerService.addItemKind(newKind);
+    }
+
+    @RequestMapping("/manage/delOrderSwitch")
+    public void delOrderSwitch(String flag) {
+        scheduledTaskService.switchDelOrder("delOrder", flag);
     }
 }

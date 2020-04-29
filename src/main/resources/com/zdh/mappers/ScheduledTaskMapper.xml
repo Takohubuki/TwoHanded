@@ -103,7 +103,10 @@
       marks = #{marks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="getTaskByName" parameterType="java.lang.String">
+    <select id="getTaskByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from scheduled_task where task_name = #{taskName};
   </select>
+    <update id="switchTask" parameterType="java.util.Map">
+        update scheduled_task set swich = #{flag} where task_name = #{taskName}
+    </update>
 </mapper>

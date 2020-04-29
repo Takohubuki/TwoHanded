@@ -237,12 +237,14 @@ public class OrderServiceImpl implements OrderService {
         List<String> sellerList = new ArrayList<>();
         List<Order> orderByOrderId = orderMapper.selectOrderAndItems(orderId);
         for (Order order : orderByOrderId) {
-            String publisher = order.getItem().getPublisher();
-            sellerList.add(publisher);
+            if (itemId.equals(order.getItem().getSerialNum())) {
+                String publisher = order.getItem().getPublisher();
+                sellerList.add(publisher);
 
-            Member member = memberMapper.selectByPrimaryKey(order.getBuyerId());
-            String text = member.getUsername() + "已经确认收货，订单完成";
-            noticeService.newNotice(text, order.getItem().getPublisher());
+                Member member = memberMapper.selectByPrimaryKey(order.getBuyerId());
+                String text = member.getUsername() + "已经确认收货，订单完成";
+                noticeService.newNotice(text, order.getItem().getPublisher());
+            }
         }
         memberMapper.updateTradRecord(sellerList);
         orderMapper.cfmGetItem(orderId, itemId);

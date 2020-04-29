@@ -129,7 +129,7 @@
                     <div class="row">
                         <div class="form-group col-xs-3">
                             <select class="form-control selectpicker" title="${item.conditions}" name="conditions"
-                                    readonly>
+                                    readonly disabled>
                                 <option value="出售">出售</option>
                                 <option value="求购">求购</option>
                             </select>
