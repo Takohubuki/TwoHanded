@@ -282,7 +282,7 @@
   </update>
 
   <select id="getUnpaidOrder" parameterType="java.util.List" resultMap="OrderAndItems">
-    select * from `order` where is_paid = '0', `status` = 'U'
+    select * from `order` where is_paid = '0' and `status` = 'U'
   </select>
   <select id="getUserSoldOut" parameterType="java.lang.String" resultMap="OrderAndItems">
     select * from `order` join item on `order`.item_id = item.serial_num where item.publisher = #{sid} and `order`.display != 'S' and `order`.display != 'D'
