@@ -294,7 +294,7 @@ public class ItemServiceImpl implements ItemService {
     public ModelAndView updateItemInfo(ModelAndView modelAndView, String itemId) {
         Item item = itemMapper.selectBySerialNum(itemId);
         modelAndView.addObject("item", item);
-        modelAndView.setViewName("updateItem");
+        modelAndView.setViewName("userCenter/updateItem");
         return modelAndView;
     }
 

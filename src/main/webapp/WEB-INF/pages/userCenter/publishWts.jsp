@@ -131,7 +131,7 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable();
+        pagePath = '/user/publish/wts';
         $('#example2').DataTable({
             'paging': true,
             'lengthChange': false,
@@ -141,36 +141,8 @@
             'autoWidth': false,
             'language': language
         });
-        $('#offBtn').click(function () {
-            let reason = $('#denyReason').val();
-            $.ajax({
-                url: '/items/offMyItem',
-                type: 'post',
-                data: {
-                    'itemId': itemId,
-                    'reason': reason
-                },
-                success: function (result) {
-                    if (result === 'success') {
-                        alert('成功下架！');
-                    }
-                },
-                error: function (result) {
-                    console.log(result);
-                }
-            });
-            hideModal('danger');
-            $('#page').load('/user/publish/wts');
-
-        })
     });
-
-    function getItemId(btn) {
-        itemId = btn.value;
-        console.log(itemId);
-        $('#offItemId').val(itemId);
-    }
-
 </script>
+<script src="${pageContext.request.contextPath}/js/myPublish.js"></script>
 </body>
 </html>

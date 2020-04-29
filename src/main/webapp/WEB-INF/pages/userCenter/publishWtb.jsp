@@ -76,8 +76,13 @@
 
                                                     </td>
                                                     <td>
-                                                        <a href="javascript:updateitem('${myWtb.serialNum}')">修改</a>
-                                                        <a href="javascript:offMyItem('${myWtb.serialNum}')">下架</a>
+                                                        <button class="btn btn-primary"
+                                                                onclick="updateitem('${myWtb.serialNum}')">修改
+                                                        </button>
+                                                        <button class="btn btn-danger" onclick="getItemId(this)"
+                                                                data-toggle="modal" data-target="#modal-danger"
+                                                                value="${myWtb.serialNum}">下架
+                                                        </button>
                                                     </td>
                                                 </tr>
                                         </c:forEach>
@@ -98,20 +103,45 @@
     </section>
     <!-- /.content -->
     <div class="control-sidebar-bg"></div>
+    <div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确定撤下该信息吗？</h4>
+                </div>
+                <div class="modal-body">
+                    原因：（可以留空）：
+                    <input type="text" id="denyReason" style="color: black"/>
+                    <input type="hidden" id="denyId" name="id" class="hidden"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" id="offBtn">确定</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
-<script>
-    $(function () {
-        $('#example2').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            'language'    : language
-        })
-    });
+    <script>
+        $(function () {
+            pagePath = '/user/publish/wtb';
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+                'language': language
+            })
+        });
+    </script>
+    <script src="${pageContext.request.contextPath}/js/myPublish.js"></script>
 
-</script>
 </body>
 </html>

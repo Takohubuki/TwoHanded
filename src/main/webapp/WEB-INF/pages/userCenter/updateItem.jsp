@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
@@ -41,63 +42,68 @@
 
                         </div>
                     </div>
-                    <div class="form-group">
-                        <%--                    <select class="form-control selectpicker" title="${item.quality}" name="quality">--%>
-                        <%--                        <option value="1">1</option>--%>
-                        <%--                        <option value="2">2</option>--%>
-                        <%--                        <option value="3">3</option>--%>
-                        <%--                        <option value="4">4</option>--%>
-                        <%--                        <option value="5">5</option>--%>
-                        <%--                        <option value="6">6</option>--%>
-                        <%--                        <option value="7">7</option>--%>
-                        <%--                        <option value="8">8</option>--%>
-                        <%--                        <option value="9">9</option>--%>
-                        <%--                        <option value="10">全新</option>--%>
-                        <%--                        <option value="0">其他</option>--%>
-                        <%--                    </select>--%>
-                        <%--                    <input type="hidden" value="${item.quality}" name="quality">--%>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <label>数量</label>
-                            <input class="form-control" type="text" placeholder="商品数量" name="number"
-                                   value="${item.number}">
-                        </div>
-                        <div class="col-xs-6">
+                    <c:if test="${item.conditions == '求购'}">
 
-                        </div>
-                    </div>
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label>期望价格</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input class="form-control input-group" type="text" placeholder="商品单价" name="price"
+                                           value="${item.price}">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
 
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <label>商品类型</label>
-                            <select class="form-control selectpicker" title="${item.kind}" name="kind">
-                                <option value="电子产品">电子产品</option>
-                                <option value="衣物">衣物</option>
-                                <option value="体育用品">体育用品</option>
-                                <option value="生活用品">生活用品</option>
-                                <option value="杂物">杂物</option>
-                            </select>
-                            <input type="hidden" value="${item.kind}">
-                        </div>
-                        <div class="col-xs-6">
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-xs-6">
-                            <label>单价</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">￥</span>
-                                <input class="form-control input-group" type="text" placeholder="商品单价" name="price"
-                                       value="${item.price}">
                             </div>
                         </div>
-                        <div class="col-xs-6">
 
+                    </c:if>
+                    <c:if test="${item.conditions == '出售'}">
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label>数量</label>
+                                <input class="form-control" type="text" placeholder="商品数量" name="number"
+                                       value="${item.number}">
+                            </div>
+                            <div class="col-xs-6">
+
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label>商品类型</label>
+                                <select class="form-control selectpicker" title="${item.kind}" name="kind">
+                                    <option value="电子产品">电子产品</option>
+                                    <option value="衣物">衣物</option>
+                                    <option value="体育用品">体育用品</option>
+                                    <option value="生活用品">生活用品</option>
+                                    <option value="杂物">杂物</option>
+                                </select>
+                                <input type="hidden" value="${item.kind}">
+                            </div>
+                            <div class="col-xs-6">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xs-6">
+                                <label>单价</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">￥</span>
+                                    <input class="form-control input-group" type="text" placeholder="商品单价" name="price"
+                                           value="${item.price}">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+
+                            </div>
+                        </div>
+
+                    </c:if>
+
 
                     <div class="row">
                         <div class="form-group col-xs-6">
@@ -122,7 +128,8 @@
 
                     <div class="row">
                         <div class="form-group col-xs-3">
-                            <select class="form-control selectpicker" title="${item.conditions}" name="conditions">
+                            <select class="form-control selectpicker" title="${item.conditions}" name="conditions"
+                                    readonly>
                                 <option value="出售">出售</option>
                                 <option value="求购">求购</option>
                             </select>

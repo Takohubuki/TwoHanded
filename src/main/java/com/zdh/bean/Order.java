@@ -60,9 +60,29 @@ public class Order implements Serializable {
      */
     private String payMethod;
 
+    private String display;
+
+    private String status;
+
     private Item item;
 
     private Member buyer;
+
+    public String getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(String display) {
+        this.display = display;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Item getItem() {
         return item;

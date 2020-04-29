@@ -40,4 +40,6 @@ public interface OrderMapper {
     List<Order> getUserSoldOut(String sid);
 
     void commentOrder(@Param("orderId") String orderId, @Param("itemId") String itemId);
+
+    void hideOrder(Map param);
 }

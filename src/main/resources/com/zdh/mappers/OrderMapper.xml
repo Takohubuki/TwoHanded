@@ -15,6 +15,8 @@
     <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
     <result column="is_checked" jdbcType="BIT" property="isChecked"/>
     <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
+    <result column="display" jdbcType="VARCHAR" property="display"/>
+    <result column="status" jdbcType="VARCHAR" property="status"/>
   </resultMap>
 
     <resultMap id="ItemInOrder" type="com.zdh.bean.Item">
@@ -50,6 +52,8 @@
     <result column="is_canceled" jdbcType="BIT" property="isCanceled"/>
     <result column="is_checked" jdbcType="BIT" property="isChecked"/>
     <result column="pay_method" jdbcType="VARCHAR" property="payMethod"/>
+    <result column="display" jdbcType="VARCHAR" property="display"/>
+    <result column="status" jdbcType="VARCHAR" property="status"/>
     <collection property="item" column="item_id" select="getItemListInOrder" ofType="com.zdh.bean.Item">
     </collection>
     <collection property="buyer" column="buyer_id" select="getBuyer" ofType="com.zdh.bean.Member"/>
@@ -231,7 +235,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectMyOrder" resultMap="OrderAndItems">
-      select * from `order` where buyer_id = #{sid};
+      select * from `order` where buyer_id = #{sid} and display != 'B' and display != 'D';
   </select>
   <select id="selectOrderAndItems" resultMap="OrderAndItems">
       select * from `order` where order_id = #{orderId};
@@ -280,10 +284,14 @@
     select * from `order` where is_paid = '0'
   </select>
   <select id="getUserSoldOut" parameterType="java.lang.String" resultMap="OrderAndItems">
-    select * from `order` join item on `order`.item_id = item.serial_num where item.publisher = #{sid}
+    select * from `order` join item on `order`.item_id = item.serial_num where item.publisher = #{sid} and `order`.display != 'S' and `order`.display != 'D'
   </select>
 
   <select id="getBuyer" resultMap="Buyer">
     select * from member where sid = #{buyerId};
   </select>
+
+  <update id="hideOrder" parameterType="java.util.Map">
+    update `order` set display = #{type} where order_id = #{orderId}
+  </update>
 </mapper>

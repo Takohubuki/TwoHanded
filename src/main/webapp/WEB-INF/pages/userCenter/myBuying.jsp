@@ -45,13 +45,13 @@
                                             单种商品总价
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
-                                            下单时间
-                                        </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             订单状态
                                         </th>
-                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             操作
+                                        </th>
+                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                            下单时间
                                         </th>
                                     </tr>
                                     </thead>
@@ -74,11 +74,7 @@
                                             <td>
                                                     ${order_list.sumPrice}
                                             </td>
-                                            <td>
-                                                <fmt:formatDate value="${order_list.createTime}"
-                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
-                                            </td>
-                                            <c:if test="${order_list.isCanceled == true}">
+                                            <c:if test="${order_list.status == 'C'}">
                                                 <td>
                                                     已取消
                                                 </td>
@@ -86,7 +82,7 @@
 
                                                 </td>
                                             </c:if>
-                                            <c:if test="${order_list.isCanceled == false && order_list.isPaid == false}">
+                                            <c:if test="${order_list.status == 'U'}">
                                                 <td>
                                                     待付款(24小时内未付款自动取消订单！)
                                                 </td>
@@ -102,7 +98,7 @@
                                                 </td>
                                             </c:if>
 
-                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == false && order_list.isCanceled == false}">
+                                            <c:if test="${order_list.status == 'P'}">
                                                 <td>
                                                     待确认收货
                                                 </td>
@@ -114,7 +110,7 @@
                                                     </button>
                                                 </td>
                                             </c:if>
-                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false && order_list.isChecked == false}">
+                                            <c:if test="${order_list.status == 'R'}">
                                                 <td>
                                                     已收货
                                                 </td>
@@ -127,15 +123,25 @@
                                                 </td>
                                             </c:if>
 
-                                            <c:if test="${order_list.isPaid == true && order_list.isReceived == true && order_list.isCanceled == false && order_list.isChecked == true}">
+                                            <c:if test="${order_list.status == 'V'}">
                                                 <td>
                                                     已评价
                                                 </td>
                                                 <td>
-
                                                 </td>
                                             </c:if>
+                                            <td>
+                                                <fmt:formatDate value="${order_list.createTime}"
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
 
+                                                <c:if test="${order_list.status == 'V' || order_list.status == 'R' || order_list.status == 'C'}">
+                                                    <button type="button" class="close" value="${order_list.orderId}"
+                                                            aria-label="Close" onclick="getOrderId(this)"
+                                                            data-toggle="modal" data-target="#modal-danger1">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </c:if>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -222,6 +228,28 @@
 </div>
 <!-- /.modal -->
 
+<div class="modal modal-danger fade" id="modal-danger1" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确定删除订单吗？</h4>
+            </div>
+            <div class="modal-body">
+                <p>删除之后将不再显示该订单</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="delBtn" value="B">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <%--    同意弹出框--%>
 <div class="modal modal-info fade" id="modal-info3" tabindex="-1" role="dialog">
     <div class="modal-dialog">
@@ -257,7 +285,7 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable();
+        pagePath = '/order/myOrder';
         $('#example2').DataTable({
             'paging': true,
             'lengthChange': false,
@@ -270,84 +298,9 @@
                 userHide(0);
             }
         });
-
-        $('#goPayBtn').click(function () {
-            let $goPay = $('#goPay');
-            $goPay.attr('action', '/order/payLater');
-            $goPay.attr('method', 'post');
-            $goPay.submit();
-        });
-
-        $('#cfmBtn').click(function () {
-            $.ajax({
-                url: '/order/cfmGetItem',
-                type: 'post',
-                async: false,
-                data: {
-                    'orderId': orderId,
-                    'itemId': itemId
-                },
-                success: function (result) {
-                },
-                error: function (result) {
-                    console.log(result.responseText);
-                }
-            });
-            hideModal('info1');
-            $('#page').load('/order/myOrder');
-
-        });
-        $('#denyBtn').click(function () {
-            $.ajax({
-                url: '/order/cancel',
-                type: 'post',
-                async: false,
-                data: {
-                    'orderId': orderId
-                },
-                success: function (result) {
-                    alert('成功取消订单！');
-                },
-                error: function (result) {
-                    console.log(result);
-                }
-            });
-            hideModal('danger');
-            $('#page').load('/order/myOrder');
-        });
-
-        $('#submitComment').click(function () {
-            let comment = $('#commentDiv').find('input[name = comment]:checked').val();
-            console.log(comment);
-            console.log(orderId);
-            $.ajax({
-                url: '/user/comment',
-                async: false,
-                data: {
-                    'itemId': itemId,
-                    'orderId': orderId,
-                    'comment': comment
-                },
-                success: function (result) {
-                    if (result === '0') {
-                        alert('评价成功');
-                    }
-                },
-                error: function (result) {
-                    console.log(result)
-                }
-            });
-            hideModal('info3');
-            $('#page').load('/order/myOrder');
-        })
     });
 
-    function getOrderId(cfmBtn) {
-        itemId = $(cfmBtn).attr('itemid');
-        orderId = cfmBtn.value;
-        $('#orderToPay').val(orderId);
-    }
-
 </script>
+<script src="${pageContext.request.contextPath}/js/myOrder.js"></script>
 </body>
 </html>

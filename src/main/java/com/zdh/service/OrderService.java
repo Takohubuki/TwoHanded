@@ -30,4 +30,6 @@ public interface OrderService {
     ModelAndView payLater(String orderId, ModelAndView modelAndView);
 
     ModelAndView cancelOrder(String orderId, ModelAndView modelAndView);
+
+    void hideOrder(String orderId, String type);
 }

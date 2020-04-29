@@ -102,6 +102,11 @@
                                             <td>
                                                 <fmt:formatDate value="${soldList.createTime}"
                                                                 pattern="yyyy-MM-dd HH:mm"/>
+                                                <button type="button" class="close" value="${soldList.orderId}"
+                                                        aria-label="Close" onclick="getOrderId(this)"
+                                                        data-toggle="modal" data-target="#modal-danger1">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </td>
 
                                         </tr>
@@ -124,10 +129,32 @@
 <!-- /.content -->
 <div class="control-sidebar-bg"></div>
 
+<div class="modal modal-danger fade" id="modal-danger1" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">确定删除订单吗？</h4>
+            </div>
+            <div class="modal-body">
+                <p>删除之后将不再显示该订单</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="delBtn" value="S">确定</button>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <script>
 
     $(function () {
-        $('#example1').DataTable();
+        pagePath = '/user/mySoldOut';
         $('#example2').DataTable({
             'paging': true,
             'lengthChange': false,
@@ -137,10 +164,12 @@
             'autoWidth': false,
             'language': language,
             "createdRow": function (row, data, dataIndex) {
-                userHide(0);
+                mySoldOutHide(0);
             }
         });
     });
 </script>
+<script src="${pageContext.request.contextPath}/js/myOrder.js"></script>
+
 </body>
 </html>

@@ -74,4 +74,9 @@ public class OrderController {
     public ModelAndView cancelOrder(String orderId) {
         return orderService.cancelOrder(orderId, new ModelAndView());
     }
+
+    @RequestMapping("/hideOrder")
+    public void hideOrder(String orderId, String type) {
+        orderService.hideOrder(orderId, type);
+    }
 }
