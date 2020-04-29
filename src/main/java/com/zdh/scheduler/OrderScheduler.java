@@ -1,8 +1,10 @@
 package com.zdh.scheduler;
 
 import com.zdh.bean.Order;
+import com.zdh.bean.ScheduledTask;
 import com.zdh.mappers.OrderMapper;
 import com.zdh.service.ItemService;
+import com.zdh.service.ScheduledTaskService;
 import com.zdh.util.TimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +29,13 @@ public class OrderScheduler {
     @Resource
     private ItemService itemService;
 
-    //每隔30分钟检查一次
+    @Resource
+    private ScheduledTaskService scheduledTaskService;
+
+    /**
+     * 检查是否有过期未付订单
+     * 30分钟执行一次
+     */
     @Scheduled(cron = "0 0/30 * * * ?")
     public void cancelOrder() {
 
@@ -55,4 +63,56 @@ public class OrderScheduler {
 
         logger.info("处理完成");
     }
+
+    /**
+     * 检查超过4年的订单
+     * 并将其改为可删除状态
+     * 24小时执行一次
+     */
+    @Scheduled(cron = "0 0 0/24 * * ?")
+    public void deletableOrder() {
+
+        logger.info("开始检查可以删除的订单");
+
+        now = new Date();
+        Date expireDate;
+        List<Order> deletableOrder = new ArrayList<>();
+
+        List<Order> orderList = orderMapper.selectAllOrder();
+        for (Order order : orderList) {
+
+            expireDate = TimeUtils.yearsFrom(4, order.getUpdateTime());
+
+            if (expireDate.before(now)) {
+                order.setDisplay("E");
+                deletableOrder.add(order);
+            }
+
+        }
+
+        orderMapper.batchUpdate(deletableOrder);
+
+        logger.info("处理完成");
+    }
+
+    /**
+     * 检查可删除的订单
+     * 24小时执行一次
+     */
+    @Scheduled(cron = "0 0 0/24 * * ?")
+    public void batchDelOrder() {
+
+        ScheduledTask delOrder = scheduledTaskService.getTTaskByName("delOrder");
+        if (!delOrder.getSwich()) {
+            return;
+        }
+
+        logger.info("开始自动删除订单");
+
+        orderMapper.batchDelOrder();
+
+        logger.info("处理完成");
+    }
+
+
 }

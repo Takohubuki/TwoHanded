@@ -134,28 +134,28 @@ function manageHide(v) {//参数：输入要隐藏的列数，要查第几列，
 			var behind = $("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + parseInt(v) + ")").text();
 
 			if (ford !== "" && ford === behind) {
-				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + parseInt(v) + ")").hide();
-				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 1 + ")").hide();
-				$("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 5 + ")").hide();
-				mark = mark + 1;
-			} else if (ford !== behind) {
-				index = i - mark;
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + parseInt(v) + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + parseInt(v) + ")").attr("class", "marge");
+                $("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + parseInt(v) + ")").hide();
+                $("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 1 + ")").hide();
+                $("#example2 tr:gt(0):eq(" + (parseInt(i) + 1) + ") td:eq(" + 6 + ")").hide();
+                mark = mark + 1;
+            } else if (ford !== behind) {
+                index = i - mark;
+                $("#example2 tr:gt(0):eq(" + index + ") td:eq(" + parseInt(v) + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
+                $("#example2 tr:gt(0):eq(" + index + ") td:eq(" + parseInt(v) + ")").attr("class", "marge");
 
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 1 + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 1 + ")").attr("class", "marge");
+                $("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 1 + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
+                $("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 1 + ")").attr("class", "marge");
 
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 5 + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
-				$("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 5 + ")").attr("class", "marge");
+                $("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 6 + ")").attr("rowspan", mark + 1);//将当前的行加入属性rowspan，合并 mark+1行
+                $("#example2 tr:gt(0):eq(" + index + ") td:eq(" + 6 + ")").attr("class", "marge");
 
-				//rowspan 列上横跨， colspan 行上横跨
-				//后面的参数，表示横跨的单元格个数，
-				//合并单元格就是将其他的单元格隐藏（hide）,或删除（remove）。
-				//将一个单元格的rowspan 或colsspan 加大
+                //rowspan 列上横跨， colspan 行上横跨
+                //后面的参数，表示横跨的单元格个数，
+                //合并单元格就是将其他的单元格隐藏（hide）,或删除（remove）。
+                //将一个单元格的rowspan 或colsspan 加大
 
-				mark = 0;
-			}
+                mark = 0;
+            }
 		}
 	}
 }

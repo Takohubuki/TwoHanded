@@ -42,4 +42,10 @@ public interface OrderMapper {
     void commentOrder(@Param("orderId") String orderId, @Param("itemId") String itemId);
 
     void hideOrder(Map param);
+
+    void delOrder(String orderId);
+
+    void batchUpdate(List<Order> orders);
+
+    void batchDelOrder();
 }

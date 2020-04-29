@@ -294,4 +294,60 @@
   <update id="hideOrder" parameterType="java.util.Map">
     update `order` set display = #{type} where order_id = #{orderId}
   </update>
+
+  <delete id="delOrder" parameterType="java.lang.String">
+    delete from `order` where order_id = #{orderId}
+  </delete>
+
+  <update id="batchUpdate" parameterType="java.util.List">
+    <foreach collection="list" item="orders" separator=";">
+      update `order`
+      <set>
+        <if test="orders.orderId != null">
+          order_id = #{orders.orderId},
+        </if>
+        <if test="orders.sumPrice != null">
+          sum_price = #{orders.sumPrice},
+        </if>
+        <if test="orders.itemNum != null">
+          item_num = #{orders.itemNum},
+        </if>
+        <if test="orders.itemId != null">
+          item_id = #{orders.itemId},
+        </if>
+        <if test="orders.buyerId != null">
+          buyer_id = #{orders.buyerId},
+        </if>
+        <if test="orders.createTime != null">
+          create_time = #{orders.createTime},
+        </if>
+        <if test="orders.updateTime != null">
+          update_time = #{orders.updateTime},
+        </if>
+        <if test="orders.isPaid != null">
+          is_paid = #{orders.isPaid},
+        </if>
+        <if test="orders.isReceived != null">
+          is_received = #{orders.isReceived},
+        </if>
+        <if test="orders.isCanceled != null">
+          is_canceled = #{orders.isCanceled},
+        </if>
+        <if test="orders.isChecked != null">
+          is_checked = #{orders.isChecked},
+        </if>
+        <if test="orders.status != null">
+          `status` = #{orders.status},
+        </if>
+        <if test="orders.display != null">
+          display = #{orders.display},
+        </if>
+      </set>
+      where order_id = #{orders.orderId}
+    </foreach>
+  </update>
+
+  <delete id="batchDelOrder">
+    delete from `order` where display = 'E'
+  </delete>
 </mapper>

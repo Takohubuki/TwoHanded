@@ -42,11 +42,11 @@ public class ManagerServiceImpl implements ManagerService {
         Manager manager = managerMapper.selectByName(username);
         if (manager == null) {
             modelAndView.addObject("manager_message", "用户名错误！");
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("manage/login");
             return modelAndView;
         } else if (!PasswordUtils.passwordConfirm(manager.getPassword(), password)) {
             modelAndView.addObject("manager_message", "密码错误！");
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("manage/login");
             return modelAndView;
         }else if (PasswordUtils.passwordConfirm(manager.getPassword(),password)){
             session.setAttribute("manager",manager);
@@ -55,7 +55,7 @@ public class ManagerServiceImpl implements ManagerService {
              */
             return getGeneralSituation(modelAndView);
         }else {
-            modelAndView.setViewName("login");
+            modelAndView.setViewName("manage/login");
             return modelAndView;
         }
     }
@@ -63,7 +63,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ModelAndView logout(HttpSession session, ModelAndView modelAndView) {
         session.setAttribute("manager", null);
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("manage/login");
         return modelAndView;
     }
 
@@ -71,7 +71,7 @@ public class ManagerServiceImpl implements ManagerService {
     public ModelAndView order(ModelAndView modelAndView) {
         List<Order> orders = orderMapper.selectAllOrder();
         modelAndView.addObject("orderlist", orders);
-        modelAndView.setViewName("order");
+        modelAndView.setViewName("manage/order");
         return modelAndView;
     }
 
@@ -84,7 +84,7 @@ public class ManagerServiceImpl implements ManagerService {
     public ModelAndView manageMember(ModelAndView modelAndView) {
         List<Member> members = memberMapper.selectAllMember();
         modelAndView.addObject("memberlist", members);
-        modelAndView.setViewName("member");
+        modelAndView.setViewName("manage/member");
         return modelAndView;
     }
 
@@ -121,7 +121,7 @@ public class ManagerServiceImpl implements ManagerService {
         managerMapper.shutMember(sid);
         List<Member> members = managerMapper.selectAllMember();
         modelAndView.addObject("memberlist", members);
-        modelAndView.setViewName("member");
+        modelAndView.setViewName("manage/member");
         return modelAndView;
     }
 
@@ -130,7 +130,7 @@ public class ManagerServiceImpl implements ManagerService {
         managerMapper.activeMember(sid);
         List<Member> members = managerMapper.selectAllMember();
         modelAndView.addObject("memberlist", members);
-        modelAndView.setViewName("member");
+        modelAndView.setViewName("manage/member");
         return modelAndView;
     }
 

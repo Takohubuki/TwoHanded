@@ -24,4 +24,17 @@ public class TimeUtils {
         time = time + days * 24 * 60 * 60 * 1000;
         return new Date(time);
     }
+
+    public static Date monthsFrom(int months, Date date) {
+        long time = date.getTime();
+        time = time + months * 30 * 24 * 60 * 60 * 1000;
+        return new Date(time);
+    }
+
+    public static Date yearsFrom(int years, Date date) {
+        long time = date.getTime();
+        time = time + years * 12 * 30 * 24 * 60 * 60 * 1000;
+        return new Date(time);
+    }
+
 }

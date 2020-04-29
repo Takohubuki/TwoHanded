@@ -33,10 +33,10 @@
                                             单种商品总价
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
-                                            下单时间
-                                        </th>
-                                        <th class="sorting" tabindex="5" aria-controls="example2">
                                             订单状态
+                                        </th>
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                            下单时间
                                         </th>
 
                                     </tr>
@@ -59,31 +59,38 @@
                                             <td>
                                                     ${orderlist.sumPrice}
                                             </td>
-                                            <td>
-                                                <fmt:formatDate value="${orderlist.createTime}"
-                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
-                                            </td>
-                                            <c:if test="${orderlist.isCanceled == true}">
+                                            <c:if test="${orderlist.status == 'C'}">
                                                 <td>
                                                     已取消
                                                 </td>
                                             </c:if>
-                                            <c:if test="${orderlist.isCanceled == false && orderlist.isPaid == false}">
+                                            <c:if test="${orderlist.status == 'U'}">
                                                 <td>
                                                     待付款(24小时内未付款自动取消订单！)
                                                 </td>
                                             </c:if>
 
-                                            <c:if test="${orderlist.isPaid == true && orderlist.isReceived == false && orderlist.isCanceled == false}">
+                                            <c:if test="${orderlist.status == 'P'}">
                                                 <td>
                                                     待确认收货
                                                 </td>
                                             </c:if>
-                                            <c:if test="${orderlist.isPaid == true && orderlist.isReceived == true && orderlist.isCanceled == false}">
+                                            <c:if test="${orderlist.status == 'R' || orderlist.status == 'V'}">
                                                 <td>
                                                     完成
                                                 </td>
                                             </c:if>
+                                            <td>
+                                                <fmt:formatDate value="${orderlist.createTime}"
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
+                                                <c:if test="${orderlist.display == 'D'}">
+                                                    <button type="button" class="close" value="${orderlist.orderId}"
+                                                            aria-label="Close" onclick="getOrderId(this)"
+                                                            data-toggle="modal" data-target="#modal-danger">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </c:if>
+                                            </td>
 
                                         </tr>
                                     </c:forEach>
@@ -101,23 +108,70 @@
         <!-- /.col -->
     </div>
 
+    <div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确定删除订单吗？</h4>
+                </div>
+                <%--<div class="modal-body">
+                    <p>删除之后将不再显示该订单</p>
+                </div>--%>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" id="delBtn" value="D">确定</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
 </section>
 <script>
     $(function () {
-        $('#example1').DataTable();
+        let orderId;
+        url = '/manage/manageOrder';
         $('#example2').DataTable({
-            'paging'      : true,
+            'paging': true,
             'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            'language'    : language,
-            "createdRow"  : function( row, data, dataIndex ) {
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'language': language,
+            "createdRow": function (row, data, dataIndex) {
                 manageHide(0);
             }
+        });
+        $('#delBtn').click(function () {
+            let type = $('#delBtn').val();
+            $.ajax({
+                url: '/order/hideOrder',
+                type: 'post',
+                async: false,
+                data: {
+                    'orderId': orderId,
+                    'type': type
+                },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
+            hideModal('danger');
+            $('#page').load(url);
         })
     });
+
+    function getOrderId(Btn) {
+        orderId = Btn.value;
+    }
 
 </script>
 </html>

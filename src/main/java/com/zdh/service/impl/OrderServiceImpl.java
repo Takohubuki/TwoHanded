@@ -15,7 +15,6 @@ import com.zdh.service.OrderService;
 import com.zdh.util.AmountUtils;
 import com.zdh.util.Constant;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -279,14 +278,19 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void hideOrder(String orderId, String type) {
-        List<Order> orderByOrderId = orderMapper.getOrderByOrderId(orderId);
-        if (!StringUtils.isEmpty(orderByOrderId.get(0).getDisplay())) {
-            type = "D";
+
+        if ("D".equals(type)) {
+            orderMapper.delOrder(orderId);
+        } else {
+            List<Order> orderByOrderId = orderMapper.getOrderByOrderId(orderId);
+            if (!"U".equals(orderByOrderId.get(0).getDisplay())) {
+                type = "D";
+            }
+            Map param = new HashMap();
+            param.put("orderId", orderId);
+            param.put("type", type);
+            orderMapper.hideOrder(param);
         }
-        Map param = new HashMap();
-        param.put("orderId", orderId);
-        param.put("type", type);
-        orderMapper.hideOrder(param);
     }
 
     private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate) {
