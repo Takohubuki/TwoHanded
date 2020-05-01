@@ -45,8 +45,12 @@ public class OrderScheduler {
         Date expireDate;
         List<Order> orderToCancel = new ArrayList<>();
 
-
         List<Order> unpaidOrder = orderMapper.getUnpaidOrder();
+        if (unpaidOrder == null || unpaidOrder.size() <= 1) {
+            logger.info("无需处理");
+            return;
+        }
+
         for (Order order : unpaidOrder) {
             Date createTime = order.getCreateTime();
             expireDate = TimeUtils.daysFrom(1, createTime);
@@ -79,6 +83,11 @@ public class OrderScheduler {
         List<Order> deletableOrder = new ArrayList<>();
 
         List<Order> orderList = orderMapper.selectAllOrder();
+
+        if (orderList == null || orderList.size() <= 1) {
+            logger.info("没有符合条件的订单");
+            return;
+        }
         for (Order order : orderList) {
 
             expireDate = TimeUtils.yearsFrom(4, order.getUpdateTime());

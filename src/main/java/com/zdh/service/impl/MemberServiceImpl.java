@@ -423,4 +423,9 @@ public class MemberServiceImpl implements MemberService {
         return Constant.SUCCESS_CODE;
     }
 
+    @Override
+    public Member getMemberById(String sid) {
+        return memberMapper.selectByPrimaryKey(sid);
+    }
+
 }

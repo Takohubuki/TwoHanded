@@ -355,30 +355,31 @@
             </c:if>
         </div>
         <div class="col-md-3 single-right-left">
-            <!-- Widget: user widget style 1 -->
-            <div class="box box-widget widget-user-2">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-yellow">
-                    <div class="widget-user-image">
-                        <img class="img-circle"
-                             src="${pageContext.request.contextPath}/images/avatar/${publisher.avatar}"
-                             alt="User Avatar">
-                    </div>
-                    <!-- /.widget-user-image -->
-                    <h3 class="widget-user-username">${publisher.username}</h3>
-                    <h5 class="widget-user-desc">发布人</h5>
-                </div>
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-stacked">
-                        <li><a href="#">好评数 <span class="pull-right badge bg-green">${publisher.positiveComment}</span></a>
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle"
+                         src="${pageContext.request.contextPath}/images/avatar/${publisher.avatar}"
+                         alt="User profile picture">
+
+                    <h3 class="profile-username text-center">${publisher.username}</h3>
+
+                    <p class="text-muted text-center">发布人</p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>好评数</b> <a class="pull-right">${publisher.positiveComment}</a>
                         </li>
-                        <li><a href="#">差评数 <span
-                                class="pull-right badge bg-red">${publisher.negativeComment}</span></a>
+                        <li class="list-group-item">
+                            <b>差评数</b> <a class="pull-right">${publisher.negativeComment}</a>
                         </li>
-                        <li><a href="#">出售物品数量 <span class="pull-right badge bg-blue">${publisher.tradRecordNum}</span></a>
+                        <li class="list-group-item">
+                            <b>出售物品数量</b> <a class="pull-right">${publisher.tradRecordNum}</a>
                         </li>
                     </ul>
+
+                    <a href="#" class="btn btn-primary btn-block"><b>详情</b></a>
                 </div>
+                <!-- /.box-body -->
             </div>
         </div>
         <div class="clearfix"></div>

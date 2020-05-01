@@ -35,13 +35,25 @@
                                         <th class="sorting" tabindex="5" aria-controls="example2">
                                             注册时间
                                         </th>
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                            操作
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach var="memberlist" items="${memberlist}">
                                         <tr role="row">
                                             <td class="sorting">
-                                                    ${memberlist.sid}
+                                                <c:if test="${memberlist.status == 'U'}">
+                                                    <i class="fa fa-circle text-success"></i>
+                                                </c:if>
+                                                <c:if test="${memberlist.status == 'S'}">
+                                                    <i class="fa fa-circle text-danger"></i>
+                                                </c:if>
+                                                <c:if test="${memberlist.status == 'D'}">
+                                                    <i class="fa fa-circle text-yellow"></i>
+                                                </c:if>
+                                                <a href="javascript:userDetail('${memberlist.sid}')">${memberlist.sid}</a>
                                             </td>
                                             <td>
                                                     ${memberlist.username}
@@ -56,8 +68,13 @@
                                                     ${memberlist.phone}
                                             </td>
                                             <td>
-                                                <fmt:formatDate value="${memberlist.signinTime}" pattern="yyyy-MM-dd HH:mm:ss" type="Date" />
+                                                <fmt:formatDate value="${memberlist.signinTime}"
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
 
+                                            </td>
+                                            <td>
+                                                <button onclick="getUserId(this)" class="btn btn-danger">封禁</button>
+                                                <button>删除</button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -77,19 +94,27 @@
 
 </section>
 <script>
+    let userId;
+
+    function getUserId(btn) {
+        userId = btn.val();
+    }
+
+    function userDetail(sid) {
+        $('#page').load('${pageContext.request.contextPath}/user/manageUserProfile?userId=' + sid);
+    }
+
     $(function () {
-        $('#example1').DataTable();
         $('#example2').DataTable({
-            'paging'      : true,
+            'paging': true,
             'lengthChange': false,
-            'searching'   : true,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false,
-            'language'    : language
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'language': language
         })
     });
-
 
 </script>
 </html>

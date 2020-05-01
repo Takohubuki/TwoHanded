@@ -199,4 +199,12 @@ public class UserController {
     public String comment(HttpSession session, String comment, String itemId, String orderId) {
         return memberService.comment(session, comment, itemId, orderId);
     }
+
+    @RequestMapping("/manageUserProfile")
+    public ModelAndView manageUserProfile(String userId, ModelAndView modelAndView) {
+        Member memberById = memberService.getMemberById(userId);
+        modelAndView.addObject("memberDetail", memberById);
+        modelAndView.setViewName("manage/memberDetail");
+        return modelAndView;
+    }
 }

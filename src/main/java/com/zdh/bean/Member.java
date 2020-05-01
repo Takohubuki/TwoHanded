@@ -62,6 +62,16 @@ public class Member implements Serializable {
      */
     private Integer tradRecordNum;
 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getSid() {
         return sid;
     }

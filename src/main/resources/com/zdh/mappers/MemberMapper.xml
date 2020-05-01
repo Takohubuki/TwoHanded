@@ -34,11 +34,12 @@
     <result column="is_undercarriage" jdbcType="BIT" property="isUndercarriage"/>
     <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
     <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
+    <result column="status" jdbcType="VARCHAR" property="status"/>
   </resultMap>
 
   <sql id="Base_Column_List">
     sid, username, `password`, email, `name`, avatar, phone, is_active, signin_time,
-    recent_login, positive_comment, negative_comment, trad_record_num
+    recent_login, positive_comment, negative_comment, trad_record_num, `status`
   </sql>
 
   <insert id="insert" parameterType="com.zdh.bean.Member">
@@ -95,6 +96,9 @@
       <if test="tradRecordNum != null">
         trad_record_num,
       </if>
+      <if test="status != null">
+        `status`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sid != null">
@@ -135,6 +139,9 @@
       </if>
       <if test="tradRecordNum != null">
         #{tradRecordNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -253,6 +260,9 @@
       </if>
       <if test="tradRecordNum != null">
         trad_record_num = #{tradRecordNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
       </if>
     </set>
     where sid = #{sid,jdbcType=VARCHAR}
