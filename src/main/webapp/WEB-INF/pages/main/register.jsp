@@ -46,7 +46,7 @@
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="寝室 例如：2公寓202为2202" name="dormitory">
+                <input type="text" class="form-control" placeholder="电子邮箱" name="email">
                 <span class="glyphicon glyphicon-home form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

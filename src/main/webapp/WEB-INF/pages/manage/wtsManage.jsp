@@ -32,7 +32,7 @@
                                             商品单价
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            库存量
+                                            商品数量
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
                                             是否下架
@@ -85,7 +85,7 @@
                                                                 pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
                                             </td>
                                             <td>
-                                                    ${itemlist.publisher}
+                                                <a href="javascript:userDetail('${itemlist.publisher}')">${itemlist.publisher}</a>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal"
