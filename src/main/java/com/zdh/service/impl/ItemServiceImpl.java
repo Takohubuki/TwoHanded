@@ -388,4 +388,9 @@ public class ItemServiceImpl implements ItemService {
         itemMapper.wtsItem(serialNum);
         return Constant.SUCCESS_CODE;
     }
+
+    @Override
+    public List<Item> getItemByKind(String[] kindList) {
+        return itemMapper.getItemByKind(kindList);
+    }
 }

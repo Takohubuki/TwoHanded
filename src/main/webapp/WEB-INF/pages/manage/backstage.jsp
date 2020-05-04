@@ -22,7 +22,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dataTables.bootstrap.css">
 
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/select2.css">
+
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini">
 <div class="wrapper">

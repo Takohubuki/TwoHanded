@@ -135,4 +135,6 @@ public interface ItemService {
     ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView);
 
     String wtsItem(String serialNum, HttpSession session);
+
+    List<Item> getItemByKind(String[] kindList);
 }

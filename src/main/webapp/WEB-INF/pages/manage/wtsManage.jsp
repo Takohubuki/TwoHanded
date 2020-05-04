@@ -16,7 +16,26 @@
                     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <div class="form-group">
+                                    <label>Date:</label>
+
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right" id="datepicker">
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control select2" multiple="multiple" data-placeholder="选择商品分类"
+                                            style="width: 200px;" id="manageWtsByKind">
+                                    </select>
+                                </div>
+
+                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                       aria-describedby="example2_info">
                                     <thead>
                                     <tr role="row">
                                         <th class="sorting" tabindex="0" aria-controls="example2">
@@ -35,18 +54,15 @@
                                             商品数量
                                         </th>
                                         <th class="sorting" tabindex="5" aria-controls="example2">
-                                            是否下架
-                                        </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             商品编号
                                         </th>
-                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             发布时间
                                         </th>
-                                        <th class="sorting" tabindex="8" aria-controls="example2">
+                                        <th class="sorting" tabindex="7" aria-controls="example2">
                                             发布者
                                         </th>
-                                        <th>
+                                        <th class="sorting" tabindex="8" aria-controls="example2">
                                             操作
                                         </th>
                                     </tr>
@@ -70,19 +86,11 @@
                                                 ${itemlist.number}
                                             </td>
                                             <td>
-                                                <c:if test="${itemlist.isUndercarriage == false}">
-                                                    出售中
-                                                </c:if>
-                                                <c:if test="${itemlist.isUndercarriage == true}">
-                                                    已下架
-                                                </c:if>
-                                            </td>
-                                            <td>
                                                     ${itemlist.serialNum}
                                             </td>
                                             <td>
                                                 <fmt:formatDate value="${itemlist.publishTime}"
-                                                                pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
+                                                                pattern="yyyy-MM-dd HH:mm" type="Date"/>
                                             </td>
                                             <td>
                                                 <a href="javascript:userDetail('${itemlist.publisher}')">${itemlist.publisher}</a>
@@ -179,64 +187,18 @@
 </div>
 <!-- /.modal -->
 
+<!-- date-range-picker -->
+<script src="${pageContext.request.contextPath}/js/moment.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
+<!-- Select2 -->
+<script src="${pageContext.request.contextPath}/js/select2.full.js"></script>
+
 <script>
     url = '/manage/wtsitem';
-    $(function () {
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            'language': language
-        });
-        $('#itemKindMange').click(function () {
-            let html = '';
-            $.ajax({
-                url: '/manage/itemKind',
-                datatype: 'json',
-                async: false,
-                success: function (result) {
-                    console.log(result);
-                    for (let x in result) {
-                        html = html + '<div class="radio"><label><input type="radio" value="' + result[x] + '">' + result[x] + '</label></div>';
-                    }
-                    $('#modal-default1').find('.modal-body').html(html);
-                },
-                error: function (result) {
-                    console.log(result)
-                }
-            })
-        });
-        $('#addItemKind').click(function () {
-            hideModal('default1');
-            $('#modal-default2').modal('show');
-        });
-        $('#subNewKind').click(function () {
-            let val = $('#newKind').val();
-            $.ajax({
-                url: '/manage/addItemKind',
-                data: {
-                    'newKind': val
-                },
-                async: false,
-                success: function (result) {
-                    if (result === 0) {
-                        alert('添加成功');
-                    }
-                },
-                error: function (result) {
-                    console.log(result);
-                }
-            });
-            hideModal('default2');
-            $('#page').load('/manage/wtsitem');
-        });
-    });
-
-
 </script>
+<script src="${pageContext.request.contextPath}/js/wtsManage.js"></script>
 <script src="${pageContext.request.contextPath}/js/approvalPublishInfo.js"></script>
 
 </html>

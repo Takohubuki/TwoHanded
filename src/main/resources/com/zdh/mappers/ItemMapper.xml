@@ -471,4 +471,11 @@
     <update id="wtsItem" parameterType="java.lang.String">
         update item set `number` = `number` + 1 where serial_num = #{serialNum} and conditions = '求购'
     </update>
+    <select id="getItemByKind" resultMap="BaseResultMap">
+        select * from item where conditions = '出售' and is_undercarriage = '0'
+        and
+        <foreach collection="array" separator="or" item="kindList">
+            kind = #{kindList}
+        </foreach>
+    </select>
 </mapper>

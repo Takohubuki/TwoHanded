@@ -56,4 +56,6 @@ public interface ItemMapper {
     List<Item> select3MostViewedWts();
 
     Item getItemAndMember(String itemId);
+
+    List<Item> getItemByKind(String[] kindList);
 }

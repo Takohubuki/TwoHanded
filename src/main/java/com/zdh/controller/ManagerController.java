@@ -1,5 +1,8 @@
 package com.zdh.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.zdh.bean.Item;
+import com.zdh.service.ItemService;
 import com.zdh.service.ManagerService;
 import com.zdh.service.ScheduledTaskService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 
@@ -18,6 +22,9 @@ public class ManagerController {
 
     @Resource
     private ScheduledTaskService scheduledTaskService;
+
+    @Resource
+    private ItemService itemService;
 
     @RequestMapping("/managerlogin")
     public ModelAndView manager(ModelAndView modelAndView) {
@@ -164,5 +171,11 @@ public class ManagerController {
     @RequestMapping("/manage/delOrderSwitch")
     public void delOrderSwitch(String flag) {
         scheduledTaskService.switchDelOrder("delOrder", flag);
+    }
+
+    @RequestMapping(path = "/manage/manageWtsByKind", produces = {"application/json;charset=UTF-8"})
+    public String manageWtsByKind(String[] kindList) {
+        List<Item> itemByKind = itemService.getItemByKind(kindList);
+        return JSON.toJSONString(itemByKind);
     }
 }
