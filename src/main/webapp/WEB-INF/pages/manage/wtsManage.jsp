@@ -17,15 +17,25 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Date:</label>
+                                    <label>选择商品发布的时间段：</label>
 
                                     <div class="input-group date">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" class="form-control pull-right" id="datepicker">
+                                        <input type="text" class="form-control pull-right datepicker" id="startTime">
                                     </div>
                                     <!-- /.input group -->
+                                    -
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right datepicker" id="endTime">
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" id="manageWtsByTime">确定</button>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">

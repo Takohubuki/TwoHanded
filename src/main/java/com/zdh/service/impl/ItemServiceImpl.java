@@ -12,6 +12,7 @@ import com.zdh.mappers.MemberMapper;
 import com.zdh.service.ItemService;
 import com.zdh.service.NoticeService;
 import com.zdh.util.Constant;
+import com.zdh.util.TimeUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -392,5 +394,33 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<Item> getItemByKind(String[] kindList) {
         return itemMapper.getItemByKind(kindList);
+    }
+
+    public List<Item> getWtsItemByTime(Date startTime, Date endTime, Boolean isUndercarriage) {
+        Map param = new HashMap();
+        param.put("startTime", startTime);
+        param.put("endTime", endTime);
+        param.put("isUndercarriage", isUndercarriage);
+        return itemMapper.getWtsItemByTime(param);
+    }
+
+    @Override
+    public List<Item> manageWtsByTime(String startTime, String endTime) throws ParseException {
+        Date start = TimeUtils.parseStringToDate(startTime);
+        Date end = TimeUtils.parseStringToDate(endTime);
+        return getWtsItemByTime(start, end, false);
+    }
+
+    @Override
+    public List<Item> selectWtsAllByTime() {
+        return itemMapper.selectWtsAllByTime();
+    }
+
+    @Override
+    public List<Item> manageWtsByKindAndTime(String startTime, String endTime, String[] kindList) throws ParseException {
+        Date start = TimeUtils.parseStringToDate(startTime);
+        Date end = TimeUtils.parseStringToDate(endTime);
+
+        return itemMapper.getWtsItemByKindAndTime(start, end, kindList);
     }
 }

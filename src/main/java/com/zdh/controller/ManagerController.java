@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -175,7 +176,24 @@ public class ManagerController {
 
     @RequestMapping(path = "/manage/manageWtsByKind", produces = {"application/json;charset=UTF-8"})
     public String manageWtsByKind(String[] kindList) {
-        List<Item> itemByKind = itemService.getItemByKind(kindList);
+        List<Item> itemByKind;
+        if (kindList == null) {
+            itemByKind = itemService.selectWtsAllByTime();
+        } else {
+            itemByKind = itemService.getItemByKind(kindList);
+        }
         return JSON.toJSONString(itemByKind);
+    }
+
+    @RequestMapping(path = "/manage/manageWtsByTime", produces = {"application/json;charset=UTF-8"})
+    public String manageWtsByTime(String startTime, String endTime) throws ParseException {
+        List<Item> itemList = itemService.manageWtsByTime(startTime, endTime);
+        return JSON.toJSONString(itemList);
+    }
+
+    @RequestMapping(path = "/manage/manageWtsByKindAndTime", produces = {"application/json;charset=UTF-8"})
+    public String manageWtsByKindAndTime(String startTime, String endTime, String[] kindList) throws ParseException {
+        List<Item> itemList = itemService.manageWtsByKindAndTime(startTime, endTime, kindList);
+        return JSON.toJSONString(itemList);
     }
 }

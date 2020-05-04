@@ -1,8 +1,15 @@
 package com.zdh.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeUtils {
+    public static Date parseStringToDate(String time) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(Constant.YEAR_MONTH_DAY_DATE_PATTERN);
+        return sdf.parse(time);
+    }
+
     public static Date minsFromNow(int mins) {
         long currentTime = System.currentTimeMillis() + mins * 60 * 1000;
         return new Date(currentTime);

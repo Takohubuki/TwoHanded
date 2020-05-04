@@ -2,7 +2,9 @@ package com.zdh.mappers;
 
 import com.github.pagehelper.Page;
 import com.zdh.bean.Item;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,4 +60,8 @@ public interface ItemMapper {
     Item getItemAndMember(String itemId);
 
     List<Item> getItemByKind(String[] kindList);
+
+    List<Item> getWtsItemByTime(Map param);
+
+    List<Item> getWtsItemByKindAndTime(@Param("startTime") Date start, @Param("endTime") Date end, @Param("kindList") String[] kindList);
 }

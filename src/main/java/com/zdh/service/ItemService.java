@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 public interface ItemService {
@@ -137,4 +138,10 @@ public interface ItemService {
     String wtsItem(String serialNum, HttpSession session);
 
     List<Item> getItemByKind(String[] kindList);
+
+    List<Item> manageWtsByTime(String startTime, String endTime) throws ParseException;
+
+    List<Item> selectWtsAllByTime();
+
+    List<Item> manageWtsByKindAndTime(String startTime, String endTime, String[] kindList) throws ParseException;
 }
