@@ -12,15 +12,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="" />
-        <script>
-            addEventListener("load", function () {
-                setTimeout(hideURLbar, 0);
-            }, false);
-
-            function hideURLbar() {
-                window.scrollTo(0, 1);
-            }
-        </script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/font-awesome.css" rel="stylesheet">
@@ -158,7 +149,8 @@
                 <div class="modal_body_left modal_body_left1">
                     <h3 class="agileinfo_sign">注 册</h3>
 
-                    <form action="${pageContext.request.contextPath}/user/signup" method="post">
+                    <form action="${pageContext.request.contextPath}/user/signup" method="post" id="registerForm"
+                          enctype="multipart/form-data">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="学号" name="sid" required="">
                         </div>
@@ -169,8 +161,8 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <label class="control-label" for="email" id="emailError"></label>
                             <input type="text" placeholder="电子邮箱" name="email" required="" id="email">
+                            <label class="control-label" for="email" id="emailError" style="font-size: small"></label>
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">
@@ -179,11 +171,18 @@
                             <input type="password" placeholder="密码" name="password" id="password1" required="">
                         </div>
                         <div class="styled-input">
-                            <label class="control-label" for="password2" id="pwdValidate"></label>
                             <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2"
                                    required="">
+                            <label class="control-label" for="password2" id="pwdValidate"
+                                   style="font-size: small"></label>
                         </div>
-                        <input type="submit" value="注册">
+                        <div class="styled-input">
+                            <label class="control-label" for="identificationMaterial" id="">请上传学生证和本人同框的照片</label>
+                            <input type="file" name="image" id="identificationMaterial"
+                                   required="required">
+                        </div>
+
+                        <input type="button" class="btn btn-primary" value="注册" id="submitRegisterInfo">
                     </form>
 
                 </div>
@@ -407,83 +406,14 @@
 <script src="js/jquery.js"></script>
 <!-- //jquery -->
 
-<!-- 弹出登录注册框-->
-<script src="js/jquery.magnific-popup.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-
-    });
-</script>
-
-<!-- price range (top products) -->
-<script src="js/jquery-ui.js"></script>
-<script>
-    //<![CDATA[
-    $(window).load(function () {
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 9000,
-            values: [50, 6000],
-            slide: function (event, ui) {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
-
-    }); //]]>
-</script>
-<!-- //price range (top products) -->
-
-<!-- flexisel (for special offers) -->
-<script src="js/jquery.flexisel.js"></script>
-<script>
-    $(window).load(function () {
-        $("#flexiselDemo1").flexisel({
-            visibleItems: 3,
-            animationSpeed: 1000,
-            autoPlay: true,
-            autoPlaySpeed: 3000,
-            pauseOnHover: true,
-            enableResponsiveBreakpoints: true,
-            responsiveBreakpoints: {
-                portrait: {
-                    changePoint: 480,
-                    visibleItems: 1
-                },
-                landscape: {
-                    changePoint: 640,
-                    visibleItems: 2
-                },
-                tablet: {
-                    changePoint: 768,
-                    visibleItems: 2
-                }
-            }
-        });
-
-    });
-</script>
-<!-- //flexisel (for special offers) -->
+<!-- for bootstrap working -->
+<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
 
 <!-- 输入密码相同检测 -->
 <script src="js/common.js"></script>
 <!-- //检测结束 -->
 
-<!-- for bootstrap working -->
-<script src="js/bootstrap.js"></script>
-<!-- //for bootstrap working -->
 <!-- //js-files -->
 <script>
     let member = "<%=session.getAttribute("member")%>";

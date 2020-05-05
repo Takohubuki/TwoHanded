@@ -60,23 +60,43 @@ public class MemberServiceImpl implements MemberService {
     private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
     @Override
-    public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request) {
+    public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request, MultipartFile image) throws IOException {
         System.out.println("-----------------------开始注册------------------------");
-        /*
-        将新用户的信息分别存入member表和seller表中
-        密码经过md5加密之后存入数据库中
-         */
         String uri = request.getHeader("Referer");
 
         String password = member.getPassword();
         String s = DigestUtils.md5DigestAsHex(password.getBytes());
+
         member.setPassword(s);
         Date date = new Date();
         member.setRecentLogin(date);
         member.setSigninTime(date);
+        member.setStatus("V");
+
+        if (!image.isEmpty()) {
+            //上传文件路径
+            String path = request.getSession().getServletContext().getRealPath("/images/user/identificationPhoto");
+
+            System.out.println(path);
+            //上传文件名
+            String filename = image.getOriginalFilename();
+            assert filename != null;
+            File filepath = new File(path, filename);
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) {
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            image.transferTo(new File(path + File.separator + filename));
+            //输出文件上传最终的路径 测试查看
+            System.out.println(path + File.separator + filename);
+
+            member.setIdentificationMaterial("/images/user/identificationPhoto/" + filename);
+        }
 
         memberMapper.insertSelective(member);
         System.out.println("-----------------------注册成功-----------------------------");
+        member.setAvatar("default.jpg");
         session.setAttribute("member", member);
         modelAndView.setViewName("redirect:" + uri);
 
@@ -426,6 +446,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member getMemberById(String sid) {
         return memberMapper.selectByPrimaryKey(sid);
+    }
+
+    @Override
+    public List<Member> getUnidentifiedMember() {
+        return memberMapper.getUnidentifiedMember();
     }
 
 }

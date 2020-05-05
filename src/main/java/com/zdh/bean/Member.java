@@ -64,6 +64,16 @@ public class Member implements Serializable {
 
     private String status;
 
+    private String identificationMaterial;
+
+    public String getIdentificationMaterial() {
+        return identificationMaterial;
+    }
+
+    public void setIdentificationMaterial(String identificationMaterial) {
+        this.identificationMaterial = identificationMaterial;
+    }
+
     public String getStatus() {
         return status;
     }

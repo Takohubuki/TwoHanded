@@ -8,17 +8,20 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 public interface MemberService {
     /**
      * 用户注册
+     *
      * @param member
      * @param session
      * @param modelAndView
      * @param request
+     * @param image
      * @return
      */
-    public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request);
+    public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request, MultipartFile image) throws IOException;
 
     /**
      * 注销
@@ -120,4 +123,6 @@ public interface MemberService {
     String comment(HttpSession session, String comment, String itemId, String orderId);
 
     Member getMemberById(String sid);
+
+    List<Member> getUnidentifiedMember();
 }

@@ -54,6 +54,7 @@ public class UserController {
 
     /**
      * 用户注册
+     *
      * @param member
      * @param session
      * @param modelAndView
@@ -61,8 +62,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/signup")
-    public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request){
-        return memberService.signUp(member, session, modelAndView, request);
+    public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request, MultipartFile image) throws IOException {
+        return memberService.signUp(member, session, modelAndView, request, image);
     }
 
     /**

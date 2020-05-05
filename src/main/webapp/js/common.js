@@ -2,41 +2,44 @@ let searchName;
 var reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/; //邮箱正则表达式
 
 $(function () {
-    $('#password1').on('change', function () {
-        validatePassword();
+    let email = $('input[name = email]');
+
+    $('#password2').blur(function () {
+        if (validatePassword()) {
+            $('#pwdValidate').html('');
+            $('#pwdValidate').parent().removeClass('has-error');
+        } else {
+            $('#pwdValidate').html("两次输入的密码不一样！");
+            $('#pwdValidate').parent().addClass('has-error');
+        }
     });
-    $('#password2').on('change', function () {
-        validatePassword();
+    $('input[ name = email]').blur(function () {
+        if (validateEmail(email)) {
+            $('#emailError').html('');
+            $('#emailError').parent().removeClass('has-error');
+        } else {
+            $('#emailError').html('邮箱格式不正确！');
+            $('#emailError').parent().addClass('has-error');
+        }
     });
     $('#searchBtn').click(function () {
         searchName = $('#searchBar').val();
         window.sessionStorage.setItem('searchName', searchName);
     });
-    $('input[name = email]').blur(function () {
-        let email = $('input[name = email]');
-        validateEmail(email);
-    })
+    $('#submitRegisterInfo').click(function () {
+        if (validatePassword() && validateEmail(email)) {
+            $('#registerForm').submit();
+        }
+    });
 });
 
 function validatePassword() {
     var pass2 = $('#password2').val();
     var pass1 = $('#password1').val();
-    if (pass1 !== pass2) {
-        $('#pwdValidate').html($('#password2').validationMessage);
-        $('#password2').setCustomValidity("输入密码不匹配");
-    } else {
-        $('#pwdValidate').html('');
-        $('#password2').setCustomValidity('');
-    }
+    return pass1 === pass2;
 }
 
 function validateEmail(email) {
     console.log(email.val());
-    if (!reg.test(email.val())) {
-        $('#emailError').html(email.validationMessage);
-        email.setCustomValidity('邮箱格式不正确！');
-    } else {
-        $('#emailError').html('');
-        email.setCustomValidity('');
-    }
+    return reg.test(email.val());
 }

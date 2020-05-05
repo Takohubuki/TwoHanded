@@ -207,6 +207,7 @@ public class ManagerServiceImpl implements ManagerService {
         Integer item_wtb_sum_today = managerMapper.countItemWtbToday();
         Integer order_total = managerMapper.countOrderTotal();
         Integer infoToHandle = managerMapper.countInfoToHandle();
+        Integer memberToHandle = managerMapper.countMemberToIdentify();
 
         Map<String, Integer> param = new HashMap<>();
 
@@ -219,6 +220,7 @@ public class ManagerServiceImpl implements ManagerService {
         param.put("item_wtb_sum", countItemWtbOnCarriiage);
         param.put("order_today", orderedToday);
         param.put("infoToHandle", infoToHandle);
+        param.put("memberToHandle", memberToHandle);
 
         modelAndView.addObject("generalSit", param);
         modelAndView.setViewName("manage/backstage");

@@ -85,16 +85,44 @@
                         <i class="fa fa-dashboard"></i> <span>订单管理</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="javascript:publishInfo()">
-                        <i class="fa fa-circle-o"></i>
-                        待审核
-                        <c:if test="${generalSit.infoToHandle != 0}">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>待审核信息</span>
+                        <c:if test="${(generalSit.infoToHandle + generalSit.memberToHandle) != 0}">
                             <span class="pull-right-container">
-                                <span class="label label-danger pull-right">${generalSit.infoToHandle}</span>
+                                <span class="label label-danger pull-right">${generalSit.infoToHandle + generalSit.memberToHandle}</span>
                             </span>
                         </c:if>
                     </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="javascript:publishInfo()">
+                                <i class="fa fa-circle-o"></i>
+                                上架审核
+                                <c:if test="${generalSit.infoToHandle != 0}">
+                                    <span class="pull-right-container">
+                                        <span class="label label-danger pull-right">${generalSit.infoToHandle}</span>
+                                    </span>
+                                </c:if>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:identificationMember()">
+                                <i class="fa fa-circle-o"></i>
+                                实名信息审核
+                                <c:if test="${generalSit.memberToHandle != 0}">
+                                    <span class="pull-right-container">
+                                        <span class="label label-danger pull-right">${generalSit.memberToHandle}</span>
+                                    </span>
+                                </c:if>
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
                 </li>
 
             </ul>
@@ -262,14 +290,21 @@
     function order_manage() {
         $("#page").load("${pageContext.request.contextPath}/manage/manageOrder");
     }
+
     function wtsItem() {
         $("#page").load("${pageContext.request.contextPath}/manage/wtsitem");
     }
+
     function wtbItem() {
         $("#page").load("${pageContext.request.contextPath}/manage/wtbitem");
     }
+
     function publishInfo() {
         $('#page').load("${pageContext.request.contextPath}/manage/approval");
+    }
+
+    function identificationMember() {
+        $('#page').load('${pageContext.request.contextPath}/manage/memberIdentificationInfo');
     }
 
 </script>

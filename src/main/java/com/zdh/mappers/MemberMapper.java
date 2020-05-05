@@ -37,4 +37,6 @@ public interface MemberMapper {
     void goodComment(String sid);
 
     void badComment(String sid);
+
+    List<Member> getUnidentifiedMember();
 }

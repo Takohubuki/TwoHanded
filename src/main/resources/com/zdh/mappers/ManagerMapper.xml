@@ -57,6 +57,9 @@
     <select id="selectAllOrder" resultType="com.zdh.bean.Order">
         select * from `order` ;
     </select>
+    <select id="countMemberToIdentify" resultType="java.lang.Integer">
+        select count(*) from member where `status` = 'V';
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from manager
     where id = #{id,jdbcType=INTEGER}

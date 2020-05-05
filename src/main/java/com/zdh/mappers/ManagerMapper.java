@@ -53,4 +53,6 @@ public interface ManagerMapper {
     Integer countOrderTotal();
 
     Integer countInfoToHandle();
+
+    Integer countMemberToIdentify();
 }

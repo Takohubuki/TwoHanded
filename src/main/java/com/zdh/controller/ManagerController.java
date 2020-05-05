@@ -2,8 +2,10 @@ package com.zdh.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zdh.bean.Item;
+import com.zdh.bean.Member;
 import com.zdh.service.ItemService;
 import com.zdh.service.ManagerService;
+import com.zdh.service.MemberService;
 import com.zdh.service.ScheduledTaskService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +29,9 @@ public class ManagerController {
     @Resource
     private ItemService itemService;
 
+    @Resource
+    private MemberService memberService;
+
     @RequestMapping("/managerlogin")
     public ModelAndView manager(ModelAndView modelAndView) {
         modelAndView.setViewName("manage/login");
@@ -36,6 +41,15 @@ public class ManagerController {
     @RequestMapping("/manage/approval")
     public ModelAndView approval(ModelAndView modelAndView) {
         return managerService.approval(modelAndView);
+    }
+
+    @RequestMapping("/manage/memberIdentificationInfo")
+    public ModelAndView memberIdentificationInfo() {
+        List<Member> unidentifiedMember = memberService.getUnidentifiedMember();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("memberInfoList", unidentifiedMember);
+        modelAndView.setViewName("manage/identifyMember");
+        return modelAndView;
     }
 
     /**

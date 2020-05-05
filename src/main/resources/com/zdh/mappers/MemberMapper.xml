@@ -35,11 +35,12 @@
     <result column="undercarriage_reason" jdbcType="VARCHAR" property="undercarriageReason"/>
     <result column="viewed_times" jdbcType="INTEGER" property="viewedTimes"/>
     <result column="status" jdbcType="VARCHAR" property="status"/>
+    <result column="identification_material" jdbcType="VARCHAR" property="identificationMaterial"/>
   </resultMap>
 
   <sql id="Base_Column_List">
     sid, username, `password`, email, `name`, avatar, phone, is_active, signin_time,
-    recent_login, positive_comment, negative_comment, trad_record_num, `status`
+    recent_login, positive_comment, negative_comment, trad_record_num, `status`, identification_material
   </sql>
 
   <insert id="insert" parameterType="com.zdh.bean.Member">
@@ -88,17 +89,20 @@
         recent_login,
       </if>
       <if test="positiveComment != null">
-        positive_comment,
+          positive_comment,
       </if>
-      <if test="negativeComment != null">
-        negative_comment,
-      </if>
-      <if test="tradRecordNum != null">
-        trad_record_num,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
+        <if test="negativeComment != null">
+            negative_comment,
+        </if>
+        <if test="tradRecordNum != null">
+            trad_record_num,
+        </if>
+        <if test="status != null">
+            `status`,
+        </if>
+        <if test="identificationMaterial != null">
+            identification_material,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sid != null">
@@ -132,17 +136,20 @@
         #{recentLogin,jdbcType=TIMESTAMP},
       </if>
       <if test="positiveComment != null">
-        #{positiveComment,jdbcType=INTEGER},
+          #{positiveComment,jdbcType=INTEGER},
       </if>
-      <if test="negativeComment != null">
-        #{negativeComment,jdbcType=INTEGER},
-      </if>
-      <if test="tradRecordNum != null">
-        #{tradRecordNum,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
+        <if test="negativeComment != null">
+            #{negativeComment,jdbcType=INTEGER},
+        </if>
+        <if test="tradRecordNum != null">
+            #{tradRecordNum,jdbcType=INTEGER},
+        </if>
+        <if test="status != null">
+            #{status,jdbcType=INTEGER},
+        </if>
+        <if test="identificationMaterial != null">
+            #{identificationMaterial,jdbcType=VARCHAR}
+        </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zdh.bean.Member">
@@ -274,14 +281,18 @@
     select * from member;
   </select>
   <update id="updateTradRecord" parameterType="java.util.List">
-    <foreach collection="list" item="sellerList" separator=";">
-      update member set trad_record_num = trad_record_num + 1 where sid = #{sellerList}
-    </foreach>
+      <foreach collection="list" item="sellerList" separator=";">
+          update member set trad_record_num = trad_record_num + 1 where sid = #{sellerList}
+      </foreach>
   </update>
-  <update id="goodComment" parameterType="java.lang.String">
+    <update id="goodComment" parameterType="java.lang.String">
     update member set positive_comment = positive_comment + 1 where sid = #{sid}
   </update>
-  <update id="badComment" parameterType="java.lang.String">
+    <update id="badComment" parameterType="java.lang.String">
     update member set negative_comment = negative_comment + 1 where sid = #{sid}
   </update>
+
+    <select id="getUnidentifiedMember" resultMap="BaseResultMap">
+    select * from member where `status` = 'V';
+  </select>
 </mapper>
