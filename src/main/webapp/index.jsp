@@ -4,21 +4,22 @@
 
 <html>
 <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>HRBU二手交易</title>
-        <!-- Tell the browser to be responsive to screen width -->
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="keywords" content="" />
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-        <link href="css/font-awesome.css" rel="stylesheet">
-        <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
-    </head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HRBU二手交易</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800"
+          rel="stylesheet">
+</head>
 
 <body>
 <div class="header-most-top">
@@ -416,8 +417,16 @@
 
 <!-- //js-files -->
 <script>
-    let member = "<%=session.getAttribute("member")%>";
+    let message = "<%=session.getAttribute("message")%>";
+    let member_status = '';
+    if (message !== '' && message !== 'null') {
+        alert(message);
+        message = '';
+        member_status = 'V';
+    }
+    let member = '<%=session.getAttribute("member")%>';
     console.log(member);
+
 </script>
 <script src="js/cart.js"></script>
 

@@ -11,7 +11,8 @@ $(function () {
         console.log(member);
         if (member === "null") {
             alert("请先登录！");
-
+        } else if (member_status === 'V') {
+            alert('您还未通过实名认证！');
         } else {
             $.ajax({
                 url: "/order/addcart",

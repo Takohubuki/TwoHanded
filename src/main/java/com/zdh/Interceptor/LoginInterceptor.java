@@ -15,14 +15,20 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws ServletException, IOException {
         String requestURI = request.getRequestURI();
         HttpSession session = request.getSession();
-        if (requestURI.contains("login")){
+        if (requestURI.contains("login")) {
             return true;
         }
         Member member = (Member) session.getAttribute("member");
-        if (member == null && (requestURI.contains("/order") || requestURI.contains("publish") || requestURI.contains("cart"))){
-            request.setAttribute("message","请先登录");
-            request.getRequestDispatcher("/user/signin").forward(request,response);
-            return false;
+        if (requestURI.contains("/order") || requestURI.contains("publish")) {
+            if (member == null) {
+                request.setAttribute("message", "请先登录");
+                request.getRequestDispatcher("/user/signin").forward(request, response);
+                return false;
+            } else if ("V".equals(member.getStatus())) {
+                session.setAttribute("message", "您还未通过实名认证！");
+                request.getRequestDispatcher("/index/backindex").forward(request, response);
+                return false;
+            }
         }
         return true;
     }
