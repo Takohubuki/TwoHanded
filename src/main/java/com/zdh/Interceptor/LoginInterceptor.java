@@ -28,6 +28,10 @@ public class LoginInterceptor implements HandlerInterceptor {
                 session.setAttribute("message", "您还未通过实名认证！");
                 request.getRequestDispatcher("/index/backindex").forward(request, response);
                 return false;
+            } else if ("S".equals(member.getStatus())) {
+                session.setAttribute("message", "您已被封禁！");
+                request.getRequestDispatcher("/index/backindex").forward(request, response);
+                return false;
             }
         }
         return true;

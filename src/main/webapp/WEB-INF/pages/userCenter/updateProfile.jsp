@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
@@ -47,13 +48,21 @@
                     <label>修改密码</label>
                     <input type="password" class="form-control" name="password" placeholder="此处留空为不修改">
                 </div>
+
+                <c:if test="${member.status == 'V'}">
+                    <div class="form-group">
+                        <label>上传实名材料（学生证与本人同框的照片）</label>
+                        <input type="file" class="form-control" name="image">
+                    </div>
+                </c:if>
+
             </div>
-                <div class="footer">
-                    <button class="btn btn-primary" type="submit">保存</button>
-                </div>
-            </form>
-        </div>
+            <div class="footer">
+                <button class="btn btn-primary" type="submit">保存</button>
+            </div>
+        </form>
     </div>
+</div>
 
 </body>
 </html>
