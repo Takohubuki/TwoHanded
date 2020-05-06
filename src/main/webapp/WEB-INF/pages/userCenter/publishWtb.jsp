@@ -72,7 +72,7 @@
                                                     </td>
                                                     <td>
                                                         <fmt:formatDate value="${myWtb.publishTime}"
-                                                                        pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
+                                                                        pattern="yyyy-MM-dd HH:mm" type="Date"/>
 
                                                     </td>
                                                     <td>

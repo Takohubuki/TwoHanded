@@ -1,6 +1,8 @@
 package com.zdh.controller;
 
+import com.zdh.bean.Item;
 import com.zdh.bean.Member;
+import com.zdh.service.ItemService;
 import com.zdh.service.MemberService;
 import com.zdh.service.NoticeService;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @RequestMapping("/user")
 @RestController
@@ -25,6 +28,9 @@ public class UserController {
 
     @Resource
     private NoticeService noticeService;
+
+    @Resource
+    private ItemService itemService;
 
     /**
      * 用户登录
@@ -204,7 +210,12 @@ public class UserController {
     @RequestMapping("/manageUserProfile")
     public ModelAndView manageUserProfile(String userId, ModelAndView modelAndView) {
         Member memberById = memberService.getMemberById(userId);
+        List<Item> wts = itemService.getItemByUser(userId, "出售");
+        List<Item> wtb = itemService.getItemByUser(userId, "求购");
+
         modelAndView.addObject("memberDetail", memberById);
+        modelAndView.addObject("myWts", wts);
+        modelAndView.addObject("myWtb", wtb);
         modelAndView.setViewName("manage/memberDetail");
         return modelAndView;
     }

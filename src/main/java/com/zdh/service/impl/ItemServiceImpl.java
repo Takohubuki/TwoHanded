@@ -423,4 +423,14 @@ public class ItemServiceImpl implements ItemService {
 
         return itemMapper.getWtsItemByKindAndTime(start, end, kindList);
     }
+
+    @Override
+    public List<Item> getItemByUser(String userId, String condition) {
+        return itemMapper.getItemByUser(userId, condition);
+    }
+
+    @Override
+    public List<Item> getItemByUser(String userId) {
+        return itemMapper.getItemByUser(userId, null);
+    }
 }

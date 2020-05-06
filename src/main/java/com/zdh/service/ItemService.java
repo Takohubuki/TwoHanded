@@ -144,4 +144,8 @@ public interface ItemService {
     List<Item> selectWtsAllByTime();
 
     List<Item> manageWtsByKindAndTime(String startTime, String endTime, String[] kindList) throws ParseException;
+
+    List<Item> getItemByUser(String userId, String condition);
+
+    List<Item> getItemByUser(String userId);
 }

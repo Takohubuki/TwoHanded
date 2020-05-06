@@ -161,19 +161,21 @@ CREATE TABLE `member` (
   `positive_comment` int(11) DEFAULT '0' COMMENT '好评数',
   `negative_comment` int(11) DEFAULT '0' COMMENT '差评数',
   `trad_record_num` int(11) DEFAULT '0' COMMENT '成交次数',
-  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'U' COMMENT '用户状态 U正常 S封禁 D停止使用',
+  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'U' COMMENT '用户状态 U正常 S限制交易 D停止使用 V待实名',
+  `identification_material` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '用户上传的学生证照片',
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `member` */
 
-insert  into `member`(`sid`,`username`,`password`,`email`,`name`,`avatar`,`phone`,`is_active`,`signin_time`,`recent_login`,`positive_comment`,`negative_comment`,`trad_record_num`,`status`) values 
-('15022364','123','4297f44b13955235245b2497399d7a93','243510508@qq.com','但如果','default.jpg','15503125215',1,'2019-07-19 09:43:58','2020-04-29 22:55:44',0,0,5,'U'),
-('15025236','932421804','4297f44b13955235245b2497399d7a93','932421804@qq.com','开户行沟通','default.jpg','15504618935',1,'2019-07-19 09:44:22','2019-08-02 14:37:20',0,1,13,'U'),
-('16025426','admin','e10adc3949ba59abbe56e057f20f883e','Takohubuki@163.com','地方','default.jpg','15504618935',1,'2019-07-19 09:44:26','2020-05-01 20:46:30',0,0,6,'D'),
-('16044606','htd','4297f44b13955235245b2497399d7a93','932421804@qq.com','htd','default.jpg','15504618935',1,'2020-05-01 19:59:51','2020-05-01 19:59:51',0,0,0,'U'),
-('16046621','htd','4297f44b13955235245b2497399d7a93','670526299@qq.com','xlj','right.png','15504618935',1,'2019-07-19 09:44:31','2020-04-27 21:20:45',2,0,18,'U'),
-('18047828','热心人','4297f44b13955235245b2497399d7a93','a932421804@gmail.com','想吃肉','default.jpg','15504618935',1,'2019-07-19 09:44:31','2020-04-21 19:25:06',6,0,14,'S');
+insert  into `member`(`sid`,`username`,`password`,`email`,`name`,`avatar`,`phone`,`is_active`,`signin_time`,`recent_login`,`positive_comment`,`negative_comment`,`trad_record_num`,`status`,`identification_material`) values 
+('15022364','123','4297f44b13955235245b2497399d7a93','243510508@qq.com','但如果','default.jpg','15503125215',1,'2019-07-19 09:43:58','2020-04-29 22:55:44',0,0,5,'U',NULL),
+('15025236','932421804','4297f44b13955235245b2497399d7a93','932421804@qq.com','开户行沟通','default.jpg','15504618935',1,'2019-07-19 09:44:22','2019-08-02 14:37:20',0,1,13,'U',NULL),
+('16025425','。。。','202cb962ac59075b964b07152d234b70','Takohubuki@163.com','但如果','default.jpg','15504618935',1,'2020-05-06 16:24:39','2020-05-06 16:56:50',0,0,0,'V','/images/user/identificationPhoto/7A0E483C8E69A175C9DF8C512FDEBDA2.png'),
+('16025426','admin','e10adc3949ba59abbe56e057f20f883e','Takohubuki@163.com','地方','default.jpg','15504618935',1,'2019-07-19 09:44:26','2020-05-01 20:46:30',0,0,6,'D',NULL),
+('16044606','htd','4297f44b13955235245b2497399d7a93','932421804@qq.com','htd','default.jpg','15504618935',1,'2020-05-01 19:59:51','2020-05-01 19:59:51',0,0,0,'U',NULL),
+('16046621','htd','4297f44b13955235245b2497399d7a93','670526299@qq.com','xlj','right.png','15504618935',1,'2019-07-19 09:44:31','2020-04-27 21:20:45',2,0,18,'U',NULL),
+('18047828','热心人','4297f44b13955235245b2497399d7a93','a932421804@gmail.com','想吃肉','default.jpg','15504618935',1,'2019-07-19 09:44:31','2020-04-21 19:25:06',6,0,14,'S',NULL);
 
 /*Table structure for table `notice` */
 

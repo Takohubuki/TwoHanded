@@ -64,4 +64,6 @@ public interface ItemMapper {
     List<Item> getWtsItemByTime(Map param);
 
     List<Item> getWtsItemByKindAndTime(@Param("startTime") Date start, @Param("endTime") Date end, @Param("kindList") String[] kindList);
+
+    List<Item> getItemByUser(@Param("userId") String userId, @Param("condition") String condition);
 }

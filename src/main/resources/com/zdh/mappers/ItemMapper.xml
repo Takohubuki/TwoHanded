@@ -498,4 +498,10 @@
         </if>
 
     </select>
+    <select id="getItemByUser" resultMap="BaseResultMap">
+        select * from item where publisher = #{userId}
+        <if test="condition != null">
+            and conditions = #{condition}
+        </if>
+    </select>
 </mapper>

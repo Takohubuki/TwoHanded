@@ -266,6 +266,7 @@
 
 <script>
     let url = '';
+    let userId;
 
     /*
         function offitem(item_id) {

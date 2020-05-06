@@ -53,6 +53,10 @@
                                                 <c:if test="${memberlist.status == 'D'}">
                                                     <i class="fa fa-circle text-yellow"></i>
                                                 </c:if>
+                                                <c:if test="${memberlist.status == 'V'}">
+                                                    <i class="fa fa-circle text-orange"></i>
+                                                </c:if>
+
                                                 <a href="javascript:userDetail('${memberlist.sid}')">${memberlist.sid}</a>
                                             </td>
                                             <td>
@@ -73,8 +77,21 @@
 
                                             </td>
                                             <td>
-                                                <button onclick="getUserId(this)" class="btn btn-danger">封禁</button>
-                                                <button>删除</button>
+                                                <c:if test="${memberlist.status == 'U'}">
+                                                    <button onclick="getUserId(this)" class="btn btn-danger shutMember">
+                                                        封禁
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${memberlist.status == 'S'}">
+                                                    <button onclick="getUserId(this)"
+                                                            class="btn btn-success activeMember">解封
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${memberlist.status == 'D'}">
+                                                    <button onclick="getUserId(this)" class="btn btn-danger delMember">
+                                                        删除
+                                                    </button>
+                                                </c:if>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -94,7 +111,7 @@
 
 </section>
 <script>
-    let userId;
+    url = '/manage/member';
 
     function getUserId(btn) {
         userId = btn.val();
@@ -113,7 +130,32 @@
             'info': true,
             'autoWidth': false,
             'language': language
+        });
+
+        $('.shutMember').click(function () {
+            $.ajax({
+                url: '/manage/shutMember',
+                data: {
+                    'sid': userId
+                },
+                success: function (result) {
+                    $('#page').load(url);
+                }
+            })
+        });
+
+        $('.activeMember').click(function () {
+            $.ajax({
+                url: '/manage/activeMember',
+                data: {
+                    'sid': userId
+                },
+                success: function (result) {
+                    $('#page').load(url);
+                }
+            })
         })
+
     });
 
 </script>

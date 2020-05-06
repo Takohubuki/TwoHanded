@@ -146,7 +146,7 @@ public class ManagerController {
      * @param sid
      * @return
      */
-    @RequestMapping("/manage/shutmember")
+    @RequestMapping("/manage/shutMember")
     public ModelAndView shutMember(ModelAndView modelAndView, String sid){
         return managerService.shutMember(modelAndView, sid);
     }
@@ -158,7 +158,7 @@ public class ManagerController {
      * @param sid
      * @return
      */
-    @RequestMapping("/manage/activemember")
+    @RequestMapping("/manage/activeMember")
     public ModelAndView activeMember(ModelAndView modelAndView, String sid) {
         return managerService.activeMember(modelAndView, sid);
     }
