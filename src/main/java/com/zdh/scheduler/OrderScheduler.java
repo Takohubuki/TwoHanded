@@ -53,7 +53,7 @@ public class OrderScheduler {
 
         for (Order order : unpaidOrder) {
             Date createTime = order.getCreateTime();
-            expireDate = TimeUtils.daysFrom(1, createTime);
+            expireDate = TimeUtils.daysFrom(3, createTime);
             if (expireDate.before(now)) {
                 order.setIsCanceled(true);
                 orderToCancel.add(order);

@@ -98,7 +98,7 @@ public class UserController {
 
 
     /**
-     * 用户发布出售商品信息
+     * 用户管理出售商品信息
      * @param session
      * @param modelAndView
      * @return
@@ -110,7 +110,7 @@ public class UserController {
 
 
     /**
-     * 用户发布求购商品信息
+     * 用户管理求购商品信息
      * @param session
      * @param modelAndView
      * @return

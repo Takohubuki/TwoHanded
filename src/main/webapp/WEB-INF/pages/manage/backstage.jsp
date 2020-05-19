@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-datepicker.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/select2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini">
@@ -133,115 +134,140 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" id="page">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>今日平台概况</h1>
-        </section>
+        <div class="row">
+            <section class="content-header">
+                <h1>今日平台概况</h1>
+            </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-red-gradient">
-                            <div class="inner">
-                                <h3>${generalSit.member_sum}</h3>
-                                <p>注册用户数</p>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-red-gradient">
+                                <div class="inner">
+                                    <h3>${generalSit.member_sum}</h3>
+                                    <p>注册用户数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-user"></i>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>${generalSit.item_wts_sum}</h3>
+                                    <p>在售商品数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-yellow-active">
+                                <div class="inner">
+                                    <h3>${generalSit.item_wtb_sum}</h3>
+                                    <p>求购信息数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>${generalSit.order_today}</h3>
+                                    <p>今日完成订单</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-document"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3>${generalSit.loginToday}</h3>
+                                    <p>今日登录用户数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>${generalSit.item_wts_sum_today}</h3>
+                                    <p>今日发布出售数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-light-blue-gradient">
+                                <div class="inner">
+                                    <h3>${generalSit.item_wtb_sum_today}</h3>
+                                    <p>今日发布求购数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-book"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-blue-active">
+                                <div class="inner">
+                                    <h3>${generalSit.order_total}</h3>
+                                    <p>完成订单总数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-bar-chart"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-aqua">
-                            <div class="inner">
-                                <h3>${generalSit.item_wts_sum}</h3>
-                                <p>在售商品数</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-shopping-cart"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-yellow-active">
-                            <div class="inner">
-                                <h3>${generalSit.item_wtb_sum}</h3>
-                                <p>求购信息数</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-shopping-cart"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-green">
-                            <div class="inner">
-                                <h3>${generalSit.order_today}</h3>
-                                <p>今日完成订单</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-document"></i>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-yellow">
-                            <div class="inner">
-                                <h3>${generalSit.loginToday}</h3>
-                                <p>今日登录用户数</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-user"></i>
-                            </div>
-                        </div>
-                    </div>
+            </section>
+            <!-- /.content -->
+        </div>
 
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-aqua">
-                            <div class="inner">
-                                <h3>${generalSit.item_wts_sum_today}</h3>
-                                <p>今日发布出售数</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-md-2">
 
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-light-blue-gradient">
-                            <div class="inner">
-                                <h3>${generalSit.item_wtb_sum_today}</h3>
-                                <p>今日发布求购数</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-book"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-xs-6">
-                        <div class="small-box bg-blue-active">
-                            <div class="inner">
-                                <h3>${generalSit.order_total}</h3>
-                                <p>完成订单总数</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fa fa-bar-chart"></i>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-8">
+                <div>
+                    <label>选择年份</label>
+                    <select class="form-control selectpicker" title="" name="kind">
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                    </select>
+                </div>
+                <div>
+                    <canvas id="orderChart"></canvas>
                 </div>
             </div>
-        </section>
-        <!-- /.content -->
+            <div class="col-md-2">
+
+            </div>
+        </div>
+
     </div>
     <div class="control-sidebar-bg"></div>
 </div>
@@ -263,6 +289,9 @@
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 <script src="${pageContext.request.contextPath}/js/ordersRowspan.js"></script>
 <script src="${pageContext.request.contextPath}/js/modal.js"></script>
+<script src="${pageContext.request.contextPath}/js/chart.js"></script>
+<script src="${pageContext.request.contextPath}/js/orderChart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 <script>
     let url = '';
