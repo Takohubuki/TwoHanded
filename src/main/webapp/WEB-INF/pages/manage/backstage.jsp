@@ -251,14 +251,27 @@
 
             </div>
             <div class="col-md-8">
-                <div>
-                    <label>选择年份</label>
-                    <select class="form-control selectpicker" title="" name="kind">
-                        <option value="2019">2019</option>
-                        <option value="2018">2018</option>
-                        <option value="2017">2017</option>
+                <div class="col-sm-3">
+                    <label>选择统计方式</label>
+                    <select class="selectpicker" id="selectCondition">
+                        <option value="year" selected>按照年份统计</option>
+                        <option value="month">按照月份统计</option>
                     </select>
                 </div>
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-3" id="searchCondition">
+                    <div>
+                        <label>选择年份</label>
+                        <select class="selectpicker" id="yearPicker">
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div>
                     <canvas id="orderChart"></canvas>
                 </div>
@@ -278,20 +291,23 @@
 <!-- DataTables -->
 <script src="${pageContext.request.contextPath}/js/jquery.dataTables.js"></script>
 <script src="${pageContext.request.contextPath}/js/dataTables.bootstrap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 <!-- SlimScroll -->
 <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.zh-CN.js"></script>
 <!-- FastClick -->
 <script src="${pageContext.request.contextPath}/js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="${pageContext.request.contextPath}/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
+<script src="${pageContext.request.contextPath}/js/moment.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/dataTables.js"></script>
 <script src="${pageContext.request.contextPath}/js/ordersRowspan.js"></script>
 <script src="${pageContext.request.contextPath}/js/modal.js"></script>
 <script src="${pageContext.request.contextPath}/js/chart.js"></script>
 <script src="${pageContext.request.contextPath}/js/orderChart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 
 <script>
     let url = '';

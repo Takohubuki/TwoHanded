@@ -1,3 +1,15 @@
+let dateConfig = {
+    language: "zh-CN",
+    todayHighlight: true,
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    startView: 'days',
+    maxViewMode:'years',
+    minViewMode:'days',
+    startDate:moment().subtract(47,'month').toDate(),
+    endDate:moment().toDate()
+};
+
 function validateTime(startTime, endTime) {
     if (startTime === undefined || endTime === undefined) {
         return true;
@@ -77,10 +89,7 @@ $(function () {
     //Initialize Select2 Elements
     $('.select2').select2();
     //Date picker
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true
-    });
+    $('.datepicker').datepicker(dateConfig);
     $('.datepicker').on('change', function () {
         startTime = $('#startTime').val();
         endTime = $('#endTime').val();

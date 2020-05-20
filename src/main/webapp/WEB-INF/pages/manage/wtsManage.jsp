@@ -202,6 +202,7 @@
 <script src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.zh-CN.js"></script>
 <!-- Select2 -->
 <script src="${pageContext.request.contextPath}/js/select2.full.js"></script>
 

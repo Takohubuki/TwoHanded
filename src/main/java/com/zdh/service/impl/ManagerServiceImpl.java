@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
@@ -195,6 +195,53 @@ public class ManagerServiceImpl implements ManagerService {
         itemKind.setKindName(newKind);
         itemKindMapper.insertSelective(itemKind);
         return Constant.SUCCESS_CODE;
+    }
+
+    @Override
+    public String orderCount(String time){
+        List<Map> maps;
+        ArrayList result;
+        if (time.length() == 4){
+            maps = orderMapper.countOrderByYear(Integer.parseInt(time));
+            result = handleResultByMonths(maps);
+        }else {
+            maps = orderMapper.countOrderByMonth(time);
+            result = handleResultByDays(maps);
+        }
+
+        return JSON.toJSONString(result);
+    }
+
+    private ArrayList handleResultByDays(List<Map> maps){
+        ArrayList<Long> result = new ArrayList();
+
+        for (int i = 0; i < 31; i++) {
+            result.add(0l);
+        }
+
+        for (int i = 0; i < maps.size(); i++) {
+            Long o = (Long) maps.get(i).get("count(0)");
+            Integer days = (Integer) maps.get(i).get("day(update_time)");
+            result.set(days - 1, o);
+        }
+        return result;
+
+    }
+
+    private ArrayList handleResultByMonths(List<Map> maps){
+        ArrayList<Long> result = new ArrayList();
+
+        for (int i = 0; i < 12; i++) {
+            result.add(0l);
+        }
+
+        for (int i = 0; i < maps.size(); i++) {
+            Long o = (Long) maps.get(i).get("count(0)");
+            Integer months = (Integer) maps.get(i).get("month(update_time)");
+            result.set(months - 1, o);
+        }
+        return result;
+
     }
 
     private ModelAndView getGeneralSituation(ModelAndView modelAndView) {

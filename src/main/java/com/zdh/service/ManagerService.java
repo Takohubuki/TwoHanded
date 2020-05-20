@@ -3,6 +3,7 @@ package com.zdh.service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 
 public interface ManagerService {
 
@@ -59,4 +60,6 @@ public interface ManagerService {
     String itemKindManage();
 
     String addItemKind(String newKind);
+
+    String orderCount(String time) throws ParseException;
 }

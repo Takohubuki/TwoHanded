@@ -70,11 +70,11 @@
     </bean>
 
     <mvc:interceptors>
-        <bean class="com.zdh.Interceptor.LoginInterceptor">
-        </bean>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/manage/**"/>
             <bean class="com.zdh.Interceptor.LoginInterceptor">
+
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>

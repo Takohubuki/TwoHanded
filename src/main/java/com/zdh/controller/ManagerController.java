@@ -210,4 +210,10 @@ public class ManagerController {
         List<Item> itemList = itemService.manageWtsByKindAndTime(startTime, endTime, kindList);
         return JSON.toJSONString(itemList);
     }
+
+    @RequestMapping(path = "/manage/orderCount", produces = {"application/json;charset=UTF-8"})
+    public String orderCount(String time) throws ParseException {
+        return managerService.orderCount(time);
+    }
+
 }

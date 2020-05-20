@@ -1,5 +1,6 @@
 package com.zdh.mappers;
 
+import com.zdh.bean.Manager;
 import com.zdh.bean.Order;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,4 +49,8 @@ public interface OrderMapper {
     void batchUpdate(List<Order> orders);
 
     void batchDelOrder();
+
+    List<Map> countOrderByYear(int year);
+
+    List<Map> countOrderByMonth(String time);
 }
