@@ -48,6 +48,11 @@ $(function () {
             $searchCondition.html(selectYearHtml);
             $('#yearPicker').selectpicker('refresh');
             $('#yearPicker').selectpicker('render');
+            getOrderCount($('#yearPicker').val());
+            chartObj.data.datasets[0].data = completedOrder;
+            chartObj.data.datasets[1].data = canceledOrder;
+            chartObj.data.labels = months;
+            chartObj.update();
 
         }else {
             $searchCondition.html(selectMonthHtml);
@@ -58,6 +63,7 @@ $(function () {
 
                 getOrderCount(month);
                 chartObj.data.datasets[0].data = completedOrder;
+                chartObj.data.datasets[1].data = canceledOrder;
                 chartObj.data.labels = thirtyDays;
                 chartObj.update();
             });
@@ -66,6 +72,11 @@ $(function () {
 
     $('body').on('change', '#yearPicker', function () {
         getOrderCount($('#yearPicker').val());
+        chartObj.data.datasets[0].data = completedOrder;
+        chartObj.data.datasets[1].data = canceledOrder;
+        chartObj.data.labels = months;
+        chartObj.update();
+
     });
 
 })
@@ -78,9 +89,14 @@ function getOrderCount(time) {
         success: function (result) {
             console.log(result);
             completedOrder.splice(0, completedOrder.length);
-            for (let x in result){
-                completedOrder.push(result[x]);
+            canceledOrder.splice(0, canceledOrder.length);
+            for (let x in result.completedOrderList){
+                completedOrder.push(result.completedOrderList[x]);
             }
+            for (let x in result.canceledOrderList){
+                canceledOrder.push(result.canceledOrderList[x]);
+            }
+
         },
         error: function (result) {
             console.log(result);

@@ -50,7 +50,11 @@ public interface OrderMapper {
 
     void batchDelOrder();
 
-    List<Map> countOrderByYear(int year);
+    List<Map> countCompletedOrderByYear(int year);
 
-    List<Map> countOrderByMonth(String time);
+    List<Map> countCompletedOrderByMonth(String time);
+
+    List<Map> countCanceledOrderByYear(int year);
+
+    List<Map> countCanceledOrderByMonth(String time);
 }

@@ -352,11 +352,20 @@
     delete from `order` where display = 'E'
   </delete>
 
-  <select id="countOrderByYear" resultType="java.util.Map">
+  <select id="countCompletedOrderByYear" resultType="java.util.Map">
     select month(update_time), count(0) from `order` where `status` in ('V', 'R') and year(update_time) = #{year} group by month(update_time);
   </select>
 
-  <select id="countOrderByMonth" resultType="java.util.Map">
+  <select id="countCompletedOrderByMonth" resultType="java.util.Map">
     select day(update_time), count(0) from `order` where `status` in ('V', 'R') and CONCAT(YEAR(update_time),'-',month(update_time)) = #{time} group by day(update_time);
   </select>
+
+  <select id="countCanceledOrderByYear" resultType="java.util.Map">
+    select month(update_time), count(0) from `order` where `status` = 'C' and year(update_time) = #{year} group by month(update_time);
+  </select>
+
+  <select id="countCanceledOrderByMonth" resultType="java.util.Map">
+    select day(update_time), count(0) from `order` where `status` = 'C' and CONCAT(YEAR(update_time),'-',month(update_time)) = #{time} group by day(update_time);
+  </select>
+
 </mapper>

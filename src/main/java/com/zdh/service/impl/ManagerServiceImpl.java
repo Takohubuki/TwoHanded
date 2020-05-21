@@ -14,8 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -199,16 +197,26 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public String orderCount(String time){
+        HashMap<String, ArrayList> result = new HashMap<>();
         List<Map> maps;
-        ArrayList result;
+        ArrayList completedOrderList;
+        ArrayList canceledOrderList;
         if (time.length() == 4){
-            maps = orderMapper.countOrderByYear(Integer.parseInt(time));
-            result = handleResultByMonths(maps);
+            maps = orderMapper.countCompletedOrderByYear(Integer.parseInt(time));
+            completedOrderList = handleResultByMonths(maps);
+
+            maps = orderMapper.countCanceledOrderByYear(Integer.parseInt(time));
+            canceledOrderList = handleResultByMonths(maps);
         }else {
-            maps = orderMapper.countOrderByMonth(time);
-            result = handleResultByDays(maps);
+            maps = orderMapper.countCompletedOrderByMonth(time);
+            completedOrderList = handleResultByDays(maps);
+
+            maps = orderMapper.countCanceledOrderByMonth(time);
+            canceledOrderList = handleResultByDays(maps);
         }
 
+        result.put("completedOrderList", completedOrderList);
+        result.put("canceledOrderList", canceledOrderList);
         return JSON.toJSONString(result);
     }
 
