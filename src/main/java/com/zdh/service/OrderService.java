@@ -1,11 +1,13 @@
 package com.zdh.service;
 
 import com.zdh.bean.Item;
+import com.zdh.bean.Order;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface OrderService {
 
@@ -32,4 +34,6 @@ public interface OrderService {
     ModelAndView cancelOrder(String orderId, ModelAndView modelAndView);
 
     void hideOrder(String orderId, String type);
+
+    List<Order> manageOrderByTime(String startTime, String endTime);
 }

@@ -3,10 +3,8 @@ package com.zdh.controller;
 import com.alibaba.fastjson.JSON;
 import com.zdh.bean.Item;
 import com.zdh.bean.Member;
-import com.zdh.service.ItemService;
-import com.zdh.service.ManagerService;
-import com.zdh.service.MemberService;
-import com.zdh.service.ScheduledTaskService;
+import com.zdh.bean.Order;
+import com.zdh.service.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +29,10 @@ public class ManagerController {
 
     @Resource
     private MemberService memberService;
+
+    @Resource
+    private OrderService orderService;
+
 
     @RequestMapping("/managerlogin")
     public ModelAndView manager(ModelAndView modelAndView) {
@@ -215,5 +217,18 @@ public class ManagerController {
     public String orderCount(String time) throws ParseException {
         return managerService.orderCount(time);
     }
+
+    @RequestMapping(path = "/manage/manageWtbByTime", produces = {"application/json;charset=UTF-8"})
+    public String manageWtbByTime(String startTime, String endTime) throws ParseException {
+        List<Item> itemList = itemService.manageWtbByTime(startTime, endTime);
+        return JSON.toJSONString(itemList);
+    }
+
+    @RequestMapping(path = "/manage/manageOrderByTime", produces = {"application/json;charset=UTF-8"})
+    public String manageOrderByTime(String startTime, String endTime) throws ParseException {
+        List<Order> orderList = orderService.manageOrderByTime(startTime, endTime);
+        return JSON.toJSONString(orderList);
+    }
+
 
 }

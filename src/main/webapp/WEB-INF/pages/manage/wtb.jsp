@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <section class="content-header">
-    <h1>商品管理</h1>
+    <h1>求购信息</h1>
 </section>
 
 <section class="content">
@@ -15,7 +15,29 @@
                     <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                <div class="form-group">
+                                    <label>选择商品发布的时间段：</label>
+
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right datepicker" id="startTime">
+                                    </div>
+                                    <!-- /.input group -->
+                                    -
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right datepicker" id="endTime">
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" id="manageWtsByTime">确定</button>
+                                    </div>
+                                </div>
+
+                                <table id="wtbDataTable" class="table table-bordered table-hover dataTable" role="grid"
                                        aria-describedby="example2_info">
                                     <thead>
                                     <tr role="row">
@@ -32,15 +54,12 @@
 
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
-                                            是否下架
-                                        </th>
-                                        <th class="sorting" tabindex="5" aria-controls="example2">
                                             商品编号
                                         </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                        <th class="sorting" tabindex="5" aria-controls="example2">
                                             发布时间
                                         </th>
-                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                        <th class="sorting" tabindex="6" aria-controls="example2">
                                             发布者
                                         </th>
                                         <th>
@@ -65,14 +84,6 @@
                                                     ${itemlist.number}人愿意出售
                                             </td>
                                             <td>
-                                                <c:if test="${itemlist.isUndercarriage == false}">
-                                                    发布中
-                                                </c:if>
-                                                <c:if test="${itemlist.isUndercarriage == true}">
-                                                    已下架
-                                                </c:if>
-                                            </td>
-                                            <td>
                                                     ${itemlist.serialNum}
                                             </td>
                                             <td>
@@ -80,7 +91,7 @@
                                                                 pattern="yyyy-MM-dd HH:mm:ss" type="Date"/>
                                             </td>
                                             <td>
-                                                    ${itemlist.publisher}
+                                                <a href="javascript:userDetail('${itemlist.publisher}')">${itemlist.publisher}</a>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal"
@@ -135,20 +146,9 @@
 
 <script>
     url = '/manage/wtbitem';
-    $(function () {
-        $('#example1').DataTable();
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            'language': language
-        })
-    });
-
 </script>
+<script src="${pageContext.request.contextPath}/js/manage/wtbManage.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/approvalPublishInfo.js"></script>
 
 </html>

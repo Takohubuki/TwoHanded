@@ -1,14 +1,3 @@
-let dateConfig = {
-    language: "zh-CN",
-    todayHighlight: true,
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    startView: 'days',
-    maxViewMode:'years',
-    minViewMode:'days',
-    startDate:moment().subtract(47,'month').toDate(),
-    endDate:moment().toDate()
-};
 
 function validateTime(startTime, endTime) {
     if (startTime === undefined || endTime === undefined) {
@@ -68,6 +57,18 @@ $(function () {
     let kindList;
     let html1 = '';
     let html2 = '';
+    let wtsDateConfig = {
+        language: "zh-CN",
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        startView: 'days',
+        maxViewMode:'years',
+        minViewMode:'days',
+        startDate:moment().subtract(47,'month').toDate(),
+        endDate:moment().toDate()
+    };
+
     $.ajax({
         url: '/manage/itemKind',
         datatype: 'json',
@@ -89,13 +90,13 @@ $(function () {
     //Initialize Select2 Elements
     $('.select2').select2();
     //Date picker
-    $('.datepicker').datepicker(dateConfig);
+    $('.datepicker').datepicker(wtsDateConfig);
     $('.datepicker').on('change', function () {
         startTime = $('#startTime').val();
         endTime = $('#endTime').val();
     });
 
-    $('#example2').DataTable({
+    $('#wtsDataTable').DataTable({
         'paging': true,
         'lengthChange': false,
         'searching': true,
@@ -161,8 +162,8 @@ function userDetail(sid) {
 
 function reloadDatatable(result) {
     console.log(result);
-    $('#example2').DataTable().destroy();
-    $('#example2').DataTable({
+    $('#wtsDataTable').DataTable().destroy();
+    $('#wtsDataTable').DataTable({
         'paging': true,
         'lengthChange': false,
         'searching': true,
@@ -190,7 +191,7 @@ function reloadDatatable(result) {
         "columnDefs": [{
             "render": function (data, type, row) {
                 let html = '';
-                html = html + '<img src="/' + data + '" style="width: 80px;height: 75px">';
+                html = html + '<img src=' + data + '"/" style="width: 80px;height: 75px">';
                 return html;
             },
             "targets": 0

@@ -148,4 +148,6 @@ public interface ItemService {
     List<Item> getItemByUser(String userId, String condition);
 
     List<Item> getItemByUser(String userId);
+
+    List<Item> manageWtbByTime(String startTime, String endTime) throws ParseException;
 }

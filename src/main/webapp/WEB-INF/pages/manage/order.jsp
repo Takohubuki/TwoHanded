@@ -13,32 +13,54 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-body">
-                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div id="orderDataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
-                                       aria-describedby="example2_info">
+                                <div class="form-group">
+                                    <label>选择商品发布的时间段：</label>
+
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right datepicker" id="startTime">
+                                    </div>
+                                    <!-- /.input group -->
+                                    -
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right datepicker" id="endTime">
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-primary" id="manageWtsByTime">确定</button>
+                                    </div>
+                                </div>
+
+                                <table id="orderDataTable" class="table table-bordered table-hover dataTable" role="grid"
+                                       aria-describedby="orderDataTable_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting" tabindex="0" aria-controls="example2">
+                                        <th class="sorting" tabindex="0" aria-controls="orderDataTable">
                                             订单编号
                                         </th>
-                                        <th class="sorting" tabindex="1" aria-controls="example2">
+                                        <th class="sorting" tabindex="1" aria-controls="orderDataTable">
                                             买家ID
                                         </th>
-                                        <th class="sorting" tabindex="2" aria-controls="example2">
+                                        <th class="sorting" tabindex="2" aria-controls="orderDataTable">
                                             商品名称
                                         </th>
-                                        <th class="sorting" tabindex="3" aria-controls="example2">
+                                        <th class="sorting" tabindex="3" aria-controls="orderDataTable">
                                             商品数量
                                         </th>
-                                        <th class="sorting" tabindex="4" aria-controls="example2">
+                                        <th class="sorting" tabindex="4" aria-controls="orderDataTable">
                                             单种商品总价
                                         </th>
-                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                        <th class="sorting" tabindex="5" aria-controls="orderDataTable">
                                             订单状态
                                         </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                        <th class="sorting" tabindex="6" aria-controls="orderDataTable">
                                             下单时间
                                         </th>
 
@@ -51,7 +73,7 @@
                                                 ${orderlist.orderId}
                                             </td>
                                             <td>
-                                                ${orderlist.buyerId}
+                                                <a href="javascript:userDetail('${orderlist.buyerId}')">${orderlist.buyerId}</a>
                                             </td>
                                             <td>
                                                     ${orderlist.item.name}
@@ -140,77 +162,9 @@
         if (flag) {
             $('#delOrderSwitch').prop('checked', true);
         }
-        let orderId;
-        url = '/manage/manageOrder';
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            'language': language,
-            "createdRow": function (row, data, dataIndex) {
-                manageHide(0);
-            }
-        });
-        $('#delBtn').click(function () {
-            let type = $('#delBtn').val();
-            $.ajax({
-                url: '/order/hideOrder',
-                type: 'post',
-                async: false,
-                data: {
-                    'orderId': orderId,
-                    'type': type
-                },
-                success: function (result) {
-                    console.log(result);
-                },
-                error: function (result) {
-                    console.log(result);
-                }
-            });
-            hideModal('danger');
-            $('#page').load(url);
-        });
 
-        $('#delOrderSwitch').on('change', function () {
-            if (this.checked) {
-                $.ajax({
-                    url: '/manage/delOrderSwitch',
-                    data: {
-                        'flag': 'on'
-                    },
-                    success: function (result) {
-                        console.log(result);
-                    },
-                    error: function (result) {
-                        console.log(result);
-                    }
-
-                })
-            } else {
-                $.ajax({
-                    url: '/manage/delOrderSwitch',
-                    data: {
-                        'flag': 'off'
-                    },
-                    success: function (result) {
-                        console.log(result);
-                    },
-                    error: function (result) {
-                        console.log(result);
-                    }
-
-                })
-            }
-        })
     });
-
-    function getOrderId(Btn) {
-        orderId = Btn.value;
-    }
-
+    url = '/manage/manageOrder';
 </script>
+<script src="${pageContext.request.contextPath}/js/manage/orderManage.js"></script>
 </html>

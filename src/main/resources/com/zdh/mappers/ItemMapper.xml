@@ -486,6 +486,14 @@
         and publish_time &gt;= #{startTime} and publish_time &lt;= #{endTime}
     </select>
 
+    <select id="getWtbItemByTime" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from item where conditions = '求购'
+        <if test="isUndercarriage != null">
+            and is_undercarriage = #{isUndercarriage,jdbcType=BOOLEAN}
+        </if>
+        and publish_time &gt;= #{startTime} and publish_time &lt;= #{endTime}
+    </select>
+
     <select id="getWtsItemByKindAndTime" resultMap="BaseResultMap">
         select * from item where conditions = '出售' and is_undercarriage = '0' and publish_time &gt;= #{startTime} and
         publish_time &lt; #{endTime}

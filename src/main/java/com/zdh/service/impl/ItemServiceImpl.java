@@ -404,6 +404,15 @@ public class ItemServiceImpl implements ItemService {
         return itemMapper.getWtsItemByTime(param);
     }
 
+    public List<Item> getWtbItemByTime(Date startTime, Date endTime, Boolean isUndercarriage) {
+        Map param = new HashMap();
+        param.put("startTime", startTime);
+        param.put("endTime", endTime);
+        param.put("isUndercarriage", isUndercarriage);
+        return itemMapper.getWtbItemByTime(param);
+    }
+
+
     @Override
     public List<Item> manageWtsByTime(String startTime, String endTime) throws ParseException {
         Date start = TimeUtils.parseStringToDate(startTime);
@@ -433,4 +442,12 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> getItemByUser(String userId) {
         return itemMapper.getItemByUser(userId, null);
     }
+
+    @Override
+    public List<Item> manageWtbByTime(String startTime, String endTime) throws ParseException {
+        Date start = TimeUtils.parseStringToDate(startTime);
+        Date end = TimeUtils.parseStringToDate(endTime);
+        return getWtbItemByTime(start, end, false);
+    }
+
 }

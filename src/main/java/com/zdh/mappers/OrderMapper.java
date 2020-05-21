@@ -1,5 +1,6 @@
 package com.zdh.mappers;
 
+import com.zdh.bean.Item;
 import com.zdh.bean.Manager;
 import com.zdh.bean.Order;
 import org.apache.ibatis.annotations.Param;
@@ -57,4 +58,6 @@ public interface OrderMapper {
     List<Map> countCanceledOrderByYear(int year);
 
     List<Map> countCanceledOrderByMonth(String time);
+
+    List<Order> getOrderByTime(Map param);
 }

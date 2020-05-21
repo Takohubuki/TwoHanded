@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <section class="content-header">
-    <h1>商品管理</h1>
+    <h1>出售信息</h1>
     <button class="btn btn-primary" data-toggle="modal" data-target="#modal-default1" id="itemKindMange">分类管理</button>
 </section>
 
@@ -44,7 +44,7 @@
                                     </select>
                                 </div>
 
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                <table id="wtsDataTable" class="table table-bordered table-hover dataTable" role="grid"
                                        aria-describedby="example2_info">
                                     <thead>
                                     <tr role="row">
@@ -197,19 +197,13 @@
 </div>
 <!-- /.modal -->
 
-<!-- date-range-picker -->
-<script src="${pageContext.request.contextPath}/js/moment.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
-<!-- bootstrap datepicker -->
-<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.zh-CN.js"></script>
 <!-- Select2 -->
 <script src="${pageContext.request.contextPath}/js/select2.full.js"></script>
 
 <script>
     url = '/manage/wtsitem';
 </script>
-<script src="${pageContext.request.contextPath}/js/wtsManage.js"></script>
+<script src="${pageContext.request.contextPath}/js/manage/wtsManage.js"></script>
 <script src="${pageContext.request.contextPath}/js/approvalPublishInfo.js"></script>
 
 </html>

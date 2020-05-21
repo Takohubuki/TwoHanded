@@ -98,7 +98,7 @@ public class ManagerServiceImpl implements ManagerService {
     public ModelAndView manageWtsItem(ModelAndView modelAndView) {
         List<Item> items = itemMapper.selectWtsAllByTime();
         modelAndView.addObject("itemlist", items);
-        modelAndView.setViewName("manage/wtsManage");
+        modelAndView.setViewName("manage/wts");
         return modelAndView;
 
     }
@@ -107,7 +107,7 @@ public class ManagerServiceImpl implements ManagerService {
     public ModelAndView manageWtbItem(ModelAndView modelAndView) {
         List<Item> items = itemMapper.selectWtbAllByTime();
         modelAndView.addObject("itemlist", items);
-        modelAndView.setViewName("manage/wtbManage");
+        modelAndView.setViewName("manage/wtb");
         return modelAndView;
 
     }
@@ -117,7 +117,7 @@ public class ManagerServiceImpl implements ManagerService {
         managerMapper.offItem(itemId);
         List<Item> items = managerMapper.selectAllSellItems();
         modelAndView.addObject("itemlist", items);
-        modelAndView.setViewName("manage/wtsManage");
+        modelAndView.setViewName("manage/wts");
         return modelAndView;
 
     }
@@ -224,12 +224,12 @@ public class ManagerServiceImpl implements ManagerService {
         ArrayList<Long> result = new ArrayList();
 
         for (int i = 0; i < 31; i++) {
-            result.add(0l);
+            result.add(0L);
         }
 
-        for (int i = 0; i < maps.size(); i++) {
-            Long o = (Long) maps.get(i).get("count(0)");
-            Integer days = (Integer) maps.get(i).get("day(update_time)");
+        for (Map map : maps) {
+            Long o = (Long) map.get("count(0)");
+            Integer days = (Integer) map.get("day(update_time)");
             result.set(days - 1, o);
         }
         return result;
@@ -240,12 +240,12 @@ public class ManagerServiceImpl implements ManagerService {
         ArrayList<Long> result = new ArrayList();
 
         for (int i = 0; i < 12; i++) {
-            result.add(0l);
+            result.add(0L);
         }
 
-        for (int i = 0; i < maps.size(); i++) {
-            Long o = (Long) maps.get(i).get("count(0)");
-            Integer months = (Integer) maps.get(i).get("month(update_time)");
+        for (Map map : maps) {
+            Long o = (Long) map.get("count(0)");
+            Integer months = (Integer) map.get("month(update_time)");
             result.set(months - 1, o);
         }
         return result;

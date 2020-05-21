@@ -74,7 +74,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="javascript:wtsItem()"><i class="fa fa-circle-o"></i>出售商品</a>
+                            <a href="javascript:wtsItem()"><i class="fa fa-circle-o"></i>出售信息</a>
                         </li>
                         <li>
                             <a href="javascript:wtbItem()"><i class="fa fa-circle-o"></i>求购信息</a>
@@ -94,6 +94,9 @@
                                 <span class="label label-danger pull-right">${generalSit.infoToHandle + generalSit.memberToHandle}</span>
                             </span>
                         </c:if>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                     </a>
                     <ul class="treeview-menu">
                         <li>
@@ -309,6 +312,7 @@
 <script src="${pageContext.request.contextPath}/js/chart.js"></script>
 <script src="${pageContext.request.contextPath}/js/orderChart.js"></script>
 
+
 <script>
     let url = '';
     let userId;
@@ -351,6 +355,10 @@
 
     function identificationMember() {
         $('#page').load('${pageContext.request.contextPath}/manage/memberIdentificationInfo');
+    }
+
+    function userDetail(sid) {
+        $('#page').load('/user/manageUserProfile?userId=' + sid);
     }
 
 </script>

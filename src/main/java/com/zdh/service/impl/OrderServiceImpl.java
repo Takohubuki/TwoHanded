@@ -295,6 +295,15 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    @Override
+    public List<Order> manageOrderByTime(String startTime, String endTime) {
+        Map param = new HashMap();
+        param.put("startTime", startTime);
+        param.put("endTime", endTime);
+        return orderMapper.getOrderByTime(param);
+
+    }
+
     private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate) {
         //生成新订单
         Order new_order = new Order();
