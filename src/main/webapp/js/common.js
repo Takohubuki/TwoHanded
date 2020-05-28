@@ -25,6 +25,8 @@ $(function () {
     $('#searchBtn').click(function () {
         searchName = $('#searchBar').val();
         window.sessionStorage.setItem('searchName', searchName);
+        $('#searchForm').attr('action', '/items/searchbyname');
+        $('#searchForm').submit();
     });
     $('#submitRegisterInfo').click(function () {
         if (validatePassword() && validateEmail(email)) {

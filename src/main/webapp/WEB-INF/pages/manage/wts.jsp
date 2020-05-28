@@ -138,7 +138,7 @@
                 <h4 class="modal-title">确定要下架商品吗？</h4>
             </div>
             <div class="modal-body">
-                输入下架原因：（可以留空）：
+                输入下架原因：
                 <input type="text" id="denyReason" style="color: black"/>
                 <input type="hidden" id="denyId" name="id" class="hidden"/>
             </div>

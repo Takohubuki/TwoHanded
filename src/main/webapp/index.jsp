@@ -71,9 +71,9 @@
             </ul>
             <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="${pageContext.request.contextPath}/items/searchbyname" method="get">
-                    <input name="search" type="search" placeholder="想搜点什么？" required="" id="searchBar">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align" id="searchBtn">
+                <form action="" method="get" id="searchForm">
+                    <input name="searchName" type="search" placeholder="想搜点什么？" required="" id="searchBar">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" id="searchBtn">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
                 </form>
@@ -339,15 +339,12 @@
 
                                         </div>
                                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                <%--                                            <form action="#" method="post">--%>
                                             <fieldset>
                                                 <input type="hidden" name="itemId" value="${wts_item.serialNum}"/>
                                                 <input type="hidden" name="itemName" value="${wts_item.name}"/>
                                                 <input type="hidden" name="publisher" value="${wts_item.publisher}"/>
-                                                    <%--                                                    <input type="submit" name="submit" value="Add to cart" class="button" />--%>
                                                 <input type="submit" name="addcart" class="button" value="添加到购物车"/>
                                             </fieldset>
-                                                <%--                                            </form>--%>
                                         </div>
                                     </div>
                                 </div>
@@ -417,14 +414,20 @@
 
 <!-- //js-files -->
 <script>
-    let message = "<%=session.getAttribute("message")%>";
     let member_status = '';
-    if (message !== '' && message !== 'null') {
-        alert(message);
-        message = '';
-        member_status = 'V';
-    }
-    let member = '<%=session.getAttribute("member")%>';
+    let message;
+    let member;
+    $(function () {
+        member = '<%=session.getAttribute("member")%>';
+        message = "<%=session.getAttribute("message")%>";
+        if (message !== '' && message !== 'null') {
+            alert(message);
+            message = '';
+            member_status = 'V';
+        }
+
+
+    })
     console.log(member);
 
 </script>

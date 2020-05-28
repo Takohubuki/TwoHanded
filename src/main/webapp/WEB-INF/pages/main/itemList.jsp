@@ -92,9 +92,9 @@
             <!-- //header lists -->
             <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="${pageContext.request.contextPath}/items/searchbyname" method="get">
-                    <input name="search" type="search" placeholder="想搜点什么？" required="">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                <form action="" method="get" id="searchForm">
+                    <input name="searchName" type="search" placeholder="想搜点什么？" required="" id="searchBar">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" id="searchBtn">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
                 </form>
@@ -272,165 +272,190 @@
 					<i></i>
 				</span>
         </h3>
+        <div class="">
+            <a class="btn btn-block btn-social" id="sortByTime">
+                <i class="fa fa-sort-amount-desc" id="timeSortIcon"></i>
+                <label class="sortBtnText" id="timeSortText">按照发布时间降序</label>
+            </a>
+            <a class="btn btn-block btn-social" id="sortByClick">
+                <i class="fa fa-sort-amount-desc" id="clickSortIcon"></i>
+                <label class="sortBtnText" id="clickSortText">按照点击量降序</label>
+            </a>
+        </div>
+
         <!-- //tittle heading -->
         <!-- product right -->
         <div class="agileinfo-ads-display center-block">
-            <div class="wrapper" id="paging">
-                <!-- first section (nuts) -->
-                <c:if test="${wtsPageInfo != null}">
-                    <div class="product-sec1">
-                        <h3 class="heading-tittle">出售</h3>
-                        <div class="row">
-                            <c:forEach var="itemlist" items="${wtsPageInfo.list}">
-                                <div class="col-md-4 product-men">
-                                    <div class="men-pro-item simpleCart_shelfItem">
-                                        <div class="men-thumb-item">
-                                            <img src="${pageContext.request.contextPath}/${itemlist.image}" alt=""
-                                                 style="width: 159px;height: 150px">
-                                            <div class="men-cart-pro">
-                                                <div class="inner-men-cart-pro">
-                                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}"
-                                                       class="link-product-add-cart">详情</a>
+            <div class="wrapper">
+                <div class="row" id="itemInfoPaging">
+                    <!-- first section (nuts) -->
+                    <c:if test="${wtsPageInfo != null}">
+                        <div class="product-sec1">
+                            <h3 class="heading-tittle">出售</h3>
+                            <div class="row">
+                                <c:forEach var="itemlist" items="${wtsPageInfo.list}">
+                                    <div class="col-md-4 product-men">
+                                        <div class="men-pro-item simpleCart_shelfItem">
+                                            <div class="men-thumb-item">
+                                                <img src="${pageContext.request.contextPath}/${itemlist.image}" alt=""
+                                                     style="width: 159px;height: 150px">
+                                                <div class="men-cart-pro">
+                                                    <div class="inner-men-cart-pro">
+                                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}"
+                                                           class="link-product-add-cart">详情</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="item-info-product ">
-                                            <h4>
-                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}">${itemlist.name}</a>
-                                            </h4>
-                                            <div class="info-product-price">
-                                                <span class="item_price">￥${itemlist.price}</span>
+                                            <div class="item-info-product ">
+                                                <h4>
+                                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}">${itemlist.name}</a>
+                                                </h4>
+                                                <div class="info-product-price">
+                                                    <span class="item_price">￥${itemlist.price}</span>
+
+                                                </div>
+                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                        <%--                                    <form action="#" method="post">--%>
+                                                    <fieldset>
+                                                        <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
+                                                        <input type="hidden" name="itemName" value="${itemlist.name}"/>
+                                                        <input type="hidden" name="publisher"
+                                                               value="${itemlist.publisher}"/>
+                                                        <input type="submit" name="addcart" class="button" value="添加到购物车"/>
+                                                    </fieldset>
+                                                </div>
 
                                             </div>
-                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                    <%--                                    <form action="#" method="post">--%>
-                                                <fieldset>
-                                                    <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
-                                                    <input type="hidden" name="itemName" value="${itemlist.name}"/>
-                                                    <input type="hidden" name="publisher"
-                                                           value="${itemlist.publisher}"/>
-                                                    <input type="submit" name="addcart" class="button" value="添加到购物车"/>
-                                                </fieldset>
-                                            </div>
-
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        <div class="row">
-                            <ul class="pagination">
-                                <c:if test="${!wtsPageInfo.isFirstPage}">
-                                    <li>
-                                        <a href="javascript:queryDeviceRecords(${wtsPageInfo.navigateFirstPage});">首页</a>
-                                    </li>
-                                    <li><a href="javascript:queryDeviceRecords(${wtsPageInfo.prePage});">上一页</a></li>
-                                </c:if>
-                                <c:forEach items="${wtsPageInfo.navigatepageNums}" var="navigatepageNum">
-
-                                    <c:if test="${navigatepageNum==wtsPageInfo.pageNum}">
-                                        <li class="active"><a
-                                                href="javascript:queryAllDevices(${navigatepageNum});">${navigatepageNum}</a>
-                                        </li>
-                                    </c:if>
-                                    <c:if test="${navigatepageNum!=wtsPageInfo.pageNum}">
-                                        <li>
-                                            <a href="javascript:queryDeviceRecords(${navigatepageNum});">${navigatepageNum}</a>
-                                        </li>
-                                    </c:if>
                                 </c:forEach>
-                                <c:if test="${!wtsPageInfo.isLastPage}">
-                                    <li><a href="javascript:queryDeviceRecords(${wtsPageInfo.nextPage});">下一页</a></li>
-                                    <li>
-                                        <a href="javascript:queryDeviceRecords(${wtsPageInfo.navigateLastPage});">最后一页</a>
-                                    </li>
-                                </c:if>
-                            </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+                                    <ul class="pagination">
+                                        <c:if test="${!wtsPageInfo.isFirstPage}">
+                                            <li>
+                                                <a href="javascript:queryDeviceRecords(${wtsPageInfo.navigateFirstPage}, 'wts');">首页</a>
+                                            </li>
+                                            <li><a href="javascript:queryDeviceRecords(${wtsPageInfo.prePage}, 'wts');">上一页</a></li>
+                                        </c:if>
+                                        <c:forEach items="${wtsPageInfo.navigatepageNums}" var="navigatepageNum">
 
+                                            <c:if test="${navigatepageNum == wtsPageInfo.pageNum}">
+                                                <li class="active"><a
+                                                        href="javascript:queryAllDevices(${navigatepageNum});">${navigatepageNum}</a>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${navigatepageNum != wtsPageInfo.pageNum}">
+                                                <li>
+                                                    <a href="javascript:queryDeviceRecords(${navigatepageNum}, 'wts');">${navigatepageNum}</a>
+                                                </li>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${!wtsPageInfo.isLastPage}">
+                                            <li><a href="javascript:queryDeviceRecords(${wtsPageInfo.nextPage}, 'wts');">下一页</a></li>
+                                            <li>
+                                                <a href="javascript:queryDeviceRecords(${wtsPageInfo.navigateLastPage}, 'wts');">最后一页</a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-2"></div>
+
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </c:if>
-                <!-- //first section (nuts) -->
+                    </c:if>
+                    <!-- //first section (nuts) -->
 
-                <!-- third section (oils) -->
-                <c:if test="${wtbPageInfo != null}">
-                    <div class="product-sec1" id="paging">
-                        <h3 class="heading-tittle">出售</h3>
-                        <div class="row">
-                            <c:forEach var="itemlist" items="${wtbPageInfo.list}">
-                                <div class="col-md-4 product-men">
-                                    <div class="men-pro-item simpleCart_shelfItem">
-                                        <div class="men-thumb-item">
-                                            <img src="${pageContext.request.contextPath}/${itemlist.image}" alt=""
-                                                 style="width: 159px;height: 150px">
-                                            <div class="men-cart-pro">
-                                                <div class="inner-men-cart-pro">
-                                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}"
-                                                       class="link-product-add-cart">详情</a>
+                    <!-- third section (oils) -->
+                    <c:if test="${wtbPageInfo != null}">
+                        <div class="product-sec1">
+                            <h3 class="heading-tittle">求购</h3>
+                            <div class="row">
+                                <c:forEach var="itemlist" items="${wtbPageInfo.list}">
+                                    <div class="col-md-4 product-men">
+                                        <div class="men-pro-item simpleCart_shelfItem">
+                                            <div class="men-thumb-item">
+                                                <img src="${pageContext.request.contextPath}/${itemlist.image}" alt=""
+                                                     style="width: 159px;height: 150px">
+                                                <div class="men-cart-pro">
+                                                    <div class="inner-men-cart-pro">
+                                                        <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}"
+                                                           class="link-product-add-cart">详情</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="item-info-product ">
-                                            <h4>
-                                                <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}">${itemlist.name}</a>
-                                            </h4>
-                                            <div class="info-product-price">
-                                                <span class="item_price">￥${itemlist.price}</span>
+                                            <div class="item-info-product ">
+                                                <h4>
+                                                    <a href="${pageContext.request.contextPath}/items/singleitem?itemId=${itemlist.serialNum}">${itemlist.name}</a>
+                                                </h4>
+                                                <div class="info-product-price">
+                                                    <span class="item_price">￥${itemlist.price}</span>
+
+                                                </div>
+                                                <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                                    <fieldset>
+                                                        <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
+                                                        <input type="hidden" name="itemName" value="${itemlist.name}"/>
+                                                        <input type="hidden" name="publisher"
+                                                               value="${itemlist.publisher}"/>
+                                                    </fieldset>
+                                                </div>
 
                                             </div>
-                                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                                <fieldset>
-                                                    <input type="hidden" name="itemId" value="${itemlist.serialNum}"/>
-                                                    <input type="hidden" name="itemName" value="${itemlist.name}"/>
-                                                    <input type="hidden" name="publisher"
-                                                           value="${itemlist.publisher}"/>
-                                                    <c:if test="${itemlist.conditions == '出售'}">
-                                                        <input type="submit" name="addcart" class="button"
-                                                               value="添加到购物车"/>
-                                                    </c:if>
-                                                </fieldset>
-                                            </div>
-
                                         </div>
                                     </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                        <div class="row">
-                            <ul class="pagination">
-                                <c:if test="${!wtbPageInfo.isFirstPage}">
-                                    <li>
-                                        <a href="javascript:queryDeviceRecords(${wtbPageInfo.navigateFirstPage});">首页</a>
-                                    </li>
-                                    <li><a href="javascript:queryDeviceRecords(${wtbPageInfo.prePage});">上一页</a></li>
-                                </c:if>
-                                <c:forEach items="${wtbPageInfo.navigatepageNums}" var="navigatepageNum">
-
-                                    <c:if test="${navigatepageNum == wtbPageInfo.pageNum}">
-                                        <li class="active"><a
-                                                href="javascript:queryAllDevices(${navigatepageNum});">${navigatepageNum}</a>
-                                        </li>
-                                    </c:if>
-                                    <c:if test="${navigatepageNum != wtbPageInfo.pageNum}">
-                                        <li>
-                                            <a href="javascript:queryDeviceRecords(${navigatepageNum});">${navigatepageNum}</a>
-                                        </li>
-                                    </c:if>
                                 </c:forEach>
-                                <c:if test="${!wtbPageInfo.isLastPage}">
-                                    <li><a href="javascript:queryDeviceRecords(${wtbPageInfo.nextPage});">下一页</a></li>
-                                    <li>
-                                        <a href="javascript:queryDeviceRecords(${wtbPageInfo.navigateLastPage});">最后一页</a>
-                                    </li>
-                                </c:if>
-                            </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+                                    <ul class="pagination">
+                                        <c:if test="${!wtbPageInfo.isFirstPage}">
+                                            <li>
+                                                <a href="javascript:queryDeviceRecords(${wtbPageInfo.navigateFirstPage}, 'wtb');">首页</a>
+                                            </li>
+                                            <li><a href="javascript:queryDeviceRecords(${wtbPageInfo.prePage}, 'wtb');">上一页</a></li>
+                                        </c:if>
+                                        <c:forEach items="${wtbPageInfo.navigatepageNums}" var="navigatepageNum">
 
+                                            <c:if test="${navigatepageNum == wtbPageInfo.pageNum}">
+                                                <li class="active"><a
+                                                        href="javascript:queryAllDevices(${navigatepageNum}, 'wtb');">${navigatepageNum}</a>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${navigatepageNum != wtbPageInfo.pageNum}">
+                                                <li>
+                                                    <a href="javascript:queryDeviceRecords(${navigatepageNum}, 'wtb');">${navigatepageNum}</a>
+                                                </li>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${!wtbPageInfo.isLastPage}">
+                                            <li><a href="javascript:queryDeviceRecords(${wtbPageInfo.nextPage}, 'wtb');">下一页</a></li>
+                                            <li>
+                                                <a href="javascript:queryDeviceRecords(${wtbPageInfo.navigateLastPage}, 'wtb');">最后一页</a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </c:if>
-                <!-- //third section (oils) -->
+                    </c:if>
+                    <!-- //third section (oils) -->
+
+                    <c:if test="${wtbPageInfo == null && wtsPageInfo == null}">
+                        <div class="product-sec1">
+                            <h3 class="heading-tittle">没有找到相关商品！</h3>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </c:if>
+
+                </div>
 
             </div>
         </div>
@@ -446,25 +471,6 @@
 <script src="${pageContext.request.contextPath}/js/jquery-2.1.4.min.js"></script>
 <!-- //jquery -->
 
-<!-- popup modal (for signin & signup)-->
-<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.popup-with-zoom-anim').magnificPopup({
-            type: 'inline',
-            fixedContentPos: false,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            closeBtnInside: true,
-            preloader: false,
-            midClick: true,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in'
-        });
-
-    });
-</script>
-
 <!-- imagezoom -->
 <script src="${pageContext.request.contextPath}/js/imagezoom.js"></script>
 <!-- //imagezoom -->
@@ -475,17 +481,57 @@
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 
 <script type="text/javascript">
+    function changeIcon(selector, type) {
+        let $iconToChange = $('#' + selector);
+        if (type === 'asc'){
+            $iconToChange.removeClass('fa-sort-amount-desc');
+            $iconToChange.addClass('fa-sort-amount-asc');
+        }else {
+            $iconToChange.removeClass('fa-sort-amount-asc');
+            $iconToChange.addClass('fa-sort-amount-desc');
+        }
+    }
+
     $(function () {
         searchName = window.sessionStorage.getItem('searchName');
+
+        $('#sortByTime').click(function () {
+            if($('#timeSortIcon').hasClass('fa-sort-amount-desc')){
+                changeIcon('timeSortIcon', 'asc');
+                $('#timeSortText').html('按照发布时间升序');
+                //todo
+                alert('时间升序');
+
+            }else {
+                changeIcon('timeSortIcon', 'desc');
+                $('#timeSortText').html('按照发布时间降序');
+                alert('时间降序');
+            }
+
+        });
+        $('#sortByClick').click(function () {
+            if($('#clickSortIcon').hasClass('fa-sort-amount-desc')){
+                changeIcon('clickSortIcon', 'asc');
+                $('#clickSortText').html('按照点击量升序');
+                //todo
+                alert('点击量升序');
+            }else {
+                changeIcon('clickSortIcon', 'desc');
+                $('#clickSortText').html('按照点击量升序');
+                alert('点击量降序');
+
+            }
+        })
+
     });
 
-    function queryDeviceRecords(pageNum) {
+    function queryDeviceRecords(pageNum, type) {
         let url = '${pageContext.request.contextPath}/items/itempage?pageNum=' + pageNum;
         console.log(url);
         if (searchName !== '') {
-            url = url + '&search=' + searchName;
+            url = url + '&searchName=' + searchName;
         }
-        $("#paging").load(url);
+        $('#itemInfoPaging').load(url)
     }
 </script>
 

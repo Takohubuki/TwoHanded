@@ -58,7 +58,7 @@ public class ItemsController {
      * @return
      */
     @RequestMapping(path = "/itempage", method = RequestMethod.GET)
-    public ModelAndView itemPage(ModelAndView modelAndView, @RequestParam(value = "pageNum") int pageNum, @RequestParam(value = "search", required = false) String searchName, HttpServletRequest request) {
+    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, String searchName, HttpServletRequest request) {
         return itemService.itemPage(modelAndView, pageNum, request, searchName);
     }
 
@@ -125,12 +125,12 @@ public class ItemsController {
     /**
      * 根据商品名查询
      * @param modelAndView
-     * @param search
+     * @param searchName
      * @return
      */
     @RequestMapping("/searchbyname")
-    public ModelAndView searchByName(ModelAndView modelAndView, String search){
-        return itemService.searchByName(modelAndView, search);
+    public ModelAndView searchByName(ModelAndView modelAndView, String searchName){
+        return itemService.searchByName(modelAndView, searchName);
     }
 
     /**
