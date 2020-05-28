@@ -220,7 +220,7 @@
                             </li>
                             <c:forEach items="${kindList}" var="kindList">
                                 <li class="">
-                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}&pageNum=1">
                                         ${kindList}
                                     </a>
                                 </li>
@@ -315,7 +315,7 @@
                 <div class="product-sec1">
                     <h3 class="heading-tittle">出售</h3>
                     <div class="row center-block">
-                        <a class="btn btn-primary text-right" role="button" href="${pageContext.request.contextPath}/items/listwtsbytime">更多</a>
+                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listwtsbytime?pageNum=1">更多</a>
                     </div>
                     <div class="row">
                         <c:forEach var="wts_item" items="${wts_item}">
@@ -360,7 +360,7 @@
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
                     <div class="row center-block">
-                        <a class="btn btn-primary" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime">更多</a>
+                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime?pageNum=1">更多</a>
                     </div>
                     <c:forEach items="${wtb_item}" var="wtb_item">
                         <div class="col-md-4 product-men">

@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -34,8 +35,8 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/listwtbbytime")
-    public ModelAndView listWtbByTime(ModelAndView modelAndView) {
-        return itemService.listWtbByTime(modelAndView);
+    public ModelAndView listWtbByTime(ModelAndView modelAndView, int pageNum) {
+        return itemService.listWtbByTime(modelAndView, pageNum);
     }
 
     /**
@@ -45,8 +46,8 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/listwtsbytime")
-    public ModelAndView listWtsByTime(ModelAndView modelAndView){
-        return itemService.listWtsByTime(modelAndView);
+    public ModelAndView listWtsByTime(ModelAndView modelAndView, int pageNum){
+        return itemService.listWtsByTime(modelAndView, pageNum);
     }
 
     /**
@@ -129,8 +130,8 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/searchbyname")
-    public ModelAndView searchByName(ModelAndView modelAndView, String searchName){
-        return itemService.searchByName(modelAndView, searchName);
+    public ModelAndView searchByName(ModelAndView modelAndView, String searchName, int pageNum){
+        return itemService.searchByName(modelAndView, searchName, pageNum);
     }
 
     /**
@@ -140,8 +141,8 @@ public class ItemsController {
      * @return
      */
     @RequestMapping("/searchbykind")
-    public ModelAndView searchByKind(ModelAndView modelAndView, String kind){
-        return itemService.searchByKind(modelAndView, kind);
+    public ModelAndView searchByKind(ModelAndView modelAndView, String kind, int pageNum){
+        return itemService.searchByKind(modelAndView, kind, pageNum);
     }
 
     /**
@@ -173,6 +174,20 @@ public class ItemsController {
     @RequestMapping(path = "/wtsItem", produces = {"text/plain;charset=UTF-8"})
     public String wtsItem(String serialNum, HttpSession session) {
         return itemService.wtsItem(serialNum, session);
+    }
+
+    @RequestMapping(path = "/sort")
+    public ModelAndView sort(String timeSort, String clickSort, String searchName, int pageNum){
+        HashMap<String, String> param = new HashMap();
+        param.put("timeSort", timeSort);
+        param.put("clickSort", clickSort);
+        param.put("searchName", searchName);
+
+        itemService.getSortedItem(param);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("main/itemListPage");
+        return modelAndView;
     }
 
 }

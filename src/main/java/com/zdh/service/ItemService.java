@@ -49,14 +49,15 @@ public interface ItemService {
      * @param modelAndView
      * @return
      */
-    public ModelAndView listWtbByTime(ModelAndView modelAndView);
+    public ModelAndView listWtbByTime(ModelAndView modelAndView, int pageNum);
 
     /**
      * 时间降序获取出售商品列表
      * @param modelAndView
+     * @param pageNum
      * @return
      */
-    public ModelAndView listWtsByTime(ModelAndView modelAndView);
+    public ModelAndView listWtsByTime(ModelAndView modelAndView, int pageNum);
 
     /**
      * 商品信息分页列表
@@ -99,17 +100,19 @@ public interface ItemService {
      * 根据名称查询商品信息
      * @param modelAndView
      * @param search
+     * @param pageNum
      * @return
      */
-    public ModelAndView searchByName(ModelAndView modelAndView, String search);
+    public ModelAndView searchByName(ModelAndView modelAndView, String search, int pageNum);
 
     /**
      * 根据类别查询商品信息
      * @param modelAndView
      * @param kind
+     * @param pageNum
      * @return
      */
-    public ModelAndView searchByKind(ModelAndView modelAndView, String kind);
+    public ModelAndView searchByKind(ModelAndView modelAndView, String kind, int pageNum);
 
     /**
      * 更新商品信息

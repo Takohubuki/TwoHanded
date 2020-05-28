@@ -25,7 +25,7 @@ $(function () {
     $('#searchBtn').click(function () {
         searchName = $('#searchBar').val();
         window.sessionStorage.setItem('searchName', searchName);
-        $('#searchForm').attr('action', '/items/searchbyname');
+        $('#searchForm').attr('action', '/items/searchbyname?pageNum=1');
         $('#searchForm').submit();
     });
     $('#submitRegisterInfo').click(function () {

@@ -231,7 +231,7 @@
                             </li>
                             <c:forEach items="${kindList}" var="kindList">
                                 <li class="">
-                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}&pageNum=1">
                                             ${kindList}
                                     </a>
                                 </li>
@@ -481,6 +481,8 @@
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 
 <script type="text/javascript">
+    let timeSort = '';
+    let clickSort = '';
     function changeIcon(selector, type) {
         let $iconToChange = $('#' + selector);
         if (type === 'asc'){
@@ -492,41 +494,66 @@
         }
     }
 
+    function itemSortReq() {
+        let url = '/items/sort';
+        if (searchName !== ''){
+            url = url + '?searchName=' + searchName;
+        }
+        $.ajax({
+            url: url,
+            data: {
+                'timeSort': timeSort,
+                'clickSort': clickSort
+            },
+            async: false,
+            success: function (result) {
+                console.log(result);
+                $('#itemInfoPaging').html(result);
+            }
+        })
+
+    }
+
     $(function () {
         searchName = window.sessionStorage.getItem('searchName');
 
         $('#sortByTime').click(function () {
+
             if($('#timeSortIcon').hasClass('fa-sort-amount-desc')){
+
+                timeSort = 'asc';
                 changeIcon('timeSortIcon', 'asc');
                 $('#timeSortText').html('按照发布时间升序');
-                //todo
-                alert('时间升序');
-
             }else {
+                timeSort = 'desc';
                 changeIcon('timeSortIcon', 'desc');
                 $('#timeSortText').html('按照发布时间降序');
-                alert('时间降序');
             }
+
+            itemSortReq();
 
         });
         $('#sortByClick').click(function () {
+
             if($('#clickSortIcon').hasClass('fa-sort-amount-desc')){
+
+                clickSort = 'asc';
                 changeIcon('clickSortIcon', 'asc');
                 $('#clickSortText').html('按照点击量升序');
-                //todo
-                alert('点击量升序');
             }else {
+                clickSort = 'desc';
                 changeIcon('clickSortIcon', 'desc');
-                $('#clickSortText').html('按照点击量升序');
-                alert('点击量降序');
+                $('#clickSortText').html('按照点击量降序');
 
             }
+            itemSortReq();
+
         })
 
     });
 
     function queryDeviceRecords(pageNum, type) {
-        let url = '${pageContext.request.contextPath}/items/itempage?pageNum=' + pageNum;
+        let url = '/items/itempage?pageNum=' + pageNum;
         console.log(url);
         if (searchName !== '') {
             url = url + '&searchName=' + searchName;

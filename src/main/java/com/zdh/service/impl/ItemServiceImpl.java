@@ -131,8 +131,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ModelAndView listWtsByTime(ModelAndView modelAndView) {
-        PageHelper.startPage(1,6);
+    public ModelAndView listWtsByTime(ModelAndView modelAndView, int pageNum) {
+        PageHelper.startPage(pageNum,6);
         Page<Item> wtsAllByTime = itemMapper.selectWtsAllByTime();
         PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
         modelAndView.addObject("wtsPageInfo", itemPageInfo);
@@ -256,11 +256,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ModelAndView searchByName(ModelAndView modelAndView, String search) {
-        PageHelper.startPage(1, 3);
+    public ModelAndView searchByName(ModelAndView modelAndView, String search, int pageNum) {
+        PageHelper.startPage(pageNum, 3);
         List<Item> wtsByName = itemMapper.selectWtsByName(search);
 
-        PageHelper.startPage(1, 3);
+        PageHelper.startPage(pageNum, 3);
         List<Item> wtbByName = itemMapper.selectWtbByName(search);
 
         PageInfo<Item> itemPageInfo = new PageInfo<>(wtsByName);
@@ -279,8 +279,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ModelAndView searchByKind(ModelAndView modelAndView, String kind) {
-        PageHelper.startPage(1,6);
+    public ModelAndView searchByKind(ModelAndView modelAndView, String kind, int pageNum) {
+        PageHelper.startPage(pageNum,6);
         List<Item> items = itemMapper.selectByKind(kind);
         PageInfo<Item> itemPageInfo = new PageInfo<>(items);
         modelAndView.addObject("wtsPageInfo", itemPageInfo);
