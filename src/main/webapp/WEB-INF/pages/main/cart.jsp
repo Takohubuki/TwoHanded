@@ -189,9 +189,10 @@
             </ul>
             <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="${pageContext.request.contextPath}/items/searchbyname" method="post">
-                    <input name="search" type="search" placeholder="想搜点什么？" required="">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                <form action="" method="get" id="searchForm">
+                    <input name="searchName" type="search" placeholder="想搜点什么？" required="" id="searchBar">
+                    <input name="pageNum" type="hidden" value="0" required="" id="pageNum">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" id="searchBtn">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
                 </form>
@@ -273,18 +274,18 @@
                     </label>
                 </div>
                 <div class="col-md-1 bottom-menu">
-				<span id="deleteMulty">
-						删除
-				</span>
+<%--				<span id="deleteMulty">--%>
+<%--						删除--%>
+<%--				</span>--%>
                 </div>
                 <div class="col-md-6 bottom-menu">
 
                 </div>
                 <div class="col-md-2 bottom-menu">
-                    <span>已选商品 <span id="selectGoodsCount">0</span> 件</span>
+<%--                    <span>已选商品 <span id="selectGoodsCount">0</span> 件</span>--%>
                 </div>
                 <div class="col-md-1 bottom-menu">
-                    <span>合计：<span id="selectGoodsMoney">0.00</span></span>
+<%--                    <span>合计：<span id="selectGoodsMoney">0.00</span></span>--%>
                 </div>
                 <div class="col-md-1 bottom-menu">
                     <button class="btn btn-primary" id="subBtn" onclick="check()">结算</button>

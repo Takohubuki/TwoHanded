@@ -148,14 +148,20 @@ public class ItemsController {
      */
     @RequestMapping("/searchByName")
     public ModelAndView searchByName(ModelAndView modelAndView, String searchName, int pageNum, String timeSort, String clickSort, String condition){
-        if (pageNum != 0){
+        if (pageNum != 0 && !StringUtils.isEmpty(condition)){
             PageHelper.startPage(pageNum, 3);
             List<Item> result = itemService.searchByName(searchName, timeSort, clickSort, condition);
             PageInfo<Item> itemPageInfo = new PageInfo<>(result);
             modelAndView.addObject(condition + "PageInfo", itemPageInfo);
             modelAndView.setViewName("main/itemListPage");
-        }else {
-            HashMap<String, PageInfo<Item>> result = itemService.searchByName(searchName);
+        }else if (!StringUtils.isEmpty(timeSort) || !StringUtils.isEmpty(clickSort)){
+            HashMap<String, PageInfo<Item>> result = itemService.searchByName(searchName, timeSort, clickSort);
+
+            modelAndView.addObject("wtsPageInfo", result.get("wts"));
+            modelAndView.addObject("wtbPageInfo", result.get("wtb"));
+            modelAndView.setViewName("main/itemListPage");
+        }else if (pageNum == 0){
+            HashMap<String, PageInfo<Item>> result = itemService.searchByName(searchName, "", "");
 
             modelAndView.addObject("wtsPageInfo", result.get("wts"));
             modelAndView.addObject("wtbPageInfo", result.get("wtb"));

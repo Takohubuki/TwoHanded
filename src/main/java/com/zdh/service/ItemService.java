@@ -151,5 +151,5 @@ public interface ItemService {
 
     List<Item> manageWtbByTime(String startTime, String endTime) throws ParseException;
 
-    HashMap<String, PageInfo<Item>> searchByName(String name);
+    HashMap<String, PageInfo<Item>> searchByName(String name, String timeSort, String clickSort);
 }

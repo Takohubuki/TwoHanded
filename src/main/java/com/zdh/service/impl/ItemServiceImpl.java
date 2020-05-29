@@ -403,13 +403,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public HashMap<String, PageInfo<Item>> searchByName(String name) {
+    public HashMap<String, PageInfo<Item>> searchByName(String name, String timeSort, String clickSort) {
         PageHelper.startPage(1, 3);
-        List<Item> wtb = itemMapper.selectWtbByName(name, "", "");
+        List<Item> wtb = itemMapper.selectWtbByName(name, timeSort, clickSort);
         PageInfo<Item> wtbResult = new PageInfo<>(wtb);
 
         PageHelper.startPage(1, 3);
-        List<Item> wts = itemMapper.selectWtsByName(name, "", "");
+        List<Item> wts = itemMapper.selectWtsByName(name, timeSort, clickSort);
         PageInfo<Item> wtsResult = new PageInfo<>(wts);
 
         HashMap<String, PageInfo<Item>> result = new HashMap<>();

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tako
@@ -306,7 +307,13 @@
                     </li>
 
                     <li>
-                        库存：${item.number}
+                        商品数量：${item.number}
+                    </li>
+                    <li>
+                        发布于：<fmt:formatDate value="${item.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                    </li>
+                    <li>
+                        信息最后更新时间：<fmt:formatDate value="${item.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                     </li>
                     <li>
                         <c:if test="${member == null}">
@@ -370,7 +377,7 @@
                         </li>
                     </ul>
 
-                    <a href="#" class="btn btn-primary btn-block"><b>详情</b></a>
+<%--                    <a href="#" class="btn btn-primary btn-block"><b>详情</b></a>--%>
                 </div>
                 <!-- /.box-body -->
             </div>

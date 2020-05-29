@@ -27,9 +27,5 @@ public class IndexController implements ServletContextAware {
         itemService.getIndexItem(servletContext);
     }
 
-    @RequestMapping("/blank")
-    public ModelAndView blank(ModelAndView modelAndView) {
-        modelAndView.setViewName("blank");
-        return modelAndView;
-    }
+
 }

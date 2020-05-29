@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html lang="zxx">
 
@@ -311,6 +312,13 @@
                             已有${item.number}人愿意出售
                         </li>
                         <li>
+                            发布于：<fmt:formatDate value="${item.publishTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                        </li>
+                        <li>
+                            信息最后更新时间：<fmt:formatDate value="${item.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+                        </li>
+
+                        <li>
                             <c:if test="${member == null}">
                                 登录即可查看发布人联系方式
                             </c:if>
@@ -377,7 +385,7 @@
                         </li>
                     </ul>
 
-                    <a href="#" class="btn btn-primary btn-block"><b>详情</b></a>
+<%--                    <a href="#" class="btn btn-primary btn-block"><b>详情</b></a>--%>
                 </div>
                 <!-- /.box-body -->
             </div>
