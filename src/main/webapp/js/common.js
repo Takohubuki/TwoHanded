@@ -57,3 +57,7 @@ function validateEmail(email) {
 function getItemInSession(key) {
     return window.sessionStorage.getItem(key);
 }
+
+function isInteger(obj) {
+    return typeof obj === 'number' && obj%1 === 0
+}

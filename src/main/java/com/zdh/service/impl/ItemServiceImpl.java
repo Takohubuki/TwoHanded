@@ -337,7 +337,7 @@ public class ItemServiceImpl implements ItemService {
         Member member = (Member) session.getAttribute("member");
         Item item = itemMapper.selectBySerialNum(serialNum);
 
-        String text = member.getUsername() + "回应了你的求购：" + item.getName();
+        String text = member.getUsername() + "回应了你的求购：" + item.getName() + " 联系方式：" + member.getPhone();
         noticeService.newNotice(text, item.getPublisher());
         itemMapper.wtsItem(serialNum);
         return Constant.SUCCESS_CODE;

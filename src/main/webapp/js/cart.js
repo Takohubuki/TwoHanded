@@ -98,8 +98,18 @@ $(function () {
         num = $(this).val();
         if (oldNum !== num){
             itemNum = $(".cart_quantity_up").parent().attr("itemNum");
+            if (isInteger(num)){
+                alert("修改失败！必须输入整数！");
+                $(this).val(oldNum);
+                return;
+            }
             if (parseInt(num) > parseInt(itemNum)){
-                alert("添加失败！超过库存");
+                alert("修改失败！不能超过卖家设定的数量！");
+                $(this).val(oldNum);
+                return;
+            }
+            if (parseInt(num) <= 0){
+                alert("修改失败！");
                 $(this).val(oldNum);
                 return;
             }
@@ -123,10 +133,12 @@ $(function () {
         let method = $('select').val();
         payMethod(method);
     });
+    //取消订单
     $('#cancelOrder').click(function () {
         $('#payForm').attr('action', '/order/cancel');
         $('#payForm').submit();
     });
+    //删除购物车
     $('.item-delete').click(function () {
         id = $(this).val();
         delCart(id);
@@ -180,7 +192,7 @@ function changeNum(id, num) {
     })
 }
 
-
+//结算
 function check(){
 
     atLeastOne = false;
