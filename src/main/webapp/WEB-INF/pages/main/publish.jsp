@@ -79,7 +79,7 @@
                             <span class="fa fa-pencil-square-o" aria-hidden="true"></span> 注 销</a>
                     </li>
                     <li class="navbar-right">
-                        你好！<a href="#" >
+                        你好！<a href="${pageContext.request.contextPath}/user/profile">
                         <img src="${pageContext.request.contextPath}/images/avatar/${member.avatar}" class="img-circle"
                              style="width: 20px;height: 20px">
                             ${member.username}

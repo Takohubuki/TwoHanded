@@ -25,7 +25,7 @@
         <div class="box-body">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li>
+                    <li class="active">
                         <a href="#infoTab" data-toggle="tab" aria-expanded="true">用户详情</a>
                     </li>
                     <li>
@@ -72,6 +72,9 @@
                                 </c:if>
                                 <c:if test="${memberDetail.status == 'D'}">
                                     <a href="#"><i class="fa fa-circle text-orange"></i> 停止使用</a>
+                                </c:if>
+                                <c:if test="${memberDetail.status == 'V'}">
+                                    <a href="#"><i class="fa fa-circle text-orange"></i> 待实名</a>
                                 </c:if>
                             </dd>
                         </dl>

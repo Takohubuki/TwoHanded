@@ -78,17 +78,17 @@
                                             </td>
                                             <td>
                                                 <c:if test="${memberlist.status == 'U'}">
-                                                    <button onclick="getUserId(this)" class="btn btn-danger shutMember">
+                                                    <button onclick="getUserId(this)" value="${memberlist.sid}" class="btn btn-danger shutMember">
                                                         封禁
                                                     </button>
                                                 </c:if>
                                                 <c:if test="${memberlist.status == 'S'}">
-                                                    <button onclick="getUserId(this)"
+                                                    <button onclick="getUserId(this)" value="${memberlist.sid}"
                                                             class="btn btn-success activeMember">解封
                                                     </button>
                                                 </c:if>
                                                 <c:if test="${memberlist.status == 'D'}">
-                                                    <button onclick="getUserId(this)" class="btn btn-danger delMember">
+                                                    <button onclick="getUserId(this)" value="${memberlist.sid}" class="btn btn-danger delMember">
                                                         删除
                                                     </button>
                                                 </c:if>
@@ -111,52 +111,9 @@
 
 </section>
 <script>
-    url = '/manage/member';
-
-    function getUserId(btn) {
-        userId = btn.val();
-    }
-
-    function userDetail(sid) {
-        $('#page').load('${pageContext.request.contextPath}/user/manageUserProfile?userId=' + sid);
-    }
-
     $(function () {
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            'language': language
-        });
-
-        $('.shutMember').click(function () {
-            $.ajax({
-                url: '/manage/shutMember',
-                data: {
-                    'sid': userId
-                },
-                success: function (result) {
-                    $('#page').load(url);
-                }
-            })
-        });
-
-        $('.activeMember').click(function () {
-            $.ajax({
-                url: '/manage/activeMember',
-                data: {
-                    'sid': userId
-                },
-                success: function (result) {
-                    $('#page').load(url);
-                }
-            })
-        })
-
-    });
-
+        url = '/manage/member';
+    })
 </script>
+
 </html>

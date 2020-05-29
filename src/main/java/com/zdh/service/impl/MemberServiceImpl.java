@@ -57,12 +57,19 @@ public class MemberServiceImpl implements MemberService {
     @Resource
     private NoticeService noticeService;
 
-    private Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
     @Override
     public ModelAndView signUp(Member member, HttpSession session, ModelAndView modelAndView, HttpServletRequest request, MultipartFile image) throws IOException {
         System.out.println("-----------------------开始注册------------------------");
         String uri = request.getHeader("Referer");
+
+        Member memberById = getMemberById(member.getSid());
+        if (memberById != null){
+            modelAndView.setViewName("main/register");
+            modelAndView.addObject("message", "该学号已经被注册！");
+            return modelAndView;
+        }
 
         String password = member.getPassword();
         String s = DigestUtils.md5DigestAsHex(password.getBytes());

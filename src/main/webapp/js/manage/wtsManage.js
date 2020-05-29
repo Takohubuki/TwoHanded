@@ -1,6 +1,6 @@
 
 function validateTime(startTime, endTime) {
-    if (startTime === undefined || endTime === undefined) {
+    if (startTime === '' || endTime === '') {
         return true;
     }
     let time1 = new Date(startTime).getTime();
@@ -91,10 +91,6 @@ $(function () {
     $('.select2').select2();
     //Date picker
     $('.datepicker').datepicker(wtsDateConfig);
-    $('.datepicker').on('change', function () {
-        startTime = $('#startTime').val();
-        endTime = $('#endTime').val();
-    });
 
     $('#wtsDataTable').DataTable({
         'paging': true,
@@ -109,6 +105,9 @@ $(function () {
     //根据类型查询商品
     $('#manageWtsByKind').on('change', function () {
         kindList = $('#manageWtsByKind').val();
+        startTime = $('#startTime').val();
+        endTime = $('#endTime').val();
+
         if (!validateTime(startTime, endTime)) {
             getWtsItemByKindAndTime(startTime, endTime, kindList);
         } else {
@@ -143,6 +142,13 @@ $(function () {
     });
 
     $('#manageWtsByTime').click(function () {
+        startTime = $('#startTime').val();
+        endTime = $('#endTime').val();
+
+        if (startTime === '' && endTime === ''){
+            getWtsItemByKind(kindList);
+            return;
+        }
 
         if (validateTime(startTime, endTime)) {
             alert('时间选择有误！');
@@ -191,7 +197,7 @@ function reloadDatatable(result) {
         "columnDefs": [{
             "render": function (data, type, row) {
                 let html = '';
-                html = html + '<img src=' + data + '"/" style="width: 80px;height: 75px">';
+                html = html + '<img src="/' + data + '" style="width: 80px;height: 75px">';
                 return html;
             },
             "targets": 0
