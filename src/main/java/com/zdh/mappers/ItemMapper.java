@@ -1,6 +1,5 @@
 package com.zdh.mappers;
 
-import com.github.pagehelper.Page;
 import com.zdh.bean.Item;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface ItemMapper {
-    int deleteByPrimaryKey(Integer id);
 
     int insert(Item record);
 
@@ -25,13 +23,11 @@ public interface ItemMapper {
 
     List<Item> recommandSameKind(String kind);
 
-    Page<Item> selectWtbAllByTime();
+    List<Item> selectWtbAllByTime(@Param("timeSort") String timeSort, @Param("clickSort") String clickSort);
 
-    Page<Item> selectWtsAllByTime();
+    List<Item> selectWtsAllByTime(@Param("timeSort") String timeSort, @Param("clickSort") String clickSort);
 
-    List<Item> selectByName(String search);
-
-    List<Item> selectByKind(String kind);
+    List<Item> selectByKind(@Param("kind") String kind, @Param("timeSort") String timeSort, @Param("clickSort") String clickSort);
 
     void addPublish(Item item);
 
@@ -51,13 +47,11 @@ public interface ItemMapper {
 
     void wtsItem(String serialNum);
 
-    List<Item> selectWtsByName(String name);
+    List<Item> selectWtsByName(@Param("name") String name, @Param("timeSort") String timeSort, @Param("clickSort") String clickSort);
 
-    List<Item> selectWtbByName(String name);
+    List<Item> selectWtbByName(@Param("name") String name, @Param("timeSort") String timeSort, @Param("clickSort") String clickSort);
 
     List<Item> select3MostViewedWts();
-
-    Item getItemAndMember(String itemId);
 
     List<Item> getItemByKind(String[] kindList);
 

@@ -246,10 +246,86 @@
         select * from item where serial_num = #{itemId};
     </select>
     <select id="selectWtsAllByTime" resultMap="BaseResultMap">
-        select * from item where conditions='出售' and is_undercarriage = '0' order BY update_time desc
+        select * from item where conditions='出售' and is_undercarriage = '0'
+        <choose>
+            <when test="timeSort == 'desc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    desc, viewed_times asc
+                </if>
+                <if test="clickSort == ''">
+                    desc
+                </if>
+            </when>
+
+            <when test="timeSort == 'asc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times asc
+                </if>
+                <if test="clickSort == 'desc'.toString()">
+                    asc, viewed_times desc
+                </if>
+                <if test="clickSort == ''">
+                    asc
+                </if>
+            </when>
+
+            <when test="timeSort == '' and clickSort != ''">
+                order by viewed_times
+                <if test="clickSort == 'desc'.toString()">
+                    desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    asc
+                </if>
+            </when>
+        </choose>
+
     </select>
     <select id="selectWtbAllByTime" resultMap="BaseResultMap">
-        select * from item where conditions='求购' and is_undercarriage = '0' order BY update_time desc
+        select * from item where conditions='求购' and is_undercarriage = '0'
+        <choose>
+            <when test="timeSort == 'desc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    desc, viewed_times asc
+                </if>
+                <if test="clickSort == ''">
+                    desc
+                </if>
+            </when>
+
+            <when test="timeSort == 'asc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times asc
+                </if>
+                <if test="clickSort == 'desc'.toString()">
+                    asc, viewed_times desc
+                </if>
+                <if test="clickSort == ''">
+                    asc
+                </if>
+            </when>
+
+            <when test="timeSort == '' and clickSort != ''">
+                order by viewed_times
+                <if test="clickSort == 'desc'.toString()">
+                    desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    asc
+                </if>
+            </when>
+        </choose>
+
     </select>
     <select id="select3WtsItemByTime" resultMap="BaseResultMap">
         select
@@ -278,15 +354,128 @@
 
     <select id="selectWtsByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from item where name like concat('%', #{name}, '%') and is_undercarriage = '0' and conditions = '出售'
+        <choose>
+            <when test="timeSort == 'desc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    desc, viewed_times asc
+                </if>
+                <if test="clickSort == ''">
+                    desc
+                </if>
+            </when>
+
+            <when test="timeSort == 'asc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times asc
+                </if>
+                <if test="clickSort == 'desc'.toString()">
+                    asc, viewed_times desc
+                </if>
+                <if test="clickSort == ''">
+                    asc
+                </if>
+            </when>
+
+            <when test="timeSort == '' and clickSort != ''">
+                order by viewed_times
+                <if test="clickSort == 'desc'.toString()">
+                    desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    asc
+                </if>
+            </when>
+        </choose>
+
     </select>
     <select id="selectWtbByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from item where name like concat('%', #{name}, '%') and is_undercarriage = '0' and conditions = '求购'
+        <choose>
+            <when test="timeSort == 'desc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    desc, viewed_times asc
+                </if>
+                <if test="clickSort == ''">
+                    desc
+                </if>
+            </when>
+
+            <when test="timeSort == 'asc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times asc
+                </if>
+                <if test="clickSort == 'desc'.toString()">
+                    asc, viewed_times desc
+                </if>
+                <if test="clickSort == ''">
+                    asc
+                </if>
+            </when>
+
+            <when test="timeSort == '' and clickSort != ''">
+                order by viewed_times
+                <if test="clickSort == 'desc'.toString()">
+                    desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                    asc
+                </if>
+            </when>
+        </choose>
+
     </select>
     <select id="recommandSameKind" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from item where kind = #{kind} and conditions = '出售' and is_undercarriage = '0' limit 6
     </select>
     <select id="selectByKind" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from item where kind = #{kind} and is_undercarriage = '0' and conditions = '出售'
+        <choose>
+            <when test="timeSort == 'desc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                     desc, viewed_times asc
+                </if>
+                <if test="clickSort == ''">
+                     desc
+                </if>
+            </when>
+
+            <when test="timeSort == 'asc'.toString()">
+                order by publish_time
+                <if test="clickSort == timeSort">
+                    ,viewed_times asc
+                </if>
+                <if test="clickSort == 'desc'.toString()">
+                     asc, viewed_times desc
+                </if>
+                <if test="clickSort == ''">
+                     asc
+                </if>
+            </when>
+
+            <when test="timeSort == '' and clickSort != ''">
+                order by viewed_times
+                <if test="clickSort == 'desc'.toString()">
+                     desc
+                </if>
+                <if test="clickSort == 'asc'.toString()">
+                     asc
+                </if>
+            </when>
+        </choose>
     </select>
     <insert id="addPublish" parameterType="com.zdh.bean.Item">
         insert into item

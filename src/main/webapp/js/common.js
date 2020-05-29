@@ -1,4 +1,5 @@
 let searchName;
+let kind;
 var reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/; //邮箱正则表达式
 
 $(function () {
@@ -22,10 +23,11 @@ $(function () {
             $('#emailError').parent().addClass('has-error');
         }
     });
+    //搜索框
     $('#searchBtn').click(function () {
         searchName = $('#searchBar').val();
         window.sessionStorage.setItem('searchName', searchName);
-        $('#searchForm').attr('action', '/items/searchbyname?pageNum=1');
+        $('#searchForm').attr('action', '/items/searchByName');
         $('#searchForm').submit();
     });
     $('#submitRegisterInfo').click(function () {
@@ -33,6 +35,12 @@ $(function () {
             $('#registerForm').submit();
         }
     });
+    //分类搜索
+    $('.kindList').click(function () {
+        kind = $(this).text().trim();
+        console.log(kind);
+        window.sessionStorage.setItem('kind', kind);
+    })
 });
 
 function validatePassword() {
@@ -44,4 +52,8 @@ function validatePassword() {
 function validateEmail(email) {
     console.log(email.val());
     return reg.test(email.val());
+}
+
+function getItemInSession(key) {
+    return window.sessionStorage.getItem(key);
 }

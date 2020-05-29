@@ -9,7 +9,7 @@ import java.util.List;
  * @author zhouhr3
  */
 public class PageInfo<T> {
-    public PageInfo() {
+    public PageInfo(List<Item> items) {
         this.pageNum = 1;
         this.pageSize = 10;
     }

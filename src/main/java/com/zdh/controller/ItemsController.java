@@ -1,10 +1,13 @@
 package com.zdh.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zdh.bean.Item;
 import com.zdh.service.ItemKindService;
 import com.zdh.service.ItemService;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,9 +38,26 @@ public class ItemsController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping("/listwtbbytime")
-    public ModelAndView listWtbByTime(ModelAndView modelAndView, int pageNum) {
-        return itemService.listWtbByTime(modelAndView, pageNum);
+    @RequestMapping("/listWtbWyTime")
+    public ModelAndView listWtbByTime(ModelAndView modelAndView, int pageNum, String timeSort, String clickSort) {
+        if (pageNum != 0){
+            modelAndView.setViewName("main/itemListPage");
+        }else {
+            pageNum = 1;
+            modelAndView.setViewName("main/itemList");
+            timeSort = "desc";
+        }
+        PageHelper.startPage(pageNum,6);
+        List<Item> wtbAllByTime = itemService.listWtbByTime(timeSort, clickSort);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtbAllByTime);
+        modelAndView.addObject("wtbPageInfo", itemPageInfo);
+
+        List<String> kindList = itemKindService.getAllKind();
+        modelAndView.addObject("kindList", kindList);
+
+        modelAndView.addObject("pageType", "listWtbByTime");
+
+        return modelAndView;
     }
 
     /**
@@ -45,23 +66,29 @@ public class ItemsController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping("/listwtsbytime")
-    public ModelAndView listWtsByTime(ModelAndView modelAndView, int pageNum){
-        return itemService.listWtsByTime(modelAndView, pageNum);
+    @RequestMapping("/listWtsByTime")
+    public ModelAndView listWtsByTime(ModelAndView modelAndView, int pageNum, String timeSort, String clickSort){
+        if (pageNum != 0){
+            modelAndView.setViewName("main/itemListPage");
+        }else {
+            pageNum = 1;
+            modelAndView.setViewName("main/itemList");
+            timeSort = "desc";
+        }
+        PageHelper.startPage(pageNum,6);
+        List<Item> wtsAllByTime = itemService.listWtsByTime(timeSort, clickSort);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(wtsAllByTime);
+        modelAndView.addObject("wtsPageInfo", itemPageInfo);
+
+        List<String> kindList = itemKindService.getAllKind();
+        modelAndView.addObject("kindList", kindList);
+
+        modelAndView.addObject("pageType", "listWtsByTime");
+
+        return modelAndView;
+
     }
 
-    /**
-     * 商品列表分页
-     *
-     * @param modelAndView
-     * @param pageNum
-     * @param request
-     * @return
-     */
-    @RequestMapping(path = "/itempage", method = RequestMethod.GET)
-    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, String searchName, HttpServletRequest request) {
-        return itemService.itemPage(modelAndView, pageNum, request, searchName);
-    }
 
     /**
      * 跳转求购商品详情页
@@ -83,16 +110,6 @@ public class ItemsController {
     @RequestMapping("/singleitem")
     public ModelAndView singleItem(ModelAndView modelAndView, String itemId){
         return itemService.selectById(modelAndView, itemId);
-    }
-
-    /**
-     * 跳转最新出售商品列表页
-     * @param modelAndView
-     * @return
-     */
-    @RequestMapping("/queryalltime")
-    public ModelAndView queryWtsAllTime(ModelAndView modelAndView){
-        return itemService.queryWtsAllTime(modelAndView);
     }
 
     /**
@@ -126,12 +143,31 @@ public class ItemsController {
     /**
      * 根据商品名查询
      * @param modelAndView
-     * @param searchName
+     * @param
      * @return
      */
-    @RequestMapping("/searchbyname")
-    public ModelAndView searchByName(ModelAndView modelAndView, String searchName, int pageNum){
-        return itemService.searchByName(modelAndView, searchName, pageNum);
+    @RequestMapping("/searchByName")
+    public ModelAndView searchByName(ModelAndView modelAndView, String searchName, int pageNum, String timeSort, String clickSort, String condition){
+        if (pageNum != 0){
+            PageHelper.startPage(pageNum, 3);
+            List<Item> result = itemService.searchByName(searchName, timeSort, clickSort, condition);
+            PageInfo<Item> itemPageInfo = new PageInfo<>(result);
+            modelAndView.addObject(condition + "PageInfo", itemPageInfo);
+            modelAndView.setViewName("main/itemListPage");
+        }else {
+            HashMap<String, PageInfo<Item>> result = itemService.searchByName(searchName);
+
+            modelAndView.addObject("wtsPageInfo", result.get("wts"));
+            modelAndView.addObject("wtbPageInfo", result.get("wtb"));
+            modelAndView.setViewName("main/itemList");
+        }
+
+        List<String> kindList = itemKindService.getAllKind();
+        modelAndView.addObject("kindList", kindList);
+
+        modelAndView.addObject("pageType", "searchByName");
+
+        return modelAndView;
     }
 
     /**
@@ -140,9 +176,27 @@ public class ItemsController {
      * @param kind
      * @return
      */
-    @RequestMapping("/searchbykind")
-    public ModelAndView searchByKind(ModelAndView modelAndView, String kind, int pageNum){
-        return itemService.searchByKind(modelAndView, kind, pageNum);
+    @RequestMapping("/searchByKind")
+    public ModelAndView searchByKind(ModelAndView modelAndView, String kind, int pageNum, String timeSort, String clickSort){
+        if (pageNum != 0){
+            modelAndView.setViewName("main/itemListPage");
+        }else {
+            pageNum = 1;
+            modelAndView.setViewName("main/itemList");
+        }
+
+        PageHelper.startPage(pageNum,6);
+        List<Item> items = itemService.searchByKind(kind, timeSort, clickSort);
+        PageInfo<Item> itemPageInfo = new PageInfo<>(items);
+
+        modelAndView.addObject("wtsPageInfo", itemPageInfo);
+
+        List<String> kindList = itemKindService.getAllKind();
+        modelAndView.addObject("kindList", kindList);
+
+        modelAndView.addObject("pageType", "searchByKind");
+
+        return modelAndView;
     }
 
     /**
@@ -176,18 +230,20 @@ public class ItemsController {
         return itemService.wtsItem(serialNum, session);
     }
 
+/*
     @RequestMapping(path = "/sort")
-    public ModelAndView sort(String timeSort, String clickSort, String searchName, int pageNum){
+    public ModelAndView sort(String timeSort, String clickSort, int pageNum, String condition){
         HashMap<String, String> param = new HashMap();
         param.put("timeSort", timeSort);
         param.put("clickSort", clickSort);
-        param.put("searchName", searchName);
+        param.put("condition", condition);
 
-        itemService.getSortedItem(param);
+        HashMap<String, ArrayList<Item>> result = itemService.getSortedItem(param, pageNum);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("main/itemListPage");
         return modelAndView;
     }
+*/
 
 }

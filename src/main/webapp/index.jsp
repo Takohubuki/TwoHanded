@@ -73,6 +73,7 @@
             <div class="agileits_search">
                 <form action="" method="get" id="searchForm">
                     <input name="searchName" type="search" placeholder="想搜点什么？" required="" id="searchBar">
+                    <input name="pageNum" type="hidden" value="0" required="" id="pageNum">
                     <button type="button" class="btn btn-default" aria-label="Left Align" id="searchBtn">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
@@ -220,8 +221,8 @@
                             </li>
                             <c:forEach items="${kindList}" var="kindList">
                                 <li class="">
-                                    <a class="nav-stylehead" href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}&pageNum=1">
-                                        ${kindList}
+                                    <a class="nav-stylehead kindList" href="${pageContext.request.contextPath}/items/searchByKind?kind=${kindList}&pageNum=0">
+                                            ${kindList}
                                     </a>
                                 </li>
                             </c:forEach>
@@ -315,7 +316,7 @@
                 <div class="product-sec1">
                     <h3 class="heading-tittle">出售</h3>
                     <div class="row center-block">
-                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listwtsbytime?pageNum=1">更多</a>
+                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listWtsByTime?pageNum=0">更多</a>
                     </div>
                     <div class="row">
                         <c:forEach var="wts_item" items="${wts_item}">
@@ -360,7 +361,7 @@
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
                     <div class="row center-block">
-                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listwtbbytime?pageNum=1">更多</a>
+                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listWtbWyTime?pageNum=0">更多</a>
                     </div>
                     <c:forEach items="${wtb_item}" var="wtb_item">
                         <div class="col-md-4 product-men">

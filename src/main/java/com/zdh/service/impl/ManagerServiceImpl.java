@@ -96,7 +96,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView manageWtsItem(ModelAndView modelAndView) {
-        List<Item> items = itemMapper.selectWtsAllByTime();
+        List<Item> items = itemMapper.selectWtsAllByTime("desc", "");
         modelAndView.addObject("itemlist", items);
         modelAndView.setViewName("manage/wts");
         return modelAndView;
@@ -105,7 +105,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public ModelAndView manageWtbItem(ModelAndView modelAndView) {
-        List<Item> items = itemMapper.selectWtbAllByTime();
+        List<Item> items = itemMapper.selectWtbAllByTime("desc", "");
         modelAndView.addObject("itemlist", items);
         modelAndView.setViewName("manage/wtb");
         return modelAndView;

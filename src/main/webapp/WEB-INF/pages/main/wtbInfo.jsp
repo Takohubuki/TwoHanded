@@ -97,9 +97,10 @@
             <!-- //header lists -->
             <!--站内搜索模块 -->
             <div class="agileits_search">
-                <form action="${pageContext.request.contextPath}/items/searchbyname" method="post">
-                    <input name="search" type="search" placeholder="想搜点什么？" required="">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
+                <form action="" method="get" id="searchForm">
+                    <input name="searchName" type="search" placeholder="想搜点什么？" required="" id="searchBar">
+                    <input name="pageNum" type="hidden" value="0" required="" id="pageNum">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" id="searchBtn">
                         <span class="fa fa-search" aria-hidden="true"> </span>
                     </button>
                 </form>
@@ -237,8 +238,7 @@
                             </li>
                             <c:forEach items="${kindList}" var="kindList">
                                 <li class="">
-                                    <a class="nav-stylehead"
-                                       href="${pageContext.request.contextPath}/items/searchbykind?kind=${kindList}">
+                                    <a class="nav-stylehead kindList" href="${pageContext.request.contextPath}/items/searchByKind?kind=${kindList}&pageNum=0">
                                             ${kindList}
                                     </a>
                                 </li>

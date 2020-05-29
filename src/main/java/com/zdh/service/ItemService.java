@@ -1,5 +1,6 @@
 package com.zdh.service;
 
+import com.github.pagehelper.PageInfo;
 import com.zdh.bean.Item;
 import com.zdh.bean.Order;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface ItemService {
@@ -46,18 +48,19 @@ public interface ItemService {
 
     /**
      * 时间降序获取求购信息列表
-     * @param modelAndView
+     * @param timeSort
+     * @param clickSort
      * @return
      */
-    public ModelAndView listWtbByTime(ModelAndView modelAndView, int pageNum);
+    public List<Item> listWtbByTime(String timeSort, String clickSort);
 
     /**
      * 时间降序获取出售商品列表
-     * @param modelAndView
-     * @param pageNum
+     * @param timeSort
+     * @param clickSort
      * @return
      */
-    public ModelAndView listWtsByTime(ModelAndView modelAndView, int pageNum);
+    public List<Item> listWtsByTime(String timeSort, String clickSort);
 
     /**
      * 商品信息分页列表
@@ -68,7 +71,7 @@ public interface ItemService {
      * @param searchName
      * @return
      */
-    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request, String searchName);
+//    public ModelAndView itemPage(ModelAndView modelAndView, int pageNum, HttpServletRequest request, String searchName);
 
     /**
      * 获取求购信息
@@ -77,13 +80,6 @@ public interface ItemService {
      * @return
      */
     public ModelAndView wtbItem(String itemId, ModelAndView modelAndView);
-
-    /**
-     * 获取全部出售信息
-     * @param modelAndView
-     * @return
-     */
-    public ModelAndView queryWtsAllTime(ModelAndView modelAndView);
 
     /**
      * 发布出售求购信息
@@ -98,21 +94,22 @@ public interface ItemService {
 
     /**
      * 根据名称查询商品信息
-     * @param modelAndView
-     * @param search
-     * @param pageNum
+     * @param name
+     * @param timeSort
+     * @param clickSort
+     * @param condition
      * @return
      */
-    public ModelAndView searchByName(ModelAndView modelAndView, String search, int pageNum);
+    public List<Item> searchByName(String name, String timeSort, String clickSort, String condition);
 
     /**
      * 根据类别查询商品信息
-     * @param modelAndView
      * @param kind
-     * @param pageNum
+     * @param timeSort
+     * @param clickSort
      * @return
      */
-    public ModelAndView searchByKind(ModelAndView modelAndView, String kind, int pageNum);
+    public List<Item> searchByKind(String kind, String timeSort, String clickSort);
 
     /**
      * 更新商品信息
@@ -153,4 +150,6 @@ public interface ItemService {
     List<Item> getItemByUser(String userId);
 
     List<Item> manageWtbByTime(String startTime, String endTime) throws ParseException;
+
+    HashMap<String, PageInfo<Item>> searchByName(String name);
 }
