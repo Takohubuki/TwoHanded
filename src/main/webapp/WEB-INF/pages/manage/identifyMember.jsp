@@ -6,6 +6,46 @@
 <section class="content-header">
     <h1>用户管理</h1>
 </section>
+<script>
+    // let userId;
+
+    function identifyMember(btn) {
+        userId = btn.value;
+        let reqUrl = '/manage/';
+        if ($(btn).hasClass("btn-primary")){
+            reqUrl = reqUrl + 'identifyMember';
+        }else {
+            reqUrl = reqUrl + 'denyIdentifyMember';
+        }
+        $.ajax({
+            url: reqUrl,
+            data: {
+                'userId': userId
+            },
+            async: false,
+            success: function (result) {
+                alert(result);
+                $('#page').load(url);
+            }
+
+        })
+
+    }
+
+    $(function () {
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false,
+            'language': language
+        })
+    });
+
+</script>
+
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
@@ -65,8 +105,8 @@
                                                                 pattern="yyyy-MM-dd HH:mm" type="Date"/>
                                             </td>
                                             <td>
-                                                <button onclick="getUserId(this)" class="btn btn-danger">通过</button>
-                                                <button>拒绝</button>
+                                                <button onclick="identifyMember(this)" value="${memberInfoList.sid}" class="btn btn-primary">同意</button>
+                                                <button onclick="identifyMember(this)" value="${memberInfoList.sid}" class="btn btn-danger">拒绝</button>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -85,28 +125,4 @@
     </div>
 
 </section>
-<script>
-    let userId;
-
-    function getUserId(btn) {
-        userId = btn.val();
-    }
-
-    function userDetail(sid) {
-        $('#page').load('${pageContext.request.contextPath}/user/manageUserProfile?userId=' + sid);
-    }
-
-    $(function () {
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false,
-            'language': language
-        })
-    });
-
-</script>
 </html>

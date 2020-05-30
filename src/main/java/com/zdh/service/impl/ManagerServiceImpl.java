@@ -229,6 +229,29 @@ public class ManagerServiceImpl implements ManagerService {
         return modelAndView;
     }
 
+    @Override
+    public String identifyMember(String userId) {
+        Member member = memberMapper.selectByPrimaryKey(userId);
+        member.setStatus("V");
+        String text = "管理员已同意您的实名申请";
+
+        noticeService.newNotice(text, member.getSid());
+        memberMapper.updateProfile(member);
+        return "操作成功！";
+    }
+
+    @Override
+    public String denyIdentifyMember(String userId) {
+        Member member = memberMapper.selectByPrimaryKey(userId);
+        member.setIdentificationMaterial("");
+        String text = "管理员拒绝了您的实名申请，请再次上传实名材料！";
+
+        noticeService.newNotice(text, member.getSid());
+        memberMapper.updateProfile(member);
+        return "操作成功！";
+
+    }
+
     private ArrayList handleResultByDays(List<Map> maps){
         ArrayList<Long> result = new ArrayList();
 

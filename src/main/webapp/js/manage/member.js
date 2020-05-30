@@ -1,16 +1,16 @@
 function getUserId(btn) {
     userId = btn.value;
-    let url = '/manage/';
+    let reqUrl = '/manage/';
     if ($(btn).hasClass('activeMember')){
-        url = url + 'activeMember';
+        reqUrl = reqUrl + 'activeMember';
     }if ($(btn).hasClass('shutMember')){
-        url = url + 'shutMember';
+        reqUrl = reqUrl + 'shutMember';
     }if ($(btn).hasClass('delMember')){
-        url = url + 'delMember';
+        reqUrl = reqUrl + 'delMember';
     }
 
     $.ajax({
-        url: url,
+        url: reqUrl,
         async:false,
         data: {
             'sid': userId

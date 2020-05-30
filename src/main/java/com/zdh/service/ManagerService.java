@@ -64,4 +64,8 @@ public interface ManagerService {
     String orderCount(String time) throws ParseException;
 
     ModelAndView delMember(ModelAndView modelAndView, String sid);
+
+    String identifyMember(String userId);
+
+    String denyIdentifyMember(String userId);
 }

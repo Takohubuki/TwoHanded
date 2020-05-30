@@ -234,5 +234,14 @@ public class ManagerController {
         return JSON.toJSONString(orderList);
     }
 
+    @RequestMapping("/manage/identifyMember")
+    public String identifyMember(String userId) {
+        return managerService.identifyMember(userId);
+    }
+
+    @RequestMapping("/manage/denyIdentifyMember")
+    public String denyIdentifyMember(String userId) {
+        return managerService.denyIdentifyMember(userId);
+    }
 
 }
