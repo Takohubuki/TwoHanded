@@ -164,6 +164,10 @@ public class ManagerController {
     public ModelAndView activeMember(ModelAndView modelAndView, String sid) {
         return managerService.activeMember(modelAndView, sid);
     }
+    @RequestMapping("/manage/delMember")
+    public ModelAndView delMember(ModelAndView modelAndView, String sid) {
+        return managerService.delMember(modelAndView, sid);
+    }
 
     @RequestMapping("/manage/accessInfo")
     public String accessInfo(String id) {

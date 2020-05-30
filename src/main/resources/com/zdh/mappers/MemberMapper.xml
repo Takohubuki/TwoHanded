@@ -295,4 +295,7 @@
     <select id="getUnidentifiedMember" resultMap="BaseResultMap">
     select * from member where `status` = 'V';
   </select>
+  <update id="deletableMember" parameterType="com.zdh.bean.Member">
+    update member set `status` = 'D' where sid = #{sid}
+  </update>
 </mapper>

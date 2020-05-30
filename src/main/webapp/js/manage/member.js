@@ -5,10 +5,13 @@ function getUserId(btn) {
         url = url + 'activeMember';
     }if ($(btn).hasClass('shutMember')){
         url = url + 'shutMember';
+    }if ($(btn).hasClass('delMember')){
+        url = url + 'delMember';
     }
 
     $.ajax({
         url: url,
+        async:false,
         data: {
             'sid': userId
         },
@@ -16,11 +19,10 @@ function getUserId(btn) {
             $('#page').load(url);
         }
     })
-
-
 }
 
 $(function () {
+    $('#example2').DataTable().destroy();
     $('#example2').DataTable({
         'paging': true,
         'lengthChange': false,
@@ -31,6 +33,7 @@ $(function () {
         'language': language
     });
 
+/*
     $('.shutMember').click(function () {
         userId = $(this).val();
 
@@ -58,5 +61,6 @@ $(function () {
             }
         })
     })
+*/
 
 });

@@ -62,4 +62,6 @@ public interface ManagerService {
     String addItemKind(String newKind);
 
     String orderCount(String time) throws ParseException;
+
+    ModelAndView delMember(ModelAndView modelAndView, String sid);
 }

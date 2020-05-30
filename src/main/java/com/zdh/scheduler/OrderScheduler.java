@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class OrderScheduler {
 
-    private Logger logger = LoggerFactory.getLogger(OrderScheduler.class);
+    private final Logger logger = LoggerFactory.getLogger(OrderScheduler.class);
 
     private Date now = null;
 

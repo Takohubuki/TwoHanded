@@ -419,4 +419,10 @@ public class ItemServiceImpl implements ItemService {
         return result;
     }
 
+    @Override
+    public String delItem(String itemId) {
+        itemMapper.delItem(itemId);
+        return "success";
+    }
+
 }

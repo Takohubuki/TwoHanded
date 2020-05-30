@@ -115,5 +115,6 @@
         url = '/manage/member';
     })
 </script>
+<script src="${pageContext.request.contextPath}/js/manage/member.js"></script>
 
 </html>

@@ -226,6 +226,11 @@ public class ItemsController {
         return itemService.offMyItem(reason, itemId);
     }
 
+    @RequestMapping(path = "/delItem", produces = {"text/plain;charset=UTF-8"})
+    public String delItem(String itemId) {
+        return itemService.delItem(itemId);
+    }
+
     @RequestMapping("/waitForAccess")
     public ModelAndView waitForAccess(HttpSession session, ModelAndView modelAndView) {
         return itemService.waitForAccess(session, modelAndView);

@@ -220,6 +220,15 @@ public class ManagerServiceImpl implements ManagerService {
         return JSON.toJSONString(result);
     }
 
+    @Override
+    public ModelAndView delMember(ModelAndView modelAndView, String sid) {
+        managerMapper.delMember(sid);
+        List<Member> members = managerMapper.selectAllMember();
+        modelAndView.addObject("memberlist", members);
+        modelAndView.setViewName("manage/member");
+        return modelAndView;
+    }
+
     private ArrayList handleResultByDays(List<Map> maps){
         ArrayList<Long> result = new ArrayList();
 

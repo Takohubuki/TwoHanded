@@ -39,4 +39,6 @@ public interface MemberMapper {
     void badComment(String sid);
 
     List<Member> getUnidentifiedMember();
+
+    void deletableMember(Member member);
 }

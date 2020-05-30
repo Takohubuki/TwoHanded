@@ -62,4 +62,6 @@ public interface ItemMapper {
     List<Item> getItemByUser(@Param("userId") String userId, @Param("condition") String condition);
 
     List<Item> getWtbItemByTime(Map param);
+
+    void delItem(String itemId);
 }

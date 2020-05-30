@@ -55,4 +55,6 @@ public interface ManagerMapper {
     Integer countInfoToHandle();
 
     Integer countMemberToIdentify();
+
+    void delMember(String sid);
 }

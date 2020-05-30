@@ -114,12 +114,18 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <update id="shutMember" parameterType="java.lang.String">
-        update member set is_active = '0' where sid=#{sid};
+        update member set `status` = 'S' where sid = #{sid};
     </update>
     <update id="activeMember" parameterType="java.lang.String">
-        update member set is_active = '1' where sid=#{sid};
+        update member set `status` = 'U' where sid = #{sid};
     </update>
     <update id="offItem" parameterType="java.lang.String">
-        update item set is_undercarriage = '1' where serial_num=#{item_id};
+        update item set is_undercarriage = '1' where serial_num = #{item_id};
     </update>
+    <update id="deletableMember" parameterType="java.lang.String">
+        update member set `status` = 'D' where sid = #{sid};
+    </update>
+    <delete id="delMember" parameterType="java.lang.String">
+        delete from member where sid = #{sid}
+    </delete>
 </mapper>

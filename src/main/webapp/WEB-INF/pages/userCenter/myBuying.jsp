@@ -20,37 +20,37 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div id="orderDataTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                         <div class="row">
 
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                <table id="orderDataTable" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="orderDataTable_info">
                                     <thead>
                                     <tr role="row">
-                                        <th class="sorting" tabindex="0" aria-controls="example2">
+                                        <th class="sorting" tabindex="0" aria-controls="orderDataTable">
                                             订单编号
                                         </th>
-                                        <th class="sorting" tabindex="1" aria-controls="example2">
+                                        <th class="sorting" tabindex="1" aria-controls="orderDataTable">
                                             名称
                                         </th>
-                                        <th class="sorting" tabindex="2" aria-controls="example2">
+                                        <th class="sorting" tabindex="2" aria-controls="orderDataTable">
                                             商品图片
                                         </th>
-                                        <th class="sorting" tabindex="3" aria-controls="example2">
+                                        <th class="sorting" tabindex="3" aria-controls="orderDataTable">
                                             数量
                                         </th>
-                                        <th class="sorting" tabindex="4" aria-controls="example2">
+                                        <th class="sorting" tabindex="4" aria-controls="orderDataTable">
                                             单种商品总价
                                         </th>
-                                        <th class="sorting" tabindex="5" aria-controls="example2">
+                                        <th class="sorting" tabindex="5" aria-controls="orderDataTable">
                                             订单状态
                                         </th>
-                                        <th class="sorting" tabindex="6" aria-controls="example2">
+                                        <th class="sorting" tabindex="6" aria-controls="orderDataTable">
                                             操作
                                         </th>
-                                        <th class="sorting" tabindex="7" aria-controls="example2">
+                                        <th class="sorting" tabindex="7" aria-controls="orderDataTable">
                                             下单时间
                                         </th>
                                     </tr>
@@ -84,7 +84,7 @@
                                             </c:if>
                                             <c:if test="${order_list.status == 'U'}">
                                                 <td>
-                                                    待付款(24小时内未付款自动取消订单！)
+                                                    待付款(建议在3天内完成线下验货并付款，过期自动取消)
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-primary operation"
@@ -286,7 +286,7 @@
 <script>
     $(function () {
         pagePath = '/order/myOrder';
-        $('#example2').DataTable({
+        $('#orderDataTable').DataTable({
             'paging': true,
             'lengthChange': false,
             'searching': true,

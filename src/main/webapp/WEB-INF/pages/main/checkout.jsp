@@ -22,6 +22,7 @@
 
     <div class="login-box">
         <div class="login-box-msg">
+            <h3>建议在完成线下验货之后再支付！</h3>
             <span>选择支付方式</span>
         </div>
         <div class="login-box-body">
@@ -46,7 +47,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">确定取消下单吗？</h4>
+                    <h4 class="modal-title">确定取消订单吗？</h4>
                 </div>
                 <div class="modal-body">
                 </div>

@@ -701,4 +701,7 @@
             and conditions = #{condition}
         </if>
     </select>
+    <delete id="delItem" parameterType="java.lang.String">
+        delete from item where serial_num = #{itemId}
+    </delete>
 </mapper>
