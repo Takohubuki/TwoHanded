@@ -79,4 +79,9 @@ public class OrderController {
     public void hideOrder(String orderId, String type) {
         orderService.hideOrder(orderId, type);
     }
+
+    @RequestMapping("/delOrder")
+    public void delOrder(String orderId) {
+        orderService.delOrder(orderId);
+    }
 }

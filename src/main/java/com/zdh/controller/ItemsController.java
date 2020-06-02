@@ -38,7 +38,7 @@ public class ItemsController {
      * @param modelAndView
      * @return
      */
-    @RequestMapping("/listWtbWyTime")
+    @RequestMapping("/listWtbByTime")
     public ModelAndView listWtbByTime(ModelAndView modelAndView, int pageNum, String timeSort, String clickSort) {
         if (pageNum != 0){
             modelAndView.setViewName("main/itemListPage");

@@ -312,41 +312,6 @@
             </div>
         </div>
     </div>
-    <!--是否勾选商品提示-->
-<%--    <div class="modal fade" tabindex="-1" role="dialog" id="selectItemTip" aria-labelledby="gridSystemModalLabel">--%>
-<%--        <div class="modal-dialog" role="document">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header">--%>
-<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
-<%--                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>--%>
-<%--                </div>--%>
-<%--                <div class="modal-body">--%>
-<%--                    请选择要删除的商品！--%>
-<%--                </div>--%>
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-    <!--批量删除商品-->
-<%--    <div class="modal fade" tabindex="-1" role="dialog" id="deleteMultyTip" aria-labelledby="gridSystemModalLabel">--%>
-<%--        <div class="modal-dialog" role="document">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header">--%>
-<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--%>
-<%--                    <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>--%>
-<%--                </div>--%>
-<%--                <div class="modal-body">--%>
-<%--                    确认删除选择的商品！--%>
-<%--                </div>--%>
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
-<%--                    <button type="button" class="btn btn-primary deleteMultySure">确定</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 </div>
 
 <script>
@@ -355,12 +320,37 @@
 
 <!-- js-files -->
 
-<script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 
 
 <!-- for bootstrap working -->
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
+
+<script>
+    $(function () {
+        pageType = '${pageType}';
+        member = '<%=session.getAttribute("member")%>';
+        message = '<%=session.getAttribute("message")%>';
+        if (message !== '' && message !== 'null') {
+            alert(message);
+            if (message === '您已被封禁！'){
+                member_status = 'S';
+            }
+            if (message === '您还未通过实名认证！'){
+                member_status = 'V';
+            }
+            <%session.removeAttribute("message");%>
+            message = '';
+        }
+    })
+    console.log(member);
+</script>
+
+
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
+
 <!-- //for bootstrap working -->
 <!-- //js-files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>

@@ -73,6 +73,7 @@
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/manage/**"/>
+            <mvc:exclude-mapping path="/user/**"/>
             <bean class="com.zdh.Interceptor.LoginInterceptor">
 
             </bean>

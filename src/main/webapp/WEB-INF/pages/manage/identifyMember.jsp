@@ -8,6 +8,7 @@
 </section>
 <script>
     // let userId;
+    url = '/manage/member'
 
     function identifyMember(btn) {
         userId = btn.value;

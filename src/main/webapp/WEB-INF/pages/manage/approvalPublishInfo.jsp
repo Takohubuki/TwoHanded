@@ -34,10 +34,10 @@
                                             商品名称
                                         </th>
                                         <th class="sorting" tabindex="2" aria-controls="example2">
-                                            商品类型
+                                            类型
                                         </th>
                                         <th class="sorting" tabindex="3" aria-controls="example2">
-                                            商品单价
+                                            价格/期望价格
                                         </th>
                                         <th class="sorting" tabindex="4" aria-controls="example2">
                                             商品描述
@@ -64,10 +64,12 @@
                                                     ${infoList.name}
                                             </td>
                                             <td>
-                                                    ${infoList.price}
+                                                <c:if test="${infoList.conditions == '出售'}">
+                                                    ${infoList.kind}
+                                                </c:if>
                                             </td>
                                             <td>
-                                                    ${infoList.kind}
+                                                    ￥${infoList.price}
                                             </td>
                                             <td>
                                                     ${infoList.describes}

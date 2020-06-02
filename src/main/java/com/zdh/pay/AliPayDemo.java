@@ -28,7 +28,7 @@ public class AliPayDemo {
         itemName = URLDecoder.decode(itemName, "UTF-8");
 
         AlipayTradePagePayRequest alipayTradePagePayRequest = new AlipayTradePagePayRequest();
-        alipayTradePagePayRequest.setReturnUrl("回调接口");
+        alipayTradePagePayRequest.setReturnUrl("localhost:8080/");
         alipayTradePagePayRequest.setBizContent("{" +
                 "\"out_trade_no\":\""+ orderId + "\"," +
                 "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +

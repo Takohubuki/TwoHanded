@@ -46,6 +46,9 @@
                                                     发布时间
                                                 </th>
                                                 <th tabindex="6" aria-controls="example2">
+                                                    状态
+                                                </th>
+                                                <th tabindex="7" aria-controls="example2">
                                                     操作
                                                 </th>
 
@@ -75,15 +78,35 @@
                                                                         pattern="yyyy-MM-dd HH:mm" type="Date"/>
 
                                                     </td>
-                                                    <td>
-                                                        <button class="btn btn-primary"
-                                                                onclick="updateitem('${myWtb.serialNum}')">修改
-                                                        </button>
-                                                        <button class="btn btn-danger" onclick="getItemId(this)"
-                                                                data-toggle="modal" data-target="#modal-danger"
-                                                                value="${myWtb.serialNum}">下架
-                                                        </button>
-                                                    </td>
+                                                    <c:if test="${myWtb.isUndercarriage == true}">
+                                                        <td>
+                                                            已下架
+                                                        </td>
+                                                        <td>
+                                                                ${myWtb.undercarriageReason}
+                                                            <button type="button" class="close" value="${myWtb.serialNum}"
+                                                                    aria-label="Close" onclick="getItemId(this)"
+                                                                    data-toggle="modal" data-target="#modal-danger1">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+
+                                                        </td>
+                                                    </c:if>
+
+                                                    <c:if test="${myWtb.isUndercarriage == false}">
+                                                        <td>
+                                                            发布中
+                                                        </td>
+                                                        <td>
+                                                            <button class="btn btn-primary"
+                                                                    onclick="updateitem('${myWtb.serialNum}')">修改
+                                                            </button>
+                                                            <button class="btn btn-danger" onclick="getItemId(this)"
+                                                                    data-toggle="modal" data-target="#modal-danger"
+                                                                    value="${myWtb.serialNum}">下架
+                                                            </button>
+                                                        </td>
+                                                    </c:if>
                                                 </tr>
                                         </c:forEach>
                                         </tbody>
@@ -103,6 +126,28 @@
     </section>
     <!-- /.content -->
     <div class="control-sidebar-bg"></div>
+    <div class="modal modal-danger fade" id="modal-danger1" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">确定删除该商品吗？</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="delItemId" name="id" class="hidden"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" id="delBtn">确定</button>
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
     <div class="modal modal-danger fade" id="modal-danger" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

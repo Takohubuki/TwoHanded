@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>选择商品发布的时间段：</label>
+                                    <label>选择要查询的时间段：</label>
 
                                     <div class="input-group date">
                                         <div class="input-group-addon">

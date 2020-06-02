@@ -36,4 +36,6 @@ public interface OrderService {
     void hideOrder(String orderId, String type);
 
     List<Order> manageOrderByTime(String startTime, String endTime);
+
+    void delOrder(String orderId);
 }

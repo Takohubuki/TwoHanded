@@ -42,11 +42,11 @@ $(function () {
     //Date picker
     $('.datepicker').datepicker(wtsDateConfig);
     $('.datepicker').on('change', function () {
-        startTime = $('#startTime').val();
-        endTime = $('#endTime').val();
     });
 
     $('#manageWtsByTime').click(function () {
+        startTime = $('#startTime').val();
+        endTime = $('#endTime').val();
 
         if (validateTime(startTime, endTime)) {
             alert('时间选择有误！');
@@ -71,12 +71,11 @@ $(function () {
     $('#delBtn').click(function () {
         let type = $('#delBtn').val();
         $.ajax({
-            url: '/order/hideOrder',
+            url: '/order/delOrder',
             type: 'post',
             async: false,
             data: {
                 'orderId': orderId,
-                'type': type
             },
             success: function (result) {
                 console.log(result);
@@ -125,8 +124,8 @@ $(function () {
 
 function reloadDatatable(result) {
     console.log(result);
-    $('#wtsDataTable').DataTable().destroy();
-    $('#wtsDataTable').DataTable({
+    $('#orderDataTable').DataTable().destroy();
+    $('#orderDataTable').DataTable({
         'paging': true,
         'lengthChange': false,
         'searching': true,
@@ -140,7 +139,6 @@ function reloadDatatable(result) {
             {'data': 'buyId'},
             {'data': 'item.name'},
             {'data': 'itemNum'},
-            {'data': 'number'},
             {'data': 'sumPrice'},
             {'data': 'status'},
             {'data': 'createTime'},
@@ -158,7 +156,22 @@ function reloadDatatable(result) {
                     return '<a href="javascript:userDetail(' + data + ')">' + data + '</a>';
                 },
                 "targets": 1
+            },
+            {
+                "render": function (data, type, row) {
+                    if (data === 'C'){
+                        return '已取消';
+                    }
+                    if (data === 'P'){
+                        return '待确认收货';
+                    }
+                    if (data === 'V' || data === 'R'){
+                        return '完成';
+                    }
+                },
+                "targets": 5
             }
+
         ],
         "createdRow": function (row, data, dataIndex) {
             manageHide(0);

@@ -234,12 +234,12 @@ public class ManagerController {
         return JSON.toJSONString(orderList);
     }
 
-    @RequestMapping("/manage/identifyMember")
+    @RequestMapping(path = "/manage/identifyMember", produces = {"text/plain;charset=UTF-8"})
     public String identifyMember(String userId) {
         return managerService.identifyMember(userId);
     }
 
-    @RequestMapping("/manage/denyIdentifyMember")
+    @RequestMapping(path = "/manage/denyIdentifyMember", produces = {"text/plain;charset=UTF-8"})
     public String denyIdentifyMember(String userId) {
         return managerService.denyIdentifyMember(userId);
     }

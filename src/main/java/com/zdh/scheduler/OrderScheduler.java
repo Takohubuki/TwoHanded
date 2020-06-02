@@ -111,8 +111,10 @@ public class OrderScheduler {
     @Scheduled(cron = "0 0 0/24 * * ?")
     public void batchDelOrder() {
 
+        System.out.println("检查自动删除订单是否开启");
         ScheduledTask delOrder = scheduledTaskService.getTTaskByName("delOrder");
         if (!delOrder.getSwich()) {
+            System.out.println("未开启，结束定时任务");
             return;
         }
 

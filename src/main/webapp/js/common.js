@@ -1,5 +1,10 @@
 let searchName;
 let kind;
+
+let member_status = '';
+let message;
+let member;
+
 var reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/; //邮箱正则表达式
 
 $(function () {
@@ -31,7 +36,7 @@ $(function () {
         $('#searchForm').submit();
     });
     $('#submitRegisterInfo').click(function () {
-        if (validatePassword() && validateEmail(email)) {
+        if (validatePassword() && validateEmail(email) && $('#identificationMaterial').val() !== '') {
             $('#registerForm').submit();
         }
     });

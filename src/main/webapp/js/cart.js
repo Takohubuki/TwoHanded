@@ -192,8 +192,23 @@ function changeNum(id, num) {
     })
 }
 
+function checkMember() {
+    if (member_status === 'V'){
+        alert('您尚未实名，无法完成下单');
+        return false;
+    }
+    if (member_status === 'S'){
+        alert('您已被封禁，无法完成下单');
+        return false;
+    }
+    return true;
+}
+
 //结算
 function check(){
+    if (!checkMember()){
+        return;
+    }
 
     atLeastOne = false;
 

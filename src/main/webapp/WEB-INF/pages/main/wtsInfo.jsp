@@ -176,7 +176,8 @@
                 <div class="modal_body_left modal_body_left1">
                     <h3 class="agileinfo_sign">注 册</h3>
 
-                    <form action="${pageContext.request.contextPath}/user/signup" method="post">
+                    <form action="${pageContext.request.contextPath}/user/signup" method="post" id="registerForm"
+                          enctype="multipart/form-data">
                         <div class="styled-input agile-styled-input-top">
                             <input type="text" placeholder="学号" name="sid" required="">
                         </div>
@@ -187,7 +188,8 @@
                             <input type="text" placeholder="用户名" name="username" required="">
                         </div>
                         <div class="styled-input">
-                            <input type="text" placeholder="电子邮箱" name="dormitory" required="">
+                            <input type="text" placeholder="电子邮箱" name="email" required="" id="email">
+                            <label class="control-label" for="email" id="emailError" style="font-size: small"></label>
                         </div>
                         <div class="styled-input">
                             <input type="text" placeholder="联系电话" name="phone" required="">
@@ -198,8 +200,16 @@
                         <div class="styled-input">
                             <input type="password" placeholder="再次输入密码" name="Confirm Password" id="password2"
                                    required="">
+                            <label class="control-label" for="password2" id="pwdValidate"
+                                   style="font-size: small"></label>
                         </div>
-                        <input type="submit" value="注册">
+                        <div class="styled-input">
+                            <label class="control-label" for="identificationMaterial" id="">请上传学生证和本人同框的照片</label>
+                            <input type="file" name="image" id="identificationMaterial"
+                                   required="required">
+                        </div>
+
+                        <input type="button" class="btn btn-primary" value="注册" id="submitRegisterInfo">
                     </form>
 
                 </div>
@@ -511,15 +521,31 @@
 <script src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <!-- //for bootstrap working -->
 <!-- //js-files -->
-<script>
-    let member = "<%=session.getAttribute("member")%>";
-    console.log(member);
-</script>
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 <!-- password-script -->
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 <!-- //password-script -->
+<script>
+    $(function () {
+        member = '<%=session.getAttribute("member")%>';
+        message = '<%=session.getAttribute("message")%>';
+        if (message !== '' && message !== 'null') {
+            alert(message);
+            if (message === '您已被封禁！'){
+                member_status = 'S';
+            }
+            if (message === '您还未通过实名认证！'){
+                member_status = 'V';
+            }
+            <%session.removeAttribute("message");%>
+
+            message = '';
+        }
+
+    })
+    console.log(member);
+</script>
 
 </body>
 

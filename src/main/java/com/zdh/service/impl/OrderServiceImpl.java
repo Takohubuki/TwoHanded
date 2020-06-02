@@ -90,7 +90,7 @@ public class OrderServiceImpl implements OrderService {
             item.setNumber(itemNum);
             if (itemNum <= 0) {
                 item.setIsUndercarriage(true);
-                item.setUndercarriageReason("库存不足");
+                item.setUndercarriageReason("已经售罄");
 
                 //通知卖家库存不足
                 String text = "您的 " + item.getName() + " 已经售罄";
@@ -302,6 +302,11 @@ public class OrderServiceImpl implements OrderService {
         param.put("endTime", endTime);
         return orderMapper.getOrderByTime(param);
 
+    }
+
+    @Override
+    public void delOrder(String orderId) {
+        orderMapper.delOrder(orderId);
     }
 
     private Order generateOrder(String sid, String itemId, int itemNum, Date sysDate) {

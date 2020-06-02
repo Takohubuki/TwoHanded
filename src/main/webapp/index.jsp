@@ -361,7 +361,7 @@
                 <div class="product-sec1">
                     <h3 class="heading-tittle">求购</h3>
                     <div class="row center-block">
-                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listWtbWyTime?pageNum=0">更多</a>
+                        <a class="btn btn-primary pull-right" role="button" href="${pageContext.request.contextPath}/items/listWtbByTime?pageNum=0">更多</a>
                     </div>
                     <c:forEach items="${wtb_item}" var="wtb_item">
                         <div class="col-md-4 product-men">
@@ -415,18 +415,21 @@
 
 <!-- //js-files -->
 <script>
-    let member_status = '';
-    let message;
-    let member;
     $(function () {
         member = '<%=session.getAttribute("member")%>';
-        message = "<%=session.getAttribute("message")%>";
+        message = '<%=session.getAttribute("message")%>';
         if (message !== '' && message !== 'null') {
             alert(message);
-            message = '';
-            member_status = 'V';
-        }
+            if (message === '您已被封禁！'){
+                member_status = 'S';
+            }
+            if (message === '您还未通过实名认证！'){
+                member_status = 'V';
+            }
+            <%session.removeAttribute("message");%>
 
+            message = '';
+        }
 
     })
     console.log(member);

@@ -232,7 +232,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public String identifyMember(String userId) {
         Member member = memberMapper.selectByPrimaryKey(userId);
-        member.setStatus("V");
+        member.setStatus("U");
         String text = "管理员已同意您的实名申请";
 
         noticeService.newNotice(text, member.getSid());
