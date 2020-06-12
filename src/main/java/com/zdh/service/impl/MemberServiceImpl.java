@@ -408,7 +408,7 @@ public class MemberServiceImpl implements MemberService {
 
         modelAndView.addObject("unreadNotice", noticesList);
         modelAndView.addObject("itemsWaitForAccess", countApprovalItemOfUser);
-        modelAndView.setViewName("userCenter/profile");
+            modelAndView.setViewName("userCenter/profile");
         return modelAndView;
     }
 
